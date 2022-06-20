@@ -28,19 +28,4 @@ def main():
 if __name__ == '__main__':
     main()
 
-    from sklearn.utils import all_estimators
-
-    estimators = all_estimators(type_filter='regressor')
-
-    all_regs = []
-    for name, RegressorClass in estimators:
-        try:
-            print('Appending name', name)
-            print('Appending class', RegressorClass)
-            reg = RegressorClass()
-            print(reg.get_params())
-            all_regs.append(reg)
-        except Exception as e:
-            print(e)
-
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
