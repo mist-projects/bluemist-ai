@@ -6,6 +6,7 @@ from sklearn.model_selection import RandomizedSearchCV, train_test_split
 
 import regression.tuning
 from regression.overridden_estimators import overridden_regressors
+from regression.tuning.constant import default_hyperparameters
 from utils.metrics import scoingStrategy
 from sklearn.utils import all_estimators
 
@@ -59,11 +60,12 @@ def train_test_evaluate(data, tune_models, test_size=0.25, random_state=2):
                 if tune_all_models or name in tune_model_list:
                     parameters = reg.get_params()
                     print('parameters', parameters)
-                    print('hyperparameter alpha_1', regression.tuning.hyperparameters['alpha_1'])
+
+                    print('hyperparameter alpha_1', default_hyperparameters['alpha_1'])
 
                     print('parameters', type(parameters))
-                    print('hyperparameter alpha_1', type(regression.tuning.hyperparameters['alpha_1']))
-                    default_hyperparameters_for_tuning = regression.tuning.hyperparameters
+                    print('hyperparameter alpha_1', type(default_hyperparameters['alpha_1']))
+                    default_hyperparameters_for_tuning = default_hyperparameters
                     model_hyperparameters_for_tuning = getattr(regression.tuning, name, None)
 
                     deprecated_keys = []
