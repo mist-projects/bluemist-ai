@@ -7,7 +7,7 @@ from sklearn.model_selection import RandomizedSearchCV, train_test_split
 import regression.tuning
 from regression.overridden_estimators import overridden_regressors
 from regression.tuning.constant import default_hyperparameters
-from utils.metrics import scoingStrategy
+from utils.metrics import scoringStrategy
 from sklearn.utils import all_estimators
 
 
@@ -18,8 +18,7 @@ def get_regressor_class(module, class_name):
     return instance
 
 
-def train_test_evaluate(data, tune_models, test_size=0.25, random_state=2):
-
+def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2, metrics='default'):
     X = data.drop(['mpg', 'origin_europe'], axis=1)
     # the dependent variable
     y = data[['mpg']]
@@ -43,10 +42,9 @@ def train_test_evaluate(data, tune_models, test_size=0.25, random_state=2):
     for name, RegressorClass in estimators:
         i = i + 1
 
-        if i == 1:
+        if i < 3:
             try:
-                print('Appending name', name)
-                print('Appending class', RegressorClass)
+                print('Regressor Name', name)
 
                 estimator = custom_regressors_df.query("Name == @name")
                 if not estimator.empty:
@@ -59,14 +57,10 @@ def train_test_evaluate(data, tune_models, test_size=0.25, random_state=2):
 
                 if tune_all_models or name in tune_model_list:
                     parameters = reg.get_params()
-                    print('parameters', parameters)
-
-                    print('hyperparameter alpha_1', default_hyperparameters['alpha_1'])
-
                     print('parameters', type(parameters))
                     print('hyperparameter alpha_1', type(default_hyperparameters['alpha_1']))
                     default_hyperparameters_for_tuning = default_hyperparameters
-                    model_hyperparameters_for_tuning = getattr(regression.tuning, name, None)
+                    model_hyperparameters_for_tuning = getattr(regression.tuning.constant, name, None)
 
                     deprecated_keys = []
                     for key, value in parameters.items():
@@ -83,7 +77,7 @@ def train_test_evaluate(data, tune_models, test_size=0.25, random_state=2):
                     for deprecated_key in deprecated_keys:
                         parameters.pop(deprecated_key, None)
 
-                    print('modified parameters', parameters)
+                    print('Hyperparameters for Tuning :: ', parameters)
 
                     search = RandomizedSearchCV(reg, parameters)
                     fitted_estimator = search.fit(X_train, y_train)
@@ -96,21 +90,15 @@ def train_test_evaluate(data, tune_models, test_size=0.25, random_state=2):
                     print('Best Score: %s' % fitted_estimator.best_score_)
                     print('Best Hyperparameters: %s' % fitted_estimator.best_params_)
 
-                score = scoingStrategy(y_test, y_pred)
+                scorer = scoringStrategy(y_test, y_pred, metrics)
+                stats_df = scorer.getStats()
+                stats_df.insert(0, 'Estimator', name)  # Insert Estimator name as the first column in the dataframe
+                print('stats_df', stats_df)
 
-                mae = score.get_mae()
-                r2_score = score.get_r2_score()
-                mse = score.get_mse()
-                rmse = score.get_rmse()
-
-                metrics = {'Estimator': [name], 'mae': [mae], 'mse': [mse], 'rmse': [rmse], 'r2_score': [r2_score],
-                           'regression_error': None}
-                df_metrics = pd.DataFrame(metrics)
-                print('metrics', df_metrics)
-                df = pd.concat([df, df_metrics])
+                df = pd.concat([df, stats_df], ignore_index=True)
+                print('after concat', df)
             except Exception as e:
-                metrics = {'Estimator': [name], 'mae': None, 'mse': None, 'rmse': None, 'r2_score': None,
-                           'regression_error': [str(e)]}
+                metrics = {'Estimator': [name], 'mae': None, 'mse': None, 'rmse': None, 'r2_score': None}
                 df_metrics = pd.DataFrame(metrics)
                 print('metrics', df_metrics)
                 df = pd.concat([df, df_metrics])

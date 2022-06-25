@@ -3,7 +3,7 @@ import importlib
 import pandas as pd
 
 from regression.overridden_estimators import regression_algorithms
-from utils.metrics import scoingStrategy
+from utils.metrics import scoringStrategy
 
 
 class regressor:
@@ -32,7 +32,7 @@ class regressor:
             print(type(y_test))
             print(type(y_pred))
 
-            score = scoingStrategy(y_test, y_pred)
+            score = scoringStrategy(y_test, y_pred)
             mae = score.get_mae()
             r2_score = score.get_r2_score()
             mse = score.get_mse()

@@ -4,10 +4,11 @@ from regression import train_test_evaluate
 
 
 def main():
+
     data = get_data()
     print(data.shape)
     data = preprocess_data(data)
-    train_test_evaluate(data, tune_models='all')
+    train_test_evaluate(data, tune_models='all', metrics='all')
 
 
 # Press the green button in the gutter to run the script.
