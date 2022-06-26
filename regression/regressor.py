@@ -3,11 +3,12 @@ import traceback
 
 import numpy as np
 import pandas as pd
-from sklearn import pipeline
+from sklearn import pipeline, set_config
 from sklearn.model_selection import RandomizedSearchCV, train_test_split
 from sklearn.pipeline import Pipeline
 
 import regression.tuning
+from pipeline.bluemist_pipeline import add_pipeline_step, save_pipeline
 from regression.overridden_estimators import overridden_regressors
 from regression.tuning.constant import default_hyperparameters
 from utils.metrics import scoringStrategy
@@ -45,7 +46,7 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
     for name, RegressorClass in estimators:
         i = i + 1
 
-        if i <= 1:
+        if i <= 2:
             try:
                 print('Regressor Name', name)
 
@@ -59,40 +60,48 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
                 y_test = np.ravel(y_test)
 
                 if tune_all_models or name in tune_model_list:
-                    parameters = reg.get_params()
-                    print('parameters', type(parameters))
+                    estimator_parameters = reg.get_params()
+                    print('parameters', type(estimator_parameters))
                     print('hyperparameter alpha_1', type(default_hyperparameters['alpha_1']))
                     default_hyperparameters_for_tuning = default_hyperparameters
                     model_hyperparameters_for_tuning = getattr(regression.tuning.constant, name, None)
 
                     deprecated_keys = []
-                    for key, value in parameters.items():
+                    for key, value in estimator_parameters.items():
                         if value == 'deprecated':
                             deprecated_keys.append(key)
                             print('deprecated key', key)
                         elif model_hyperparameters_for_tuning is not None and key in model_hyperparameters_for_tuning:
-                            parameters[key] = model_hyperparameters_for_tuning[key]
-                            print('parameters[key]', parameters[key])
+                            estimator_parameters[key] = model_hyperparameters_for_tuning[key]
+                            print('parameters[key]', estimator_parameters[key])
                         elif key in default_hyperparameters_for_tuning:
-                            parameters[key] = default_hyperparameters_for_tuning[key]
-                            print('parameters[key]', parameters[key])
+                            estimator_parameters[key] = default_hyperparameters_for_tuning[key]
+                            print('parameters[key]', estimator_parameters[key])
 
                     for deprecated_key in deprecated_keys:
-                        parameters.pop(deprecated_key, None)
+                        estimator_parameters.pop(deprecated_key, None)
 
-                    # Renaming the hyperparameters to add step name as required by the pipeline
-                    for key in parameters:
+                    # Creating new dictionary of hyperparameters to add step name as required by the pipeline
+                    hyperparameters = {}
+
+                    for key in estimator_parameters:
                         old_key = key
                         new_key = name + '__' + key
-                        parameters[new_key] = parameters.pop(old_key)
+                        hyperparameters[new_key] = estimator_parameters[old_key]
 
-                    print('Hyperparameters for Tuning :: ', parameters)
+                    print('Hyperparameters for Tuning :: ', hyperparameters)
 
                     step_estimator = (name, reg)
-                    steps = [step_estimator]
+                    steps = add_pipeline_step(name, step_estimator)
+                    #steps = [step_estimator]
                     pipe = Pipeline(steps=steps)
-                    search = RandomizedSearchCV(pipe, param_distributions=parameters)
+                    search = RandomizedSearchCV(pipe, param_distributions=hyperparameters)
                     fitted_estimator = search.fit(X_train, y_train)
+                    save_pipeline(name, pipe)
+
+                    set_config(display="diagram")
+                    print(pipe)
+                    set_config(display="text")
                 else:
                     step_estimator = (name, reg)
                     steps = [step_estimator]
@@ -106,7 +115,7 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
 
                     y_pred = fitted_estimator.predict(X_test)
                 else:
-                    y_pred = pipe.predict(X_test)
+                    y_pred = pipeline.predict(X_test)
 
                 scorer = scoringStrategy(y_test, y_pred, metrics)
                 stats_df = scorer.getStats()
