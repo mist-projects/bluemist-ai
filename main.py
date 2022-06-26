@@ -9,7 +9,7 @@ from regression import train_test_evaluate
 def main():
 
     f = Figlet(font='small')
-    print (colored(f.renderText('Blue Mist - AI . ONE'), 'blue'))
+    print (colored(f.renderText('B l u e    M i s t - AI'), 'blue'))
     data = get_data_from_filesystem('datasets/auto-mpg/auto-mpg.csv')
 
     print(data.shape)
