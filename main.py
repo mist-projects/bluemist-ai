@@ -1,5 +1,4 @@
-from datasource.provider.aws import get_data_from_s3
-from datasource.provider.file import get_data_from_filesystem
+from datasource.file import get_data_from_filesystem
 from preprocessing import preprocess_data
 from regression import train_test_evaluate
 
