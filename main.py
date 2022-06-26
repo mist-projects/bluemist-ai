@@ -9,7 +9,7 @@ def main():
 
     print(data.shape)
     data = preprocess_data(data)
-    train_test_evaluate(data, tune_models='all', metrics='all')
+    train_test_evaluate(data, tune_models=None, metrics='all')
 
 
 # Press the green button in the gutter to run the script.

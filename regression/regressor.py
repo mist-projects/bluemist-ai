@@ -1,8 +1,11 @@
 import importlib
+import traceback
 
 import numpy as np
 import pandas as pd
+from sklearn import pipeline
 from sklearn.model_selection import RandomizedSearchCV, train_test_split
+from sklearn.pipeline import Pipeline
 
 import regression.tuning
 from regression.overridden_estimators import overridden_regressors
@@ -46,9 +49,9 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
             try:
                 print('Regressor Name', name)
 
-                estimator = custom_regressors_df.query("Name == @name")
-                if not estimator.empty:
-                    reg = get_regressor_class(estimator['Module'].values[0], estimator['Class'].values[0])
+                custom_estimator = custom_regressors_df.query("Name == @name")
+                if not custom_estimator.empty:
+                    reg = get_regressor_class(custom_estimator['Module'].values[0], custom_estimator['Class'].values[0])
                 else:
                     reg = RegressorClass()
 
@@ -77,18 +80,33 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
                     for deprecated_key in deprecated_keys:
                         parameters.pop(deprecated_key, None)
 
+                    # Renaming the hyperparameters to add step name as required by the pipeline
+                    for key in parameters:
+                        old_key = key
+                        new_key = name + '__' + key
+                        parameters[new_key] = parameters.pop(old_key)
+
                     print('Hyperparameters for Tuning :: ', parameters)
 
-                    search = RandomizedSearchCV(reg, parameters)
+                    step_estimator = (name, reg)
+                    steps = [step_estimator]
+                    pipe = Pipeline(steps=steps)
+                    search = RandomizedSearchCV(pipe, param_distributions=parameters)
                     fitted_estimator = search.fit(X_train, y_train)
                 else:
-                    fitted_estimator = reg.fit(X_train, y_train)
-
-                y_pred = fitted_estimator.predict(X_test);
+                    step_estimator = (name, reg)
+                    steps = [step_estimator]
+                    pipe = Pipeline(steps=steps)
+                    print(pipe)
+                    fitted_estimator = pipe.fit(X_train, y_train)
 
                 if tune_all_models or name in tune_model_list:
                     print('Best Score: %s' % fitted_estimator.best_score_)
                     print('Best Hyperparameters: %s' % fitted_estimator.best_params_)
+
+                    y_pred = fitted_estimator.predict(X_test)
+                else:
+                    y_pred = pipe.predict(X_test)
 
                 scorer = scoringStrategy(y_test, y_pred, metrics)
                 stats_df = scorer.getStats()
@@ -102,6 +120,6 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
                 df_metrics = pd.DataFrame(metrics)
                 print('metrics', df_metrics)
                 df = pd.concat([df, df_metrics])
-                print(e)
+                traceback.print_exc()
 
     print(df)
