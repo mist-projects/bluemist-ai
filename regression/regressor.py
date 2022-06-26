@@ -42,7 +42,7 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
     for name, RegressorClass in estimators:
         i = i + 1
 
-        if i < 3:
+        if i <= 1:
             try:
                 print('Regressor Name', name)
 

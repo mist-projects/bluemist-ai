@@ -1,4 +1,5 @@
 from datasource import get_data
+from datasource.provider.aws import get_data_from_s3
 from preprocessing import preprocess_data
 from regression import train_test_evaluate
 
@@ -6,6 +7,7 @@ from regression import train_test_evaluate
 def main():
 
     data = get_data()
+
     print(data.shape)
     data = preprocess_data(data)
     train_test_evaluate(data, tune_models='all', metrics='all')

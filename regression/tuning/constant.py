@@ -16,7 +16,6 @@ default_hyperparameters = {
     'max_features': [0.7, 0.8, 0.9, 1],
     'n_estimators': np.arange(10, 1050 + 1, 50).tolist(),
     'n_iter': np.arange(100, 5000 + 1, 50).tolist(),
-    'n_jobs': [None],
     'normalize': [False],
     'oob_score': [True, False],
     'random_state': [2],
@@ -28,5 +27,5 @@ default_hyperparameters = {
 }
 
 AdaBoostRegressor = {
-    'loss': ['linear', 'square', 'exponential'],
+    'loss': ['linear', 'square', 'exponential']
 }
