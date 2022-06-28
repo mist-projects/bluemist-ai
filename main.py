@@ -1,3 +1,7 @@
+import time
+
+import mlflow
+from mlflow.cli import ui
 from pyfiglet import Figlet
 from termcolor import colored
 
@@ -14,7 +18,7 @@ def main():
 
     print(data.shape)
     data = preprocess_data(data)
-    train_test_evaluate(data, tune_models='all', metrics='all')
+    train_test_evaluate(data, tune_models=None, metrics='all')
 
 
 # Press the green button in the gutter to run the script.

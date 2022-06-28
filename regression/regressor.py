@@ -3,6 +3,7 @@ import traceback
 
 import numpy as np
 import pandas as pd
+from mlflow.tracking import MlflowClient
 from sklearn import pipeline, set_config
 from sklearn.model_selection import RandomizedSearchCV, train_test_split
 from sklearn.pipeline import Pipeline
@@ -14,6 +15,9 @@ from regression.tuning.constant import default_hyperparameters
 from utils.metrics import scoringStrategy
 from sklearn.utils import all_estimators
 
+import mlflow
+import mlflow.sklearn
+
 
 def get_regressor_class(module, class_name):
     module = importlib.import_module(module)
@@ -22,7 +26,8 @@ def get_regressor_class(module, class_name):
     return instance
 
 
-def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2, metrics='default'):
+def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2, metrics='default',
+                        mlflow_experiment_name=None, mlflow_run_name=None):
     X = data.drop(['mpg', 'origin_europe'], axis=1)
     # the dependent variable
     y = data[['mpg']]
@@ -41,6 +46,17 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
 
     estimators = all_estimators(type_filter='regressor')
     custom_regressors_df = overridden_regressors
+
+    if mlflow_experiment_name is not None:
+        experiment = mlflow.get_experiment_by_name('TEST2')
+        if not experiment:
+            mlflow.create_experiment(name='TEST2', artifact_location='/home/shashank-agrawal/mlflow_artifact')
+
+        if experiment.lifecycle_stage == 'deleted':
+            client = MlflowClient()
+            client.restore_experiment(experiment.experiment_id)
+
+        mlflow.set_experiment('TEST2')
 
     i = 0
     for name, RegressorClass in estimators:
@@ -93,15 +109,12 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
 
                     step_estimator = (name, reg)
                     steps = add_pipeline_step(name, step_estimator)
-                    #steps = [step_estimator]
+                    # steps = [step_estimator]
                     pipe = Pipeline(steps=steps)
                     search = RandomizedSearchCV(pipe, param_distributions=hyperparameters)
-                    fitted_estimator = search.fit(X_train, y_train)
+                    fitted_estimator = search.best_estimator_.fit(X_train, y_train)
                     save_pipeline(name, pipe)
-
-                    set_config(display="diagram")
                     print(pipe)
-                    set_config(display="text")
                 else:
                     step_estimator = (name, reg)
                     steps = [step_estimator]
@@ -115,15 +128,26 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
 
                     y_pred = fitted_estimator.predict(X_test)
                 else:
-                    y_pred = pipeline.predict(X_test)
+                    y_pred = fitted_estimator.predict(X_test)
 
                 scorer = scoringStrategy(y_test, y_pred, metrics)
                 stats_df = scorer.getStats()
-                stats_df.insert(0, 'Estimator', name)  # Insert Estimator name as the first column in the dataframe
-                print('stats_df', stats_df)
 
-                df = pd.concat([df, stats_df], ignore_index=True)
-                print('after concat', df)
+                final_stats_df = stats_df.copy()
+
+                # Insert Estimator name as the first column in the dataframe
+                final_stats_df.insert(0, 'Estimator', name)
+                print('stats_df', final_stats_df)
+
+                df = pd.concat([df, final_stats_df], ignore_index=True)
+                print('after concat', final_stats_df)
+                print(stats_df.to_dict('records'))
+                with mlflow.start_run(run_name=mlflow_run_name):
+                    print('Inside mlflow')
+                    mlflow.log_param('model', name)
+                    mlflow.log_metrics(stats_df.to_dict('records')[0])
+                    mlflow.sklearn.log_model(fitted_estimator, "model")
+                    print("Model saved in run %s" % mlflow.active_run().info.run_uuid)
             except Exception as e:
                 metrics = {'Estimator': [name], 'mae': None, 'mse': None, 'rmse': None, 'r2_score': None}
                 df_metrics = pd.DataFrame(metrics)

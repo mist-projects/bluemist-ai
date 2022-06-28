@@ -1,6 +1,3 @@
-import math
-
-from pandas._config import display
 from sklearn.metrics import *
 import pandas as pd
 
