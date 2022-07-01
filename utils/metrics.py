@@ -27,19 +27,24 @@ class scoringStrategy:
         rows = []
         row = []
 
+        print ('self.metrics_requested', self.metrics_requested)
         if isinstance(self.metrics_requested, str) and self.metrics_requested == 'default':
             for metric in default_regression_metrics:
                 self.metrics_to_be_returned.append(metric.__name__)
+                print('metric 1', metric(self.y_true, self.y_pred))
                 row.append(metric(self.y_true, self.y_pred))
         elif isinstance(self.metrics_requested, str) and self.metrics_requested == 'all':
             for metric in all_regression_metrics:
                 self.metrics_to_be_returned.append(metric.__name__)
+                print('metric 2', metric(self.y_true, self.y_pred))
                 row.append(metric(self.y_true, self.y_pred))
         elif isinstance(self.metrics_requested, list) and len(self.metrics_requested) > 0:
             for metric in list:
                 self.metrics_to_be_returned.append(metric.__name__)
+                print('metric 3', metric(self.y_true, self.y_pred))
                 row.append(metric(self.y_true, self.y_pred))
 
+        print('df created row', row)
         rows.append(row)
         stats_df = pd.DataFrame(rows, columns=self.metrics_to_be_returned)
 

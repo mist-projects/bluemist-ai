@@ -1,12 +1,15 @@
 import importlib
+import logging
 import traceback
+from logging import config
 
 import numpy as np
 import pandas as pd
 from mlflow.tracking import MlflowClient
-from sklearn import pipeline, set_config
+from sklearn.compose import TransformedTargetRegressor
 from sklearn.model_selection import RandomizedSearchCV, train_test_split
 from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 
 import regression.tuning
 from pipeline.bluemist_pipeline import add_pipeline_step, save_pipeline
@@ -18,6 +21,9 @@ from sklearn.utils import all_estimators
 import mlflow
 import mlflow.sklearn
 
+config.fileConfig('logging.config')
+logger = logging.getLogger("root")
+
 
 def get_regressor_class(module, class_name):
     module = importlib.import_module(module)
@@ -27,11 +33,14 @@ def get_regressor_class(module, class_name):
 
 
 def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2, metrics='default',
-                        mlflow_experiment_name=None, mlflow_run_name=None):
+                        mlflow_stats=False, mlflow_experiment_name=None, mlflow_run_name=None):
     X = data.drop(['mpg', 'origin_europe'], axis=1)
     # the dependent variable
     y = data[['mpg']]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
+
+    y_train = np.ravel(y_train)
+    y_test = np.ravel(y_test)
 
     tune_all_models = False
     tune_model_list = []
@@ -47,40 +56,40 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
     estimators = all_estimators(type_filter='regressor')
     custom_regressors_df = overridden_regressors
 
-    if mlflow_experiment_name is not None:
-        experiment = mlflow.get_experiment_by_name('TEST2')
-        if not experiment:
-            mlflow.create_experiment(name='TEST2', artifact_location='/home/shashank-agrawal/mlflow_artifact')
+    if mlflow_stats:
+        if mlflow_experiment_name is not None:
+            experiment = mlflow.get_experiment_by_name(mlflow_experiment_name)
+            if not experiment:
+                mlflow.create_experiment(name=mlflow_experiment_name,
+                                         artifact_location='/home/shashank-agrawal/mlflow_artifact')
 
-        if experiment.lifecycle_stage == 'deleted':
-            client = MlflowClient()
-            client.restore_experiment(experiment.experiment_id)
+            if experiment.lifecycle_stage == 'deleted':
+                client = MlflowClient()
+                client.restore_experiment(experiment.experiment_id)
 
-        mlflow.set_experiment('TEST2')
+            mlflow.set_experiment(mlflow_experiment_name)
 
     i = 0
-    for name, RegressorClass in estimators:
+    for estimator_name, RegressorClass in estimators:
         i = i + 1
 
-        if i <= 2:
+        if i > 0:
+        #if estimator_name == 'BaggingRegressor':
             try:
-                print('Regressor Name', name)
+                print('Regressor Name', estimator_name)
 
-                custom_estimator = custom_regressors_df.query("Name == @name")
+                custom_estimator = custom_regressors_df.query("Name == @estimator_name")
                 if not custom_estimator.empty:
                     reg = get_regressor_class(custom_estimator['Module'].values[0], custom_estimator['Class'].values[0])
                 else:
                     reg = RegressorClass()
 
-                y_train = np.ravel(y_train)
-                y_test = np.ravel(y_test)
-
-                if tune_all_models or name in tune_model_list:
+                if tune_all_models or estimator_name in tune_model_list:
                     estimator_parameters = reg.get_params()
                     print('parameters', type(estimator_parameters))
                     print('hyperparameter alpha_1', type(default_hyperparameters['alpha_1']))
                     default_hyperparameters_for_tuning = default_hyperparameters
-                    model_hyperparameters_for_tuning = getattr(regression.tuning.constant, name, None)
+                    model_hyperparameters_for_tuning = getattr(regression.tuning.constant, estimator_name, None)
 
                     deprecated_keys = []
                     for key, value in estimator_parameters.items():
@@ -102,27 +111,38 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
 
                     for key in estimator_parameters:
                         old_key = key
-                        new_key = name + '__' + key
+                        new_key = estimator_name + '__' + key
                         hyperparameters[new_key] = estimator_parameters[old_key]
 
                     print('Hyperparameters for Tuning :: ', hyperparameters)
 
-                    step_estimator = (name, reg)
-                    steps = add_pipeline_step(name, step_estimator)
-                    # steps = [step_estimator]
+                    step_scale = ('scaler', StandardScaler())
+                    add_pipeline_step(estimator_name, step_scale)
+
+                    step_estimator = (estimator_name, reg)
+                    steps = add_pipeline_step(estimator_name, step_estimator)
+
                     pipe = Pipeline(steps=steps)
                     search = RandomizedSearchCV(pipe, param_distributions=hyperparameters)
                     fitted_estimator = search.best_estimator_.fit(X_train, y_train)
-                    save_pipeline(name, pipe)
-                    print(pipe)
+                    save_pipeline(estimator_name, pipe)
+                    print('pipe1:', pipe)
                 else:
-                    step_estimator = (name, reg)
-                    steps = [step_estimator]
+                    step_scale = ('scaler', StandardScaler())
+                    add_pipeline_step(estimator_name, step_scale)
+
+                    tt = TransformedTargetRegressor(regressor=reg, transformer=StandardScaler())
+                    step_estimator = (estimator_name, tt)
+
+                    #step_estimator = (estimator_name, reg)
+                    steps = add_pipeline_step(estimator_name, step_estimator)
+                    #steps = [step_estimator]
+
                     pipe = Pipeline(steps=steps)
-                    print(pipe)
+                    print('pipe2', pipe)
                     fitted_estimator = pipe.fit(X_train, y_train)
 
-                if tune_all_models or name in tune_model_list:
+                if tune_all_models or estimator_name in tune_model_list:
                     print('Best Score: %s' % fitted_estimator.best_score_)
                     print('Best Hyperparameters: %s' % fitted_estimator.best_params_)
 
@@ -131,28 +151,33 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
                     y_pred = fitted_estimator.predict(X_test)
 
                 scorer = scoringStrategy(y_test, y_pred, metrics)
-                stats_df = scorer.getStats()
+                estimator_stats_df = scorer.getStats()
 
-                final_stats_df = stats_df.copy()
+                final_stats_df = estimator_stats_df.copy()
 
                 # Insert Estimator name as the first column in the dataframe
-                final_stats_df.insert(0, 'Estimator', name)
+                final_stats_df.insert(0, 'Estimator', estimator_name)
                 print('stats_df', final_stats_df)
 
                 df = pd.concat([df, final_stats_df], ignore_index=True)
                 print('after concat', final_stats_df)
-                print(stats_df.to_dict('records'))
-                with mlflow.start_run(run_name=mlflow_run_name):
-                    print('Inside mlflow')
-                    mlflow.log_param('model', name)
-                    mlflow.log_metrics(stats_df.to_dict('records')[0])
-                    mlflow.sklearn.log_model(fitted_estimator, "model")
-                    print("Model saved in run %s" % mlflow.active_run().info.run_uuid)
+                print(estimator_stats_df.to_dict('records'))
+
+                if mlflow_stats:
+                    with mlflow.start_run(run_name=mlflow_run_name):
+                        print('Inside mlflow')
+                        mlflow.log_param('model', estimator_name)
+                        mlflow.log_metrics(estimator_stats_df.to_dict('records')[0])
+                        mlflow.sklearn.log_model(fitted_estimator, "model")
+                        print("Model saved in run %s" % mlflow.active_run().info.run_uuid)
             except Exception as e:
-                metrics = {'Estimator': [name], 'mae': None, 'mse': None, 'rmse': None, 'r2_score': None}
-                df_metrics = pd.DataFrame(metrics)
-                print('metrics', df_metrics)
-                df = pd.concat([df, df_metrics])
+                exception = {'Estimator': [estimator_name], 'Exception': str(e)}
+                exception_df = pd.DataFrame(exception)
+                print('metrics', exception_df)
+                df = pd.concat([df, exception_df])
                 traceback.print_exc()
 
-    print(df)
+    df.style.set_table_styles([{'selector': '',
+                                'props': [('border',
+                                           '10px solid yellow')]}])
+    logger.info('Estimator Stats : {}'.format(df.to_string()))
