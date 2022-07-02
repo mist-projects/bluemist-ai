@@ -1,3 +1,7 @@
+"""
+Main comment for regressor.py
+"""
+
 import importlib
 import logging
 import traceback
@@ -34,6 +38,10 @@ def get_regressor_class(module, class_name):
 
 def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2, metrics='default',
                         mlflow_stats=False, mlflow_experiment_name=None, mlflow_run_name=None):
+    """
+    data: dataframe-like = None
+        Dataframe to be passed to the ML estimator
+    """
     X = data.drop(['mpg', 'origin_europe'], axis=1)
     # the dependent variable
     y = data[['mpg']]
