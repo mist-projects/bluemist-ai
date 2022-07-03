@@ -4,9 +4,10 @@ import pandas as pd
 
 def preprocess_data(data):
     data = data.drop('car name', axis=1)
+    data = data.drop('origin', axis=1)
     # Also replacing the categorical var with actual values
-    data['origin'] = data['origin'].replace({1: 'america', 2: 'europe', 3: 'asia'})
-    data = pd.get_dummies(data, columns=['origin'])
+    #data['origin'] = data['origin'].replace({1: 'america', 2: 'europe', 3: 'asia'})
+    #data = pd.get_dummies(data, columns=['origin'])
 
     # isdigit()? on 'horsepower'
     hpIsDigit = pd.DataFrame(

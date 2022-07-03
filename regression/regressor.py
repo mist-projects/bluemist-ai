@@ -16,7 +16,10 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
 import regression.tuning
+import utils.scaler
 from pipeline.bluemist_pipeline import add_pipeline_step, save_pipeline
+from regression.constant import multi_output_regressors, multi_task_regressors, unsupported_regressors, \
+    base_estimator_regressors
 from regression.overridden_estimators import overridden_regressors
 from regression.tuning.constant import default_hyperparameters
 from utils.metrics import scoringStrategy
@@ -36,22 +39,63 @@ def get_regressor_class(module, class_name):
     return instance
 
 
-def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2, metrics='default',
-                        mlflow_stats=False, mlflow_experiment_name=None, mlflow_run_name=None):
+def train_test_evaluate(
+        data,
+        tune_models=False,
+        test_size=0.25,
+        random_state=None,
+        metrics='default',
+        multi_output=False,
+        multi_task=False,
+        scale_data=False,
+        scaling_type='StandardScaler',
+        scale_target=False,
+        save_pipeline_to_disk=True,
+        mlflow_stats=False,
+        mlflow_experiment_name=None,
+        mlflow_run_name=None):
     """
     data: dataframe-like = None
         Dataframe to be passed to the ML estimator
+    tune_models: bool, default=False
+        Set to True to perform hyperparamter tuning
+    test_size: float or int, default=0.25
+        Proportion of the dataset to include in the test split.
+    random_state: int, default=None
+        random_state description
+    metrics: dataframe-like = None
+        Add description
+    multi_output: bool, default=False
+        Future use
+    multi_task: bool, default=False
+        Future use        
+    scale_data: dataframe-like = None
+        Add description
+    scaling_type: dataframe-like = None
+        Add description. Ignored if scale_data is False
+    scale_target: dataframe-like = None
+        Add description. Ignored if scale_data is False
+    mlflow_stats: bool, default=False
+        Set to True to log experiments in MLFlow
+    mlflow_experiment_name: dataframe-like = None
+        Add description. Ignored if mlflow_stats is False
+    mlflow_run_name: dataframe-like = None
+        Add description. Ignored if mlflow_stats is False
     """
-    X = data.drop(['mpg', 'origin_europe'], axis=1)
+
+    tune_all_models = False
+    tune_model_list = []
+    scaler = None
+
+    #X = data.drop(['mpg', 'origin_europe'], axis=1)
+    X = data.drop(['mpg'], axis=1)
+    print('X columns', X.columns)
     # the dependent variable
     y = data[['mpg']]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
 
     y_train = np.ravel(y_train)
     y_test = np.ravel(y_test)
-
-    tune_all_models = False
-    tune_model_list = []
 
     if isinstance(tune_models, str):
         if tune_models == 'all':
@@ -61,8 +105,8 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
 
     df = pd.DataFrame()
 
-    estimators = all_estimators(type_filter='regressor')
-    custom_regressors_df = overridden_regressors
+    if scale_data:
+        scaler = utils.scaler.getScaler(scaling_type)
 
     if mlflow_stats:
         if mlflow_experiment_name is not None:
@@ -77,18 +121,45 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
 
             mlflow.set_experiment(mlflow_experiment_name)
 
+    estimators = all_estimators(type_filter='regressor')
+    print('estimators', estimators)
+
+    estimators_to_remove = []
+    for estimator in estimators:
+        if not multi_output:
+            if estimator[0] in multi_output_regressors:
+                estimators_to_remove.append(estimator)
+        if not multi_task:
+            if estimator[0] in multi_task_regressors:
+                estimators_to_remove.append(estimator)
+        if unsupported_regressors:
+            if estimator[0] in unsupported_regressors:
+                estimators_to_remove.append(estimator)
+        if base_estimator_regressors:
+            if estimator[0] in base_estimator_regressors:
+                estimators_to_remove.append(estimator)
+
+    print('estimators_to_remove >>', estimators_to_remove)
+
+    for estimator_to_remove in estimators_to_remove:
+        estimators.remove(estimator_to_remove)
+
+    print('estimators after removal >>', estimators)
+    custom_regressors_df = overridden_regressors
+
     i = 0
     for estimator_name, RegressorClass in estimators:
         i = i + 1
 
-        if i > 0:
-        #if estimator_name == 'BaggingRegressor':
+        #if i > 0:
+        if estimator_name == 'LinearRegression':
             try:
                 print('Regressor Name', estimator_name)
 
                 custom_estimator = custom_regressors_df.query("Name == @estimator_name")
                 if not custom_estimator.empty:
                     reg = get_regressor_class(custom_estimator['Module'].values[0], custom_estimator['Class'].values[0])
+                    print('Custom regressor', reg)
                 else:
                     reg = RegressorClass()
 
@@ -96,7 +167,7 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
                     estimator_parameters = reg.get_params()
                     print('parameters', type(estimator_parameters))
                     print('hyperparameter alpha_1', type(default_hyperparameters['alpha_1']))
-                    default_hyperparameters_for_tuning = default_hyperparameters
+                    # default_hyperparameters_for_tuning = default_hyperparameters
                     model_hyperparameters_for_tuning = getattr(regression.tuning.constant, estimator_name, None)
 
                     deprecated_keys = []
@@ -107,8 +178,8 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
                         elif model_hyperparameters_for_tuning is not None and key in model_hyperparameters_for_tuning:
                             estimator_parameters[key] = model_hyperparameters_for_tuning[key]
                             print('parameters[key]', estimator_parameters[key])
-                        elif key in default_hyperparameters_for_tuning:
-                            estimator_parameters[key] = default_hyperparameters_for_tuning[key]
+                        elif key in default_hyperparameters:
+                            estimator_parameters[key] = default_hyperparameters[key]
                             print('parameters[key]', estimator_parameters[key])
 
                     for deprecated_key in deprecated_keys:
@@ -124,31 +195,43 @@ def train_test_evaluate(data, tune_models=False, test_size=0.25, random_state=2,
 
                     print('Hyperparameters for Tuning :: ', hyperparameters)
 
-                    step_scale = ('scaler', StandardScaler())
-                    add_pipeline_step(estimator_name, step_scale)
+                    if scaler is not None:
+                        step_scale = ('scaler', scaler)
+                        add_pipeline_step(estimator_name, step_scale)
 
-                    step_estimator = (estimator_name, reg)
+                        if scale_target:
+                            tt = TransformedTargetRegressor(regressor=reg, transformer=StandardScaler())
+                            step_estimator = (estimator_name, tt)
+                    else:
+                        step_estimator = (estimator_name, reg)
                     steps = add_pipeline_step(estimator_name, step_estimator)
 
                     pipe = Pipeline(steps=steps)
                     search = RandomizedSearchCV(pipe, param_distributions=hyperparameters)
                     fitted_estimator = search.best_estimator_.fit(X_train, y_train)
-                    save_pipeline(estimator_name, pipe)
+                    if save_pipeline_to_disk:
+                        save_pipeline(estimator_name, pipe)
+
                     print('pipe1:', pipe)
                 else:
-                    step_scale = ('scaler', StandardScaler())
-                    add_pipeline_step(estimator_name, step_scale)
+                    if scaler is not None:
+                        step_scale = ('scaler', scaler)
+                        add_pipeline_step(estimator_name, step_scale)
 
-                    tt = TransformedTargetRegressor(regressor=reg, transformer=StandardScaler())
-                    step_estimator = (estimator_name, tt)
-
-                    #step_estimator = (estimator_name, reg)
+                        if scale_target:
+                            tt = TransformedTargetRegressor(regressor=reg, transformer=StandardScaler())
+                            step_estimator = (estimator_name, tt)
+                    else:
+                        step_estimator = (estimator_name, reg)
                     steps = add_pipeline_step(estimator_name, step_estimator)
-                    #steps = [step_estimator]
 
                     pipe = Pipeline(steps=steps)
-                    print('pipe2', pipe)
                     fitted_estimator = pipe.fit(X_train, y_train)
+
+                    if save_pipeline_to_disk:
+                        save_pipeline(estimator_name, pipe)
+
+                    print('pipe2', pipe)
 
                 if tune_all_models or estimator_name in tune_model_list:
                     print('Best Score: %s' % fitted_estimator.best_score_)

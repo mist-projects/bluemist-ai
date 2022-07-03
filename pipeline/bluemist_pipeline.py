@@ -1,3 +1,5 @@
+from joblib import dump
+
 pipeline_steps = {}
 pipelines = {}
 
@@ -15,4 +17,5 @@ def add_pipeline_step(estimator_name, pipeline_step):
 
 def save_pipeline(estimator_name, pipeline):
     pipelines[estimator_name] = pipeline
+    dump(pipeline, 'api/models/' + estimator_name + '.joblib')
     print(pipelines)

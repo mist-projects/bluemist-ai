@@ -13,7 +13,7 @@ def main():
 
     print(data.shape)
     data = preprocess_data(data)
-    train_test_evaluate(data, tune_models=None, metrics='all', mlflow_stats=False)
+    train_test_evaluate(data, tune_models=None, metrics='all', mlflow_stats=False, scale_data=True, scale_target=True)
 
 
 # Press the green button in the gutter to run the script.
