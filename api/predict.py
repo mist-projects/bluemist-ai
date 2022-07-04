@@ -39,3 +39,6 @@ def predict(data: request_body):
     class_idx = pipeline.predict(test_data)[0]
     # Return the Result
     return {'class': class_idx}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
