@@ -41,7 +41,7 @@ def get_regressor_class(module, class_name):
 
 def train_test_evaluate(
         data,
-        tune_models=False,
+        tune_models=None,
         test_size=0.25,
         random_state=None,
         metrics='default',
@@ -87,7 +87,7 @@ def train_test_evaluate(
     tune_model_list = []
     scaler = None
 
-    #X = data.drop(['mpg', 'origin_europe'], axis=1)
+    # X = data.drop(['mpg', 'origin_europe'], axis=1)
     X = data.drop(['mpg'], axis=1)
     print('X columns', X.columns)
     # the dependent variable
@@ -107,6 +107,8 @@ def train_test_evaluate(
 
     if scale_data:
         scaler = utils.scaler.getScaler(scaling_type)
+    if scaler is None:
+        scale_target = False
 
     if mlflow_stats:
         if mlflow_experiment_name is not None:
@@ -151,8 +153,8 @@ def train_test_evaluate(
     for estimator_name, RegressorClass in estimators:
         i = i + 1
 
-        #if i > 0:
-        if estimator_name == 'LinearRegression':
+        # if estimator_name == 'LinearRegression':
+        if i == 1:
             try:
                 print('Regressor Name', estimator_name)
 
@@ -190,7 +192,11 @@ def train_test_evaluate(
 
                     for key in estimator_parameters:
                         old_key = key
-                        new_key = estimator_name + '__' + key
+
+                        if scale_target:
+                            new_key = estimator_name + '__regressor__' + key
+                        else:
+                            new_key = estimator_name + '__' + key
                         hyperparameters[new_key] = estimator_parameters[old_key]
 
                     print('Hyperparameters for Tuning :: ', hyperparameters)
@@ -199,38 +205,48 @@ def train_test_evaluate(
                         step_scale = ('scaler', scaler)
                         add_pipeline_step(estimator_name, step_scale)
 
-                        if scale_target:
-                            tt = TransformedTargetRegressor(regressor=reg, transformer=StandardScaler())
-                            step_estimator = (estimator_name, tt)
+                    if scale_target:
+                        tt = TransformedTargetRegressor(regressor=reg, transformer=StandardScaler())
+                        step_estimator = (estimator_name, tt)
+                        steps = add_pipeline_step(estimator_name, step_estimator)
                     else:
                         step_estimator = (estimator_name, reg)
-                    steps = add_pipeline_step(estimator_name, step_estimator)
+                        steps = add_pipeline_step(estimator_name, step_estimator)
 
-                    pipe = Pipeline(steps=steps)
-                    search = RandomizedSearchCV(pipe, param_distributions=hyperparameters)
-                    fitted_estimator = search.best_estimator_.fit(X_train, y_train)
-                    if save_pipeline_to_disk:
-                        save_pipeline(estimator_name, pipe)
+                    if steps is not None:
+                        pipe = Pipeline(steps=steps)
+                        search = RandomizedSearchCV(pipe, param_distributions=hyperparameters)
+                        fitted_estimator = search.fit(X_train, y_train)
+                        pipeline_with_best_estimator = fitted_estimator.best_estimator_
+                        # fitted_estimator = search.best_estimator_
+                        print('fitted_estimator', fitted_estimator)
+                        print('pipe', pipe)
+                        print('pipeline_with_best_estimator', pipeline_with_best_estimator)
 
-                    print('pipe1:', pipe)
+                        if save_pipeline_to_disk:
+                            save_pipeline(estimator_name, pipeline_with_best_estimator)
+
+                        print('pipe1:', pipe)
                 else:
                     if scaler is not None:
                         step_scale = ('scaler', scaler)
                         add_pipeline_step(estimator_name, step_scale)
 
-                        if scale_target:
-                            tt = TransformedTargetRegressor(regressor=reg, transformer=StandardScaler())
-                            step_estimator = (estimator_name, tt)
+                    if scale_target:
+                        tt = TransformedTargetRegressor(regressor=reg, transformer=StandardScaler())
+                        step_estimator = (estimator_name, tt)
+                        steps = add_pipeline_step(estimator_name, step_estimator)
                     else:
                         step_estimator = (estimator_name, reg)
-                    steps = add_pipeline_step(estimator_name, step_estimator)
+                        steps = add_pipeline_step(estimator_name, step_estimator)
 
                     pipe = Pipeline(steps=steps)
                     fitted_estimator = pipe.fit(X_train, y_train)
 
                     if save_pipeline_to_disk:
-                        save_pipeline(estimator_name, pipe)
+                        save_pipeline(estimator_name, fitted_estimator)
 
+                    print('fitted_estimator', fitted_estimator)
                     print('pipe2', pipe)
 
                 if tune_all_models or estimator_name in tune_model_list:

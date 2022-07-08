@@ -6,12 +6,13 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 
-def get_data_from_database(db_type=None, host=None, database=None, service=None, oracle_instant_client_path=None, username=None, password=None, query=None,
+def get_data_from_database(db_type=None, host=None, database=None, service=None, oracle_instant_client_path=None,
+                           username=None, password=None, query=None,
                            chunk_size=1000):
     password = urllib.parse.quote_plus(password)
 
     if db_type == 'mariadb':
-        connection_url = 'mysql+mysqlconnector://' + username + ':' + password + '@' + host + '/' + database
+        connection_url = 'mysql+pymysql://' + username + ':' + password + '@' + host + '/' + database
         engine = create_engine(connection_url)
         conn = engine.connect()
         data = extract_data(conn, query, chunk_size)
@@ -29,15 +30,9 @@ def get_data_from_database(db_type=None, host=None, database=None, service=None,
         data = extract_data(conn, query, chunk_size)
         return data
     elif db_type == 'oracle':
-        os.environ['LD_LIBRARY_PATH'] = oracle_instant_client_path
-        cx_Oracle.init_oracle_client(lib_dir=oracle_instant_client_path)
-        # connection_url = 'oracle+cx_oracle://' + username + ':' + password + '@' + host + '/?service_name=' + service
-        # engine = create_engine(connection_url)
-        # conn = engine.connect()
-        # data = extract_data(conn, query, chunk_size)
-        # return data
-        dsn_tns = cx_Oracle.makedsn(host, 1521, service_name=service)
-        conn = cx_Oracle.connect(username, password, dsn_tns)
+        connection_url = 'oracle+cx_oracle://' + username + ':' + password + '@' + host + '/?service_name=' + service
+        engine = create_engine(connection_url)
+        conn = engine.connect()
         data = extract_data(conn, query, chunk_size)
         return data
     elif db_type == 'postgres' or db_type == 'aurora-postgres':
@@ -46,6 +41,7 @@ def get_data_from_database(db_type=None, host=None, database=None, service=None,
         conn = engine.connect()
         data = extract_data(conn, query, chunk_size)
         return data
+
 
 def extract_data(conn=None, query=None, chunk_size=None):
     dfs = []
