@@ -1,6 +1,7 @@
 import numpy as np
 
 default_hyperparameters = {
+    'alpha': [1.0, 1.5, 2.0, 2.5, 3, 3.5, 4, 4.5, 5],
     'alpha_1': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1],
     'alpha_2': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1],
     'alpha_init': [None, 0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1],
@@ -14,6 +15,7 @@ default_hyperparameters = {
     'copy_X': [True],
     'criterion': ['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
     'fit_intercept': [True, False],
+    'l1_ratio': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
     'lambda_1': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1],
     'lambda_2': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1],
     'lambda_init': [None, 0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1],
@@ -33,9 +35,12 @@ default_hyperparameters = {
     'n_jobs': [-1],
     'normalize': [False],
     'oob_score': [True, False],
+    'positive': [True, False],
+    'precompute': [True, False],
     'quantile': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
     'random_state': [2],
     'scale': [True, False],
+    'selection': ['cyclic', 'random'],
     'splitter': ['best', 'random'],
     'strategy': ['mean', 'median', 'quantile', 'constant'],
     'threshold_lambda': np.arange(5000.0, 20000.0 + 1, 1000.0).tolist(),
