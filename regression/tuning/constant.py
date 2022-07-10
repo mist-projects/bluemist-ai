@@ -1,6 +1,7 @@
 import numpy as np
 
 default_hyperparameters = {
+    'alphas': [None],
     'alpha': [1.0, 1.5, 2.0, 2.5, 3, 3.5, 4, 4.5, 5],
     'alpha_1': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1],
     'alpha_2': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1],
@@ -14,6 +15,8 @@ default_hyperparameters = {
     'copy': [True],
     'copy_X': [True],
     'criterion': ['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
+    'cv': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    'eps': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1],
     'fit_intercept': [True, False],
     'l1_ratio': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
     'lambda_1': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1],
@@ -29,6 +32,7 @@ default_hyperparameters = {
     'min_samples_leaf': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     'min_samples_split': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
     'min_weight_fraction_leaf': [0.0],
+    'n_alphas': np.arange(100, 5000 + 1, 50).tolist(),
     'n_components': [1, 2, 3, 4, 5, 6],
     'n_estimators': np.arange(10, 1050 + 1, 50).tolist(),
     'n_iter': np.arange(100, 5000 + 1, 50).tolist(),
@@ -54,6 +58,10 @@ AdaBoostRegressor = {
 }
 
 DecisionTreeRegressor = {
-    'max_features': [0.7, 0.8, 0.9, 1, 'auto', 'sqrt', 'log2'],
+    'max_features': [0.7, 0.8, 0.9, 1, 'auto', 'sqrt', 'log2']
+}
+
+ElasticNetCV = {
+    'precompute': [None, True, False]
 }
 

@@ -154,7 +154,7 @@ def train_test_evaluate(
         i = i + 1
 
         # if estimator_name == 'LinearRegression':
-        if i == 8:
+        if i == 9:
             try:
                 print('Regressor Name', estimator_name)
 
