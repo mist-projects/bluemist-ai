@@ -21,10 +21,12 @@ default_hyperparameters = {
     'fit_intercept': [True, False],
     'kernel': [None],
     'l1_ratio': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+    'l2_regularization': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
     'lambda_1': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1],
     'lambda_2': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1],
     'lambda_init': [None, 0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1],
     'learning_rate': np.arange(0.5, 50 + 1, 0.5).tolist(),
+    'max_bins': np.arange(1, 255 + 1, 1).tolist(),
     'max_depth': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     'max_iter': np.arange(100, 5000 + 1, 50).tolist(),
     'max_leaf_nodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -38,6 +40,7 @@ default_hyperparameters = {
     'n_components': [1, 2, 3, 4, 5, 6],
     'n_estimators': np.arange(10, 1050 + 1, 50).tolist(),
     'n_iter': np.arange(100, 5000 + 1, 50).tolist(),
+    'n_iter_no_change': [None, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     'n_jobs': [-1],
     'normalize': [False],
     'normalize_y': [True, False],
@@ -52,6 +55,7 @@ default_hyperparameters = {
     'strategy': ['mean', 'median', 'quantile', 'constant'],
     'threshold_lambda': np.arange(5000.0, 20000.0 + 1, 1000.0).tolist(),
     'tol': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1],
+    'validation_fraction': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
     'verbose': [False],
     'warm_start': [True, False]
 }
@@ -78,3 +82,18 @@ GaussianProcessRegressor = {
     'n_restarts_optimizer': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 }
 
+GradientBoostingRegressor = {
+    'alpha': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+    'criterion': ['friedman_mse', 'squared_error', 'mse'],
+    'init': [None, 'zero'],
+    'loss': ['squared_error', 'absolute_error', 'huber', 'quantile'],
+    'subsample': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+}
+
+HistGradientBoostingRegressor = {
+    'categorical_features': [None],
+    'early_stopping': ['auto', True, False],
+    'loss': ['squared_error', 'absolute_error', 'poisson'],
+    'monotonic_cst': [None],
+    'scoring': [None, 'loss']
+}
