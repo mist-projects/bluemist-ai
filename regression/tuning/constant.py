@@ -65,3 +65,7 @@ ElasticNetCV = {
     'precompute': [None, True, False]
 }
 
+ExtraTreeRegressor = {
+    'max_features': [0.7, 0.8, 0.9, 1, 'auto', 'sqrt', 'log2']
+}
+
