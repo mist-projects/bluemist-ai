@@ -14,10 +14,12 @@ default_hyperparameters = {
     'constant': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
     'copy': [True],
     'copy_X': [True],
+    'copy_X_train': [True],
     'criterion': ['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
     'cv': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     'eps': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1],
     'fit_intercept': [True, False],
+    'kernel': [None],
     'l1_ratio': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
     'lambda_1': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1],
     'lambda_2': [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1],
@@ -38,6 +40,7 @@ default_hyperparameters = {
     'n_iter': np.arange(100, 5000 + 1, 50).tolist(),
     'n_jobs': [-1],
     'normalize': [False],
+    'normalize_y': [True, False],
     'oob_score': [True, False],
     'positive': [True, False],
     'precompute': [True, False],
@@ -67,5 +70,11 @@ ElasticNetCV = {
 
 ExtraTreeRegressor = {
     'max_features': [0.7, 0.8, 0.9, 1, 'auto', 'sqrt', 'log2']
+}
+
+GaussianProcessRegressor = {
+    'alpha': [1e-10, 1e-9, 1e-8, 1e-7, 1e-6, 1e-5, 0.0001, 0.001, 0.01, 0.1],
+    'optimizer': ['fmin_l_bfgs_b'],
+    'n_restarts_optimizer': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 }
 
