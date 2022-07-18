@@ -58,7 +58,7 @@ def train_test_evaluate(
     data: dataframe-like = None
         Dataframe to be passed to the ML estimator
     tune_models: bool, default=False
-        Set to True to perform hyperparamter tuning
+        Set to True to perform automated hyperparamter tuning
     test_size: float or int, default=0.25
         Proportion of the dataset to include in the test split.
     random_state: int, default=None
@@ -154,7 +154,7 @@ def train_test_evaluate(
         i = i + 1
 
         # if estimator_name == 'LinearRegression':
-        if i == 15:
+        if i == 4:
             try:
                 print('Regressor Name', estimator_name)
 
