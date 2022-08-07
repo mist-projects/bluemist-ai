@@ -219,6 +219,7 @@ def train_test_evaluate(
                         fitted_estimator = search.fit(X_train, y_train)
                         pipeline_with_best_estimator = fitted_estimator.best_estimator_
                         # fitted_estimator = search.best_estimator_
+                        print('pipeline keys ', pipe.get_params().keys())
                         print('fitted_estimator', fitted_estimator)
                         print('pipe', pipe)
                         print('pipeline_with_best_estimator', pipeline_with_best_estimator)

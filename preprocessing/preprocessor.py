@@ -57,15 +57,15 @@ def preprocess_data(
 
     # finalize the list of categorical features
     if auto_computed_categorical_features is not None:
+        if categorical_features is not None:
+            for categorical_feature in categorical_features:
+                if categorical_feature not in auto_computed_categorical_features:
+                    auto_computed_categorical_features.append(categorical_feature)
+
         if numerical_features is not None:
             for numerical_feature in numerical_features:
                 if numerical_feature in auto_computed_categorical_features:
                     auto_computed_categorical_features.remove(numerical_feature)
-
-        if categorical_features is not None:
-            for categorical_feature in categorical_features:
-                if categorical_feature not in auto_computed_numerical_features:
-                    auto_computed_numerical_features.append(categorical_feature)
 
     # Also replacing the categorical var with actual values
     # data['origin'] = data['origin'].replace({1: 'america', 2: 'europe', 3: 'asia'})
