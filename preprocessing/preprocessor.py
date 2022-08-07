@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 
 from pipeline.preprocessing_pipeline import add_preprocessing_step
 
@@ -12,9 +13,11 @@ def preprocess_data(
         drop_features=None,
         numerical_features=None,
         categorical_features=None,
+        scaler=None,
         missing_value=np.nan,
         imputer_strategy='mean',
-        constant_value=None):
+        constant_value=None,
+        categorical_encoder=None):
     """
     data: dataframe = None
         Dataframe to be passed to the ML estimator
@@ -43,29 +46,32 @@ def preprocess_data(
     auto_computed_numerical_features = data.select_dtypes(include='number').columns.tolist()
     auto_computed_categorical_features = data.select_dtypes(include='object').columns.tolist()
 
+    final_numerical_features = auto_computed_numerical_features.copy()
+    final_categorical_features = auto_computed_categorical_features.copy()
+
     # finalize the list of numerical features
     if auto_computed_numerical_features is not None:
         if numerical_features is not None:
             for numerical_feature in numerical_features:
                 if numerical_feature not in auto_computed_numerical_features:
-                    auto_computed_numerical_features.append(numerical_feature)
+                    final_numerical_features.append(numerical_feature)
 
         if categorical_features is not None:
             for categorical_feature in categorical_features:
                 if categorical_feature in auto_computed_numerical_features:
-                    auto_computed_numerical_features.remove(categorical_feature)
+                    final_numerical_features.remove(categorical_feature)
 
     # finalize the list of categorical features
     if auto_computed_categorical_features is not None:
         if categorical_features is not None:
             for categorical_feature in categorical_features:
                 if categorical_feature not in auto_computed_categorical_features:
-                    auto_computed_categorical_features.append(categorical_feature)
+                    final_categorical_features.append(categorical_feature)
 
         if numerical_features is not None:
             for numerical_feature in numerical_features:
                 if numerical_feature in auto_computed_categorical_features:
-                    auto_computed_categorical_features.remove(numerical_feature)
+                    final_categorical_features.remove(numerical_feature)
 
     # Also replacing the categorical var with actual values
     # data['origin'] = data['origin'].replace({1: 'america', 2: 'europe', 3: 'asia'})
@@ -89,13 +95,17 @@ def preprocess_data(
 
     numeric_transformer = Pipeline(
         steps=[
-            ('imputer', SimpleImputer(strategy="median"))
+            ('imputer', SimpleImputer(strategy=imputer_strategy)),
+            ("scaler", scaler())
         ]
     )
 
+    categorical_transformer = categorical_encoder()
+
     preprocessor = ColumnTransformer(
         transformers=[
-            ("numeric_transformer", numeric_transformer, auto_computed_categorical_features),
+            ("numeric_transformer", numeric_transformer, final_numerical_features),
+            ("categorical_transformer", categorical_transformer, final_categorical_features)
         ]
     )
 
