@@ -1,32 +1,38 @@
 import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
-from sklearn.impute import SimpleImputer
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-
-from pipeline.preprocessing_pipeline import add_preprocessing_step
+from preprocessing import numeric_transformer, categorical_transformer
 
 
 def preprocess_data(
         data,
         drop_features=None,
+        convert_column_datatype=None,
         numerical_features=None,
         categorical_features=None,
+        convert_to_nan=None,
         scaler=None,
         missing_value=np.nan,
-        imputer_strategy='mean',
-        constant_value=None,
-        categorical_encoder=None):
+        numeric_imputer_strategy='mean',
+        numeric_constant_value=None,
+        categorical_imputer_strategy='mean',
+        categorical_constant_value=None,
+        categorical_encoder=None,
+        drop_categories_one_hot_encoder=None,
+        handle_unknown_one_hot_encoder=None):
     """
     data: dataframe = None
         Dataframe to be passed to the ML estimator
     drop_features: str or list, default=None
         List of features to be dropped from the dataset
+    convert_column_datatype: str ot list
+        Convert data type of column to another data type
     numerical_features: list, default=None
         list of numerical features
-    numerical_features: list, default=None
+    categorical_features: list, default=None
         list of categorical features
+    convert_to_nan: str, list, dict, Series, int, float, or None
+        dataset vales to be converted NaN
     missing_value: object, defaulr=np.nan
         value to be imputed
     imputer_strategy: str, default='mean'
@@ -93,20 +99,16 @@ def preprocess_data(
     data['horsepower'] = data['horsepower'].astype(
         'float64')  # converting the hp column from object / string type to float
 
-    numeric_transformer = Pipeline(
-        steps=[
-            ('imputer', SimpleImputer(strategy=imputer_strategy)),
-            ("scaler", scaler())
-        ]
-    )
+    data = data.replace(convert_to_nan, np.nan)
 
-    categorical_transformer = categorical_encoder()
+    num_transformer = numeric_transformer.build_numeric_transformer_pipeline(**locals())
+    cat_transformer = categorical_transformer.build_categorical_transformer_pipeline(**locals())
 
     preprocessor = ColumnTransformer(
         transformers=[
-            ("numeric_transformer", numeric_transformer, final_numerical_features),
+            ("numeric_transformer", num_transformer, final_numerical_features),
             ("categorical_transformer", categorical_transformer, final_categorical_features)
         ]
     )
 
-    return data
+   return data
