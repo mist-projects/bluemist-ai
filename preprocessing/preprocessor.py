@@ -110,5 +110,4 @@ def preprocess_data(
             ("categorical_transformer", categorical_transformer, final_categorical_features)
         ]
     )
-
-   return data
+    return data
