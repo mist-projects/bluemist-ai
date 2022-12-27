@@ -11,13 +11,13 @@ def preprocess_data(
         numerical_features=None,
         categorical_features=None,
         convert_to_nan=None,
-        scaler=None,
+        scaler='StandardScaler',
         missing_value=np.nan,
         numeric_imputer_strategy='mean',
         numeric_constant_value=None,
-        categorical_imputer_strategy='mean',
+        categorical_imputer_strategy='most_frequent',
         categorical_constant_value=None,
-        categorical_encoder=None,
+        categorical_encoder='LabelEncoder',
         drop_categories_one_hot_encoder=None,
         handle_unknown_one_hot_encoder=None):
     """
@@ -99,7 +99,7 @@ def preprocess_data(
     data['horsepower'] = data['horsepower'].astype(
         'float64')  # converting the hp column from object / string type to float
 
-    data = data.replace(convert_to_nan, np.nan)
+    #data = data.replace(convert_to_nan, np.nan)
 
     num_transformer = numeric_transformer.build_numeric_transformer_pipeline(**locals())
     cat_transformer = categorical_transformer.build_categorical_transformer_pipeline(**locals())

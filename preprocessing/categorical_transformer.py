@@ -9,7 +9,7 @@ def build_categorical_transformer_pipeline(**kwargs):
     """
     transformer_steps = []
 
-    imputer_strategy = kwargs.get('imputer_strategy')
+    imputer_strategy = kwargs.get('categorical_imputer_strategy')
     categorical_constant_value = kwargs.get('categorical_constant_value')
     categorical_encoder = kwargs.get('categorical_encoder')
     drop_categories = kwargs.get('drop_categories_one_hot_encoder')

@@ -9,7 +9,7 @@ def build_numeric_transformer_pipeline(**kwargs):
     """
     transformer_steps = []
 
-    imputer_strategy = kwargs.get('imputer_strategy')
+    imputer_strategy = kwargs.get('numeric_imputer_strategy')
     scaler = kwargs.get('scaler')
     numeric_constant_value = kwargs.get('numeric_constant_value')
 
