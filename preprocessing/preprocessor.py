@@ -9,11 +9,12 @@ def preprocess_data(
         drop_features=None,
         convert_column_datatype=None,
         numerical_features=None,
+        force_numeric_conversion=True,
         categorical_features=None,
         convert_to_nan=None,
         scaler='StandardScaler',
         missing_value=np.nan,
-        numeric_imputer_strategy='mean',
+        numeric_imputer_strategy='median',
         numeric_constant_value=None,
         categorical_imputer_strategy='most_frequent',
         categorical_constant_value=None,
@@ -79,35 +80,34 @@ def preprocess_data(
                 if numerical_feature in auto_computed_categorical_features:
                     final_categorical_features.remove(numerical_feature)
 
-    # Also replacing the categorical var with actual values
-    # data['origin'] = data['origin'].replace({1: 'america', 2: 'europe', 3: 'asia'})
-    # data = pd.get_dummies(data, columns=['origin'])
+    # prepare final list of columns after preprocessing
+    column_list = []
+    if bool(final_numerical_features) and bool(final_categorical_features):
+        column_list = final_numerical_features.append(final_categorical_features)
+    elif bool(final_numerical_features):
+        column_list = final_numerical_features
+    elif bool(final_categorical_features):
+        column_list = final_categorical_features
 
-    # isdigit()? on 'horsepower'
-    hpIsDigit = pd.DataFrame(
-        data.horsepower.str.isdigit())  # if the string is made of digits store True else False
+    # handle non-numeric data in user provided numeric column
+    if numerical_features is not None:
+        if force_numeric_conversion:
+            numeric_conversion_strategy = 'coerce'
+        else:
+            numeric_conversion_strategy = 'raise'
+        data[numerical_features] = data[numerical_features].apply(pd.to_numeric, errors=numeric_conversion_strategy,
+                                                                  axis=1)
 
-    # print isDigit = False!
-    data[hpIsDigit['horsepower'] == False]  # from temp take only those rows where hp has false
-
-    data = data.replace('?', np.nan)
-    data[hpIsDigit['horsepower'] == False]
-
-    medianFiller = lambda x: x.fillna(x.median())
-    data = data.apply(medianFiller, axis=0)
-
-    data['horsepower'] = data['horsepower'].astype(
-        'float64')  # converting the hp column from object / string type to float
-
-    #data = data.replace(convert_to_nan, np.nan)
-
+    # create transformers for preprocessing pipeline
     num_transformer = numeric_transformer.build_numeric_transformer_pipeline(**locals())
     cat_transformer = categorical_transformer.build_categorical_transformer_pipeline(**locals())
 
     preprocessor = ColumnTransformer(
         transformers=[
             ("numeric_transformer", num_transformer, final_numerical_features),
-            ("categorical_transformer", categorical_transformer, final_categorical_features)
+            ("categorical_transformer", cat_transformer, final_categorical_features)
         ]
     )
-    return data
+
+    preprocessed_data = pd.DataFrame(preprocessor.fit_transform(data), columns=column_list)
+    return preprocessed_data
