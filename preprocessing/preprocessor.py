@@ -1,18 +1,24 @@
 import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
+from sklearn.model_selection import train_test_split
+
+from pipeline.bluemist_pipeline import save_preprocessor
 from preprocessing import numeric_transformer, categorical_transformer
 
 
 def preprocess_data(
         data,
+        target_variable,
+        test_size=0.25,
+        random_state=None,
         drop_features=None,
-        convert_column_datatype=None,
         numerical_features=None,
         force_numeric_conversion=True,
         categorical_features=None,
-        convert_to_nan=None,
-        scaler='StandardScaler',
+        convert_values_to_nan=None,
+        data_scaling_strategy=None,
+        data_tranformation_strategy=None,
         missing_value=np.nan,
         numeric_imputer_strategy='median',
         numeric_constant_value=None,
@@ -102,12 +108,32 @@ def preprocess_data(
     num_transformer = numeric_transformer.build_numeric_transformer_pipeline(**locals())
     cat_transformer = categorical_transformer.build_categorical_transformer_pipeline(**locals())
 
+    # remove target variable from final numerical feature list
+    final_numerical_features_without_target = final_numerical_features.copy()
+    final_numerical_features_without_target.remove(target_variable)
+
+    # create preprocessing pipeline
     preprocessor = ColumnTransformer(
         transformers=[
-            ("numeric_transformer", num_transformer, final_numerical_features),
+            ("numeric_transformer", num_transformer, final_numerical_features_without_target),
             ("categorical_transformer", cat_transformer, final_categorical_features)
         ]
     )
 
-    preprocessed_data = pd.DataFrame(preprocessor.fit_transform(data), columns=column_list)
-    return preprocessed_data
+    X = data.drop([target_variable], axis=1)
+    print('X columns', X.columns)
+    y = data[[target_variable]]
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
+
+    column_list_without_target = column_list.copy()
+    column_list_without_target.remove(target_variable)
+
+    print('Column test', column_list_without_target)
+    X_train = pd.DataFrame(preprocessor.fit_transform(X_train), columns=column_list_without_target)
+    X_test = pd.DataFrame(preprocessor.transform(X_test), columns=column_list_without_target)
+
+    y_train = np.ravel(y_train)
+    y_test = np.ravel(y_test)
+
+    save_preprocessor(preprocessor)
+    return X_train, X_test, y_train, y_test

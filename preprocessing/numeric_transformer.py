@@ -1,40 +1,46 @@
 import pandas as pd
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler, MinMaxScaler, MaxAbsScaler, RobustScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, MaxAbsScaler, RobustScaler, PowerTransformer
+
+from utils.scaler import getScaler, available_scalers
 
 
 def build_numeric_transformer_pipeline(**kwargs):
     """
     :rtype: object
     """
-    transformer_steps = []
+    preprocessing_steps = []
 
     imputer_strategy = kwargs.get('numeric_imputer_strategy')
-    scaler = kwargs.get('scaler')
+    scaler = kwargs.get('data_scaling_strategy')
     numeric_constant_value = kwargs.get('numeric_constant_value')
+    data_tranformation_strategy = kwargs.get('data_tranformation_strategy')
 
+    # handling missing values
     if imputer_strategy is not None and imputer_strategy in ['mean', 'median', 'most_frequent', 'constant']:
         if imputer_strategy == 'constant':
             imputer_step = ('imputer', SimpleImputer(strategy=imputer_strategy, fill_value=numeric_constant_value))
         else:
             imputer_step = ('imputer', SimpleImputer(strategy=imputer_strategy))
-        transformer_steps.append(imputer_step)
-    else:
+        preprocessing_steps.append(imputer_step)
+    elif imputer_strategy is not None:
         raise ValueError('Invalid imputer_strategy value passed : ', imputer_strategy)
 
-    # if scaler is not None and scaler in ['StandardScaler', 'MinMaxScaler', 'MaxAbsScaler', 'RobustScaler']:
-    #     if scaler == 'StandardScaler':
-    #         scaler_step = ('scaler', StandardScaler())
-    #     elif scaler == 'MinMaxScaler':
-    #         scaler_step = ('scaler', MinMaxScaler())
-    #     elif scaler == 'MaxAbsScaler':
-    #         scaler_step = ('scaler', MaxAbsScaler())
-    #     elif scaler == 'RobustScaler':
-    #         scaler_step = ('scaler', RobustScaler())
-    #     transformer_steps.append(scaler_step)
-    # else:
-    #     raise ValueError('Invalid scaler value passed : ', scaler)
+    # data scaling
+    if scaler is not None and scaler in available_scalers:
+        scaler_step = ('scaler', getScaler(scaler))
+        preprocessing_steps.append(scaler_step)
+    elif scaler is not None:
+        raise ValueError('Invalid scaler value passed : ', scaler)
 
-    numeric_transformer = Pipeline(steps=transformer_steps)
+    # data transformation
+    if data_tranformation_strategy is not None and data_tranformation_strategy in ['auto', 'yeo-johnson', 'box-cox']:
+        if data_tranformation_strategy in ['auto', 'yeo-johnson']:
+            transformer_step = ('transformer', PowerTransformer(method='yeo-johnson'))
+        elif data_tranformation_strategy == 'box-cox':
+            transformer_step = ('transformer', PowerTransformer(method='box-cox'))
+        preprocessing_steps.append(transformer_step)
+
+    numeric_transformer = Pipeline(steps=preprocessing_steps)
     return numeric_transformer
