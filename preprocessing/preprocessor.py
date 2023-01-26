@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from pipeline.bluemist_pipeline import save_preprocessor
 from preprocessing import numeric_transformer, categorical_transformer
 
+column_list_without_target = None
 
 def preprocess_data(
         data,
@@ -17,7 +18,7 @@ def preprocess_data(
         force_numeric_conversion=True,
         categorical_features=None,
         convert_values_to_nan=None,
-        data_scaling_strategy=None,
+        data_scaling_strategy='MinMaxScaler',
         data_tranformation_strategy=None,
         missing_value=np.nan,
         numeric_imputer_strategy='median',
@@ -30,21 +31,41 @@ def preprocess_data(
     """
     data: dataframe = None
         Dataframe to be passed to the ML estimator
-    drop_features: str or list, default=None
+    target_variable: dataframe = None
+        Dataframe to be passed to the ML estimator
+    test_size: str or list, default=None
         List of features to be dropped from the dataset
-    convert_column_datatype: str ot list
+    random_state: str or list, default=None
+        List of features to be dropped from the dataset
+    drop_features: str ot list
         Convert data type of column to another data type
     numerical_features: list, default=None
+        list of numerical features
+    force_numeric_conversion: list, default=None
         list of numerical features
     categorical_features: list, default=None
         list of categorical features
     convert_to_nan: str, list, dict, Series, int, float, or None
         dataset vales to be converted NaN
+    data_scaling_strategy: str, list, dict, Series, int, float, or None
+        dataset vales to be converted NaN
+    data_tranformation_strategy: str, list, dict, Series, int, float, or None
+        dataset vales to be converted NaN
     missing_value: object, defaulr=np.nan
         value to be imputed
-    imputer_strategy: str, default='mean'
+    numeric_imputer_strategy: str, default='mean'
         imputation strategy. Possible values are 'mean, 'median', 'most_frequent', 'constant'
-    constant_value: str or number, default = None
+    numeric_constant_value: str or number, default = None
+        constant_value will replace the missing_value when imputer_strategy is passed as 'constant'
+    categorical_imputer_strategy: str or number, default = None
+        constant_value will replace the missing_value when imputer_strategy is passed as 'constant'
+    categorical_constant_value: str or number, default = None
+        constant_value will replace the missing_value when imputer_strategy is passed as 'constant'
+    categorical_encoder: str or number, default = None
+        constant_value will replace the missing_value when imputer_strategy is passed as 'constant'
+    drop_categories_one_hot_encoder: str or number, default = None
+        constant_value will replace the missing_value when imputer_strategy is passed as 'constant'
+    handle_unknown_one_hot_encoder: str or number, default = None
         constant_value will replace the missing_value when imputer_strategy is passed as 'constant'
     """
 
@@ -135,5 +156,6 @@ def preprocess_data(
     y_train = np.ravel(y_train)
     y_test = np.ravel(y_test)
 
+    print(X_train.dtypes)
     save_preprocessor(preprocessor)
     return X_train, X_test, y_train, y_test

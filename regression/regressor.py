@@ -16,16 +16,19 @@ from sklearn.compose import TransformedTargetRegressor
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.pipeline import Pipeline
 
+import model_api
 import regression.tuning
 from pipeline.bluemist_pipeline import add_pipeline_step, save_pipeline
 from regression.constant import multi_output_regressors, multi_task_regressors, unsupported_regressors, \
     base_estimator_regressors
-from regression.overridden_estimators import overridden_regressors
+
 from regression.tuning.constant import default_hyperparameters
 from utils.metrics import scoringStrategy
 from sklearn.utils import all_estimators
 
 from utils.scaler import getScaler
+
+import generate_api as generate_api
 
 config.fileConfig('logging.config')
 logger = logging.getLogger("root")
@@ -42,19 +45,48 @@ def initialize_mlflow(**kwargs):
     mlflow_stats = kwargs.get('mlflow_stats')
     mlflow_experiment_name = kwargs.get('mlflow_experiment_name')
 
-    if mlflow_stats:
-        if mlflow_experiment_name is not None:
-            experiment = mlflow.get_experiment_by_name(mlflow_experiment_name)
-            if not experiment:
-                mlflow.create_experiment(name=mlflow_experiment_name,
-                                         artifact_location='/home/shashank-agrawal/mlflow_artifact')
+    if mlflow_stats and mlflow_experiment_name is not None:
+        experiment = mlflow.get_experiment_by_name(mlflow_experiment_name)
+        if not experiment:
+            mlflow.create_experiment(name=mlflow_experiment_name,
+                                     artifact_location='/home/shashank-agrawal/mlflow_artifact')
 
-            if experiment is not None and experiment.lifecycle_stage == 'deleted':
-                print('restore experiment')
-                client = MlflowClient()
-                client.restore_experiment(experiment.experiment_id)
+        if experiment is not None and experiment.lifecycle_stage == 'deleted':
+            print('restore experiment')
+            client = MlflowClient()
+            client.restore_experiment(experiment.experiment_id)
 
-            mlflow.set_experiment(mlflow_experiment_name)
+        mlflow.set_experiment(mlflow_experiment_name)
+
+
+def get_estimators(**kwargs):
+    multi_output = kwargs.get('multi_output')
+    multi_task = kwargs.get('multi_task')
+    estimators = all_estimators(type_filter='regressor')
+    print('estimators', estimators)
+
+    estimators_to_remove = []
+    for estimator in estimators:
+        if not multi_output and estimator[0] in multi_output_regressors:
+            estimators_to_remove.append(estimator)
+        if not multi_task and estimator[0] in multi_task_regressors:
+            estimators_to_remove.append(estimator)
+        if unsupported_regressors and estimator[0] in unsupported_regressors:
+            estimators_to_remove.append(estimator)
+        if base_estimator_regressors and estimator[0] in base_estimator_regressors:
+            estimators_to_remove.append(estimator)
+
+    print('estimators_to_remove >>', estimators_to_remove)
+
+    for estimator_to_remove in estimators_to_remove:
+        estimators.remove(estimator_to_remove)
+
+    return estimators
+
+
+def deploy_model(estimator_name, host, port):
+    generate_api.generate_api_code(estimator_name=estimator_name)
+    model_api.start_api_server(host=host, port=port)
 
 
 def train_test_evaluate(
@@ -111,51 +143,23 @@ def train_test_evaluate(
     df = pd.DataFrame()
 
     initialize_mlflow(**locals())
-
-    estimators = all_estimators(type_filter='regressor')
-    print('estimators', estimators)
-
-    estimators_to_remove = []
-    for estimator in estimators:
-        if not multi_output and estimator[0] in multi_output_regressors:
-            estimators_to_remove.append(estimator)
-        if not multi_task and estimator[0] in multi_task_regressors:
-            estimators_to_remove.append(estimator)
-        if unsupported_regressors and estimator[0] in unsupported_regressors:
-            estimators_to_remove.append(estimator)
-        if base_estimator_regressors and estimator[0] in base_estimator_regressors:
-            estimators_to_remove.append(estimator)
-
-    print('estimators_to_remove >>', estimators_to_remove)
-
-    for estimator_to_remove in estimators_to_remove:
-        estimators.remove(estimator_to_remove)
-
-    print('estimators after removal >>', estimators)
-    custom_regressors_df = overridden_regressors
+    estimators = get_estimators(**locals())
 
     i = 0
     for estimator_name, estimator_class in estimators:
         i = i + 1
 
-        # if estimator_name == 'LinearRegression':
-        if i == 4:
+        if estimator_name == 'LinearRegression':
+            # if i == 0:
             try:
                 print('Regressor Name', estimator_name)
-
-                custom_estimator = custom_regressors_df.query("Name == @estimator_name")
-                if not custom_estimator.empty:
-                    regressor = get_regressor_class(custom_estimator['Module'].values[0],
-                                                    custom_estimator['Class'].values[0])
-                    print('Custom regressor', regressor)
-                else:
-                    regressor = estimator_class()
+                regressor = estimator_class()
 
                 if tune_all_models or estimator_name in tune_model_list:
                     estimator_parameters = regressor.get_params()
                     print('parameters', type(estimator_parameters))
                     print('hyperparameter alpha_1', type(default_hyperparameters['alpha_1']))
-                    # default_hyperparameters_for_tuning = default_hyperparameters
+
                     model_hyperparameters_for_tuning = getattr(regression.tuning.constant, estimator_name, None)
 
                     deprecated_keys = []
