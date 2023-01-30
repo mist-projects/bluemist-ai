@@ -6,6 +6,7 @@ import importlib
 import logging
 import traceback
 from logging import config
+from pathlib import Path
 
 import pandas as pd
 
@@ -16,7 +17,6 @@ from sklearn.compose import TransformedTargetRegressor
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.pipeline import Pipeline
 
-import model_api
 import regression.tuning
 from pipeline.bluemist_pipeline import add_pipeline_step, save_pipeline
 from regression.constant import multi_output_regressors, multi_task_regressors, unsupported_regressors, \
@@ -27,11 +27,12 @@ from utils.metrics import scoringStrategy
 from sklearn.utils import all_estimators
 
 from utils.scaler import getScaler
-
 import generate_api as generate_api
+import model_api
 
-config.fileConfig('logging.config')
-logger = logging.getLogger("root")
+
+# config.fileConfig(Path(__file__).parent / 'logging.conf')
+# logger = logging.getLogger("root")
 
 
 def get_regressor_class(module, class_name):
@@ -42,10 +43,9 @@ def get_regressor_class(module, class_name):
 
 
 def initialize_mlflow(**kwargs):
-    mlflow_stats = kwargs.get('mlflow_stats')
-    mlflow_experiment_name = kwargs.get('mlflow_experiment_name')
+    mlflow_experiment_name = kwargs.get('experiment_name')
 
-    if mlflow_stats and mlflow_experiment_name is not None:
+    if mlflow_experiment_name is not None:
         experiment = mlflow.get_experiment_by_name(mlflow_experiment_name)
         if not experiment:
             mlflow.create_experiment(name=mlflow_experiment_name,
@@ -98,34 +98,43 @@ def train_test_evaluate(
         metrics='default',
         multi_output=False,
         multi_task=False,
-        target_scaling_strategy='MinMaxScaler',
+        target_scaling_strategy=None,
         save_pipeline_to_disk=True,
-        mlflow_stats=False,
-        mlflow_experiment_name=None,
-        mlflow_run_name=None):
+        experiment_name=None,
+        run_name=None):
     """
-    data: dataframe-like = None
-        Dataframe to be passed to the ML estimator
-    tune_models: bool, default=False
-        Set to True to perform automated hyperparamter tuning
-    test_size: float or int, default=0.25
-        Proportion of the dataset to include in the test split.
-    random_state: int, default=None
-        random_state description
-    metrics: dataframe-like = None
-        Add description
-    multi_output: bool, default=False
+    X_train : pandas dataframe
+        Training data
+    X_test : pandas dataframe
+        Test data
+    y_train : array of shape (X_train.shape[0],)
+        Target values of training dataset
+    y_test : array of shape (X_test.shape[0],)
+        Target values of test dataset
+    tune_models : {'all', None} or list of models to be trained, default=None
+        all: tune all regression models
+        list: list of models to be trained
+        None: hyperparameter tuning will not be performed
+    metrics : {'all', 'default'}, default='default'
+        - all:
+            mean_absolute_error, mean_squared_error, r2_score, explained_variance_score, max_error,
+            mean_squared_log_error, median_absolute_error, mean_absolute_percentage_error, mean_poisson_deviance,
+            mean_gamma_deviance, mean_tweedie_deviance, d2_tweedie_score, mean_pinball_loss
+        - default:
+            mean_absolute_error, mean_squared_error, r2_score
+    multi_output : bool, default=False
         Future use
-    multi_task: bool, default=False
+    multi_task : bool, default=False
         Future use
-    scale_target: dataframe-like = None
-        Add description. Ignored if scale_data is False
-    mlflow_stats: bool, default=False
-        Set to True to log experiments in MLFlow
-    mlflow_experiment_name: dataframe-like = None
-        Add description. Ignored if mlflow_stats is False
-    mlflow_run_name: dataframe-like = None
-        Add description. Ignored if mlflow_stats is False
+    target_scaling_strategy : {'StandardScaler', 'MinMaxScaler', 'MaxAbsScaler', 'RobustScaler', None}, default=None
+        Scales the target variable before training the model
+    save_pipeline_to_disk : bool, default=True
+        Save preprocessor and model training pipeline to the disk. Should be set to True if needs model to be deployed
+        as an API
+    experiment_name : str, default=None
+        Name of the experiment
+    run_name : str,default=None
+        Name of the run within the experiment
     """
 
     tune_all_models = False
@@ -140,17 +149,20 @@ def train_test_evaluate(
     elif isinstance(tune_models, list):
         tune_model_list = tune_models
 
+    if experiment_name is not None:
+        capture_stats = True
+        initialize_mlflow(**locals())
+
     df = pd.DataFrame()
 
-    initialize_mlflow(**locals())
     estimators = get_estimators(**locals())
 
     i = 0
     for estimator_name, estimator_class in estimators:
         i = i + 1
 
-        if estimator_name == 'LinearRegression':
-            # if i == 0:
+        # if estimator_name == 'LinearRegression':
+        if i == 15:
             try:
                 print('Regressor Name', estimator_name)
                 regressor = estimator_class()
@@ -209,7 +221,7 @@ def train_test_evaluate(
                         print('fitted_estimator', tuned_estimator)
                         print('pipe', pipe)
                         print('pipeline_with_best_estimator', pipeline_with_fitted_estimator)
-                        print('pipeline step access', pipeline_with_fitted_estimator['BayesianRidge'])
+                        # print('pipeline step access', pipeline_with_fitted_estimator['BayesianRidge'])
                         if save_pipeline_to_disk:
                             save_pipeline(estimator_name, pipeline_with_fitted_estimator)
 
@@ -252,8 +264,8 @@ def train_test_evaluate(
                 print('after concat', final_stats_df)
                 print(estimator_stats_df.to_dict('records'))
 
-                if mlflow_stats:
-                    with mlflow.start_run(run_name=mlflow_run_name):
+                if capture_stats:
+                    with mlflow.start_run(run_name=run_name):
                         print('Inside mlflow')
                         mlflow.log_param('model', estimator_name)
                         mlflow.log_metrics(estimator_stats_df.to_dict('records')[0])
@@ -269,4 +281,4 @@ def train_test_evaluate(
     df.style.set_table_styles([{'selector': '',
                                 'props': [('border',
                                            '10px solid yellow')]}])
-    logger.info('Estimator Stats : {}'.format(df.to_string()))
+    # logger.info('Estimator Stats : {}'.format(df.to_string()))
