@@ -5,6 +5,7 @@ Main comment for regressor.py
 import importlib
 import logging
 import os
+import time
 import traceback
 from logging import config
 
@@ -34,6 +35,8 @@ from bluemist.artifacts.api import predict
 HOME_PATH = os.environ["HOME_PATH"]
 config.fileConfig(HOME_PATH + '/' + 'logging.config')
 logger = logging.getLogger("bluemist")
+
+column_metadata = []
 
 
 def get_regressor_class(module, class_name):
@@ -86,7 +89,8 @@ def get_estimators(**kwargs):
 
 
 def deploy_model(estimator_name, host, port):
-    generate_api.generate_api_code(estimator_name=estimator_name)
+    generate_api.generate_api_code(estimator_name=estimator_name, column_metadata=column_metadata)
+    importlib.reload(predict)
     predict.start_api_server(host=host, port=port)
 
 
@@ -158,6 +162,12 @@ def train_test_evaluate(
     df = pd.DataFrame()
 
     estimators = get_estimators(**locals())
+
+    # Creating list of column name and datatype which will be used in generate_api.py
+    for col_name, col_type in X_train.dtypes.items():
+        column_metadata.append((col_name, col_type))
+
+    print('column_metadata', column_metadata)
 
     i = 0
     for estimator_name, estimator_class in estimators:

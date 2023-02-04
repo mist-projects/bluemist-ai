@@ -1,3 +1,7 @@
+import logging
+import os
+from logging import config
+
 import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
@@ -5,6 +9,10 @@ from sklearn.model_selection import train_test_split
 
 from bluemist.pipeline.bluemist_pipeline import save_preprocessor
 from bluemist.preprocessing import categorical_transformer, numeric_transformer
+
+HOME_PATH = os.environ["HOME_PATH"]
+config.fileConfig(HOME_PATH + '/' + 'logging.config')
+logger = logging.getLogger("bluemist")
 
 
 def preprocess_data(
@@ -162,12 +170,13 @@ def preprocess_data(
     column_list_without_target.remove(target_variable)
 
     print('Column test', column_list_without_target)
+    logger.debug('X_train.dtypes before preprocessing :: \n{}'.format(X_train.dtypes))
     X_train = pd.DataFrame(preprocessor.fit_transform(X_train), columns=column_list_without_target)
     X_test = pd.DataFrame(preprocessor.transform(X_test), columns=column_list_without_target)
 
     y_train = np.ravel(y_train)
     y_test = np.ravel(y_test)
 
-    print(X_train.dtypes)
+    logger.debug('X_train.dtypes after preprocessing  :: \n{}'.format(X_train.dtypes))
     save_preprocessor(preprocessor)
     return X_train, X_test, y_train, y_test

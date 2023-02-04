@@ -17,6 +17,7 @@ logger = logging.getLogger("bluemist")
 logger.info('HOME_PATH {}'.format(HOME_PATH))
 logger.info('ARTIFACT_PATH {}'.format(ARTIFACT_PATH))
 
+
 def initialize(
         log_level='INFO',
         banner_color='blue',
