@@ -3,9 +3,9 @@ import pandas as pd
 
 
 def main():
-    preprocessor = joblib.load('artifcats/preprocessor/preprocessor.joblib')
+    preprocessor = joblib.load('bluemist/artifacts/preprocessor/preprocessor.joblib')
     print(preprocessor)
-    pipeline = joblib.load('artifcats/models/LinearRegression.joblib')
+    pipeline = joblib.load('bluemist/artifacts/models/LinearRegression.joblib')
     print(pipeline)
     data = {
         'cylinders': [8],

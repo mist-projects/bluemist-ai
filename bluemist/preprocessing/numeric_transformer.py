@@ -1,9 +1,8 @@
-import pandas as pd
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler, MinMaxScaler, MaxAbsScaler, RobustScaler, PowerTransformer
+from sklearn.preprocessing import PowerTransformer
 
-from utils.scaler import getScaler, available_scalers
+from bluemist.utils.scaler import getScaler, available_scalers
 
 
 def build_numeric_transformer_pipeline(**kwargs):
@@ -36,7 +35,7 @@ def build_numeric_transformer_pipeline(**kwargs):
 
     # data transformation
     if data_tranformation_strategy is not None and data_tranformation_strategy in ['auto', 'yeo-johnson', 'box-cox']:
-        if data_tranformation_strategy in ['auto', 'yeo-johnson']:
+        if data_tranformation_strategy == 'yeo-johnson':
             transformer_step = ('transformer', PowerTransformer(method='yeo-johnson'))
         elif data_tranformation_strategy == 'box-cox':
             transformer_step = ('transformer', PowerTransformer(method='box-cox'))

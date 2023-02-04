@@ -4,9 +4,9 @@ Main comment for regressor.py
 
 import importlib
 import logging
+import os
 import traceback
 from logging import config
-from pathlib import Path
 
 import pandas as pd
 
@@ -17,22 +17,23 @@ from sklearn.compose import TransformedTargetRegressor
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.pipeline import Pipeline
 
-import regression.tuning
-from pipeline.bluemist_pipeline import add_pipeline_step, save_pipeline
-from regression.constant import multi_output_regressors, multi_task_regressors, unsupported_regressors, \
+import bluemist
+from bluemist.pipeline.bluemist_pipeline import add_pipeline_step, save_pipeline
+from bluemist.regression.constant import multi_output_regressors, multi_task_regressors, unsupported_regressors, \
     base_estimator_regressors
 
-from regression.tuning.constant import default_hyperparameters
-from utils.metrics import scoringStrategy
+from bluemist.regression.tuning.constant import default_hyperparameters
+from bluemist.utils.metrics import scoringStrategy
 from sklearn.utils import all_estimators
 
-from utils.scaler import getScaler
-import generate_api as generate_api
-import model_api
+from bluemist.utils.scaler import getScaler
+from bluemist.utils import generate_api as generate_api
+from bluemist.artifacts.api import predict
 
 
-# config.fileConfig(Path(__file__).parent / 'logging.conf')
-# logger = logging.getLogger("root")
+HOME_PATH = os.environ["HOME_PATH"]
+config.fileConfig(HOME_PATH + '/' + 'logging.config')
+logger = logging.getLogger("bluemist")
 
 
 def get_regressor_class(module, class_name):
@@ -86,7 +87,7 @@ def get_estimators(**kwargs):
 
 def deploy_model(estimator_name, host, port):
     generate_api.generate_api_code(estimator_name=estimator_name)
-    model_api.start_api_server(host=host, port=port)
+    predict.start_api_server(host=host, port=port)
 
 
 def train_test_evaluate(
@@ -140,6 +141,7 @@ def train_test_evaluate(
     tune_all_models = False
     tune_model_list = []
     target_scaler = None
+    capture_stats = False
 
     if target_scaling_strategy is not None:
         target_scaler = getScaler(target_scaling_strategy)
@@ -162,7 +164,7 @@ def train_test_evaluate(
         i = i + 1
 
         # if estimator_name == 'LinearRegression':
-        if i == 15:
+        if i <= 1:
             try:
                 print('Regressor Name', estimator_name)
                 regressor = estimator_class()
@@ -172,7 +174,7 @@ def train_test_evaluate(
                     print('parameters', type(estimator_parameters))
                     print('hyperparameter alpha_1', type(default_hyperparameters['alpha_1']))
 
-                    model_hyperparameters_for_tuning = getattr(regression.tuning.constant, estimator_name, None)
+                    model_hyperparameters_for_tuning = getattr(bluemist.regression.tuning.constant, estimator_name, None)
 
                     deprecated_keys = []
                     for key, value in estimator_parameters.items():
@@ -281,4 +283,5 @@ def train_test_evaluate(
     df.style.set_table_styles([{'selector': '',
                                 'props': [('border',
                                            '10px solid yellow')]}])
-    # logger.info('Estimator Stats : {}'.format(df.to_string()))
+    print(df.to_string())
+    logger.info('Estimator Stats : {}'.format(df.to_string()))

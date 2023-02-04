@@ -3,10 +3,8 @@ import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import train_test_split
 
-from pipeline.bluemist_pipeline import save_preprocessor
-from preprocessing import numeric_transformer, categorical_transformer
-
-column_list_without_target = None
+from bluemist.pipeline.bluemist_pipeline import save_preprocessor
+from bluemist.preprocessing import categorical_transformer, numeric_transformer
 
 
 def preprocess_data(
@@ -30,57 +28,57 @@ def preprocess_data(
         drop_categories_one_hot_encoder=None,
         handle_unknown_one_hot_encoder=None):
     """
-    data : pandas daframe
-        Dataframe to be processed before passing to the ML estimator
-    target_variable : str
-        Target variable to be predicted
-    test_size : float or int, default=0.25
-        Percentage of the data to be used for testing model performance
-    data_randomizer : int default=None
-        Controls the data split. Provide a value to reproduce the same split.
-    drop_features : str ot list
-        Drops the features from the dataset
-    numerical_features : list, default=None
-        Bluemist AI will automatically identify numerical features from the dataset. Provide the list of features to override the type identified by Bluemist AI.
-    force_numeric_conversion : bool, default=True
-        Gracefully converts features to numeric datatype which are provided under `numerical_features`
-    categorical_features : list, default=None
-        Bluemist AI will automatically identify categorical features from the dataset. Provide the list of features to override the type identified by Bluemist.
-    convert_to_nan:  str, list, default=None
-        Dataset values to be converted to NumPy NaN
-    data_scaling_strategy : {None, 'StandardScaler', 'MinMaxScaler', 'MaxAbsScaler', 'RobustScaler'}, default='StandardScaler'
-        Scales dataset features, excluding target variable
-    data_tranformation_strategy : {'box-cox', 'yeo-johnson' or None}, default=None
-        Transforms the features, excluding target variable.
-    missing_values: int, float, str, np.nan, None or pandas.NA, default=np.nan
-        All instances of missing_value will be replaced with the user provided imputer strategy
-    numeric_imputer_strategy : {'mean, 'median', 'most_frequent', 'constant'}, default='mean'
-        Replaces `missing_values` with the strategy provided
-    numeric_constant_value : str or number, default=None
-        `numeric_constant_value` will replace the `missing_values` when `numeric_imputer_strategy` is passed as 'constant'
-    categorical_imputer_strategy :  {'most_frequent', 'constant'}, default='most_frequent'
-        Replaces `missing_values` with the strategy provided
-    categorical_constant_value : str or number, default=None
-        `categorical_constant_value` will replace the `missing_values` when `categorical_imputer_strategy` is passed as 'constant'
-    categorical_encoder : {'LabelEncoder', 'OneHotEncoder', 'OrdinalEncoder'}, default='OneHotEncoder'
-        Encode categorical features
-    drop_categories_one_hot_encoder : {‘first’, ‘if_binary’ or None}, default='None'
-        Determines strategy to drop one category per feature
-        - 'first':
-            drops the first category for each feature.
-        - 'if_binary':
-            drops the first category for features with teo categories
-        - 'None':
-            Keeps all features and categories
-    handle_unknown_one_hot_encoder : {‘error’, ‘ignore’, ‘infrequent_if_exist’}, default=’error’
-        Handles unknown category during transform
-        - 'error':
-            throws an error if category is unknown
-        - 'ignore':
-            ignores if category is unknown, output encoded column for this feature will be all zeroes
-        - 'infrequent_if_exist':
-            unknown category will be mapped to infrequent category is exists. If infrequent category does not exist it
-            will be treated as `ignore`
+        data : pandas daframe
+            Dataframe to be processed before passing to the ML estimator
+        target_variable : str
+            Target variable to be predicted
+        test_size : float or int, default=0.25
+            Percentage of the data to be used for testing model performance
+        data_randomizer : int default=None
+            Controls the data split. Provide a value to reproduce the same split.
+        drop_features : str ot list
+            Drops the features from the dataset
+        numerical_features : list, default=None
+            Bluemist AI will automatically identify numerical features from the dataset. Provide the list of features to override the type identified by Bluemist AI.
+        force_numeric_conversion : bool, default=True
+            Gracefully converts features to numeric datatype which are provided under `numerical_features`
+        categorical_features : list, default=None
+            Bluemist AI will automatically identify categorical features from the dataset. Provide the list of features to override the type identified by Bluemist.
+        convert_to_nan:  str, list, default=None
+            Dataset values to be converted to NumPy NaN
+        data_scaling_strategy : {None, 'StandardScaler', 'MinMaxScaler', 'MaxAbsScaler', 'RobustScaler'}, default='StandardScaler'
+            Scales dataset features, excluding target variable
+        data_tranformation_strategy : {'box-cox', 'yeo-johnson' or None}, default=None
+            Transforms the features, excluding target variable.
+        missing_values: int, float, str, np.nan, None or pandas.NA, default=np.nan
+            All instances of missing_value will be replaced with the user provided imputer strategy
+        numeric_imputer_strategy : {'mean, 'median', 'most_frequent', 'constant'}, default='mean'
+            Replaces `missing_values` with the strategy provided
+        numeric_constant_value : str or number, default=None
+            `numeric_constant_value` will replace the `missing_values` when `numeric_imputer_strategy` is passed as 'constant'
+        categorical_imputer_strategy :  {'most_frequent', 'constant'}, default='most_frequent'
+            Replaces `missing_values` with the strategy provided
+        categorical_constant_value : str or number, default=None
+            `categorical_constant_value` will replace the `missing_values` when `categorical_imputer_strategy` is passed as 'constant'
+        categorical_encoder : {'LabelEncoder', 'OneHotEncoder', 'OrdinalEncoder'}, default='OneHotEncoder'
+            Encode categorical features
+        drop_categories_one_hot_encoder : {‘first’, ‘if_binary’ or None}, default='None'
+            Determines strategy to drop one category per feature
+                - 'first':
+                    drops the first category for each feature.
+                - 'if_binary':
+                    drops the first category for features with teo categories
+                - 'None':
+                    Keeps all features and categories
+        handle_unknown_one_hot_encoder : {‘error’, ‘ignore’, ‘infrequent_if_exist’}, default=’error’
+            Handles unknown category during transform
+                - 'error':
+                    throws an error if category is unknown
+                - 'ignore':
+                    ignores if category is unknown, output encoded column for this feature will be all zeroes
+                - 'infrequent_if_exist':
+                    unknown category will be mapped to infrequent category is exists. If infrequent category does not exist it
+                    will be treated as `ignore`
     """
 
     # drop features from the dataset
