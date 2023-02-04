@@ -164,7 +164,7 @@ def train_test_evaluate(
         i = i + 1
 
         # if estimator_name == 'LinearRegression':
-        if i <= 1:
+        if i == 20:
             try:
                 print('Regressor Name', estimator_name)
                 regressor = estimator_class()
@@ -283,5 +283,5 @@ def train_test_evaluate(
     df.style.set_table_styles([{'selector': '',
                                 'props': [('border',
                                            '10px solid yellow')]}])
-    print(df.to_string())
+
     logger.info('Estimator Stats : {}'.format(df.to_string()))
