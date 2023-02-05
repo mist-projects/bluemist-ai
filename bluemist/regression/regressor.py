@@ -32,8 +32,7 @@ from bluemist.utils import generate_api as generate_api
 from bluemist.artifacts.api import predict
 
 
-HOME_PATH = os.environ["HOME_PATH"]
-ARTIFACT_PATH = os.environ["ARTIFACT_PATH"]
+HOME_PATH = os.environ["BLUEMIST_PATH"]
 config.fileConfig(HOME_PATH + '/' + 'logging.config')
 logger = logging.getLogger("bluemist")
 
@@ -50,7 +49,7 @@ def initialize_mlflow(mlflow_experiment_name):
         experiment = mlflow.get_experiment_by_name(mlflow_experiment_name)
         if not experiment:
             mlflow.create_experiment(name=mlflow_experiment_name,
-                                     artifact_location=ARTIFACT_PATH + '/' + 'experiments/mlflow')
+                                     artifact_location=BLUEMIST_PATH + '/' + 'artifacts/experiments/mlflow')
 
         if experiment is not None and experiment.lifecycle_stage == 'deleted':
             print('restore experiment')
@@ -60,7 +59,7 @@ def initialize_mlflow(mlflow_experiment_name):
         mlflow.set_experiment(mlflow_experiment_name)
 
 
-def get_estimators(multi_output=False, multi_task=False):
+def get_estimators(multi_output=False, multi_task=False, names_only=True):
     estimators = all_estimators(type_filter='regressor')
     print('estimators', estimators)
 
@@ -79,6 +78,9 @@ def get_estimators(multi_output=False, multi_task=False):
 
     for estimator_to_remove in estimators_to_remove:
         estimators.remove(estimator_to_remove)
+
+    if bool(names_only):
+        return [estimator[0] for estimator in estimators]
 
     return estimators
 
@@ -159,13 +161,13 @@ def train_test_evaluate(
 
     df = pd.DataFrame()
 
-    estimators = get_estimators(multi_output, multi_task)
+    estimators = get_estimators(multi_output, multi_task, names_only=False)
 
     i = 0
     for estimator_name, estimator_class in estimators:
         i = i + 1
 
-        # if estimator_name == 'LinearRegression':
+        #if tune_all_models or estimator_name in tune_model_list:
         if i == 20:
             try:
                 print('Regressor Name', estimator_name)
@@ -286,4 +288,7 @@ def train_test_evaluate(
                                 'props': [('border',
                                            '10px solid yellow')]}])
 
+    from IPython.display import display, HTML
+    display(df)
+    display(HTML(df.to_html()))
     logger.info('Estimator Stats : {}'.format(df.to_string()))

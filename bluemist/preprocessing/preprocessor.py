@@ -11,7 +11,7 @@ from sklearn.pipeline import Pipeline
 from bluemist.pipeline.bluemist_pipeline import save_preprocessor
 from bluemist.preprocessing import categorical_transformer, numeric_transformer
 
-HOME_PATH = os.environ["HOME_PATH"]
+HOME_PATH = os.environ["BLUEMIST_PATH"]
 config.fileConfig(HOME_PATH + '/' + 'logging.config')
 logger = logging.getLogger("bluemist")
 

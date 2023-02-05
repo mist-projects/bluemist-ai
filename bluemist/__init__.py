@@ -4,19 +4,17 @@ from logging import config
 
 from pyfiglet import Figlet
 from termcolor import colored
+from IPython.display import display, HTML
 
-os.environ["HOME_PATH"] = os.path.abspath('../bluemist')
-HOME_PATH = os.getenv("HOME_PATH")
+os.environ["BLUEMIST_PATH"] = os.path.realpath(os.path.dirname(__file__))
+BLUEMIST_PATH = os.getenv("BLUEMIST_PATH")
 
-os.environ["ARTIFACT_PATH"] = HOME_PATH + '/' + 'artifacts'
-ARTIFACT_PATH = os.getenv("ARTIFACT_PATH")
+os.chdir(BLUEMIST_PATH)
 
-config.fileConfig(HOME_PATH + '/' + 'logging.config')
+config.fileConfig(BLUEMIST_PATH + '/' + 'logging.config')
 logger = logging.getLogger("bluemist")
 
-logger.info('HOME_PATH {}'.format(HOME_PATH))
-logger.info('ARTIFACT_PATH {}'.format(ARTIFACT_PATH))
-
+logger.info('BLUEMIST_PATH {}'.format(BLUEMIST_PATH))
 
 def initialize(
         log_level='INFO',
@@ -35,14 +33,22 @@ def initialize(
     if log_level.upper() in ['CRITICAL', 'FATAL', 'ERROR', 'WARNING', 'WARN', 'INFO', 'DEBUG']:
         logger.setLevel(logging.getLevelName(log_level))
 
-    logger.handlers[1].doRollover()
+    logger.handlers[0].doRollover()
 
     figlet_banner = Figlet(font='small')
     figlet_version = Figlet(font='digital')
 
-    banner = colored(figlet_banner.renderText('B l u e  m i s t - AI'), banner_color)
-    version = colored(figlet_version.renderText('0.1.1'), banner_color)
-    logger.info('\n{}{}'.format(banner, version))
+    banner = """
+    ██████╗ ██╗     ██╗   ██╗███████╗███╗   ███╗██╗███████╗████████╗               █████╗ ██╗
+    ██╔══██╗██║     ██║   ██║██╔════╝████╗ ████║██║██╔════╝╚══██╔══╝              ██╔══██╗██║
+    ██████╔╝██║     ██║   ██║█████╗  ██╔████╔██║██║███████╗   ██║       █████╗    ███████║██║
+    ██╔══██╗██║     ██║   ██║██╔══╝  ██║╚██╔╝██║██║╚════██║   ██║       ╚════╝    ██╔══██║██║
+    ██████╔╝███████╗╚██████╔╝███████╗██║ ╚═╝ ██║██║███████║   ██║                 ██║  ██║██║
+    ╚═════╝ ╚══════╝ ╚═════╝ ╚══════╝╚═╝     ╚═╝╚═╝╚══════╝   ╚═╝                 ╚═╝  ╚═╝╚═╝                                                                                           
+    """
+
+    print(colored(banner + '\n>>>> version 0.1.1 <<<<', 'blue'))
+    #logger.info('\n{}{}'.format(banner, version))
 
     logger.info('Printing all environment variables')
     for key, value in os.environ.items():

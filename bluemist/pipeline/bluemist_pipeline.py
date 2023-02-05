@@ -5,11 +5,11 @@ from joblib import dump
 pipeline_steps = {}
 pipelines = {}
 
-ARTIFACT_PATH = os.environ["ARTIFACT_PATH"]
+BLUEMIST_PATH = os.environ["BLUEMIST_PATH"]
 
 
 def save_preprocessor(preprocessor):
-    dump(preprocessor, ARTIFACT_PATH + '/' + 'preprocessor/preprocessor.joblib')
+    dump(preprocessor, BLUEMIST_PATH + '/' + 'artifacts/preprocessor/preprocessor.joblib')
     print('preprocessor', preprocessor)
 
 
@@ -26,5 +26,5 @@ def add_pipeline_step(estimator_name, pipeline_step):
 
 def save_pipeline(estimator_name, pipeline):
     pipelines[estimator_name] = pipeline
-    dump(pipeline, ARTIFACT_PATH + '/' + 'models/' + estimator_name + '.joblib')
+    dump(pipeline, BLUEMIST_PATH + '/' + 'artifacts/models/' + estimator_name + '.joblib')
     print('pipelines', pipelines[estimator_name])
