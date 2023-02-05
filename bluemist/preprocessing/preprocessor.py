@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
 
 from bluemist.pipeline.bluemist_pipeline import save_preprocessor
 from bluemist.preprocessing import categorical_transformer, numeric_transformer
@@ -13,6 +14,10 @@ from bluemist.preprocessing import categorical_transformer, numeric_transformer
 HOME_PATH = os.environ["HOME_PATH"]
 config.fileConfig(HOME_PATH + '/' + 'logging.config')
 logger = logging.getLogger("bluemist")
+
+initial_column_metadata_for_deployment = []
+encoded_columns_for_deployment = []
+target_for_deployment= None
 
 
 def preprocess_data(
@@ -32,7 +37,7 @@ def preprocess_data(
         numeric_constant_value=None,
         categorical_imputer_strategy='most_frequent',
         categorical_constant_value=None,
-        categorical_encoder='LabelEncoder',
+        categorical_encoder='OneHotEncoder',
         drop_categories_one_hot_encoder=None,
         handle_unknown_one_hot_encoder=None):
     """
@@ -68,7 +73,7 @@ def preprocess_data(
             Replaces `missing_values` with the strategy provided
         categorical_constant_value : str or number, default=None
             `categorical_constant_value` will replace the `missing_values` when `categorical_imputer_strategy` is passed as 'constant'
-        categorical_encoder : {'LabelEncoder', 'OneHotEncoder', 'OrdinalEncoder'}, default='OneHotEncoder'
+        categorical_encoder : {'OneHotEncoder', 'OrdinalEncoder'}, default='OneHotEncoder'
             Encode categorical features
         drop_categories_one_hot_encoder : {‘first’, ‘if_binary’ or None}, default='None'
             Determines strategy to drop one category per feature
@@ -89,6 +94,9 @@ def preprocess_data(
                     will be treated as `ignore`
     """
 
+    global target_for_deployment
+    target_for_deployment = target_variable
+
     # drop features from the dataset
     if drop_features is not None:
         if isinstance(drop_features, str):
@@ -101,6 +109,7 @@ def preprocess_data(
     auto_computed_categorical_features = data.select_dtypes(include='object').columns.tolist()
 
     final_numerical_features = auto_computed_numerical_features.copy()
+    final_numerical_features.remove(target_variable)
     final_categorical_features = auto_computed_categorical_features.copy()
 
     # finalize the list of numerical features
@@ -130,7 +139,7 @@ def preprocess_data(
     # prepare final list of columns after preprocessing
     column_list = []
     if bool(final_numerical_features) and bool(final_categorical_features):
-        column_list = final_numerical_features.append(final_categorical_features)
+        column_list = final_numerical_features + final_categorical_features
     elif bool(final_numerical_features):
         column_list = final_numerical_features
     elif bool(final_categorical_features):
@@ -142,23 +151,27 @@ def preprocess_data(
             numeric_conversion_strategy = 'coerce'
         else:
             numeric_conversion_strategy = 'raise'
-        data[numerical_features] = data[numerical_features].apply(pd.to_numeric, errors=numeric_conversion_strategy,
-                                                                  axis=1)
+
+    data[final_numerical_features] = data[final_numerical_features].apply(pd.to_numeric, errors=numeric_conversion_strategy, axis=1)
+    data[final_categorical_features] = data[final_categorical_features].astype(str)
+
+    # Creating list of column name and datatype which will be used in generate_api.py
+    global initial_column_metadata_for_deployment
+    for col_name, col_type in data.drop(target_variable, axis=1).dtypes.items():
+        initial_column_metadata_for_deployment.append((col_name, col_type))
+
+    logger.debug('data.dtypes before preprocessing  :: \n{}'.format(data.dtypes))
 
     # create transformers for preprocessing pipeline
     num_transformer = numeric_transformer.build_numeric_transformer_pipeline(**locals())
     cat_transformer = categorical_transformer.build_categorical_transformer_pipeline(**locals())
 
-    # remove target variable from final numerical feature list
-    final_numerical_features_without_target = final_numerical_features.copy()
-    final_numerical_features_without_target.remove(target_variable)
-
     # create preprocessing pipeline
     preprocessor = ColumnTransformer(
         transformers=[
-            ("numeric_transformer", num_transformer, final_numerical_features_without_target),
+            ("numeric_transformer", num_transformer, final_numerical_features),
             ("categorical_transformer", cat_transformer, final_categorical_features)
-        ]
+        ], verbose_feature_names_out=False
     )
 
     X = data.drop([target_variable], axis=1)
@@ -166,13 +179,13 @@ def preprocess_data(
     y = data[[target_variable]]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=data_randomizer)
 
-    column_list_without_target = column_list.copy()
-    column_list_without_target.remove(target_variable)
+    X_train = pd.DataFrame(preprocessor.fit_transform(X_train), columns=preprocessor.get_feature_names_out())
+    X_test = pd.DataFrame(preprocessor.transform(X_test), columns=preprocessor.get_feature_names_out())
+    global encoded_columns_for_deployment
+    encoded_columns_for_deployment = preprocessor.get_feature_names_out()
 
-    print('Column test', column_list_without_target)
     logger.debug('X_train.dtypes before preprocessing :: \n{}'.format(X_train.dtypes))
-    X_train = pd.DataFrame(preprocessor.fit_transform(X_train), columns=column_list_without_target)
-    X_test = pd.DataFrame(preprocessor.transform(X_test), columns=column_list_without_target)
+    logger.debug('Columns after preprocessing :: {}'.format(preprocessor.get_feature_names_out()))
 
     y_train = np.ravel(y_train)
     y_test = np.ravel(y_test)

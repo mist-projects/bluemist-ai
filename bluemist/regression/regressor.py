@@ -5,7 +5,6 @@ Main comment for regressor.py
 import importlib
 import logging
 import os
-import time
 import traceback
 from logging import config
 
@@ -20,6 +19,7 @@ from sklearn.pipeline import Pipeline
 
 import bluemist
 from bluemist.pipeline.bluemist_pipeline import add_pipeline_step, save_pipeline
+from bluemist.preprocessing import preprocessor
 from bluemist.regression.constant import multi_output_regressors, multi_task_regressors, unsupported_regressors, \
     base_estimator_regressors
 
@@ -33,10 +33,9 @@ from bluemist.artifacts.api import predict
 
 
 HOME_PATH = os.environ["HOME_PATH"]
+ARTIFACT_PATH = os.environ["ARTIFACT_PATH"]
 config.fileConfig(HOME_PATH + '/' + 'logging.config')
 logger = logging.getLogger("bluemist")
-
-column_metadata = []
 
 
 def get_regressor_class(module, class_name):
@@ -46,14 +45,12 @@ def get_regressor_class(module, class_name):
     return instance
 
 
-def initialize_mlflow(**kwargs):
-    mlflow_experiment_name = kwargs.get('experiment_name')
-
+def initialize_mlflow(mlflow_experiment_name):
     if mlflow_experiment_name is not None:
         experiment = mlflow.get_experiment_by_name(mlflow_experiment_name)
         if not experiment:
             mlflow.create_experiment(name=mlflow_experiment_name,
-                                     artifact_location='/home/shashank-agrawal/mlflow_artifact')
+                                     artifact_location=ARTIFACT_PATH + '/' + 'experiments/mlflow')
 
         if experiment is not None and experiment.lifecycle_stage == 'deleted':
             print('restore experiment')
@@ -63,9 +60,7 @@ def initialize_mlflow(**kwargs):
         mlflow.set_experiment(mlflow_experiment_name)
 
 
-def get_estimators(**kwargs):
-    multi_output = kwargs.get('multi_output')
-    multi_task = kwargs.get('multi_task')
+def get_estimators(multi_output=False, multi_task=False):
     estimators = all_estimators(type_filter='regressor')
     print('estimators', estimators)
 
@@ -89,7 +84,10 @@ def get_estimators(**kwargs):
 
 
 def deploy_model(estimator_name, host, port):
-    generate_api.generate_api_code(estimator_name=estimator_name, column_metadata=column_metadata)
+    generate_api.generate_api_code(estimator_name=estimator_name,
+                                   initial_column_metadata=preprocessor.initial_column_metadata_for_deployment,
+                                   encoded_column_metadata=preprocessor.encoded_columns_for_deployment,
+                                   target_variable=preprocessor.target_for_deployment)
     importlib.reload(predict)
     predict.start_api_server(host=host, port=port)
 
@@ -157,17 +155,11 @@ def train_test_evaluate(
 
     if experiment_name is not None:
         capture_stats = True
-        initialize_mlflow(**locals())
+        initialize_mlflow(experiment_name)
 
     df = pd.DataFrame()
 
-    estimators = get_estimators(**locals())
-
-    # Creating list of column name and datatype which will be used in generate_api.py
-    for col_name, col_type in X_train.dtypes.items():
-        column_metadata.append((col_name, col_type))
-
-    print('column_metadata', column_metadata)
+    estimators = get_estimators(multi_output, multi_task)
 
     i = 0
     for estimator_name, estimator_class in estimators:
@@ -281,7 +273,7 @@ def train_test_evaluate(
                         print('Inside mlflow')
                         mlflow.log_param('model', estimator_name)
                         mlflow.log_metrics(estimator_stats_df.to_dict('records')[0])
-                        mlflow.sklearn.log_model(tuned_estimator, "model")
+                        mlflow.sklearn.log_model(tuned_estimator, 'model_' + estimator_name)
                         print("Model saved in run %s" % mlflow.active_run().info.run_uuid)
             except Exception as e:
                 exception = {'Estimator': [estimator_name], 'Exception': str(e)}

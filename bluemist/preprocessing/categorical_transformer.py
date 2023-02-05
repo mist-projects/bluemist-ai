@@ -24,7 +24,7 @@ def build_categorical_transformer_pipeline(**kwargs):
     else:
         raise ValueError('Invalid imputer_strategy value passed : ', imputer_strategy)
 
-    if categorical_encoder is not None and categorical_encoder in ['LabelEncoder', 'OneHotEncoder', 'OrdinalEncoder']:
+    if categorical_encoder is not None and categorical_encoder in ['OneHotEncoder', 'OrdinalEncoder']:
         encoder_step = tuple()
         if categorical_encoder == 'LabelEncoder':
             encoder_step = ('label_encoder', LabelEncoder())
