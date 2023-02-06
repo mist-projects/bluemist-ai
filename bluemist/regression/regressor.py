@@ -1,10 +1,7 @@
-"""
-Main comment for regressor.py
-"""
-
 import importlib
 import logging
 import os
+import sys
 import traceback
 from logging import config
 
@@ -13,12 +10,14 @@ import pandas as pd
 import mlflow
 import mlflow.sklearn
 from mlflow.tracking import MlflowClient
+from pandas.core.dtypes.common import is_numeric_dtype
 from sklearn.compose import TransformedTargetRegressor
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.pipeline import Pipeline
+from tqdm import tqdm
 
 import bluemist
-from bluemist.pipeline.bluemist_pipeline import add_pipeline_step, save_pipeline
+from bluemist.pipeline.bluemist_pipeline import add_pipeline_step, save_model_pipeline, clear_all_model_pipelines
 from bluemist.preprocessing import preprocessor
 from bluemist.regression.constant import multi_output_regressors, multi_task_regressors, unsupported_regressors, \
     base_estimator_regressors
@@ -31,9 +30,11 @@ from bluemist.utils.scaler import getScaler
 from bluemist.utils import generate_api as generate_api
 from bluemist.artifacts.api import predict
 
+import pylab as pl
+from IPython.display import display, HTML
 
-HOME_PATH = os.environ["BLUEMIST_PATH"]
-config.fileConfig(HOME_PATH + '/' + 'logging.config')
+BLUEMIST_PATH = os.environ["BLUEMIST_PATH"]
+config.fileConfig(BLUEMIST_PATH + '/' + 'logging.config')
 logger = logging.getLogger("bluemist")
 
 
@@ -45,6 +46,7 @@ def get_regressor_class(module, class_name):
 
 
 def initialize_mlflow(mlflow_experiment_name):
+    logger.info('Initializing MLFlow...')
     if mlflow_experiment_name is not None:
         experiment = mlflow.get_experiment_by_name(mlflow_experiment_name)
         if not experiment:
@@ -52,7 +54,7 @@ def initialize_mlflow(mlflow_experiment_name):
                                      artifact_location=BLUEMIST_PATH + '/' + 'artifacts/experiments/mlflow')
 
         if experiment is not None and experiment.lifecycle_stage == 'deleted':
-            print('restore experiment')
+            logger.info('Restoring MLFlow experiment :: {}'.format(mlflow_experiment_name))
             client = MlflowClient()
             client.restore_experiment(experiment.experiment_id)
 
@@ -60,8 +62,17 @@ def initialize_mlflow(mlflow_experiment_name):
 
 
 def get_estimators(multi_output=False, multi_task=False, names_only=True):
+    """
+        multi_output : bool, default=False
+            Future use
+        multi_task : bool, default=False
+            Future use
+        names_only : bool, default=False
+            Returns only the estimator names by removing the class metadata
+    """
+
     estimators = all_estimators(type_filter='regressor')
-    print('estimators', estimators)
+    logger.debug('All available estimators :: {}'.format(estimators))
 
     estimators_to_remove = []
     for estimator in estimators:
@@ -74,7 +85,7 @@ def get_estimators(multi_output=False, multi_task=False, names_only=True):
         if base_estimator_regressors and estimator[0] in base_estimator_regressors:
             estimators_to_remove.append(estimator)
 
-    print('estimators_to_remove >>', estimators_to_remove)
+    logger.debug('Estimators not supported by Bluemist AI :: {}'.format(estimators_to_remove))
 
     for estimator_to_remove in estimators_to_remove:
         estimators.remove(estimator_to_remove)
@@ -82,15 +93,27 @@ def get_estimators(multi_output=False, multi_task=False, names_only=True):
     if bool(names_only):
         return [estimator[0] for estimator in estimators]
 
+    logger.info('Estimators available for modelling :: {}'.format(estimators))
     return estimators
 
 
-def deploy_model(estimator_name, host, port):
+def deploy_model(estimator_name, host='localhost', port=8000):
+    """
+        estimator_name : str,
+            Estimator name to be delpoyed
+        host : {str, IPv4 or IPv6}, default='localhost'
+            Hostname or ip address of the machine where API to be deployed
+        port : int, default=8000
+            API listening port
+    """
+
+    logger.info('Generating API code to deploy the model :: {}'.format(estimator_name))
     generate_api.generate_api_code(estimator_name=estimator_name,
                                    initial_column_metadata=preprocessor.initial_column_metadata_for_deployment,
                                    encoded_column_metadata=preprocessor.encoded_columns_for_deployment,
                                    target_variable=preprocessor.target_for_deployment)
     importlib.reload(predict)
+    logger.info('Starting API server on host {} and port {}'.format(host, port))
     predict.start_api_server(host=host, port=port)
 
 
@@ -163,51 +186,64 @@ def train_test_evaluate(
 
     estimators = get_estimators(multi_output, multi_task, names_only=False)
 
+    clear_all_model_pipelines()
+
     i = 0
-    for estimator_name, estimator_class in estimators:
+    for estimator_name, estimator_class in (pbar := tqdm(estimators, colour='blue')):
+        pbar.set_description(f"Processing")
         i = i + 1
 
-        #if tune_all_models or estimator_name in tune_model_list:
-        if i == 20:
+        if (tune_models is None or tune_all_models or estimator_name in tune_model_list):
+            # if i == 20:
             try:
-                print('Regressor Name', estimator_name)
+                logger.info('Regressor in progress :: {}'.format(estimator_name))
+
                 regressor = estimator_class()
+
+                if estimator_name in ['CCA', 'PLSCanonical']:
+                    regressor.set_params(n_components=1)
 
                 if tune_all_models or estimator_name in tune_model_list:
                     estimator_parameters = regressor.get_params()
-                    print('parameters', type(estimator_parameters))
-                    print('hyperparameter alpha_1', type(default_hyperparameters['alpha_1']))
+                    logger.info('Available hyperparameters to be tuned :: {}'.format(estimator_parameters))
+                    logger.debug('Python type() for hyperparameters :: {}'.format(type(estimator_parameters)))
 
-                    model_hyperparameters_for_tuning = getattr(bluemist.regression.tuning.constant, estimator_name, None)
+                    model_hyperparameters_for_tuning = getattr(bluemist.regression.tuning.constant, estimator_name,
+                                                               None)
 
-                    deprecated_keys = []
-                    for key, value in estimator_parameters.items():
-                        if value == 'deprecated':
-                            deprecated_keys.append(key)
-                            print('deprecated key', key)
-                        elif model_hyperparameters_for_tuning is not None and key in model_hyperparameters_for_tuning:
-                            estimator_parameters[key] = model_hyperparameters_for_tuning[key]
-                            print('parameters[key]', estimator_parameters[key])
-                        elif key in default_hyperparameters:
-                            estimator_parameters[key] = default_hyperparameters[key]
-                            print('parameters[key]', estimator_parameters[key])
+                    deprecated_hyperparameters = []
+                    for hyperparameter, default_hyperparameter_value in estimator_parameters.items():
+                        if default_hyperparameter_value == 'deprecated':
+                            deprecated_hyperparameters.append(hyperparameter)
+                            logger.debug('Deprecated hyperparameter identified :: {}'.format(hyperparameter))
+                        elif model_hyperparameters_for_tuning is not None \
+                                and hyperparameter in model_hyperparameters_for_tuning:
+                            estimator_parameters[hyperparameter] = model_hyperparameters_for_tuning[hyperparameter]
+                            logger.debug('Hyperparameter in model configuration :: {} :: {}'.format(hyperparameter,
+                                                                                                    estimator_parameters[
+                                                                                                        hyperparameter]))
+                        elif hyperparameter in default_hyperparameters:
+                            estimator_parameters[hyperparameter] = default_hyperparameters[hyperparameter]
+                            logger.debug('Hyperparameter in default configuration :: {} :: {}'.format(hyperparameter,
+                                                                                                      estimator_parameters[
+                                                                                                          hyperparameter]))
 
-                    for deprecated_key in deprecated_keys:
-                        estimator_parameters.pop(deprecated_key, None)
+                    for deprecated_hyperparameter in deprecated_hyperparameters:
+                        estimator_parameters.pop(deprecated_hyperparameter, None)
 
                     # Creating new dictionary of hyperparameters to add step name as required by the pipeline
                     hyperparameters = {}
 
-                    for key in estimator_parameters:
-                        old_key = key
+                    for hyperparameter in estimator_parameters:
+                        old_key = hyperparameter
 
                         if target_scaling_strategy is not None:
-                            new_key = estimator_name + '__regressor__' + key
+                            new_key = estimator_name + '__regressor__' + hyperparameter
                         else:
-                            new_key = estimator_name + '__' + key
+                            new_key = estimator_name + '__' + hyperparameter
                         hyperparameters[new_key] = estimator_parameters[old_key]
 
-                    print('Hyperparameters for Tuning :: ', hyperparameters)
+                    logger.info('Hyperparameters to be used for model tuning :: {}'.format(hyperparameters))
 
                     if target_scaling_strategy is not None:
                         transformed_target_regressor = TransformedTargetRegressor(regressor=regressor,
@@ -219,19 +255,18 @@ def train_test_evaluate(
                         steps = add_pipeline_step(estimator_name, step_estimator)
 
                     if steps is not None:
-                        pipe = Pipeline(steps=steps)
-                        search = RandomizedSearchCV(pipe, param_distributions=hyperparameters)
-                        tuned_estimator = search.fit(X_train, y_train)
-                        pipeline_with_fitted_estimator = tuned_estimator.best_estimator_
-                        print('pipeline keys ', pipe.get_params().keys())
-                        print('fitted_estimator', tuned_estimator)
-                        print('pipe', pipe)
-                        print('pipeline_with_best_estimator', pipeline_with_fitted_estimator)
-                        # print('pipeline step access', pipeline_with_fitted_estimator['BayesianRidge'])
+                        model_pipeline = Pipeline(steps=steps)
+                        search = RandomizedSearchCV(model_pipeline, param_distributions=hyperparameters)
+                        fitted_estimator_with_all_parameters = search.fit(X_train, y_train)
+                        pipeline_with_best_estimator = fitted_estimator_with_all_parameters.best_estimator_
+                        logger.debug('Model pipeline parameters :: {}'.format(model_pipeline.get_params().keys()))
+                        logger.info(
+                            'Fitted estimator with all parameters :: {}'.format(fitted_estimator_with_all_parameters))
+                        logger.debug('Model pipeline :: {}'.format(model_pipeline))
+                        logger.info('Model pipeline with best estimator :: {}'.format(pipeline_with_best_estimator))
                         if save_pipeline_to_disk:
-                            save_pipeline(estimator_name, pipeline_with_fitted_estimator)
-
-                        print('pipe1:', pipe)
+                            logger.info('Saving model pipeline to disk')
+                            save_model_pipeline(estimator_name, pipeline_with_best_estimator)
                 else:
                     if target_scaling_strategy is not None:
                         transformed_target_regressor = TransformedTargetRegressor(regressor=regressor,
@@ -242,20 +277,21 @@ def train_test_evaluate(
                         step_estimator = (estimator_name, regressor)
                         steps = add_pipeline_step(estimator_name, step_estimator)
 
-                    pipe = Pipeline(steps=steps)
-                    pipeline_with_fitted_estimator = pipe.fit(X_train, y_train)
+                    model_pipeline = Pipeline(steps=steps)
+                    pipeline_with_best_estimator = model_pipeline.fit(X_train, y_train)
 
                     if save_pipeline_to_disk:
-                        save_pipeline(estimator_name, pipeline_with_fitted_estimator)
+                        save_model_pipeline(estimator_name, pipeline_with_best_estimator)
 
-                    print('fitted_estimator', pipeline_with_fitted_estimator)
-                    print('pipe2', pipe)
+                    logger.info('Model pipeline with best estimator (no hyperparameter tuning) :: {}'.format(
+                        pipeline_with_best_estimator))
+                    logger.debug('Model pipeline (no hyperparameter tuning) :: {}'.format(model_pipeline))
 
                 if tune_all_models or estimator_name in tune_model_list:
-                    print('Best Score: %s' % tuned_estimator.best_score_)
-                    print('Best Hyperparameters: %s' % tuned_estimator.best_params_)
+                    logger.info('Best score :: {}'.format(fitted_estimator_with_all_parameters.best_score_))
+                    logger.info('Best hyperparameters :: {}'.format(fitted_estimator_with_all_parameters.best_params_))
 
-                y_pred = pipeline_with_fitted_estimator.predict(X_test)
+                y_pred = pipeline_with_best_estimator.predict(X_test)
 
                 scorer = scoringStrategy(y_test, y_pred, metrics)
                 estimator_stats_df = scorer.getStats()
@@ -264,31 +300,33 @@ def train_test_evaluate(
 
                 # Insert Estimator name as the first column in the dataframe
                 final_stats_df.insert(0, 'Estimator', estimator_name)
-                print('stats_df', final_stats_df)
+
+                logger.info('Current estimator Stats :: \n{}'.format(final_stats_df.to_string()))
+                logger.debug(
+                    'Current estimator stats as dictionary :: {}'.format(final_stats_df.to_dict('records')))
 
                 df = pd.concat([df, final_stats_df], ignore_index=True)
-                print('after concat', final_stats_df)
-                print(estimator_stats_df.to_dict('records'))
+                logger.debug('Estimator stats so far :: \n{}'.format(df.to_string()))
 
                 if capture_stats:
                     with mlflow.start_run(run_name=run_name):
-                        print('Inside mlflow')
+                        logger.info('Capturing stats in MLFlow...')
                         mlflow.log_param('model', estimator_name)
                         mlflow.log_metrics(estimator_stats_df.to_dict('records')[0])
-                        mlflow.sklearn.log_model(tuned_estimator, 'model_' + estimator_name)
-                        print("Model saved in run %s" % mlflow.active_run().info.run_uuid)
+                        mlflow.sklearn.log_model(fitted_estimator_with_all_parameters, 'model_' + estimator_name)
+                        logger.info('Model saved in run :: {}'.format(mlflow.active_run().info.run_uuid))
             except Exception as e:
                 exception = {'Estimator': [estimator_name], 'Exception': str(e)}
                 exception_df = pd.DataFrame(exception)
-                print('metrics', exception_df)
+                logger.info('Exception occurred :: \n{}'.format(exception_df))
                 df = pd.concat([df, exception_df])
-                traceback.print_exc()
+                logger.error('Exception occurred while training the model :: {}'.format(str(e)), exc_info=True)
 
-    df.style.set_table_styles([{'selector': '',
-                                'props': [('border',
-                                           '10px solid yellow')]}])
-
-    from IPython.display import display, HTML
-    display(df)
-    display(HTML(df.to_html()))
-    logger.info('Estimator Stats : {}'.format(df.to_string()))
+    df.set_index('Estimator', inplace=True)
+    display(HTML(df.style
+                 .highlight_max(subset=[col for col in df.columns if col.endswith('score') and is_numeric_dtype(df[col])], color='green')
+                 .highlight_min(subset=[col for col in df.columns if col.endswith('score') and is_numeric_dtype(df[col])], color='yellow')
+                 .highlight_max(subset=[col for col in df.columns if not col.endswith('score') and is_numeric_dtype(df[col])], color='yellow')
+                 .highlight_min(subset=[col for col in df.columns if not col.endswith('score') and is_numeric_dtype(df[col])], color='green')
+                 .to_html()))
+    logger.info('Estimator stats across all trained models : \n{}'.format(df.to_string()))

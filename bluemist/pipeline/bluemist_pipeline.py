@@ -1,16 +1,23 @@
+import logging
 import os
+from logging import config
 
+import joblib
 from joblib import dump
 
 pipeline_steps = {}
 pipelines = {}
 
 BLUEMIST_PATH = os.environ["BLUEMIST_PATH"]
+config.fileConfig(BLUEMIST_PATH + '/' + 'logging.config')
+logger = logging.getLogger("bluemist")
 
 
 def save_preprocessor(preprocessor):
-    dump(preprocessor, BLUEMIST_PATH + '/' + 'artifacts/preprocessor/preprocessor.joblib')
-    print('preprocessor', preprocessor)
+    preprocessor_disk_location = BLUEMIST_PATH + '/' + 'artifacts/preprocessor/preprocessor.joblib'
+    logger.info('Saving preprocessor to disk on :: {}'.format(preprocessor_disk_location))
+    dump(preprocessor, preprocessor_disk_location)
+    logger.debug('Preprocessor column transformer object :: {}'.format(preprocessor))
 
 
 def add_pipeline_step(estimator_name, pipeline_step):
@@ -20,11 +27,25 @@ def add_pipeline_step(estimator_name, pipeline_step):
     if estimator_name in pipeline_steps:
         steps = pipeline_steps[estimator_name]
         steps.append(pipeline_step)
-        print('pipeline steps', steps)
+        logger.debug('Model pipeline steps :: {}'.format(steps))
         return steps
 
 
-def save_pipeline(estimator_name, pipeline):
+def save_model_pipeline(estimator_name, pipeline):
+    model_pipeline_disk_location = BLUEMIST_PATH + '/' + 'artifacts/models/' + estimator_name + '.joblib'
     pipelines[estimator_name] = pipeline
-    dump(pipeline, BLUEMIST_PATH + '/' + 'artifacts/models/' + estimator_name + '.joblib')
-    print('pipelines', pipelines[estimator_name])
+    logger.info('Saving model pipeline to disk :: {}'.format(model_pipeline_disk_location))
+    dump(pipeline, model_pipeline_disk_location)
+    logger.info('Model pipeline object :: {}'.format(pipeline))
+
+
+def clear_all_model_pipelines():
+    global pipeline_steps, pipelines
+    pipeline_steps = {}
+    pipelines = {}
+
+
+def get_model_pipeline(estimator_name):
+    logger.info('Getting model pipeline for {}'.format(estimator_name))
+    pipeline = pipelines[estimator_name]
+    return pipeline

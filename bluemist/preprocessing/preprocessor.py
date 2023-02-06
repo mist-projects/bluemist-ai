@@ -11,13 +11,13 @@ from sklearn.pipeline import Pipeline
 from bluemist.pipeline.bluemist_pipeline import save_preprocessor
 from bluemist.preprocessing import categorical_transformer, numeric_transformer
 
-HOME_PATH = os.environ["BLUEMIST_PATH"]
-config.fileConfig(HOME_PATH + '/' + 'logging.config')
+BLUEMIST_PATH = os.environ["BLUEMIST_PATH"]
+config.fileConfig(BLUEMIST_PATH + '/' + 'logging.config')
 logger = logging.getLogger("bluemist")
 
 initial_column_metadata_for_deployment = []
 encoded_columns_for_deployment = []
-target_for_deployment= None
+target_for_deployment = None
 
 
 def preprocess_data(
@@ -90,12 +90,15 @@ def preprocess_data(
                 - 'ignore':
                     ignores if category is unknown, output encoded column for this feature will be all zeroes
                 - 'infrequent_if_exist':
-                    unknown category will be mapped to infrequent category is exists. If infrequent category does not exist it
+                    unknown category will be mapped to infrequent category if exists. If infrequent category does not exist, it
                     will be treated as `ignore`
     """
 
     global target_for_deployment
     target_for_deployment = target_variable
+
+    logger.info('Shape of the dataset :: {}'.format(data.shape))
+    logger.info('Columns in the dataset :: \n{}'.format(data.columns))
 
     # drop features from the dataset
     if drop_features is not None:
@@ -152,15 +155,16 @@ def preprocess_data(
         else:
             numeric_conversion_strategy = 'raise'
 
+    logger.debug('data.dtypes before preprocessing  :: \n{}'.format(data.dtypes))
+
     data[final_numerical_features] = data[final_numerical_features].apply(pd.to_numeric, errors=numeric_conversion_strategy, axis=1)
     data[final_categorical_features] = data[final_categorical_features].astype(str)
+    logger.debug('data.dtypes after dtype conversion  :: \n{}'.format(data.dtypes))
 
     # Creating list of column name and datatype which will be used in generate_api.py
     global initial_column_metadata_for_deployment
     for col_name, col_type in data.drop(target_variable, axis=1).dtypes.items():
         initial_column_metadata_for_deployment.append((col_name, col_type))
-
-    logger.debug('data.dtypes before preprocessing  :: \n{}'.format(data.dtypes))
 
     # create transformers for preprocessing pipeline
     num_transformer = numeric_transformer.build_numeric_transformer_pipeline(**locals())
@@ -175,21 +179,23 @@ def preprocess_data(
     )
 
     X = data.drop([target_variable], axis=1)
-    print('X columns', X.columns)
     y = data[[target_variable]]
+    logger.debug('Splitting dataset into X_train, X_test, y_train, y_test...')
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=data_randomizer)
 
+    logger.debug('X_train.dtypes before ColumnTransformer :: \n{}'.format(X_train.dtypes))
     X_train = pd.DataFrame(preprocessor.fit_transform(X_train), columns=preprocessor.get_feature_names_out())
     X_test = pd.DataFrame(preprocessor.transform(X_test), columns=preprocessor.get_feature_names_out())
+
     global encoded_columns_for_deployment
     encoded_columns_for_deployment = preprocessor.get_feature_names_out()
 
-    logger.debug('X_train.dtypes before preprocessing :: \n{}'.format(X_train.dtypes))
-    logger.debug('Columns after preprocessing :: {}'.format(preprocessor.get_feature_names_out()))
+    logger.debug('X_train Columns after ColumnTransformer :: {}'.format(preprocessor.get_feature_names_out()))
+    logger.debug('X_train.dtypes after ColumnTransformer :: \n{}'.format(X_train.dtypes))
 
     y_train = np.ravel(y_train)
     y_test = np.ravel(y_test)
 
-    logger.debug('X_train.dtypes after preprocessing  :: \n{}'.format(X_train.dtypes))
+    logger.debug('Saving preprocessor to disk...')
     save_preprocessor(preprocessor)
     return X_train, X_test, y_train, y_test
