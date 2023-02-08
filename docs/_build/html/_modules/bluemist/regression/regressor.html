@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bluemist.regression.regressor &mdash; Bluemist AI 0.1 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Bluemist AI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../bluemist.preprocessing.html">Preprocessor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bluemist.regression.html">Regression</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../bluemist.preprocessing.html">Preprocessor</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Bluemist AI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>bluemist.regression.regressor</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for bluemist.regression.regressor</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Main comment for regressor.py</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">mlflow</span>
+<span class="kn">import</span> <span class="nn">mlflow.sklearn</span>
+<span class="kn">from</span> <span class="nn">mlflow.tracking</span> <span class="kn">import</span> <span class="n">MlflowClient</span>
+<span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">TransformedTargetRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">RandomizedSearchCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+
+<span class="kn">import</span> <span class="nn">bluemist</span>
+<span class="kn">from</span> <span class="nn">bluemist.pipeline.bluemist_pipeline</span> <span class="kn">import</span> <span class="n">add_pipeline_step</span><span class="p">,</span> <span class="n">save_pipeline</span>
+<span class="kn">from</span> <span class="nn">bluemist.regression.constant</span> <span class="kn">import</span> <span class="n">multi_output_regressors</span><span class="p">,</span> <span class="n">multi_task_regressors</span><span class="p">,</span> <span class="n">unsupported_regressors</span><span class="p">,</span> \
+    <span class="n">base_estimator_regressors</span>
+
+<span class="kn">from</span> <span class="nn">bluemist.regression.tuning.constant</span> <span class="kn">import</span> <span class="n">default_hyperparameters</span>
+<span class="kn">from</span> <span class="nn">bluemist.utils.metrics</span> <span class="kn">import</span> <span class="n">scoringStrategy</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">all_estimators</span>
+
+<span class="kn">from</span> <span class="nn">bluemist.utils.scaler</span> <span class="kn">import</span> <span class="n">getScaler</span>
+<span class="kn">from</span> <span class="nn">bluemist.utils</span> <span class="kn">import</span> <span class="n">generate_api</span> <span class="k">as</span> <span class="n">generate_api</span>
+<span class="kn">from</span> <span class="nn">bluemist.artifcats.api</span> <span class="kn">import</span> <span class="n">model_api</span>
+
+
+<span class="c1"># config.fileConfig(Path(__file__).parent / &#39;logging.conf&#39;)</span>
+<span class="c1"># logger = logging.getLogger(&quot;root&quot;)</span>
+
+
+<span class="k">def</span> <span class="nf">get_regressor_class</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">class_name</span><span class="p">):</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+    <span class="n">class_</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">class_name</span><span class="p">)</span>
+    <span class="n">instance</span> <span class="o">=</span> <span class="n">class_</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">instance</span>
+
+
+<span class="k">def</span> <span class="nf">initialize_mlflow</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">mlflow_experiment_name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;experiment_name&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">mlflow_experiment_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">experiment</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">get_experiment_by_name</span><span class="p">(</span><span class="n">mlflow_experiment_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">experiment</span><span class="p">:</span>
+            <span class="n">mlflow</span><span class="o">.</span><span class="n">create_experiment</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">mlflow_experiment_name</span><span class="p">,</span>
+                                     <span class="n">artifact_location</span><span class="o">=</span><span class="s1">&#39;/home/shashank-agrawal/mlflow_artifact&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">experiment</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">experiment</span><span class="o">.</span><span class="n">lifecycle_stage</span> <span class="o">==</span> <span class="s1">&#39;deleted&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;restore experiment&#39;</span><span class="p">)</span>
+            <span class="n">client</span> <span class="o">=</span> <span class="n">MlflowClient</span><span class="p">()</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">restore_experiment</span><span class="p">(</span><span class="n">experiment</span><span class="o">.</span><span class="n">experiment_id</span><span class="p">)</span>
+
+        <span class="n">mlflow</span><span class="o">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="n">mlflow_experiment_name</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="get_estimators"><a class="viewcode-back" href="../../../bluemist.regression.html#bluemist.regression.regressor.get_estimators">[docs]</a><span class="k">def</span> <span class="nf">get_estimators</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">multi_output</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;multi_output&#39;</span><span class="p">)</span>
+    <span class="n">multi_task</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;multi_task&#39;</span><span class="p">)</span>
+    <span class="n">estimators</span> <span class="o">=</span> <span class="n">all_estimators</span><span class="p">(</span><span class="n">type_filter</span><span class="o">=</span><span class="s1">&#39;regressor&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;estimators&#39;</span><span class="p">,</span> <span class="n">estimators</span><span class="p">)</span>
+
+    <span class="n">estimators_to_remove</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">estimator</span> <span class="ow">in</span> <span class="n">estimators</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">multi_output</span> <span class="ow">and</span> <span class="n">estimator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">multi_output_regressors</span><span class="p">:</span>
+            <span class="n">estimators_to_remove</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">estimator</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">multi_task</span> <span class="ow">and</span> <span class="n">estimator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">multi_task_regressors</span><span class="p">:</span>
+            <span class="n">estimators_to_remove</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">estimator</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">unsupported_regressors</span> <span class="ow">and</span> <span class="n">estimator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">unsupported_regressors</span><span class="p">:</span>
+            <span class="n">estimators_to_remove</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">estimator</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">base_estimator_regressors</span> <span class="ow">and</span> <span class="n">estimator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">base_estimator_regressors</span><span class="p">:</span>
+            <span class="n">estimators_to_remove</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">estimator</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;estimators_to_remove &gt;&gt;&#39;</span><span class="p">,</span> <span class="n">estimators_to_remove</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">estimator_to_remove</span> <span class="ow">in</span> <span class="n">estimators_to_remove</span><span class="p">:</span>
+        <span class="n">estimators</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">estimator_to_remove</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">estimators</span></div>
+
+
+<div class="viewcode-block" id="deploy_model"><a class="viewcode-back" href="../../../bluemist.regression.html#bluemist.regression.regressor.deploy_model">[docs]</a><span class="k">def</span> <span class="nf">deploy_model</span><span class="p">(</span><span class="n">estimator_name</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
+    <span class="n">generate_api</span><span class="o">.</span><span class="n">generate_api_code</span><span class="p">(</span><span class="n">estimator_name</span><span class="o">=</span><span class="n">estimator_name</span><span class="p">)</span>
+    <span class="n">model_api</span><span class="o">.</span><span class="n">start_api_server</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="train_test_evaluate"><a class="viewcode-back" href="../../../bluemist.regression.html#bluemist.regression.regressor.train_test_evaluate">[docs]</a><span class="k">def</span> <span class="nf">train_test_evaluate</span><span class="p">(</span>
+        <span class="n">X_train</span><span class="p">,</span>
+        <span class="n">X_test</span><span class="p">,</span>
+        <span class="n">y_train</span><span class="p">,</span>
+        <span class="n">y_test</span><span class="p">,</span>
+        <span class="n">tune_models</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">metrics</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span>
+        <span class="n">multi_output</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">multi_task</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">target_scaling_strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">save_pipeline_to_disk</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">experiment_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">run_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    X_train : pandas dataframe</span>
+<span class="sd">        Training data</span>
+<span class="sd">    X_test : pandas dataframe</span>
+<span class="sd">        Test data</span>
+<span class="sd">    y_train : array of shape (X_train.shape[0],)</span>
+<span class="sd">        Target values of training dataset</span>
+<span class="sd">    y_test : array of shape (X_test.shape[0],)</span>
+<span class="sd">        Target values of test dataset</span>
+<span class="sd">    tune_models : {&#39;all&#39;, None} or list of models to be trained, default=None</span>
+<span class="sd">        all: tune all regression models</span>
+<span class="sd">        list: list of models to be trained</span>
+<span class="sd">        None: hyperparameter tuning will not be performed</span>
+<span class="sd">    metrics : {&#39;all&#39;, &#39;default&#39;}, default=&#39;default&#39;</span>
+<span class="sd">        - all:</span>
+<span class="sd">            mean_absolute_error, mean_squared_error, r2_score, explained_variance_score, max_error,</span>
+<span class="sd">            mean_squared_log_error, median_absolute_error, mean_absolute_percentage_error, mean_poisson_deviance,</span>
+<span class="sd">            mean_gamma_deviance, mean_tweedie_deviance, d2_tweedie_score, mean_pinball_loss</span>
+<span class="sd">        - default:</span>
+<span class="sd">            mean_absolute_error, mean_squared_error, r2_score</span>
+<span class="sd">    multi_output : bool, default=False</span>
+<span class="sd">        Future use</span>
+<span class="sd">    multi_task : bool, default=False</span>
+<span class="sd">        Future use</span>
+<span class="sd">    target_scaling_strategy : {&#39;StandardScaler&#39;, &#39;MinMaxScaler&#39;, &#39;MaxAbsScaler&#39;, &#39;RobustScaler&#39;, None}, default=None</span>
+<span class="sd">        Scales the target variable before training the model</span>
+<span class="sd">    save_pipeline_to_disk : bool, default=True</span>
+<span class="sd">        Save preprocessor and model training pipeline to the disk. Should be set to True if needs model to be deployed</span>
+<span class="sd">        as an API</span>
+<span class="sd">    experiment_name : str, default=None</span>
+<span class="sd">        Name of the experiment</span>
+<span class="sd">    run_name : str,default=None</span>
+<span class="sd">        Name of the run within the experiment</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">tune_all_models</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">tune_model_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">target_scaler</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">capture_stats</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="n">target_scaling_strategy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">target_scaler</span> <span class="o">=</span> <span class="n">getScaler</span><span class="p">(</span><span class="n">target_scaling_strategy</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tune_models</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">tune_models</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
+        <span class="n">tune_all_models</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tune_models</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">tune_model_list</span> <span class="o">=</span> <span class="n">tune_models</span>
+
+    <span class="k">if</span> <span class="n">experiment_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">capture_stats</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">initialize_mlflow</span><span class="p">(</span><span class="o">**</span><span class="nb">locals</span><span class="p">())</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+    <span class="n">estimators</span> <span class="o">=</span> <span class="n">get_estimators</span><span class="p">(</span><span class="o">**</span><span class="nb">locals</span><span class="p">())</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">estimator_name</span><span class="p">,</span> <span class="n">estimator_class</span> <span class="ow">in</span> <span class="n">estimators</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="c1"># if estimator_name == &#39;LinearRegression&#39;:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Regressor Name&#39;</span><span class="p">,</span> <span class="n">estimator_name</span><span class="p">)</span>
+                <span class="n">regressor</span> <span class="o">=</span> <span class="n">estimator_class</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="n">tune_all_models</span> <span class="ow">or</span> <span class="n">estimator_name</span> <span class="ow">in</span> <span class="n">tune_model_list</span><span class="p">:</span>
+                    <span class="n">estimator_parameters</span> <span class="o">=</span> <span class="n">regressor</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">estimator_parameters</span><span class="p">))</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hyperparameter alpha_1&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">default_hyperparameters</span><span class="p">[</span><span class="s1">&#39;alpha_1&#39;</span><span class="p">]))</span>
+
+                    <span class="n">model_hyperparameters_for_tuning</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">bluemist</span><span class="o">.</span><span class="n">regression</span><span class="o">.</span><span class="n">tuning</span><span class="o">.</span><span class="n">constant</span><span class="p">,</span> <span class="n">estimator_name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+                    <span class="n">deprecated_keys</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">estimator_parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;deprecated&#39;</span><span class="p">:</span>
+                            <span class="n">deprecated_keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;deprecated key&#39;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">model_hyperparameters_for_tuning</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">model_hyperparameters_for_tuning</span><span class="p">:</span>
+                            <span class="n">estimator_parameters</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_hyperparameters_for_tuning</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;parameters[key]&#39;</span><span class="p">,</span> <span class="n">estimator_parameters</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+                        <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">default_hyperparameters</span><span class="p">:</span>
+                            <span class="n">estimator_parameters</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_hyperparameters</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;parameters[key]&#39;</span><span class="p">,</span> <span class="n">estimator_parameters</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+
+                    <span class="k">for</span> <span class="n">deprecated_key</span> <span class="ow">in</span> <span class="n">deprecated_keys</span><span class="p">:</span>
+                        <span class="n">estimator_parameters</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">deprecated_key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+                    <span class="c1"># Creating new dictionary of hyperparameters to add step name as required by the pipeline</span>
+                    <span class="n">hyperparameters</span> <span class="o">=</span> <span class="p">{}</span>
+
+                    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">estimator_parameters</span><span class="p">:</span>
+                        <span class="n">old_key</span> <span class="o">=</span> <span class="n">key</span>
+
+                        <span class="k">if</span> <span class="n">target_scaling_strategy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="n">new_key</span> <span class="o">=</span> <span class="n">estimator_name</span> <span class="o">+</span> <span class="s1">&#39;__regressor__&#39;</span> <span class="o">+</span> <span class="n">key</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">new_key</span> <span class="o">=</span> <span class="n">estimator_name</span> <span class="o">+</span> <span class="s1">&#39;__&#39;</span> <span class="o">+</span> <span class="n">key</span>
+                        <span class="n">hyperparameters</span><span class="p">[</span><span class="n">new_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">estimator_parameters</span><span class="p">[</span><span class="n">old_key</span><span class="p">]</span>
+
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hyperparameters for Tuning :: &#39;</span><span class="p">,</span> <span class="n">hyperparameters</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">target_scaling_strategy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">transformed_target_regressor</span> <span class="o">=</span> <span class="n">TransformedTargetRegressor</span><span class="p">(</span><span class="n">regressor</span><span class="o">=</span><span class="n">regressor</span><span class="p">,</span>
+                                                                                  <span class="n">transformer</span><span class="o">=</span><span class="n">target_scaler</span><span class="p">)</span>
+                        <span class="n">step_estimator</span> <span class="o">=</span> <span class="p">(</span><span class="n">estimator_name</span><span class="p">,</span> <span class="n">transformed_target_regressor</span><span class="p">)</span>
+                        <span class="n">steps</span> <span class="o">=</span> <span class="n">add_pipeline_step</span><span class="p">(</span><span class="n">estimator_name</span><span class="p">,</span> <span class="n">step_estimator</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">step_estimator</span> <span class="o">=</span> <span class="p">(</span><span class="n">estimator_name</span><span class="p">,</span> <span class="n">regressor</span><span class="p">)</span>
+                        <span class="n">steps</span> <span class="o">=</span> <span class="n">add_pipeline_step</span><span class="p">(</span><span class="n">estimator_name</span><span class="p">,</span> <span class="n">step_estimator</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">steps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span>
+                        <span class="n">search</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="n">param_distributions</span><span class="o">=</span><span class="n">hyperparameters</span><span class="p">)</span>
+                        <span class="n">tuned_estimator</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+                        <span class="n">pipeline_with_fitted_estimator</span> <span class="o">=</span> <span class="n">tuned_estimator</span><span class="o">.</span><span class="n">best_estimator_</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;pipeline keys &#39;</span><span class="p">,</span> <span class="n">pipe</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fitted_estimator&#39;</span><span class="p">,</span> <span class="n">tuned_estimator</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="n">pipe</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;pipeline_with_best_estimator&#39;</span><span class="p">,</span> <span class="n">pipeline_with_fitted_estimator</span><span class="p">)</span>
+                        <span class="c1"># print(&#39;pipeline step access&#39;, pipeline_with_fitted_estimator[&#39;BayesianRidge&#39;])</span>
+                        <span class="k">if</span> <span class="n">save_pipeline_to_disk</span><span class="p">:</span>
+                            <span class="n">save_pipeline</span><span class="p">(</span><span class="n">estimator_name</span><span class="p">,</span> <span class="n">pipeline_with_fitted_estimator</span><span class="p">)</span>
+
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;pipe1:&#39;</span><span class="p">,</span> <span class="n">pipe</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">target_scaling_strategy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">transformed_target_regressor</span> <span class="o">=</span> <span class="n">TransformedTargetRegressor</span><span class="p">(</span><span class="n">regressor</span><span class="o">=</span><span class="n">regressor</span><span class="p">,</span>
+                                                                                  <span class="n">transformer</span><span class="o">=</span><span class="n">target_scaler</span><span class="p">)</span>
+                        <span class="n">step_estimator</span> <span class="o">=</span> <span class="p">(</span><span class="n">estimator_name</span><span class="p">,</span> <span class="n">transformed_target_regressor</span><span class="p">)</span>
+                        <span class="n">steps</span> <span class="o">=</span> <span class="n">add_pipeline_step</span><span class="p">(</span><span class="n">estimator_name</span><span class="p">,</span> <span class="n">step_estimator</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">step_estimator</span> <span class="o">=</span> <span class="p">(</span><span class="n">estimator_name</span><span class="p">,</span> <span class="n">regressor</span><span class="p">)</span>
+                        <span class="n">steps</span> <span class="o">=</span> <span class="n">add_pipeline_step</span><span class="p">(</span><span class="n">estimator_name</span><span class="p">,</span> <span class="n">step_estimator</span><span class="p">)</span>
+
+                    <span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span>
+                    <span class="n">pipeline_with_fitted_estimator</span> <span class="o">=</span> <span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">save_pipeline_to_disk</span><span class="p">:</span>
+                        <span class="n">save_pipeline</span><span class="p">(</span><span class="n">estimator_name</span><span class="p">,</span> <span class="n">pipeline_with_fitted_estimator</span><span class="p">)</span>
+
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fitted_estimator&#39;</span><span class="p">,</span> <span class="n">pipeline_with_fitted_estimator</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;pipe2&#39;</span><span class="p">,</span> <span class="n">pipe</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">tune_all_models</span> <span class="ow">or</span> <span class="n">estimator_name</span> <span class="ow">in</span> <span class="n">tune_model_list</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best Score: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">tuned_estimator</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best Hyperparameters: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">tuned_estimator</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+
+                <span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline_with_fitted_estimator</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+                <span class="n">scorer</span> <span class="o">=</span> <span class="n">scoringStrategy</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">metrics</span><span class="p">)</span>
+                <span class="n">estimator_stats_df</span> <span class="o">=</span> <span class="n">scorer</span><span class="o">.</span><span class="n">getStats</span><span class="p">()</span>
+
+                <span class="n">final_stats_df</span> <span class="o">=</span> <span class="n">estimator_stats_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+                <span class="c1"># Insert Estimator name as the first column in the dataframe</span>
+                <span class="n">final_stats_df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Estimator&#39;</span><span class="p">,</span> <span class="n">estimator_name</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;stats_df&#39;</span><span class="p">,</span> <span class="n">final_stats_df</span><span class="p">)</span>
+
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">final_stats_df</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;after concat&#39;</span><span class="p">,</span> <span class="n">final_stats_df</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">estimator_stats_df</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">&#39;records&#39;</span><span class="p">))</span>
+
+                <span class="k">if</span> <span class="n">capture_stats</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">(</span><span class="n">run_name</span><span class="o">=</span><span class="n">run_name</span><span class="p">):</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Inside mlflow&#39;</span><span class="p">)</span>
+                        <span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">estimator_name</span><span class="p">)</span>
+                        <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metrics</span><span class="p">(</span><span class="n">estimator_stats_df</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">&#39;records&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+                        <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="n">tuned_estimator</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model saved in run </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">active_run</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">run_uuid</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">exception</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Estimator&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">estimator_name</span><span class="p">],</span> <span class="s1">&#39;Exception&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
+                <span class="n">exception_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">exception</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;metrics&#39;</span><span class="p">,</span> <span class="n">exception_df</span><span class="p">)</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">exception_df</span><span class="p">])</span>
+                <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
+
+    <span class="n">df</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">set_table_styles</span><span class="p">([{</span><span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;props&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="s1">&#39;border&#39;</span><span class="p">,</span>
+                                           <span class="s1">&#39;10px solid yellow&#39;</span><span class="p">)]}])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span></div>
+    <span class="c1"># logger.info(&#39;Estimator Stats : {}&#39;.format(df.to_string()))</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Shashank Agrawal.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
