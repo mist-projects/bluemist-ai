@@ -30,19 +30,11 @@ from bluemist.utils.scaler import getScaler
 from bluemist.utils import generate_api as generate_api
 from bluemist.artifacts.api import predict
 
-import pylab as pl
 from IPython.display import display, HTML
 
 BLUEMIST_PATH = os.environ["BLUEMIST_PATH"]
 config.fileConfig(BLUEMIST_PATH + '/' + 'logging.config')
 logger = logging.getLogger("bluemist")
-
-
-def get_regressor_class(module, class_name):
-    module = importlib.import_module(module)
-    class_ = getattr(module, class_name)
-    instance = class_()
-    return instance
 
 
 def initialize_mlflow(mlflow_experiment_name):
@@ -189,20 +181,31 @@ def train_test_evaluate(
     clear_all_model_pipelines()
 
     i = 0
+    # If hyperparameter tuning is requested for specific models, limit the overall training to those models to save time
+    if tune_models is not None and not tune_all_models and tune_model_list:
+        estimators_to_skip = []
+        for estimator in estimators:
+            if estimator[0] not in tune_model_list:
+                estimators_to_skip.append(estimator)
+
+        for estimator_to_skip in estimators_to_skip:
+            estimators.remove(estimator_to_skip)
+
     for estimator_name, estimator_class in (pbar := tqdm(estimators, colour='blue')):
-        pbar.set_description(f"Processing")
+        pbar.set_description(f"Training {estimator_name}")
         i = i + 1
 
-        if (tune_models is None or tune_all_models or estimator_name in tune_model_list):
-            # if i == 20:
+        #if tune_models is None or tune_all_models or estimator_name in tune_model_list:
+        if i < 50:
             try:
-                logger.info('Regressor in progress :: {}'.format(estimator_name))
+                logger.info('###################  Regressor in progress :: {} ###################'.format(estimator_name))
 
                 regressor = estimator_class()
 
                 if estimator_name in ['CCA', 'PLSCanonical']:
                     regressor.set_params(n_components=1)
 
+                # Hyperparameter tuning is requested
                 if tune_all_models or estimator_name in tune_model_list:
                     estimator_parameters = regressor.get_params()
                     logger.info('Available hyperparameters to be tuned :: {}'.format(estimator_parameters))

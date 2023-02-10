@@ -1,0 +1,5 @@
+include requirements.txt
+include bluemist/logging.config
+include bluemist/artifacts/logs/bluemist.log
+recursive-include bluemist/artifacts *
+recursive-include bluemist/datasets *
