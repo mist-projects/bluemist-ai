@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bluemist.pipeline.bluemist_pipeline &mdash; Bluemist AI 0.1 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Bluemist AI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../bluemist.preprocessing.html">Preprocessor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bluemist.regression.html">Regression</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../bluemist.preprocessing.html">Preprocessor</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Bluemist AI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../bluemist.html">bluemist</a> &raquo;</li>
+      <li>bluemist.pipeline.bluemist_pipeline</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for bluemist.pipeline.bluemist_pipeline</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">config</span>
+
+<span class="kn">import</span> <span class="nn">joblib</span>
+<span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">dump</span>
+
+<span class="n">pipeline_steps</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">pipelines</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">BLUEMIST_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BLUEMIST_PATH&quot;</span><span class="p">]</span>
+<span class="n">config</span><span class="o">.</span><span class="n">fileConfig</span><span class="p">(</span><span class="n">BLUEMIST_PATH</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;logging.config&#39;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;bluemist&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="save_preprocessor"><a class="viewcode-back" href="../../../bluemist.pipeline.html#bluemist.pipeline.bluemist_pipeline.save_preprocessor">[docs]</a><span class="k">def</span> <span class="nf">save_preprocessor</span><span class="p">(</span><span class="n">preprocessor</span><span class="p">):</span>
+    <span class="n">preprocessor_disk_location</span> <span class="o">=</span> <span class="n">BLUEMIST_PATH</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;artifacts/preprocessor/preprocessor.joblib&#39;</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Saving preprocessor to disk on :: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">preprocessor_disk_location</span><span class="p">))</span>
+    <span class="n">dump</span><span class="p">(</span><span class="n">preprocessor</span><span class="p">,</span> <span class="n">preprocessor_disk_location</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Preprocessor column transformer object :: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">preprocessor</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="add_pipeline_step"><a class="viewcode-back" href="../../../bluemist.pipeline.html#bluemist.pipeline.bluemist_pipeline.add_pipeline_step">[docs]</a><span class="k">def</span> <span class="nf">add_pipeline_step</span><span class="p">(</span><span class="n">estimator_name</span><span class="p">,</span> <span class="n">pipeline_step</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">estimator_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pipeline_steps</span><span class="p">:</span>
+        <span class="n">pipeline_steps</span><span class="p">[</span><span class="n">estimator_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">estimator_name</span> <span class="ow">in</span> <span class="n">pipeline_steps</span><span class="p">:</span>
+        <span class="n">steps</span> <span class="o">=</span> <span class="n">pipeline_steps</span><span class="p">[</span><span class="n">estimator_name</span><span class="p">]</span>
+        <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pipeline_step</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Model pipeline steps :: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">steps</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">steps</span></div>
+
+
+<div class="viewcode-block" id="save_model_pipeline"><a class="viewcode-back" href="../../../bluemist.pipeline.html#bluemist.pipeline.bluemist_pipeline.save_model_pipeline">[docs]</a><span class="k">def</span> <span class="nf">save_model_pipeline</span><span class="p">(</span><span class="n">estimator_name</span><span class="p">,</span> <span class="n">pipeline</span><span class="p">):</span>
+    <span class="n">model_pipeline_disk_location</span> <span class="o">=</span> <span class="n">BLUEMIST_PATH</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;artifacts/models/&#39;</span> <span class="o">+</span> <span class="n">estimator_name</span> <span class="o">+</span> <span class="s1">&#39;.joblib&#39;</span>
+    <span class="n">pipelines</span><span class="p">[</span><span class="n">estimator_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pipeline</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Saving model pipeline to disk :: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">model_pipeline_disk_location</span><span class="p">))</span>
+    <span class="n">dump</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">model_pipeline_disk_location</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Model pipeline object :: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pipeline</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="clear_all_model_pipelines"><a class="viewcode-back" href="../../../bluemist.pipeline.html#bluemist.pipeline.bluemist_pipeline.clear_all_model_pipelines">[docs]</a><span class="k">def</span> <span class="nf">clear_all_model_pipelines</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">pipeline_steps</span><span class="p">,</span> <span class="n">pipelines</span>
+    <span class="n">pipeline_steps</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">pipelines</span> <span class="o">=</span> <span class="p">{}</span></div>
+
+
+<div class="viewcode-block" id="get_model_pipeline"><a class="viewcode-back" href="../../../bluemist.pipeline.html#bluemist.pipeline.bluemist_pipeline.get_model_pipeline">[docs]</a><span class="k">def</span> <span class="nf">get_model_pipeline</span><span class="p">(</span><span class="n">estimator_name</span><span class="p">):</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Getting model pipeline for </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">estimator_name</span><span class="p">))</span>
+    <span class="n">pipeline</span> <span class="o">=</span> <span class="n">pipelines</span><span class="p">[</span><span class="n">estimator_name</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">pipeline</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Shashank Agrawal.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bluemist.datasource.database &mdash; Bluemist AI 0.1 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Bluemist AI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../bluemist.preprocessing.html">Preprocessor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bluemist.regression.html">Regression</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../bluemist.preprocessing.html">Preprocessor</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Bluemist AI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../bluemist.html">bluemist</a> &raquo;</li>
+      <li>bluemist.datasource.database</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for bluemist.datasource.database</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">urllib.parse</span>
+<span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">config</span>
+
+<span class="kn">import</span> <span class="nn">cx_Oracle</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+
+<span class="n">BLUEMIST_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;BLUEMIST_PATH&quot;</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">fileConfig</span><span class="p">(</span><span class="n">BLUEMIST_PATH</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;logging.config&#39;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;bluemist&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="get_data_from_database"><a class="viewcode-back" href="../../../bluemist.datasource.html#bluemist.datasource.database.get_data_from_database">[docs]</a><span class="k">def</span> <span class="nf">get_data_from_database</span><span class="p">(</span><span class="n">db_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">service</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">oracle_instant_client_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                           <span class="n">username</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                           <span class="n">chunk_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote_plus</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">db_type</span> <span class="o">==</span> <span class="s1">&#39;mariadb&#39;</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Pulling data from MariaDB&#39;</span><span class="p">)</span>
+        <span class="n">connection_url</span> <span class="o">=</span> <span class="s1">&#39;mysql+pymysql://&#39;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">password</span> <span class="o">+</span> <span class="s1">&#39;@&#39;</span> <span class="o">+</span> <span class="n">host</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">database</span>
+        <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">connection_url</span><span class="p">)</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Connection successful !!&#39;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">extract_data</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
+    <span class="k">elif</span> <span class="n">db_type</span> <span class="o">==</span> <span class="s1">&#39;mssql&#39;</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Pulling data from MS SQL&#39;</span><span class="p">)</span>
+        <span class="n">connection_url</span> <span class="o">=</span> <span class="s1">&#39;mssql+pymssql://&#39;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">password</span> <span class="o">+</span> <span class="s1">&#39;@&#39;</span> <span class="o">+</span> <span class="n">host</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">database</span>
+        <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">connection_url</span><span class="p">)</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Connection successful !!&#39;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">extract_data</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
+    <span class="k">elif</span> <span class="n">db_type</span> <span class="o">==</span> <span class="s1">&#39;mysql&#39;</span> <span class="ow">or</span> <span class="n">db_type</span> <span class="o">==</span> <span class="s1">&#39;aurora-mysql&#39;</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Pulling data from MySQL&#39;</span><span class="p">)</span>
+        <span class="n">connection_url</span> <span class="o">=</span> <span class="s1">&#39;mysql+pymysql://&#39;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">password</span> <span class="o">+</span> <span class="s1">&#39;@&#39;</span> <span class="o">+</span> <span class="n">host</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">database</span>
+        <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">connection_url</span><span class="p">)</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Connection successful !!&#39;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">extract_data</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
+    <span class="k">elif</span> <span class="n">db_type</span> <span class="o">==</span> <span class="s1">&#39;oracle&#39;</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Pulling data from Oracle&#39;</span><span class="p">)</span>
+        <span class="n">connection_url</span> <span class="o">=</span> <span class="s1">&#39;oracle+cx_oracle://&#39;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">password</span> <span class="o">+</span> <span class="s1">&#39;@&#39;</span> <span class="o">+</span> <span class="n">host</span> <span class="o">+</span> <span class="s1">&#39;/?service_name=&#39;</span> <span class="o">+</span> <span class="n">service</span>
+        <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">connection_url</span><span class="p">)</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Connection successful !!&#39;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">extract_data</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
+    <span class="k">elif</span> <span class="n">db_type</span> <span class="o">==</span> <span class="s1">&#39;postgres&#39;</span> <span class="ow">or</span> <span class="n">db_type</span> <span class="o">==</span> <span class="s1">&#39;aurora-postgres&#39;</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Pulling data from PostgreSQL&#39;</span><span class="p">)</span>
+        <span class="n">connection_url</span> <span class="o">=</span> <span class="s1">&#39;postgresql://&#39;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">password</span> <span class="o">+</span> <span class="s1">&#39;@&#39;</span> <span class="o">+</span> <span class="n">host</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">database</span>
+        <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">connection_url</span><span class="p">)</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Connection successful !!&#39;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">extract_data</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="extract_data"><a class="viewcode-back" href="../../../bluemist.datasource.html#bluemist.datasource.database.extract_data">[docs]</a><span class="k">def</span> <span class="nf">extract_data</span><span class="p">(</span><span class="n">conn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">dfs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">record_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="n">sql</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="n">chunk_size</span><span class="p">):</span>
+        <span class="n">dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+        <span class="n">record_count</span> <span class="o">=</span> <span class="n">record_count</span> <span class="o">+</span> <span class="n">chunk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Records pulled in this batch </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">chunk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dfs</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Total records pulled </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">record_count</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">data</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Shashank Agrawal.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
