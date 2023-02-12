@@ -18,6 +18,8 @@ default_hyperparameters = {
     'criterion': ['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
     'cv': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     'degree': [1, 2, 3, 4, 5],
+    'dual': [True, False],
+    'early_stopping': [True, False],
     'eps': [1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1],
     'estimator': [None],
     'fit_intercept': [True, False],
@@ -61,6 +63,7 @@ default_hyperparameters = {
     'random_state': [2],
     'scale': [True, False],
     'selection': ['cyclic', 'random'],
+    'shuffle': [True, False],
     'solver': ['lbfgs', 'newton-cholesky'],
     'splitter': ['best', 'random'],
     'strategy': ['mean', 'median', 'quantile', 'constant'],
@@ -136,5 +139,68 @@ Lars = {
 LarsCV = {
     'normalize': [True, False],
     'precompute': ['auto', True, False],
-    'cv': [2, 3, 4, 5, 6, 7, 8, 9, 10],
+    'cv': [2, 3, 4, 5, 6, 7, 8, 9, 10]
 }
+
+LassoCV = {
+    'cv': [2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+
+LassoLarsCV = {
+    'cv': [2, 3, 4, 5, 6, 7, 8, 9, 10],
+    'eps': [2.220446049250313e-16, 1e-10, 1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1]
+}
+
+LassoLarsIC = {
+    'criterion': ['aic', 'bic'],
+    'noise_variance': [None]
+}
+
+LinearSVR = {
+    'epsilon': [0.0],
+    'C': [1.0],
+    'loss': ['epsilon_insensitive', 'squared_epsilon_insensitive'],
+    'intercept_scaling': [1.0]
+}
+
+MLPRegressor = {
+    'hidden_layer_sizes': [(100,)],
+    'activation': ['identity', 'logistic', 'tanh', 'relu'],
+    'solver': ['lbfgs', 'sgd', 'adam'],
+    'alpha': [1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1],
+    'batch_size': ['auto'],
+    'learning_rate': ['constant', 'invscaling', 'adaptive'],
+    'learning_rate_init': [1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1],
+    'power_t': [0.5],
+    'momentum': [0.1, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+    'nesterovs_momentum': [True, False],
+    'validation_fraction': [0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+    'beta_1': [0.1, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+    'beta_2': [0.1, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.999],
+    'epsilon': [1e-8, 1e-7, 1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1],
+    'max_fun': [1000, 3000, 6000, 9000, 12000, 15000]
+}
+
+NuSVR = {
+    'nu': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+    'C': [1.0],
+    'kernel': ['linear', 'poly', 'rbf', 'sigmoid', 'precomputed'],
+    'degree': [1, 2, 3, 4, 5],
+    'gamma': ['scale', 'auto'],
+    'coef0': [0.0],
+    'shrinking': [True, False],
+    'tol': [1e-07, 1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1],
+    'cache_size': [200],
+    'max_iter': [1, 2, 3, 4, 5]
+}
+
+OrthogonalMatchingPursuit = {
+    'n_nonzero_coefs': [None],
+    'tol': [None]
+}
+
+OrthogonalMatchingPursuitCV = {
+    'cv': [2, 3, 4, 5, 6, 7, 8, 9, 10],
+    'max_iter': [5]
+}
+

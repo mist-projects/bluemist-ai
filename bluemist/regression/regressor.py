@@ -196,7 +196,7 @@ def train_test_evaluate(
         i = i + 1
 
         #if tune_models is None or tune_all_models or estimator_name in tune_model_list:
-        if i < 50:
+        if i == 31:
             try:
                 logger.info('###################  Regressor in progress :: {} ###################'.format(estimator_name))
 
@@ -326,10 +326,10 @@ def train_test_evaluate(
                 logger.error('Exception occurred while training the model :: {}'.format(str(e)), exc_info=True)
 
     df.set_index('Estimator', inplace=True)
-    display(HTML(df.style
-                 .highlight_max(subset=[col for col in df.columns if col.endswith('score') and is_numeric_dtype(df[col])], color='green')
-                 .highlight_min(subset=[col for col in df.columns if col.endswith('score') and is_numeric_dtype(df[col])], color='yellow')
-                 .highlight_max(subset=[col for col in df.columns if not col.endswith('score') and is_numeric_dtype(df[col])], color='yellow')
-                 .highlight_min(subset=[col for col in df.columns if not col.endswith('score') and is_numeric_dtype(df[col])], color='green')
-                 .to_html()))
+    # display(HTML(df.style
+    #              .highlight_max(subset=[col for col in df.columns if col.endswith('score') and is_numeric_dtype(df[col])], color='green')
+    #              .highlight_min(subset=[col for col in df.columns if col.endswith('score') and is_numeric_dtype(df[col])], color='yellow')
+    #              .highlight_max(subset=[col for col in df.columns if not col.endswith('score') and is_numeric_dtype(df[col])], color='yellow')
+    #              .highlight_min(subset=[col for col in df.columns if not col.endswith('score') and is_numeric_dtype(df[col])], color='green')
+    #              .to_html()))
     logger.info('Estimator stats across all trained models : \n{}'.format(df.to_string()))
