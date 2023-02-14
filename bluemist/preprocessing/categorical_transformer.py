@@ -4,9 +4,6 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder, OrdinalEncoder
 
 
 def build_categorical_transformer_pipeline(**kwargs):
-    """
-    :rtype: object
-    """
     transformer_steps = []
 
     imputer_strategy = kwargs.get('categorical_imputer_strategy')

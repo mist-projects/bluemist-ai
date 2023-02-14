@@ -3,6 +3,8 @@ import os
 import sys
 from logging import config
 
+import sklearn
+
 import bluemist
 from bluemist.environment import initialize
 from bluemist.datasource.aws import get_data_from_s3
@@ -10,6 +12,7 @@ from bluemist.datasource import get_data_from_filesystem
 from bluemist.pipeline import get_model_pipeline
 from bluemist.preprocessing import preprocess_data
 from bluemist.regression import train_test_evaluate, deploy_model, get_estimators
+from bluemist.eda import perform_eda
 
 HOME_PATH = os.environ["BLUEMIST_PATH"]
 config.fileConfig(HOME_PATH + '/' + 'logging.config')
@@ -49,15 +52,16 @@ def main():
 
     #print('get_estimators', get_estimators())
     initialize()
-    data = get_data_from_filesystem('datasets/auto-mpg/auto-mpg.csv')
-    X_train, X_test, y_train, y_test = preprocess_data(data, target_variable='mpg', test_size=0.25,
-                                                       drop_features=['car name'],
-                                                       numerical_features=['horsepower'],
-                                                       categorical_features=['origin'],
-                                                       categorical_encoder='OneHotEncoder')
+    #data = get_data_from_filesystem('datasets/auto-mpg/auto-mpg.csv')
+    #perform_eda(data, provider='dtale')
+    # X_train, X_test, y_train, y_test = preprocess_data(data, target_variable='mpg', test_size=0.25,
+    #                                                    drop_features=['car name'],
+    #                                                    numerical_features=['horsepower'],
+    #                                                    categorical_features=['origin'],
+    #                                                    categorical_encoder='OneHotEncoder')
     #
-    # train_test_evaluate(X_train, X_test, y_train, y_test, tune_models=None, metrics='all', target_scaling_strategy='MinMaxScaler')
-    # # pipeline = get_model_pipeline('LarsCV')
+    # train_test_evaluate(X_train, X_test, y_train, y_test, tune_models='all', metrics='all', target_scaling_strategy=None)
+    # # # pipeline = get_model_pipeline('LarsCV')
     # # print(pipeline.get_params)
     # #deploy_model(estimator_name='LarsCV', host='localhost', port=8000)
 

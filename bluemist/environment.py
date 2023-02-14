@@ -1,3 +1,13 @@
+"""
+Initialize Bluemist-AI's environment
+"""
+
+__author__ = "Shashank Agrawal"
+__license__ = "MIT"
+__version__ = "0.1.1"
+__email__ = "dew@bluemist-ai.one"
+
+
 import logging
 import os
 import shutil
@@ -6,6 +16,7 @@ from logging import config
 import platform
 from termcolor import colored
 
+
 os.environ["BLUEMIST_PATH"] = os.path.realpath(os.path.dirname(__file__))
 BLUEMIST_PATH = os.getenv("BLUEMIST_PATH")
 
@@ -13,7 +24,6 @@ os.chdir(BLUEMIST_PATH)
 
 config.fileConfig(BLUEMIST_PATH + '/' + 'logging.config')
 logger = logging.getLogger("bluemist")
-
 logging.captureWarnings(True)
 logger.info('BLUEMIST_PATH {}'.format(BLUEMIST_PATH))
 
@@ -33,7 +43,7 @@ def initialize(
     if log_level.upper() in ['CRITICAL', 'FATAL', 'ERROR', 'WARNING', 'WARN', 'INFO', 'DEBUG']:
         logger.setLevel(logging.getLevelName(log_level))
 
-    logger.handlers[0].doRollover()
+    logger.handlers[1].doRollover()
 
     banner = """
     ██████╗ ██╗     ██╗   ██╗███████╗███╗   ███╗██╗███████╗████████╗               █████╗ ██╗
@@ -60,7 +70,7 @@ def initialize(
 
     # cleaning and building artifacts directory
     if bool(cleanup_resources):
-        directories = ['data', 'experiments', 'models', 'preprocessor']
+        directories = ['data', 'eda', 'experiments', 'models', 'preprocessor']
         for directory in directories:
             directory_path = BLUEMIST_PATH + '/artifacts/' + directory
             if os.path.exists(directory_path):

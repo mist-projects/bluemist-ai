@@ -1,53 +1,27 @@
-bluemist.datasource package
-===========================
+Datasources
+===========
 
-Submodules
-----------
-
-bluemist.datasource.aws module
-------------------------------
-
-.. automodule:: bluemist.datasource.aws
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-bluemist.datasource.azure module
---------------------------------
-
-.. automodule:: bluemist.datasource.azure
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-bluemist.datasource.database module
------------------------------------
-
-.. automodule:: bluemist.datasource.database
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-bluemist.datasource.file module
--------------------------------
+File System
+------------
 
 .. automodule:: bluemist.datasource.file
    :members:
    :undoc-members:
    :show-inheritance:
 
-bluemist.datasource.gcp module
-------------------------------
+Database
+--------
 
-.. automodule:: bluemist.datasource.gcp
+.. automodule:: bluemist.datasource.database
    :members:
    :undoc-members:
    :show-inheritance:
+   :exclude-members: extract_data
 
-Module contents
----------------
+Amazon cloud (AWS)
+------------------
 
-.. automodule:: bluemist.datasource
+.. automodule:: bluemist.datasource.aws
    :members:
    :undoc-members:
    :show-inheritance:

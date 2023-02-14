@@ -1,20 +1,57 @@
+"""
+Extract data from database. Supported databases are MariaDB, Microsoft SQL, MySQL, Oracle, AWS Aurora and PostgreSQL
+"""
+
+__author__ = "Shashank Agrawal"
+__license__ = "MIT"
+__version__ = "0.1.1"
+__email__ = "dew@bluemist-ai.one"
+
+
 import logging
 import os
 import urllib.parse
 from logging import config
-
 import cx_Oracle
 import pandas as pd
 from sqlalchemy import create_engine
 
 BLUEMIST_PATH = os.getenv("BLUEMIST_PATH")
+
 config.fileConfig(BLUEMIST_PATH + '/' + 'logging.config')
 logger = logging.getLogger("bluemist")
 
 
-def get_data_from_database(db_type=None, host=None, database=None, service=None, oracle_instant_client_path=None,
-                           username=None, password=None, query=None,
+def get_data_from_database(db_type=None,
+                           host=None,
+                           database=None,
+                           service=None,
+                           oracle_instant_client_path=None,
+                           username=None,
+                           password=None,
+                           query=None,
                            chunk_size=1000):
+    """
+        db_type: {'mariadb', 'mssql', 'mysql', 'aurora-mysql', 'oracle', 'postgres', 'aurora-postgre'}
+            Database type
+        host: str
+            Database host
+        database: str
+            Database name
+        service: str
+            Oracle service name. Used if ``db_type`` is ``oracle``
+        oracle_instant_client_path: str
+            Filesystem path of Oracle instant client. Used if ``db_type`` is ``oracle``
+        username: str
+            Database user
+        password: str
+            Database password
+        query: str
+            Database query to be used to extract data
+        chunk_size: int or None, default=1000
+            Number of rows to return in each batch. Pass ``None`` to disable batch mode
+    """
+
     password = urllib.parse.quote_plus(password)
 
     if db_type == 'mariadb':

@@ -6,9 +6,6 @@ from bluemist.utils.scaler import getScaler, available_scalers
 
 
 def build_numeric_transformer_pipeline(**kwargs):
-    """
-    :rtype: object
-    """
     preprocessing_steps = []
 
     imputer_strategy = kwargs.get('numeric_imputer_strategy')

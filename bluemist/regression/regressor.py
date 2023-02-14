@@ -1,8 +1,15 @@
+"""
+Performs model training, testing, evaluations and deployment
+"""
+
+__author__ = "Shashank Agrawal"
+__license__ = "MIT"
+__version__ = "0.1.1"
+__email__ = "dew@bluemist-ai.one"
+
 import importlib
 import logging
 import os
-import sys
-import traceback
 from logging import config
 
 import pandas as pd
@@ -33,6 +40,7 @@ from bluemist.artifacts.api import predict
 from IPython.display import display, HTML
 
 BLUEMIST_PATH = os.environ["BLUEMIST_PATH"]
+
 config.fileConfig(BLUEMIST_PATH + '/' + 'logging.config')
 logger = logging.getLogger("bluemist")
 
@@ -195,10 +203,11 @@ def train_test_evaluate(
         pbar.set_description(f"Training {estimator_name}")
         i = i + 1
 
-        #if tune_models is None or tune_all_models or estimator_name in tune_model_list:
-        if i == 31:
+        # if tune_models is None or tune_all_models or estimator_name in tune_model_list:
+        if i == 46:
             try:
-                logger.info('###################  Regressor in progress :: {} ###################'.format(estimator_name))
+                logger.info(
+                    '###################  Regressor in progress :: {} ###################'.format(estimator_name))
 
                 regressor = estimator_class()
 
@@ -326,10 +335,14 @@ def train_test_evaluate(
                 logger.error('Exception occurred while training the model :: {}'.format(str(e)), exc_info=True)
 
     df.set_index('Estimator', inplace=True)
-    # display(HTML(df.style
-    #              .highlight_max(subset=[col for col in df.columns if col.endswith('score') and is_numeric_dtype(df[col])], color='green')
-    #              .highlight_min(subset=[col for col in df.columns if col.endswith('score') and is_numeric_dtype(df[col])], color='yellow')
-    #              .highlight_max(subset=[col for col in df.columns if not col.endswith('score') and is_numeric_dtype(df[col])], color='yellow')
-    #              .highlight_min(subset=[col for col in df.columns if not col.endswith('score') and is_numeric_dtype(df[col])], color='green')
-    #              .to_html()))
+    display(HTML(df.style
+                 .highlight_max(
+        subset=[col for col in df.columns if col.endswith('score') and is_numeric_dtype(df[col])], color='green')
+                 .highlight_min(
+        subset=[col for col in df.columns if col.endswith('score') and is_numeric_dtype(df[col])], color='yellow')
+                 .highlight_max(
+        subset=[col for col in df.columns if not col.endswith('score') and is_numeric_dtype(df[col])], color='yellow')
+                 .highlight_min(
+        subset=[col for col in df.columns if not col.endswith('score') and is_numeric_dtype(df[col])], color='green')
+                 .to_html()))
     logger.info('Estimator stats across all trained models : \n{}'.format(df.to_string()))

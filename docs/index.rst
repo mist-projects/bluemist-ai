@@ -11,14 +11,16 @@ Welcome to Bluemist AI's documentation!
    :caption: User Guide:
 
    bluemist.preprocessing
-   bluemist.regression
 
 
 .. toctree::
    :maxdepth: 2
    :caption: Documentation:
 
+   bluemist.datasource
+   bluemist.eda
    bluemist.preprocessing
+   bluemist.regression
 
 
 Indices and tables
