@@ -1,6 +1,6 @@
 [![PyPI version](https://badge.fury.io/py/bluemist.svg)](https://badge.fury.io/py/bluemist)
 https://img.shields.io/github/license/shashanka89/bluemist-ai
-[![Documentation Status](https://readthedocs.org/projects/bluemist-ai/badge/?version=latest)](https://bluemist-ai.readthedocs.io/en/latest/?badge=latest)
+![GitHub](https://img.shields.io/github/license/shashanka89/bluemist-ai)
 
 # bluemist-ai
 Low code python library for ML
