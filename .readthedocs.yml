@@ -5,6 +5,5 @@ build:
   tools:
     python: "3.9"
   commands:
-    - rm -r _readthedocs
     - mkdir _readthedocs
     - cp -r docs/_build/html _readthedocs
