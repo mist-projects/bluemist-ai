@@ -1,9 +1,18 @@
 [![PyPI version](https://badge.fury.io/py/bluemist.svg)](https://badge.fury.io/py/bluemist)
-https://img.shields.io/github/license/shashanka89/bluemist-ai
+[![Documentation Status](https://readthedocs.org/projects/bluemist-ai/badge/?version=latest)](https://bluemist-ai.readthedocs.io/en/latest/?badge=latest)
 ![GitHub](https://img.shields.io/github/license/shashanka89/bluemist-ai)
 
-# bluemist-ai
-Low code python library for ML
+# Bluemist AI
+Bluemist AI is a low code machine learning library written in Python to develop, evaluate and deploy automated ML pipleines.
+
+Salient features :
+- Native integration for data extraction with MySQL, PostgreSQL, MS SQL, Oracle, MariaDB, Amazon Aurora and Amazon S3
+- Trains data across multiple algorithms and provide comparison metrics
+- Automated EDA and hyperparameter tuning
+- Experiment tracking
+- API deployment
+
+Refer to the documentation for more details and upcoming features @ https://www.bluemist-ai.one
 
 ## License
 
