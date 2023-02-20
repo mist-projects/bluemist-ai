@@ -1,3 +1,4 @@
+[![PyPI version](https://badge.fury.io/py/bluemist.svg)](https://badge.fury.io/py/bluemist)
 [![Documentation Status](https://readthedocs.org/projects/bluemist-ai/badge/?version=latest)](https://bluemist-ai.readthedocs.io/en/latest/?badge=latest)
 
 # bluemist-ai
