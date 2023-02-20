@@ -1,3 +1,5 @@
+[![Documentation Status](https://readthedocs.org/projects/bluemist-ai/badge/?version=latest)](https://bluemist-ai.readthedocs.io/en/latest/?badge=latest)
+
 # bluemist-ai
 Low code python library for ML
 
