@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bluemist.main &mdash; Bluemist AI 0.1.2 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Bluemist AI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../bluemist.preprocessing.html">Preprocessor</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../bluemist.datasource.html">Dataset Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bluemist.eda.html">Exploratory Data Analysis (EDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bluemist.preprocessing.html">Preprocessor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bluemist.regression.html">Regression</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Bluemist AI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>bluemist.main</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for bluemist.main</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">config</span>
+
+<span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+
+<span class="kn">import</span> <span class="nn">bluemist</span>
+<span class="kn">from</span> <span class="nn">bluemist.environment</span> <span class="kn">import</span> <span class="n">initialize</span>
+<span class="kn">from</span> <span class="nn">bluemist.datasource.aws</span> <span class="kn">import</span> <span class="n">get_data_from_s3</span>
+<span class="kn">from</span> <span class="nn">bluemist.datasource</span> <span class="kn">import</span> <span class="n">get_data_from_filesystem</span>
+<span class="kn">from</span> <span class="nn">bluemist.pipeline</span> <span class="kn">import</span> <span class="n">get_model_pipeline</span>
+<span class="kn">from</span> <span class="nn">bluemist.preprocessing</span> <span class="kn">import</span> <span class="n">preprocess_data</span>
+<span class="kn">from</span> <span class="nn">bluemist.regression</span> <span class="kn">import</span> <span class="n">train_test_evaluate</span><span class="p">,</span> <span class="n">deploy_model</span><span class="p">,</span> <span class="n">get_estimators</span>
+<span class="kn">from</span> <span class="nn">bluemist.eda</span> <span class="kn">import</span> <span class="n">perform_eda</span>
+<span class="kn">from</span> <span class="nn">bluemist.datasource.database</span> <span class="kn">import</span> <span class="n">get_data_from_database</span>
+
+<span class="n">HOME_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BLUEMIST_PATH&quot;</span><span class="p">]</span>
+<span class="n">config</span><span class="o">.</span><span class="n">fileConfig</span><span class="p">(</span><span class="n">HOME_PATH</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;logging.config&#39;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;root&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../bluemist.html#bluemist.main.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># query = &#39;SELECT * FROM public.auto_mpg&#39;</span>
+    <span class="c1"># data = get_data_from_database(db_type=&#39;postgres&#39;, host=&#39;postgres.cxh6nuaszc34.us-east-1.rds.amazonaws.com:5432&#39;,</span>
+    <span class="c1">#                        username=&#39;postgres&#39;, password=&#39;adminadmin&#39;, database=&#39;postgres&#39;, query=query, chunk_size=100)</span>
+    <span class="c1">#</span>
+    <span class="c1"># query = &#39;SELECT * FROM public.auto_mpg&#39;</span>
+    <span class="c1"># data = get_data_from_database(db_type=&#39;aurora-postgres&#39;, host=&#39;aurora-postgres-instance-1.cxh6nuaszc34.us-east-1.rds.amazonaws.com:5432&#39;,</span>
+    <span class="c1">#                        username=&#39;postgres&#39;, password=&#39;adminadmin&#39;, database=&#39;postgres&#39;, query=query, chunk_size=100)</span>
+    <span class="c1">#</span>
+    <span class="c1"># query = &#39;SELECT * FROM auto_mpg&#39;</span>
+    <span class="c1"># data = get_data_from_database(db_type=&#39;mysql&#39;, host=&#39;mysql.cxh6nuaszc34.us-east-1.rds.amazonaws.com:3306&#39;,</span>
+    <span class="c1">#                        username=&#39;admin&#39;, password=&#39;adminadmin&#39;, database=&#39;sys&#39;, query=query, chunk_size=100)</span>
+    <span class="c1">#</span>
+    <span class="c1"># query = &#39;SELECT * FROM AUTO_MPG&#39;</span>
+    <span class="c1"># data = get_data_from_database(db_type=&#39;aurora-mysql&#39;, host=&#39;aurora-mysql-instance-1.cxh6nuaszc34.us-east-1.rds.amazonaws.com:3306&#39;,</span>
+    <span class="c1">#                        username=&#39;admin&#39;, password=&#39;adminadmin&#39;, database=&#39;sys&#39;, query=query, chunk_size=100)</span>
+    <span class="c1">#</span>
+    <span class="c1"># query = &#39;SELECT * FROM dbo.auto_mpg&#39;</span>
+    <span class="c1"># data = get_data_from_database(db_type=&#39;mssql&#39;, host=&#39;mssql.cxh6nuaszc34.us-east-1.rds.amazonaws.com:1433&#39;,</span>
+    <span class="c1">#                        username=&#39;admin&#39;, password=&#39;adminadmin&#39;, database=&#39;bluemist&#39;, query=query, chunk_size=100)</span>
+    <span class="c1">#</span>
+    <span class="c1"># query = &#39;SELECT * FROM auto_mpg&#39;</span>
+    <span class="c1"># data = get_data_from_database(db_type=&#39;mariadb&#39;, host=&#39;mariadb.cxh6nuaszc34.us-east-1.rds.amazonaws.com:3306&#39;,</span>
+    <span class="c1">#                        username=&#39;admin&#39;, password=&#39;adminadmin&#39;, database=&#39;innodb&#39;, query=query, chunk_size=100)</span>
+    <span class="c1">#</span>
+    <span class="c1">#  query = &#39;SELECT * FROM AUTO_MPG&#39;</span>
+    <span class="c1"># data = get_data_from_database(db_type=&#39;oracle&#39;, host=&#39;oracle.cxh6nuaszc34.us-east-1.rds.amazonaws.com&#39;,</span>
+    <span class="c1">#                               username=&#39;admin&#39;, password=&#39;adminadmin&#39;, service=&#39;DATABASE&#39;,</span>
+    <span class="c1">#                               oracle_instant_client_path=&#39;/home/shashank-agrawal/Desktop/instantclient_21_6&#39;,</span>
+    <span class="c1">#                               query=query, chunk_size=100)</span>
+
+    <span class="c1">#print(&#39;get_estimators&#39;, get_estimators())</span>
+    <span class="n">initialize</span><span class="p">()</span></div>
+    <span class="c1">#data = datasets.load_diabetes(as_frame=True)</span>
+    <span class="c1">#data = get_data_from_filesystem(&#39;datasets/auto-mpg/auto-mpg.csv&#39;)</span>
+
+    <span class="c1">#perform_eda(data.frame, target_variable=&#39;target&#39;, provider=&#39;autoviz&#39;)</span>
+
+    <span class="c1"># X_train, X_test, y_train, y_test = preprocess_data(data.frame, target_variable=&#39;target&#39;, test_size=0.25,</span>
+    <span class="c1">#                                                    data_scaling_strategy=None,</span>
+    <span class="c1">#                                                       categorical_features=[&#39;sex&#39;],</span>
+    <span class="c1">#                                                    categorical_encoder=&#39;OrdinalEncoder&#39;)</span>
+    <span class="c1">#</span>
+    <span class="c1"># train_test_evaluate(X_train, X_test, y_train, y_test, tune_models=None, metrics=&#39;all&#39;, target_scaling_strategy=None)</span>
+    <span class="c1"># # # pipeline = get_model_pipeline(&#39;LarsCV&#39;)</span>
+    <span class="c1"># # print(pipeline.get_params)</span>
+    <span class="c1"># #deploy_model(estimator_name=&#39;LarsCV&#39;, host=&#39;localhost&#39;, port=8000)</span>
+
+
+<span class="c1"># Press the green button in the gutter to run the script.</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Shashank Agrawal.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

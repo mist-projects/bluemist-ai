@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preprocessor &mdash; Bluemist AI 0.1.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="_static/thebelab.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Dataset Extraction" href="bluemist.datasource.html" />
+    <link rel="prev" title="Welcome to Bluemist AI’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Bluemist AI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Preprocessor</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bluemist.datasource.html">Dataset Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bluemist.eda.html">Exploratory Data Analysis (EDA)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Preprocessor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bluemist.regression.html">Regression</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Bluemist AI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Preprocessor</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/bluemist.preprocessing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bluemist.preprocessing.preprocessor">
+<span id="preprocessor"></span><h1>Preprocessor<a class="headerlink" href="#module-bluemist.preprocessing.preprocessor" title="Permalink to this headline"></a></h1>
+<p>Performs data pre-processing</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="bluemist.preprocessing.preprocessor.preprocess_data">
+<span class="sig-name descname"><span class="pre">preprocess_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_variable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_randomizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numerical_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_numeric_conversion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categorical_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convert_values_to_nan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_scaling_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'StandardScaler'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_tranformation_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numeric_imputer_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numeric_constant_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categorical_imputer_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'most_frequent'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categorical_constant_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categorical_encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'OneHotEncoder'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_categories_one_hot_encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handle_unknown_one_hot_encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bluemist/preprocessing/preprocessor.html#preprocess_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bluemist.preprocessing.preprocessor.preprocess_data" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>data: pandas daframe</dt><dd><p>Dataframe to be processed before passing to the ML estimator</p>
+</dd>
+<dt>target_variable: str</dt><dd><p>Target variable to be predicted</p>
+</dd>
+<dt>test_size: float or int, default=0.25</dt><dd><p>Percentage of the data to be used for testing model performance</p>
+</dd>
+<dt>data_randomizer: int default=None</dt><dd><p>Controls the data split. Provide a value to reproduce the same split.</p>
+</dd>
+<dt>drop_features: str ot list</dt><dd><p>Drops the features from the dataset</p>
+</dd>
+<dt>numerical_features: list, default=None</dt><dd><p>Bluemist AI will automatically identify numerical features from the dataset. Provide the list of features to override the type identified by Bluemist AI.</p>
+</dd>
+<dt>force_numeric_conversion: bool, default=True</dt><dd><p>Gracefully converts features to numeric datatype which are provided under <code class="docutils literal notranslate"><span class="pre">numerical_features</span></code></p>
+</dd>
+<dt>categorical_features: list, default=None</dt><dd><p>Bluemist AI will automatically identify categorical features from the dataset. Provide the list of features to override the type identified by Bluemist.</p>
+</dd>
+<dt>convert_to_nan:  str, list, default=None</dt><dd><p>Dataset values to be converted to NumPy NaN</p>
+</dd>
+<dt>data_scaling_strategy: {None, ‘StandardScaler’, ‘MinMaxScaler’, ‘MaxAbsScaler’, ‘RobustScaler’}, default=’StandardScaler’</dt><dd><dl class="simple">
+<dt>Scales dataset features, excluding target variable</dt><dd><ul class="simple">
+<li><p>‘StandardScaler’:</p></li>
+<li><p>‘MinMaxScaler’</p></li>
+<li><p>‘MaxAbsScaler’</p></li>
+<li><p>‘RobustScaler’</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>data_tranformation_strategy: {‘box-cox’, ‘yeo-johnson’ or None}, default=None</dt><dd><dl class="simple">
+<dt>Transforms the features, excluding target variable.</dt><dd><ul class="simple">
+<li><p>‘box-cox’:</p></li>
+<li><p>‘yeo-johnson’:</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>missing_values: int, float, str, np.nan, None or pandas.NA, default=np.nan</dt><dd><p>All instances of missing_value will be replaced with the user provided imputer strategy</p>
+</dd>
+<dt>numeric_imputer_strategy: {‘mean, ‘median’, ‘most_frequent’, ‘constant’}, default=’mean’</dt><dd><p>Replaces <cite>missing_values</cite> with the strategy provided</p>
+</dd>
+<dt>numeric_constant_value: str or number, default=None</dt><dd><p><code class="docutils literal notranslate"><span class="pre">numeric_constant_value</span></code> will replace the <code class="docutils literal notranslate"><span class="pre">missing_values</span></code> when <code class="docutils literal notranslate"><span class="pre">numeric_imputer_strategy</span></code> is passed as <code class="docutils literal notranslate"><span class="pre">constant</span></code></p>
+</dd>
+<dt>categorical_imputer_strategy:  {‘most_frequent’, ‘constant’}, default=’most_frequent’</dt><dd><p>Replaces <cite>missing_values</cite> with the strategy provided</p>
+</dd>
+<dt>categorical_constant_value: str or number, default=None</dt><dd><p><code class="docutils literal notranslate"><span class="pre">categorical_constant_value</span></code> will replace the <code class="docutils literal notranslate"><span class="pre">missing_values</span></code> when <code class="docutils literal notranslate"><span class="pre">categorical_imputer_strategy</span></code> is passed as <code class="docutils literal notranslate"><span class="pre">constant</span></code></p>
+</dd>
+<dt>categorical_encoder: {‘OneHotEncoder’, ‘OrdinalEncoder’}, default=’OneHotEncoder’</dt><dd><p>Encode categorical features</p>
+</dd>
+<dt>drop_categories_one_hot_encoder: {‘first’, ‘if_binary’ or None}, default=’None’</dt><dd><dl class="simple">
+<dt>Determines strategy to drop one category per feature</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>‘first’:</dt><dd><p>drops the first category for each feature.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>‘if_binary’:</dt><dd><p>drops the first category for features with teo categories</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>None:</dt><dd><p>Keeps all features and categories</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>handle_unknown_one_hot_encoder<span class="classifier">{‘error’, ‘ignore’, ‘infrequent_if_exist’}, default=’error’</span></dt><dd><dl class="simple">
+<dt>Handles unknown category during transform</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>‘error’:</dt><dd><p>throws an error if category is unknown</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>‘ignore’:</dt><dd><p>ignores if category is unknown, output encoded column for this feature will be all zeroes</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>‘infrequent_if_exist’:</dt><dd><p>unknown category will be mapped to infrequent category if exists. If infrequent category does not exist, it
+will be treated as <cite>ignore</cite></p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Bluemist AI’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bluemist.datasource.html" class="btn btn-neutral float-right" title="Dataset Extraction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Shashank Agrawal.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
