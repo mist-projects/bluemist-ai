@@ -203,8 +203,8 @@ def train_test_evaluate(
         pbar.set_description(f"Training {estimator_name}")
         i = i + 1
 
-        # if tune_models is None or tune_all_models or estimator_name in tune_model_list:
-        if i == 46:
+        #if tune_models is None or tune_all_models or estimator_name in tune_model_list:
+        if estimator_name == 'LinearRegression':
             try:
                 logger.info(
                     '###################  Regressor in progress :: {} ###################'.format(estimator_name))

@@ -171,7 +171,9 @@ def preprocess_data(
 
     logger.debug('data.dtypes before preprocessing  :: \n{}'.format(data.dtypes))
 
-    data[final_numerical_features] = data[final_numerical_features].apply(pd.to_numeric, errors=numeric_conversion_strategy, axis=1)
+    if numerical_features is not None:
+        data[final_numerical_features] = data[final_numerical_features].apply(pd.to_numeric, errors=numeric_conversion_strategy, axis=1)
+
     data[final_categorical_features] = data[final_categorical_features].astype(str)
     logger.debug('data.dtypes after dtype conversion  :: \n{}'.format(data.dtypes))
 

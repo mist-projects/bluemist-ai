@@ -1,6 +1,3 @@
-"""
-Extract data from local file system
-"""
 
 __author__ = "Shashank Agrawal"
 __license__ = "MIT"
@@ -24,6 +21,8 @@ def get_data_from_filesystem(file_path,
                              sheet_name=0,
                              delimiter=','):
     """
+        Extract data from local file system
+
         file_path: str
             File system path of the data file to be extracted
         file_type: {'delimited', 'excel'}, default='delimited'
@@ -32,6 +31,13 @@ def get_data_from_filesystem(file_path,
             Sheet name if ``file_type`` is ``excel``
         delimiter: str, default=','
             File delimiter to use if ``file_type`` is ``delimited``
+
+        Examples
+        ---------
+
+        .. raw:: html
+           :file: ../../code_samples/quickstarts/datasource/ds_file_system.html
+
     """
 
     logger.info('Pulling data from {}'.format(file_path))

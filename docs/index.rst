@@ -21,6 +21,8 @@ Welcome to Bluemist AI's documentation!
    bluemist.eda
    bluemist.preprocessing
    bluemist.regression
+   bluemist.experiment_tracking
+   bluemist.model_deployment
 
 
 Indices and tables

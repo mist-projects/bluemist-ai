@@ -43,7 +43,7 @@ def initialize(
     if log_level.upper() in ['CRITICAL', 'FATAL', 'ERROR', 'WARNING', 'WARN', 'INFO', 'DEBUG']:
         logger.setLevel(logging.getLevelName(log_level))
 
-    logger.handlers[1].doRollover()
+    logger.handlers[0].doRollover()
 
     banner = """
     ██████╗ ██╗     ██╗   ██╗███████╗███╗   ███╗██╗███████╗████████╗               █████╗ ██╗

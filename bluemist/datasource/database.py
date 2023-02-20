@@ -1,6 +1,3 @@
-"""
-Extract data from database. Supported databases are MariaDB, Microsoft SQL, MySQL, Oracle, AWS Aurora and PostgreSQL
-"""
 
 __author__ = "Shashank Agrawal"
 __license__ = "MIT"
@@ -32,6 +29,8 @@ def get_data_from_database(db_type=None,
                            query=None,
                            chunk_size=1000):
     """
+        Extract data from database. Supported databases are MariaDB, Microsoft SQL, MySQL, Oracle, AWS Aurora and PostgreSQL
+
         db_type: {'mariadb', 'mssql', 'mysql', 'aurora-mysql', 'oracle', 'postgres', 'aurora-postgre'}
             Database type
         host: str
@@ -50,6 +49,13 @@ def get_data_from_database(db_type=None,
             Database query to be used to extract data
         chunk_size: int or None, default=1000
             Number of rows to return in each batch. Pass ``None`` to disable batch mode
+
+        Examples
+        ---------
+
+        .. raw:: html
+           :file: ../../code_samples/quickstarts/datasource/ds_database.html
+
     """
 
     password = urllib.parse.quote_plus(password)

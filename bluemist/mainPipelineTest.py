@@ -1,3 +1,10 @@
+
+__author__ = "Shashank Agrawal"
+__license__ = "MIT"
+__version__ = "0.1.1"
+__email__ = "dew@bluemist-ai.one"
+
+
 import joblib
 import pandas as pd
 
@@ -5,7 +12,6 @@ preprocessor = joblib.load('artifacts/preprocessor/preprocessor.joblib')
 pipeline = joblib.load('artifacts/models/ARDRegression.joblib')
 
 def main():
-
     data = {
         'cylinders': [8],
         'displacement': [307],

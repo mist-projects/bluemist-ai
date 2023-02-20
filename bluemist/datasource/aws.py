@@ -1,6 +1,3 @@
-"""
-Extract data from Amazon cloud (AWS)
-"""
 
 __author__ = "Shashank Agrawal"
 __license__ = "MIT"
@@ -29,6 +26,8 @@ def get_data_from_s3(aws_access_key_id,
                      sheet_name=0,
                      delimiter=','):
     """
+        Extract data from Amazon cloud (AWS)
+
         aws_access_key_id: str
             The access key to use when creating the s3 client
         aws_secret_access_key: str
@@ -45,6 +44,13 @@ def get_data_from_s3(aws_access_key_id,
             sheet name if the dataset is an Excel file
         delimiter: str, default=','
             file delimiter to use for delimited files
+
+        Examples
+        ---------
+
+        .. raw:: html
+           :file: ../../code_samples/quickstarts/datasource/ds_aws.html
+
     """
 
     s3 = boto3.client('s3', aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
