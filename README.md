@@ -18,4 +18,4 @@ Refer to the documentation for more details and upcoming features @ https://www.
 
 Bluemist AI source code is licensed under the MIT License
 
-See [Third Party Libraries](https://github.com/shashanka89/bluemist-ai/wiki/Third-Part-Libraries) for license details of third party libraries included in the distribution.
+See [Third Party Libraries](https://github.com/mist-projects/bluemist-ai/wiki/Third-Part-Libraries) for license details of third party libraries included in the distribution.
