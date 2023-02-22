@@ -49,6 +49,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../bluemist.eda.html">Exploratory Data Analysis (EDA)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../bluemist.preprocessing.html">Preprocessor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../bluemist.regression.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bluemist.experiment_tracking.html">Experiment Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bluemist.model_deployment.html">Model Deployment</a></li>
 </ul>
 
         </div>
@@ -172,7 +174,7 @@
 <span class="sd">                - &#39;first&#39;:</span>
 <span class="sd">                    drops the first category for each feature.</span>
 <span class="sd">                - &#39;if_binary&#39;:</span>
-<span class="sd">                    drops the first category for features with teo categories</span>
+<span class="sd">                    drops the first category for features with two categories</span>
 <span class="sd">                - None:</span>
 <span class="sd">                    Keeps all features and categories</span>
 <span class="sd">        handle_unknown_one_hot_encoder : {‘error’, ‘ignore’, ‘infrequent_if_exist’}, default=’error’</span>
@@ -184,6 +186,14 @@
 <span class="sd">                - &#39;infrequent_if_exist&#39;:</span>
 <span class="sd">                    unknown category will be mapped to infrequent category if exists. If infrequent category does not exist, it</span>
 <span class="sd">                    will be treated as `ignore`</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ---------</span>
+<span class="sd">        *Data preprocessing :: Categorical Encoder*</span>
+
+<span class="sd">        .. raw:: html</span>
+<span class="sd">           :file: ../../code_samples/quickstarts/preprocessor/preprocessor_categorical.html</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">global</span> <span class="n">target_for_deployment</span>

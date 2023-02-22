@@ -94,7 +94,7 @@ def preprocess_data(
                 - 'first':
                     drops the first category for each feature.
                 - 'if_binary':
-                    drops the first category for features with teo categories
+                    drops the first category for features with two categories
                 - None:
                     Keeps all features and categories
         handle_unknown_one_hot_encoder : {‘error’, ‘ignore’, ‘infrequent_if_exist’}, default=’error’
@@ -106,6 +106,14 @@ def preprocess_data(
                 - 'infrequent_if_exist':
                     unknown category will be mapped to infrequent category if exists. If infrequent category does not exist, it
                     will be treated as `ignore`
+
+        Examples
+        ---------
+        *Data preprocessing :: Categorical Encoder*
+
+        .. raw:: html
+           :file: ../../code_samples/quickstarts/preprocessor/preprocessor_categorical.html
+
     """
 
     global target_for_deployment

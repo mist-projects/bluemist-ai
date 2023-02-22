@@ -18,6 +18,7 @@ class request_body(BaseModel):
     {%+ for column, data_type in initial_column_metadata -%}
         {{ column }}: np.{{ data_type.name }}
     {%+ endfor -%}
+
 """
 
 func_template = """
@@ -67,8 +68,13 @@ def start_api_server(host='localhost', port=8000):
 
 
 def generate_api_code(estimator_name, initial_column_metadata, encoded_column_metadata, target_variable):
+
     template = Template(class_template)
     class_code = template.render(initial_column_metadata=initial_column_metadata)
+
+    class_code = class_code.replace('np.int64', 'int')\
+        .replace('np.float64', 'float')\
+        .replace('np.object', 'str')
 
     template = Template(func_template)
     func_code = template.render(initial_column_metadata=initial_column_metadata,

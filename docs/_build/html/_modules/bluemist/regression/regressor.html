@@ -49,6 +49,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../bluemist.eda.html">Exploratory Data Analysis (EDA)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../bluemist.preprocessing.html">Preprocessor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../bluemist.regression.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bluemist.experiment_tracking.html">Experiment Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bluemist.model_deployment.html">Model Deployment</a></li>
 </ul>
 
         </div>
@@ -209,38 +211,51 @@
         <span class="n">experiment_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">run_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    X_train : pandas dataframe</span>
-<span class="sd">        Training data</span>
-<span class="sd">    X_test : pandas dataframe</span>
-<span class="sd">        Test data</span>
-<span class="sd">    y_train : array of shape (X_train.shape[0],)</span>
-<span class="sd">        Target values of training dataset</span>
-<span class="sd">    y_test : array of shape (X_test.shape[0],)</span>
-<span class="sd">        Target values of test dataset</span>
-<span class="sd">    tune_models : {&#39;all&#39;, None} or list of models to be trained, default=None</span>
-<span class="sd">        all: tune all regression models</span>
-<span class="sd">        list: list of models to be trained</span>
-<span class="sd">        None: hyperparameter tuning will not be performed</span>
-<span class="sd">    metrics : {&#39;all&#39;, &#39;default&#39;}, default=&#39;default&#39;</span>
-<span class="sd">        - all:</span>
-<span class="sd">            mean_absolute_error, mean_squared_error, r2_score, explained_variance_score, max_error,</span>
-<span class="sd">            mean_squared_log_error, median_absolute_error, mean_absolute_percentage_error, mean_poisson_deviance,</span>
-<span class="sd">            mean_gamma_deviance, mean_tweedie_deviance, d2_tweedie_score, mean_pinball_loss</span>
-<span class="sd">        - default:</span>
-<span class="sd">            mean_absolute_error, mean_squared_error, r2_score</span>
-<span class="sd">    multi_output : bool, default=False</span>
-<span class="sd">        Future use</span>
-<span class="sd">    multi_task : bool, default=False</span>
-<span class="sd">        Future use</span>
-<span class="sd">    target_scaling_strategy : {&#39;StandardScaler&#39;, &#39;MinMaxScaler&#39;, &#39;MaxAbsScaler&#39;, &#39;RobustScaler&#39;, None}, default=None</span>
-<span class="sd">        Scales the target variable before training the model</span>
-<span class="sd">    save_pipeline_to_disk : bool, default=True</span>
-<span class="sd">        Save preprocessor and model training pipeline to the disk. Should be set to True if needs model to be deployed</span>
-<span class="sd">        as an API</span>
-<span class="sd">    experiment_name : str, default=None</span>
-<span class="sd">        Name of the experiment</span>
-<span class="sd">    run_name : str,default=None</span>
-<span class="sd">        Name of the run within the experiment</span>
+<span class="sd">        X_train : pandas dataframe</span>
+<span class="sd">            Training data</span>
+<span class="sd">        X_test : pandas dataframe</span>
+<span class="sd">            Test data</span>
+<span class="sd">        y_train : array of shape (X_train.shape[0],)</span>
+<span class="sd">            Target values of training dataset</span>
+<span class="sd">        y_test : array of shape (X_test.shape[0],)</span>
+<span class="sd">            Target values of test dataset</span>
+<span class="sd">        tune_models : {&#39;all&#39;, None} or list of models to be trained, default=None</span>
+<span class="sd">            all: tune all regression models</span>
+<span class="sd">            list: list of models to be trained</span>
+<span class="sd">            None: hyperparameter tuning will not be performed</span>
+<span class="sd">        metrics : {&#39;all&#39;, &#39;default&#39;}, default=&#39;default&#39;</span>
+<span class="sd">            - all:</span>
+<span class="sd">                mean_absolute_error, mean_squared_error, r2_score, explained_variance_score, max_error,</span>
+<span class="sd">                mean_squared_log_error, median_absolute_error, mean_absolute_percentage_error, mean_poisson_deviance,</span>
+<span class="sd">                mean_gamma_deviance, mean_tweedie_deviance, d2_tweedie_score, mean_pinball_loss</span>
+<span class="sd">            - default:</span>
+<span class="sd">                mean_absolute_error, mean_squared_error, r2_score</span>
+<span class="sd">        multi_output : bool, default=False</span>
+<span class="sd">            Future use</span>
+<span class="sd">        multi_task : bool, default=False</span>
+<span class="sd">            Future use</span>
+<span class="sd">        target_scaling_strategy : {&#39;StandardScaler&#39;, &#39;MinMaxScaler&#39;, &#39;MaxAbsScaler&#39;, &#39;RobustScaler&#39;, None}, default=None</span>
+<span class="sd">            Scales the target variable before training the model</span>
+<span class="sd">        save_pipeline_to_disk : bool, default=True</span>
+<span class="sd">            Save preprocessor and model training pipeline to the disk. Should be set to True if needs model to be deployed</span>
+<span class="sd">            as an API</span>
+<span class="sd">        experiment_name : str, default=None</span>
+<span class="sd">            Name of the experiment</span>
+<span class="sd">        run_name : str,default=None</span>
+<span class="sd">            Name of the run within the experiment</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ---------</span>
+<span class="sd">        *Regression*</span>
+
+<span class="sd">        .. raw:: html</span>
+<span class="sd">            :file: ../../code_samples/quickstarts/regression/regression_simple.html</span>
+
+<span class="sd">        *Regression with hyperparameter tuning*</span>
+
+<span class="sd">        .. raw:: html</span>
+<span class="sd">            :file: ../../code_samples/quickstarts/regression/regression_hyperparameter_tuning.html</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">tune_all_models</span> <span class="o">=</span> <span class="kc">False</span>
@@ -281,8 +296,9 @@
         <span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training </span><span class="si">{</span><span class="n">estimator_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
 
-        <span class="c1">#if tune_models is None or tune_all_models or estimator_name in tune_model_list:</span>
-        <span class="k">if</span> <span class="n">estimator_name</span> <span class="o">==</span> <span class="s1">&#39;LinearRegression&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">tune_models</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">tune_all_models</span> <span class="ow">or</span> <span class="n">estimator_name</span> <span class="ow">in</span> <span class="n">tune_model_list</span><span class="p">:</span>
+        <span class="c1">#if estimator_name == &#39;LinearRegression&#39;:</span>
+        <span class="c1">#if i &lt; 3:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
                     <span class="s1">&#39;###################  Regressor in progress :: </span><span class="si">{}</span><span class="s1"> ###################&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">estimator_name</span><span class="p">))</span>
@@ -403,8 +419,9 @@
                         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Capturing stats in MLFlow...&#39;</span><span class="p">)</span>
                         <span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">estimator_name</span><span class="p">)</span>
                         <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metrics</span><span class="p">(</span><span class="n">estimator_stats_df</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">&#39;records&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-                        <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="n">fitted_estimator_with_all_parameters</span><span class="p">,</span> <span class="s1">&#39;model_&#39;</span> <span class="o">+</span> <span class="n">estimator_name</span><span class="p">)</span>
-                        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Model saved in run :: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mlflow</span><span class="o">.</span><span class="n">active_run</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">run_uuid</span><span class="p">))</span>
+                        <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="n">pipeline_with_best_estimator</span><span class="p">,</span> <span class="s1">&#39;model_&#39;</span> <span class="o">+</span> <span class="n">estimator_name</span><span class="p">)</span>
+                        <span class="n">run_id</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">active_run</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">run_id</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Model saved in run :: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">run_id</span><span class="p">))</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                 <span class="n">exception</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Estimator&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">estimator_name</span><span class="p">],</span> <span class="s1">&#39;Exception&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
                 <span class="n">exception_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">exception</span><span class="p">)</span>

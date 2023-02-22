@@ -131,38 +131,51 @@ def train_test_evaluate(
         experiment_name=None,
         run_name=None):
     """
-    X_train : pandas dataframe
-        Training data
-    X_test : pandas dataframe
-        Test data
-    y_train : array of shape (X_train.shape[0],)
-        Target values of training dataset
-    y_test : array of shape (X_test.shape[0],)
-        Target values of test dataset
-    tune_models : {'all', None} or list of models to be trained, default=None
-        all: tune all regression models
-        list: list of models to be trained
-        None: hyperparameter tuning will not be performed
-    metrics : {'all', 'default'}, default='default'
-        - all:
-            mean_absolute_error, mean_squared_error, r2_score, explained_variance_score, max_error,
-            mean_squared_log_error, median_absolute_error, mean_absolute_percentage_error, mean_poisson_deviance,
-            mean_gamma_deviance, mean_tweedie_deviance, d2_tweedie_score, mean_pinball_loss
-        - default:
-            mean_absolute_error, mean_squared_error, r2_score
-    multi_output : bool, default=False
-        Future use
-    multi_task : bool, default=False
-        Future use
-    target_scaling_strategy : {'StandardScaler', 'MinMaxScaler', 'MaxAbsScaler', 'RobustScaler', None}, default=None
-        Scales the target variable before training the model
-    save_pipeline_to_disk : bool, default=True
-        Save preprocessor and model training pipeline to the disk. Should be set to True if needs model to be deployed
-        as an API
-    experiment_name : str, default=None
-        Name of the experiment
-    run_name : str,default=None
-        Name of the run within the experiment
+        X_train : pandas dataframe
+            Training data
+        X_test : pandas dataframe
+            Test data
+        y_train : array of shape (X_train.shape[0],)
+            Target values of training dataset
+        y_test : array of shape (X_test.shape[0],)
+            Target values of test dataset
+        tune_models : {'all', None} or list of models to be trained, default=None
+            all: tune all regression models
+            list: list of models to be trained
+            None: hyperparameter tuning will not be performed
+        metrics : {'all', 'default'}, default='default'
+            - all:
+                mean_absolute_error, mean_squared_error, r2_score, explained_variance_score, max_error,
+                mean_squared_log_error, median_absolute_error, mean_absolute_percentage_error, mean_poisson_deviance,
+                mean_gamma_deviance, mean_tweedie_deviance, d2_tweedie_score, mean_pinball_loss
+            - default:
+                mean_absolute_error, mean_squared_error, r2_score
+        multi_output : bool, default=False
+            Future use
+        multi_task : bool, default=False
+            Future use
+        target_scaling_strategy : {'StandardScaler', 'MinMaxScaler', 'MaxAbsScaler', 'RobustScaler', None}, default=None
+            Scales the target variable before training the model
+        save_pipeline_to_disk : bool, default=True
+            Save preprocessor and model training pipeline to the disk. Should be set to True if needs model to be deployed
+            as an API
+        experiment_name : str, default=None
+            Name of the experiment
+        run_name : str,default=None
+            Name of the run within the experiment
+
+        Examples
+        ---------
+        *Regression*
+
+        .. raw:: html
+            :file: ../../code_samples/quickstarts/regression/regression_simple.html
+
+        *Regression with hyperparameter tuning*
+
+        .. raw:: html
+            :file: ../../code_samples/quickstarts/regression/regression_hyperparameter_tuning.html
+
     """
 
     tune_all_models = False
@@ -203,8 +216,9 @@ def train_test_evaluate(
         pbar.set_description(f"Training {estimator_name}")
         i = i + 1
 
-        #if tune_models is None or tune_all_models or estimator_name in tune_model_list:
-        if estimator_name == 'LinearRegression':
+        if tune_models is None or tune_all_models or estimator_name in tune_model_list:
+        #if estimator_name == 'LinearRegression':
+        #if i < 3:
             try:
                 logger.info(
                     '###################  Regressor in progress :: {} ###################'.format(estimator_name))
@@ -325,8 +339,9 @@ def train_test_evaluate(
                         logger.info('Capturing stats in MLFlow...')
                         mlflow.log_param('model', estimator_name)
                         mlflow.log_metrics(estimator_stats_df.to_dict('records')[0])
-                        mlflow.sklearn.log_model(fitted_estimator_with_all_parameters, 'model_' + estimator_name)
-                        logger.info('Model saved in run :: {}'.format(mlflow.active_run().info.run_uuid))
+                        mlflow.sklearn.log_model(pipeline_with_best_estimator, 'model_' + estimator_name)
+                        run_id = mlflow.active_run().info.run_id
+                        logger.info('Model saved in run :: {}'.format(run_id))
             except Exception as e:
                 exception = {'Estimator': [estimator_name], 'Exception': str(e)}
                 exception_df = pd.DataFrame(exception)

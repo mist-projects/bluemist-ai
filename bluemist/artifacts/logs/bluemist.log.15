@@ -1,0 +1,93 @@
+2023-02-22 02:45:56,398 : INFO : environment : initialize : Line 60 : 
+
+██████╗ ██╗     ██╗   ██╗███████╗███╗   ███╗██╗███████╗████████╗     █████╗ ██╗
+██╔══██╗██║     ██║   ██║██╔════╝████╗ ████║██║██╔════╝╚══██╔══╝    ██╔══██╗██║
+██████╔╝██║     ██║   ██║█████╗  ██╔████╔██║██║███████╗   ██║       ███████║██║
+██╔══██╗██║     ██║   ██║██╔══╝  ██║╚██╔╝██║██║╚════██║   ██║       ██╔══██║██║
+██████╔╝███████╗╚██████╔╝███████╗██║ ╚═╝ ██║██║███████║   ██║       ██║  ██║██║                                                                        
+                                (version 0.1.1)
+    
+2023-02-22 02:45:56,492 : INFO : environment : initialize : Line 65 : System platform :: posix, Linux, 5.19.0-31-generic, linux-x86_64, ('64bit', 'ELF')
+2023-02-22 02:45:56,493 : DEBUG : environment : initialize : Line 68 : Printing environment variables...
+2023-02-22 02:45:56,493 : DEBUG : environment : initialize : Line 70 : SHELL=/bin/bash
+2023-02-22 02:45:56,493 : DEBUG : environment : initialize : Line 70 : SESSION_MANAGER=local/Lenovo-G510:@/tmp/.ICE-unix/2719,unix/Lenovo-G510:/tmp/.ICE-unix/2719
+2023-02-22 02:45:56,493 : DEBUG : environment : initialize : Line 70 : QT_ACCESSIBILITY=1
+2023-02-22 02:45:56,494 : DEBUG : environment : initialize : Line 70 : COLORTERM=truecolor
+2023-02-22 02:45:56,494 : DEBUG : environment : initialize : Line 70 : XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+2023-02-22 02:45:56,494 : DEBUG : environment : initialize : Line 70 : SSH_AGENT_LAUNCHER=openssh
+2023-02-22 02:45:56,494 : DEBUG : environment : initialize : Line 70 : XDG_MENU_PREFIX=gnome-
+2023-02-22 02:45:56,494 : DEBUG : environment : initialize : Line 70 : GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+2023-02-22 02:45:56,494 : DEBUG : environment : initialize : Line 70 : CONDA_EXE=/home/shashank-agrawal/anaconda3/bin/conda
+2023-02-22 02:45:56,495 : DEBUG : environment : initialize : Line 70 : _CE_M=
+2023-02-22 02:45:56,495 : DEBUG : environment : initialize : Line 70 : GNOME_SHELL_SESSION_MODE=ubuntu
+2023-02-22 02:45:56,495 : DEBUG : environment : initialize : Line 70 : SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+2023-02-22 02:45:56,495 : DEBUG : environment : initialize : Line 70 : XMODIFIERS=@im=ibus
+2023-02-22 02:45:56,495 : DEBUG : environment : initialize : Line 70 : DESKTOP_SESSION=ubuntu
+2023-02-22 02:45:56,495 : DEBUG : environment : initialize : Line 70 : GTK_MODULES=gail:atk-bridge
+2023-02-22 02:45:56,496 : DEBUG : environment : initialize : Line 70 : PWD=/home/shashank-agrawal
+2023-02-22 02:45:56,496 : DEBUG : environment : initialize : Line 70 : XDG_SESSION_DESKTOP=ubuntu
+2023-02-22 02:45:56,496 : DEBUG : environment : initialize : Line 70 : LOGNAME=shashank-agrawal
+2023-02-22 02:45:56,496 : DEBUG : environment : initialize : Line 70 : CONDA_ROOT=/home/shashank-agrawal/anaconda3
+2023-02-22 02:45:56,496 : DEBUG : environment : initialize : Line 70 : QT_QPA_PLATFORMTHEME=appmenu-qt5
+2023-02-22 02:45:56,496 : DEBUG : environment : initialize : Line 70 : XDG_SESSION_TYPE=wayland
+2023-02-22 02:45:56,497 : DEBUG : environment : initialize : Line 70 : CONDA_PREFIX=/home/shashank-agrawal/anaconda3/envs/bluemist-ai
+2023-02-22 02:45:56,497 : DEBUG : environment : initialize : Line 70 : SYSTEMD_EXEC_PID=2747
+2023-02-22 02:45:56,497 : DEBUG : environment : initialize : Line 70 : XAUTHORITY=/run/user/1000/.mutter-Xwaylandauth.PHNV01
+2023-02-22 02:45:56,497 : DEBUG : environment : initialize : Line 70 : HOME=/home/shashank-agrawal
+2023-02-22 02:45:56,497 : DEBUG : environment : initialize : Line 70 : USERNAME=shashank-agrawal
+2023-02-22 02:45:56,498 : DEBUG : environment : initialize : Line 70 : IM_CONFIG_PHASE=1
+2023-02-22 02:45:56,498 : DEBUG : environment : initialize : Line 70 : LANG=en_US.UTF-8
+2023-02-22 02:45:56,498 : DEBUG : environment : initialize : Line 70 : LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+2023-02-22 02:45:56,498 : DEBUG : environment : initialize : Line 70 : XDG_CURRENT_DESKTOP=ubuntu:GNOME
+2023-02-22 02:45:56,498 : DEBUG : environment : initialize : Line 70 : VTE_VERSION=7000
+2023-02-22 02:45:56,499 : DEBUG : environment : initialize : Line 70 : WAYLAND_DISPLAY=wayland-0
+2023-02-22 02:45:56,499 : DEBUG : environment : initialize : Line 70 : CONDA_PROMPT_MODIFIER=(bluemist-ai) 
+2023-02-22 02:45:56,499 : DEBUG : environment : initialize : Line 70 : GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/78569659_ef1d_4705_818b_73a37e389986
+2023-02-22 02:45:56,499 : DEBUG : environment : initialize : Line 70 : NVM_DIR=/home/shashank-agrawal/.nvm
+2023-02-22 02:45:56,499 : DEBUG : environment : initialize : Line 70 : GNOME_SETUP_DISPLAY=:1
+2023-02-22 02:45:56,499 : DEBUG : environment : initialize : Line 70 : LESSCLOSE=/usr/bin/lesspipe %s %s
+2023-02-22 02:45:56,499 : DEBUG : environment : initialize : Line 70 : XDG_SESSION_CLASS=user
+2023-02-22 02:45:56,500 : DEBUG : environment : initialize : Line 70 : TERM=xterm-color
+2023-02-22 02:45:56,500 : DEBUG : environment : initialize : Line 70 : _CE_CONDA=
+2023-02-22 02:45:56,500 : DEBUG : environment : initialize : Line 70 : LESSOPEN=| /usr/bin/lesspipe %s
+2023-02-22 02:45:56,500 : DEBUG : environment : initialize : Line 70 : USER=shashank-agrawal
+2023-02-22 02:45:56,500 : DEBUG : environment : initialize : Line 70 : GNOME_TERMINAL_SERVICE=:1.177
+2023-02-22 02:45:56,500 : DEBUG : environment : initialize : Line 70 : CONDA_SHLVL=2
+2023-02-22 02:45:56,500 : DEBUG : environment : initialize : Line 70 : DISPLAY=:0
+2023-02-22 02:45:56,501 : DEBUG : environment : initialize : Line 70 : SHLVL=2
+2023-02-22 02:45:56,501 : DEBUG : environment : initialize : Line 70 : NVM_CD_FLAGS=
+2023-02-22 02:45:56,501 : DEBUG : environment : initialize : Line 70 : QT_IM_MODULE=ibus
+2023-02-22 02:45:56,501 : DEBUG : environment : initialize : Line 70 : CONDA_PYTHON_EXE=/home/shashank-agrawal/anaconda3/bin/python
+2023-02-22 02:45:56,501 : DEBUG : environment : initialize : Line 70 : XDG_RUNTIME_DIR=/run/user/1000
+2023-02-22 02:45:56,501 : DEBUG : environment : initialize : Line 70 : CONDA_DEFAULT_ENV=bluemist-ai
+2023-02-22 02:45:56,502 : DEBUG : environment : initialize : Line 70 : DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+2023-02-22 02:45:56,502 : DEBUG : environment : initialize : Line 70 : XDG_DATA_DIRS=/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+2023-02-22 02:45:56,502 : DEBUG : environment : initialize : Line 70 : PATH=/home/shashank-agrawal/anaconda3/envs/bluemist-ai/bin:/home/shashank-agrawal/anaconda3/condabin:/home/shashank-agrawal/.nvm/versions/node/v8.11.4/bin:/home/shashank-agrawal/bin:/home/shashank-agrawal/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+2023-02-22 02:45:56,502 : DEBUG : environment : initialize : Line 70 : GDMSESSION=ubuntu
+2023-02-22 02:45:56,502 : DEBUG : environment : initialize : Line 70 : DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+2023-02-22 02:45:56,502 : DEBUG : environment : initialize : Line 70 : NVM_BIN=/home/shashank-agrawal/.nvm/versions/node/v8.11.4/bin
+2023-02-22 02:45:56,503 : DEBUG : environment : initialize : Line 70 : CONDA_PREFIX_1=/home/shashank-agrawal/anaconda3
+2023-02-22 02:45:56,503 : DEBUG : environment : initialize : Line 70 : QT_SCALE_FACTOR=1
+2023-02-22 02:45:56,503 : DEBUG : environment : initialize : Line 70 : _=/home/shashank-agrawal/anaconda3/envs/bluemist-ai/bin/jupyter-notebook
+2023-02-22 02:45:56,503 : DEBUG : environment : initialize : Line 70 : PYDEVD_USE_FRAME_EVAL=NO
+2023-02-22 02:45:56,503 : DEBUG : environment : initialize : Line 70 : JPY_PARENT_PID=94579
+2023-02-22 02:45:56,503 : DEBUG : environment : initialize : Line 70 : CLICOLOR=1
+2023-02-22 02:45:56,504 : DEBUG : environment : initialize : Line 70 : FORCE_COLOR=1
+2023-02-22 02:45:56,504 : DEBUG : environment : initialize : Line 70 : CLICOLOR_FORCE=1
+2023-02-22 02:45:56,504 : DEBUG : environment : initialize : Line 70 : PAGER=cat
+2023-02-22 02:45:56,504 : DEBUG : environment : initialize : Line 70 : GIT_PAGER=cat
+2023-02-22 02:45:56,504 : DEBUG : environment : initialize : Line 70 : MPLBACKEND=module://matplotlib_inline.backend_inline
+2023-02-22 02:45:56,504 : DEBUG : environment : initialize : Line 70 : KMP_DUPLICATE_LIB_OK=True
+2023-02-22 02:45:56,505 : DEBUG : environment : initialize : Line 70 : KMP_INIT_AT_FORK=FALSE
+2023-02-22 02:45:56,505 : DEBUG : environment : initialize : Line 70 : BLUEMIST_PATH=/home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist
+2023-02-22 02:45:56,505 : DEBUG : environment : initialize : Line 78 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/data
+2023-02-22 02:45:56,505 : DEBUG : environment : initialize : Line 81 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/data
+2023-02-22 02:45:56,506 : DEBUG : environment : initialize : Line 78 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/eda
+2023-02-22 02:45:56,506 : DEBUG : environment : initialize : Line 81 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/eda
+2023-02-22 02:45:56,507 : DEBUG : environment : initialize : Line 78 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/experiments
+2023-02-22 02:45:56,507 : DEBUG : environment : initialize : Line 81 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/experiments
+2023-02-22 02:45:56,507 : DEBUG : environment : initialize : Line 78 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models
+2023-02-22 02:45:56,508 : DEBUG : environment : initialize : Line 81 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models
+2023-02-22 02:45:56,508 : DEBUG : environment : initialize : Line 78 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/preprocessor
+2023-02-22 02:45:56,508 : DEBUG : environment : initialize : Line 81 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/preprocessor
+2023-02-22 02:45:56,509 : DEBUG : environment : initialize : Line 85 : Clearing file content of /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/api/predict.py

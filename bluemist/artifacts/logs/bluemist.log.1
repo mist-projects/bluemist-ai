@@ -1,92 +1,1300 @@
-2023-02-19 18:50:12,841 : INFO : environment : initialize : Line 59 : 
+2023-02-22 03:52:07,642 : INFO : environment : initialize : Line 60 : 
 
-    ██████╗ ██╗     ██╗   ██╗███████╗███╗   ███╗██╗███████╗████████╗               █████╗ ██╗
-    ██╔══██╗██║     ██║   ██║██╔════╝████╗ ████║██║██╔════╝╚══██╔══╝              ██╔══██╗██║
-    ██████╔╝██║     ██║   ██║█████╗  ██╔████╔██║██║███████╗   ██║       █████╗    ███████║██║
-    ██╔══██╗██║     ██║   ██║██╔══╝  ██║╚██╔╝██║██║╚════██║   ██║       ╚════╝    ██╔══██║██║
-    ██████╔╝███████╗╚██████╔╝███████╗██║ ╚═╝ ██║██║███████║   ██║                 ██║  ██║██║
-    ╚═════╝ ╚══════╝ ╚═════╝ ╚══════╝╚═╝     ╚═╝╚═╝╚══════╝   ╚═╝                 ╚═╝  ╚═╝╚═╝                                                                                           
-    (version 0.1.2)
+██████╗ ██╗     ██╗   ██╗███████╗███╗   ███╗██╗███████╗████████╗     █████╗ ██╗
+██╔══██╗██║     ██║   ██║██╔════╝████╗ ████║██║██╔════╝╚══██╔══╝    ██╔══██╗██║
+██████╔╝██║     ██║   ██║█████╗  ██╔████╔██║██║███████╗   ██║       ███████║██║
+██╔══██╗██║     ██║   ██║██╔══╝  ██║╚██╔╝██║██║╚════██║   ██║       ██╔══██║██║
+██████╔╝███████╗╚██████╔╝███████╗██║ ╚═╝ ██║██║███████║   ██║       ██║  ██║██║                                                                        
+                                (version 0.1.1)
     
-2023-02-19 18:50:12,896 : INFO : environment : initialize : Line 64 : System platform :: posix, 5.19.0-31-generic, linux-x86_64, ('64bit', 'ELF')
-2023-02-19 18:50:12,897 : DEBUG : environment : initialize : Line 67 : Printing environment variables...
-2023-02-19 18:50:12,898 : DEBUG : environment : initialize : Line 69 : SHELL=/bin/bash
-2023-02-19 18:50:12,898 : DEBUG : environment : initialize : Line 69 : SESSION_MANAGER=local/Lenovo-G510:@/tmp/.ICE-unix/2719,unix/Lenovo-G510:/tmp/.ICE-unix/2719
-2023-02-19 18:50:12,898 : DEBUG : environment : initialize : Line 69 : QT_ACCESSIBILITY=1
-2023-02-19 18:50:12,898 : DEBUG : environment : initialize : Line 69 : COLORTERM=truecolor
-2023-02-19 18:50:12,899 : DEBUG : environment : initialize : Line 69 : XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
-2023-02-19 18:50:12,899 : DEBUG : environment : initialize : Line 69 : SSH_AGENT_LAUNCHER=openssh
-2023-02-19 18:50:12,899 : DEBUG : environment : initialize : Line 69 : XDG_MENU_PREFIX=gnome-
-2023-02-19 18:50:12,899 : DEBUG : environment : initialize : Line 69 : GNOME_DESKTOP_SESSION_ID=this-is-deprecated
-2023-02-19 18:50:12,899 : DEBUG : environment : initialize : Line 69 : CONDA_EXE=/home/shashank-agrawal/anaconda3/bin/conda
-2023-02-19 18:50:12,899 : DEBUG : environment : initialize : Line 69 : _CE_M=
-2023-02-19 18:50:12,900 : DEBUG : environment : initialize : Line 69 : GNOME_SHELL_SESSION_MODE=ubuntu
-2023-02-19 18:50:12,900 : DEBUG : environment : initialize : Line 69 : SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
-2023-02-19 18:50:12,900 : DEBUG : environment : initialize : Line 69 : XMODIFIERS=@im=ibus
-2023-02-19 18:50:12,900 : DEBUG : environment : initialize : Line 69 : DESKTOP_SESSION=ubuntu
-2023-02-19 18:50:12,900 : DEBUG : environment : initialize : Line 69 : GTK_MODULES=gail:atk-bridge
-2023-02-19 18:50:12,901 : DEBUG : environment : initialize : Line 69 : PWD=/home/shashank-agrawal
-2023-02-19 18:50:12,901 : DEBUG : environment : initialize : Line 69 : XDG_SESSION_DESKTOP=ubuntu
-2023-02-19 18:50:12,901 : DEBUG : environment : initialize : Line 69 : LOGNAME=shashank-agrawal
-2023-02-19 18:50:12,901 : DEBUG : environment : initialize : Line 69 : CONDA_ROOT=/home/shashank-agrawal/anaconda3
-2023-02-19 18:50:12,901 : DEBUG : environment : initialize : Line 69 : QT_QPA_PLATFORMTHEME=appmenu-qt5
-2023-02-19 18:50:12,902 : DEBUG : environment : initialize : Line 69 : XDG_SESSION_TYPE=wayland
-2023-02-19 18:50:12,902 : DEBUG : environment : initialize : Line 69 : CONDA_PREFIX=/home/shashank-agrawal/anaconda3/envs/bluemist-ai
-2023-02-19 18:50:12,902 : DEBUG : environment : initialize : Line 69 : SYSTEMD_EXEC_PID=2747
-2023-02-19 18:50:12,902 : DEBUG : environment : initialize : Line 69 : XAUTHORITY=/run/user/1000/.mutter-Xwaylandauth.PHNV01
-2023-02-19 18:50:12,902 : DEBUG : environment : initialize : Line 69 : HOME=/home/shashank-agrawal
-2023-02-19 18:50:12,902 : DEBUG : environment : initialize : Line 69 : USERNAME=shashank-agrawal
-2023-02-19 18:50:12,903 : DEBUG : environment : initialize : Line 69 : IM_CONFIG_PHASE=1
-2023-02-19 18:50:12,903 : DEBUG : environment : initialize : Line 69 : LANG=en_US.UTF-8
-2023-02-19 18:50:12,903 : DEBUG : environment : initialize : Line 69 : LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
-2023-02-19 18:50:12,903 : DEBUG : environment : initialize : Line 69 : XDG_CURRENT_DESKTOP=ubuntu:GNOME
-2023-02-19 18:50:12,903 : DEBUG : environment : initialize : Line 69 : VTE_VERSION=7000
-2023-02-19 18:50:12,903 : DEBUG : environment : initialize : Line 69 : WAYLAND_DISPLAY=wayland-0
-2023-02-19 18:50:12,904 : DEBUG : environment : initialize : Line 69 : CONDA_PROMPT_MODIFIER=(bluemist-ai) 
-2023-02-19 18:50:12,904 : DEBUG : environment : initialize : Line 69 : GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/78569659_ef1d_4705_818b_73a37e389986
-2023-02-19 18:50:12,904 : DEBUG : environment : initialize : Line 69 : NVM_DIR=/home/shashank-agrawal/.nvm
-2023-02-19 18:50:12,904 : DEBUG : environment : initialize : Line 69 : GNOME_SETUP_DISPLAY=:1
-2023-02-19 18:50:12,904 : DEBUG : environment : initialize : Line 69 : LESSCLOSE=/usr/bin/lesspipe %s %s
-2023-02-19 18:50:12,904 : DEBUG : environment : initialize : Line 69 : XDG_SESSION_CLASS=user
-2023-02-19 18:50:12,904 : DEBUG : environment : initialize : Line 69 : TERM=xterm-color
-2023-02-19 18:50:12,905 : DEBUG : environment : initialize : Line 69 : _CE_CONDA=
-2023-02-19 18:50:12,905 : DEBUG : environment : initialize : Line 69 : LESSOPEN=| /usr/bin/lesspipe %s
-2023-02-19 18:50:12,905 : DEBUG : environment : initialize : Line 69 : USER=shashank-agrawal
-2023-02-19 18:50:12,905 : DEBUG : environment : initialize : Line 69 : GNOME_TERMINAL_SERVICE=:1.177
-2023-02-19 18:50:12,905 : DEBUG : environment : initialize : Line 69 : CONDA_SHLVL=2
-2023-02-19 18:50:12,905 : DEBUG : environment : initialize : Line 69 : DISPLAY=:0
-2023-02-19 18:50:12,906 : DEBUG : environment : initialize : Line 69 : SHLVL=2
-2023-02-19 18:50:12,906 : DEBUG : environment : initialize : Line 69 : NVM_CD_FLAGS=
-2023-02-19 18:50:12,906 : DEBUG : environment : initialize : Line 69 : QT_IM_MODULE=ibus
-2023-02-19 18:50:12,906 : DEBUG : environment : initialize : Line 69 : CONDA_PYTHON_EXE=/home/shashank-agrawal/anaconda3/bin/python
-2023-02-19 18:50:12,906 : DEBUG : environment : initialize : Line 69 : XDG_RUNTIME_DIR=/run/user/1000
-2023-02-19 18:50:12,906 : DEBUG : environment : initialize : Line 69 : CONDA_DEFAULT_ENV=bluemist-ai
-2023-02-19 18:50:12,907 : DEBUG : environment : initialize : Line 69 : DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
-2023-02-19 18:50:12,907 : DEBUG : environment : initialize : Line 69 : XDG_DATA_DIRS=/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
-2023-02-19 18:50:12,907 : DEBUG : environment : initialize : Line 69 : PATH=/home/shashank-agrawal/anaconda3/envs/bluemist-ai/bin:/home/shashank-agrawal/anaconda3/condabin:/home/shashank-agrawal/.nvm/versions/node/v8.11.4/bin:/home/shashank-agrawal/bin:/home/shashank-agrawal/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
-2023-02-19 18:50:12,907 : DEBUG : environment : initialize : Line 69 : GDMSESSION=ubuntu
-2023-02-19 18:50:12,907 : DEBUG : environment : initialize : Line 69 : DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
-2023-02-19 18:50:12,907 : DEBUG : environment : initialize : Line 69 : NVM_BIN=/home/shashank-agrawal/.nvm/versions/node/v8.11.4/bin
-2023-02-19 18:50:12,908 : DEBUG : environment : initialize : Line 69 : CONDA_PREFIX_1=/home/shashank-agrawal/anaconda3
-2023-02-19 18:50:12,908 : DEBUG : environment : initialize : Line 69 : QT_SCALE_FACTOR=1
-2023-02-19 18:50:12,908 : DEBUG : environment : initialize : Line 69 : _=/home/shashank-agrawal/anaconda3/envs/bluemist-ai/bin/jupyter-notebook
-2023-02-19 18:50:12,908 : DEBUG : environment : initialize : Line 69 : PYDEVD_USE_FRAME_EVAL=NO
-2023-02-19 18:50:12,908 : DEBUG : environment : initialize : Line 69 : JPY_PARENT_PID=33490
-2023-02-19 18:50:12,908 : DEBUG : environment : initialize : Line 69 : CLICOLOR=1
-2023-02-19 18:50:12,908 : DEBUG : environment : initialize : Line 69 : FORCE_COLOR=1
-2023-02-19 18:50:12,909 : DEBUG : environment : initialize : Line 69 : CLICOLOR_FORCE=1
-2023-02-19 18:50:12,909 : DEBUG : environment : initialize : Line 69 : PAGER=cat
-2023-02-19 18:50:12,909 : DEBUG : environment : initialize : Line 69 : GIT_PAGER=cat
-2023-02-19 18:50:12,909 : DEBUG : environment : initialize : Line 69 : MPLBACKEND=module://matplotlib_inline.backend_inline
-2023-02-19 18:50:12,909 : DEBUG : environment : initialize : Line 69 : BLUEMIST_PATH=/home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist
-2023-02-19 18:50:12,909 : DEBUG : environment : initialize : Line 77 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/data
-2023-02-19 18:50:12,910 : DEBUG : environment : initialize : Line 80 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/data
-2023-02-19 18:50:12,910 : DEBUG : environment : initialize : Line 77 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/eda
-2023-02-19 18:50:12,917 : DEBUG : environment : initialize : Line 80 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/eda
-2023-02-19 18:50:12,918 : DEBUG : environment : initialize : Line 77 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/experiments
-2023-02-19 18:50:12,918 : DEBUG : environment : initialize : Line 80 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/experiments
-2023-02-19 18:50:12,919 : DEBUG : environment : initialize : Line 77 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models
-2023-02-19 18:50:12,919 : DEBUG : environment : initialize : Line 80 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models
-2023-02-19 18:50:12,919 : DEBUG : environment : initialize : Line 77 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/preprocessor
-2023-02-19 18:50:12,920 : DEBUG : environment : initialize : Line 80 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/preprocessor
-2023-02-19 18:50:12,920 : DEBUG : environment : initialize : Line 84 : Clearing file content of /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/api/predict.py
+2023-02-22 03:52:07,714 : INFO : environment : initialize : Line 65 : System platform :: posix, Linux, 5.19.0-31-generic, linux-x86_64, ('64bit', 'ELF')
+2023-02-22 03:52:07,715 : DEBUG : environment : initialize : Line 68 : Printing environment variables...
+2023-02-22 03:52:07,715 : DEBUG : environment : initialize : Line 70 : SHELL=/bin/bash
+2023-02-22 03:52:07,716 : DEBUG : environment : initialize : Line 70 : SESSION_MANAGER=local/Lenovo-G510:@/tmp/.ICE-unix/2719,unix/Lenovo-G510:/tmp/.ICE-unix/2719
+2023-02-22 03:52:07,716 : DEBUG : environment : initialize : Line 70 : QT_ACCESSIBILITY=1
+2023-02-22 03:52:07,716 : DEBUG : environment : initialize : Line 70 : COLORTERM=truecolor
+2023-02-22 03:52:07,716 : DEBUG : environment : initialize : Line 70 : XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+2023-02-22 03:52:07,716 : DEBUG : environment : initialize : Line 70 : SSH_AGENT_LAUNCHER=openssh
+2023-02-22 03:52:07,717 : DEBUG : environment : initialize : Line 70 : XDG_MENU_PREFIX=gnome-
+2023-02-22 03:52:07,717 : DEBUG : environment : initialize : Line 70 : GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+2023-02-22 03:52:07,717 : DEBUG : environment : initialize : Line 70 : CONDA_EXE=/home/shashank-agrawal/anaconda3/bin/conda
+2023-02-22 03:52:07,717 : DEBUG : environment : initialize : Line 70 : _CE_M=
+2023-02-22 03:52:07,717 : DEBUG : environment : initialize : Line 70 : GNOME_SHELL_SESSION_MODE=ubuntu
+2023-02-22 03:52:07,717 : DEBUG : environment : initialize : Line 70 : SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+2023-02-22 03:52:07,717 : DEBUG : environment : initialize : Line 70 : XMODIFIERS=@im=ibus
+2023-02-22 03:52:07,718 : DEBUG : environment : initialize : Line 70 : DESKTOP_SESSION=ubuntu
+2023-02-22 03:52:07,718 : DEBUG : environment : initialize : Line 70 : GTK_MODULES=gail:atk-bridge
+2023-02-22 03:52:07,718 : DEBUG : environment : initialize : Line 70 : PWD=/home/shashank-agrawal
+2023-02-22 03:52:07,718 : DEBUG : environment : initialize : Line 70 : XDG_SESSION_DESKTOP=ubuntu
+2023-02-22 03:52:07,718 : DEBUG : environment : initialize : Line 70 : LOGNAME=shashank-agrawal
+2023-02-22 03:52:07,718 : DEBUG : environment : initialize : Line 70 : CONDA_ROOT=/home/shashank-agrawal/anaconda3
+2023-02-22 03:52:07,719 : DEBUG : environment : initialize : Line 70 : QT_QPA_PLATFORMTHEME=appmenu-qt5
+2023-02-22 03:52:07,719 : DEBUG : environment : initialize : Line 70 : XDG_SESSION_TYPE=wayland
+2023-02-22 03:52:07,719 : DEBUG : environment : initialize : Line 70 : CONDA_PREFIX=/home/shashank-agrawal/anaconda3/envs/bluemist-ai
+2023-02-22 03:52:07,719 : DEBUG : environment : initialize : Line 70 : SYSTEMD_EXEC_PID=2747
+2023-02-22 03:52:07,719 : DEBUG : environment : initialize : Line 70 : XAUTHORITY=/run/user/1000/.mutter-Xwaylandauth.PHNV01
+2023-02-22 03:52:07,719 : DEBUG : environment : initialize : Line 70 : HOME=/home/shashank-agrawal
+2023-02-22 03:52:07,719 : DEBUG : environment : initialize : Line 70 : USERNAME=shashank-agrawal
+2023-02-22 03:52:07,720 : DEBUG : environment : initialize : Line 70 : IM_CONFIG_PHASE=1
+2023-02-22 03:52:07,720 : DEBUG : environment : initialize : Line 70 : LANG=en_US.UTF-8
+2023-02-22 03:52:07,720 : DEBUG : environment : initialize : Line 70 : LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+2023-02-22 03:52:07,720 : DEBUG : environment : initialize : Line 70 : XDG_CURRENT_DESKTOP=ubuntu:GNOME
+2023-02-22 03:52:07,720 : DEBUG : environment : initialize : Line 70 : VTE_VERSION=7000
+2023-02-22 03:52:07,720 : DEBUG : environment : initialize : Line 70 : WAYLAND_DISPLAY=wayland-0
+2023-02-22 03:52:07,721 : DEBUG : environment : initialize : Line 70 : CONDA_PROMPT_MODIFIER=(bluemist-ai) 
+2023-02-22 03:52:07,721 : DEBUG : environment : initialize : Line 70 : GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/78569659_ef1d_4705_818b_73a37e389986
+2023-02-22 03:52:07,721 : DEBUG : environment : initialize : Line 70 : NVM_DIR=/home/shashank-agrawal/.nvm
+2023-02-22 03:52:07,721 : DEBUG : environment : initialize : Line 70 : GNOME_SETUP_DISPLAY=:1
+2023-02-22 03:52:07,721 : DEBUG : environment : initialize : Line 70 : LESSCLOSE=/usr/bin/lesspipe %s %s
+2023-02-22 03:52:07,721 : DEBUG : environment : initialize : Line 70 : XDG_SESSION_CLASS=user
+2023-02-22 03:52:07,722 : DEBUG : environment : initialize : Line 70 : TERM=xterm-color
+2023-02-22 03:52:07,722 : DEBUG : environment : initialize : Line 70 : _CE_CONDA=
+2023-02-22 03:52:07,722 : DEBUG : environment : initialize : Line 70 : LESSOPEN=| /usr/bin/lesspipe %s
+2023-02-22 03:52:07,722 : DEBUG : environment : initialize : Line 70 : USER=shashank-agrawal
+2023-02-22 03:52:07,722 : DEBUG : environment : initialize : Line 70 : GNOME_TERMINAL_SERVICE=:1.177
+2023-02-22 03:52:07,722 : DEBUG : environment : initialize : Line 70 : CONDA_SHLVL=2
+2023-02-22 03:52:07,723 : DEBUG : environment : initialize : Line 70 : DISPLAY=:0
+2023-02-22 03:52:07,723 : DEBUG : environment : initialize : Line 70 : SHLVL=2
+2023-02-22 03:52:07,723 : DEBUG : environment : initialize : Line 70 : NVM_CD_FLAGS=
+2023-02-22 03:52:07,723 : DEBUG : environment : initialize : Line 70 : QT_IM_MODULE=ibus
+2023-02-22 03:52:07,723 : DEBUG : environment : initialize : Line 70 : CONDA_PYTHON_EXE=/home/shashank-agrawal/anaconda3/bin/python
+2023-02-22 03:52:07,723 : DEBUG : environment : initialize : Line 70 : XDG_RUNTIME_DIR=/run/user/1000
+2023-02-22 03:52:07,723 : DEBUG : environment : initialize : Line 70 : CONDA_DEFAULT_ENV=bluemist-ai
+2023-02-22 03:52:07,724 : DEBUG : environment : initialize : Line 70 : DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+2023-02-22 03:52:07,724 : DEBUG : environment : initialize : Line 70 : XDG_DATA_DIRS=/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+2023-02-22 03:52:07,724 : DEBUG : environment : initialize : Line 70 : PATH=/home/shashank-agrawal/anaconda3/envs/bluemist-ai/bin:/home/shashank-agrawal/anaconda3/condabin:/home/shashank-agrawal/.nvm/versions/node/v8.11.4/bin:/home/shashank-agrawal/bin:/home/shashank-agrawal/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+2023-02-22 03:52:07,724 : DEBUG : environment : initialize : Line 70 : GDMSESSION=ubuntu
+2023-02-22 03:52:07,724 : DEBUG : environment : initialize : Line 70 : DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+2023-02-22 03:52:07,724 : DEBUG : environment : initialize : Line 70 : NVM_BIN=/home/shashank-agrawal/.nvm/versions/node/v8.11.4/bin
+2023-02-22 03:52:07,725 : DEBUG : environment : initialize : Line 70 : CONDA_PREFIX_1=/home/shashank-agrawal/anaconda3
+2023-02-22 03:52:07,725 : DEBUG : environment : initialize : Line 70 : QT_SCALE_FACTOR=1
+2023-02-22 03:52:07,725 : DEBUG : environment : initialize : Line 70 : _=/home/shashank-agrawal/anaconda3/envs/bluemist-ai/bin/jupyter-notebook
+2023-02-22 03:52:07,725 : DEBUG : environment : initialize : Line 70 : PYDEVD_USE_FRAME_EVAL=NO
+2023-02-22 03:52:07,725 : DEBUG : environment : initialize : Line 70 : JPY_PARENT_PID=94579
+2023-02-22 03:52:07,725 : DEBUG : environment : initialize : Line 70 : CLICOLOR=1
+2023-02-22 03:52:07,725 : DEBUG : environment : initialize : Line 70 : FORCE_COLOR=1
+2023-02-22 03:52:07,726 : DEBUG : environment : initialize : Line 70 : CLICOLOR_FORCE=1
+2023-02-22 03:52:07,726 : DEBUG : environment : initialize : Line 70 : PAGER=cat
+2023-02-22 03:52:07,726 : DEBUG : environment : initialize : Line 70 : GIT_PAGER=cat
+2023-02-22 03:52:07,726 : DEBUG : environment : initialize : Line 70 : MPLBACKEND=module://matplotlib_inline.backend_inline
+2023-02-22 03:52:07,726 : DEBUG : environment : initialize : Line 70 : BLUEMIST_PATH=/home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist
+2023-02-22 03:52:07,726 : DEBUG : environment : initialize : Line 70 : KMP_DUPLICATE_LIB_OK=True
+2023-02-22 03:52:07,727 : DEBUG : environment : initialize : Line 70 : KMP_INIT_AT_FORK=FALSE
+2023-02-22 03:52:07,727 : DEBUG : environment : initialize : Line 78 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/data
+2023-02-22 03:52:07,727 : DEBUG : environment : initialize : Line 81 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/data
+2023-02-22 03:52:07,728 : DEBUG : environment : initialize : Line 78 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/eda
+2023-02-22 03:52:07,728 : DEBUG : environment : initialize : Line 81 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/eda
+2023-02-22 03:52:07,728 : DEBUG : environment : initialize : Line 78 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/experiments
+2023-02-22 03:52:07,729 : DEBUG : environment : initialize : Line 81 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/experiments
+2023-02-22 03:52:07,729 : DEBUG : environment : initialize : Line 78 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models
+2023-02-22 03:52:07,736 : DEBUG : environment : initialize : Line 81 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models
+2023-02-22 03:52:07,736 : DEBUG : environment : initialize : Line 78 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/preprocessor
+2023-02-22 03:52:07,737 : DEBUG : environment : initialize : Line 81 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/preprocessor
+2023-02-22 03:52:07,737 : DEBUG : environment : initialize : Line 85 : Clearing file content of /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/api/predict.py
+2023-02-22 03:52:08,416 : INFO : preprocessor : preprocess_data : Line 122 : Shape of the dataset :: (442, 11)
+2023-02-22 03:52:08,417 : INFO : preprocessor : preprocess_data : Line 123 : Columns in the dataset :: 
+Index(['AGE', 'SEX', 'BMI', 'BP', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'Y'], dtype='object')
+2023-02-22 03:52:08,421 : DEBUG : preprocessor : preprocess_data : Line 180 : data.dtypes before preprocessing  :: 
+AGE      int64
+SEX      int64
+BMI    float64
+BP     float64
+S1       int64
+S2     float64
+S3     float64
+S4     float64
+S5     float64
+S6       int64
+Y        int64
+dtype: object
+2023-02-22 03:52:08,429 : DEBUG : preprocessor : preprocess_data : Line 186 : data.dtypes after dtype conversion  :: 
+AGE      int64
+SEX     object
+BMI    float64
+BP     float64
+S1       int64
+S2     float64
+S3     float64
+S4     float64
+S5     float64
+S6       int64
+Y        int64
+dtype: object
+2023-02-22 03:52:08,436 : DEBUG : preprocessor : preprocess_data : Line 207 : Splitting dataset into X_train, X_test, y_train, y_test...
+2023-02-22 03:52:08,442 : DEBUG : preprocessor : preprocess_data : Line 210 : X_train.dtypes before ColumnTransformer :: 
+AGE      int64
+SEX     object
+BMI    float64
+BP     float64
+S1       int64
+S2     float64
+S3     float64
+S4     float64
+S5     float64
+S6       int64
+dtype: object
+2023-02-22 03:52:08,500 : DEBUG : preprocessor : preprocess_data : Line 217 : X_train Columns after ColumnTransformer :: ['AGE' 'BMI' 'BP' 'S1' 'S2' 'S3' 'S4' 'S5' 'S6' 'SEX_2']
+2023-02-22 03:52:08,503 : DEBUG : preprocessor : preprocess_data : Line 218 : X_train.dtypes after ColumnTransformer :: 
+AGE      float64
+BMI      float64
+BP       float64
+S1       float64
+S2       float64
+S3       float64
+S4       float64
+S5       float64
+S6       float64
+SEX_2    float64
+dtype: object
+2023-02-22 03:52:08,503 : DEBUG : preprocessor : preprocess_data : Line 223 : Saving preprocessor to disk...
+2023-02-22 03:52:08,503 : INFO : bluemist_pipeline : save_preprocessor : Line 25 : Saving preprocessor to disk on :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/preprocessor/preprocessor.joblib
+2023-02-22 03:52:08,545 : DEBUG : bluemist_pipeline : save_preprocessor : Line 27 : Preprocessor column transformer object :: ColumnTransformer(transformers=[('numeric_transformer',
+                                 Pipeline(steps=[('imputer', SimpleImputer()),
+                                                 ('scaler', StandardScaler())]),
+                                 ['AGE', 'BMI', 'BP', 'S1', 'S2', 'S3', 'S4',
+                                  'S5', 'S6']),
+                                ('categorical_transformer',
+                                 Pipeline(steps=[('imputer',
+                                                  SimpleImputer(strategy='most_frequent')),
+                                                 ('one_hot_encoder',
+                                                  OneHotEncoder(drop='first'))]),
+                                 ['SEX'])],
+                  verbose_feature_names_out=False)
+2023-02-22 03:52:09,111 : DEBUG : regressor : get_estimators : Line 75 : All available estimators :: [('ARDRegression', <class 'sklearn.linear_model._bayes.ARDRegression'>), ('AdaBoostRegressor', <class 'sklearn.ensemble._weight_boosting.AdaBoostRegressor'>), ('BaggingRegressor', <class 'sklearn.ensemble._bagging.BaggingRegressor'>), ('BayesianRidge', <class 'sklearn.linear_model._bayes.BayesianRidge'>), ('CCA', <class 'sklearn.cross_decomposition._pls.CCA'>), ('DecisionTreeRegressor', <class 'sklearn.tree._classes.DecisionTreeRegressor'>), ('DummyRegressor', <class 'sklearn.dummy.DummyRegressor'>), ('ElasticNet', <class 'sklearn.linear_model._coordinate_descent.ElasticNet'>), ('ElasticNetCV', <class 'sklearn.linear_model._coordinate_descent.ElasticNetCV'>), ('ExtraTreeRegressor', <class 'sklearn.tree._classes.ExtraTreeRegressor'>), ('ExtraTreesRegressor', <class 'sklearn.ensemble._forest.ExtraTreesRegressor'>), ('GammaRegressor', <class 'sklearn.linear_model._glm.glm.GammaRegressor'>), ('GaussianProcessRegressor', <class 'sklearn.gaussian_process._gpr.GaussianProcessRegressor'>), ('GradientBoostingRegressor', <class 'sklearn.ensemble._gb.GradientBoostingRegressor'>), ('HistGradientBoostingRegressor', <class 'sklearn.ensemble._hist_gradient_boosting.gradient_boosting.HistGradientBoostingRegressor'>), ('HuberRegressor', <class 'sklearn.linear_model._huber.HuberRegressor'>), ('IsotonicRegression', <class 'sklearn.isotonic.IsotonicRegression'>), ('KNeighborsRegressor', <class 'sklearn.neighbors._regression.KNeighborsRegressor'>), ('KernelRidge', <class 'sklearn.kernel_ridge.KernelRidge'>), ('Lars', <class 'sklearn.linear_model._least_angle.Lars'>), ('LarsCV', <class 'sklearn.linear_model._least_angle.LarsCV'>), ('Lasso', <class 'sklearn.linear_model._coordinate_descent.Lasso'>), ('LassoCV', <class 'sklearn.linear_model._coordinate_descent.LassoCV'>), ('LassoLars', <class 'sklearn.linear_model._least_angle.LassoLars'>), ('LassoLarsCV', <class 'sklearn.linear_model._least_angle.LassoLarsCV'>), ('LassoLarsIC', <class 'sklearn.linear_model._least_angle.LassoLarsIC'>), ('LinearRegression', <class 'sklearn.linear_model._base.LinearRegression'>), ('LinearSVR', <class 'sklearn.svm._classes.LinearSVR'>), ('MLPRegressor', <class 'sklearn.neural_network._multilayer_perceptron.MLPRegressor'>), ('MultiOutputRegressor', <class 'sklearn.multioutput.MultiOutputRegressor'>), ('MultiTaskElasticNet', <class 'sklearn.linear_model._coordinate_descent.MultiTaskElasticNet'>), ('MultiTaskElasticNetCV', <class 'sklearn.linear_model._coordinate_descent.MultiTaskElasticNetCV'>), ('MultiTaskLasso', <class 'sklearn.linear_model._coordinate_descent.MultiTaskLasso'>), ('MultiTaskLassoCV', <class 'sklearn.linear_model._coordinate_descent.MultiTaskLassoCV'>), ('NuSVR', <class 'sklearn.svm._classes.NuSVR'>), ('OrthogonalMatchingPursuit', <class 'sklearn.linear_model._omp.OrthogonalMatchingPursuit'>), ('OrthogonalMatchingPursuitCV', <class 'sklearn.linear_model._omp.OrthogonalMatchingPursuitCV'>), ('PLSCanonical', <class 'sklearn.cross_decomposition._pls.PLSCanonical'>), ('PLSRegression', <class 'sklearn.cross_decomposition._pls.PLSRegression'>), ('PassiveAggressiveRegressor', <class 'sklearn.linear_model._passive_aggressive.PassiveAggressiveRegressor'>), ('PoissonRegressor', <class 'sklearn.linear_model._glm.glm.PoissonRegressor'>), ('QuantileRegressor', <class 'sklearn.linear_model._quantile.QuantileRegressor'>), ('RANSACRegressor', <class 'sklearn.linear_model._ransac.RANSACRegressor'>), ('RadiusNeighborsRegressor', <class 'sklearn.neighbors._regression.RadiusNeighborsRegressor'>), ('RandomForestRegressor', <class 'sklearn.ensemble._forest.RandomForestRegressor'>), ('RegressorChain', <class 'sklearn.multioutput.RegressorChain'>), ('Ridge', <class 'sklearn.linear_model._ridge.Ridge'>), ('RidgeCV', <class 'sklearn.linear_model._ridge.RidgeCV'>), ('SGDRegressor', <class 'sklearn.linear_model._stochastic_gradient.SGDRegressor'>), ('SVR', <class 'sklearn.svm._classes.SVR'>), ('StackingRegressor', <class 'sklearn.ensemble._stacking.StackingRegressor'>), ('TheilSenRegressor', <class 'sklearn.linear_model._theil_sen.TheilSenRegressor'>), ('TransformedTargetRegressor', <class 'sklearn.compose._target.TransformedTargetRegressor'>), ('TweedieRegressor', <class 'sklearn.linear_model._glm.glm.TweedieRegressor'>), ('VotingRegressor', <class 'sklearn.ensemble._voting.VotingRegressor'>)]
+2023-02-22 03:52:09,112 : DEBUG : regressor : get_estimators : Line 88 : Estimators not supported by Bluemist AI :: [('IsotonicRegression', <class 'sklearn.isotonic.IsotonicRegression'>), ('MultiOutputRegressor', <class 'sklearn.multioutput.MultiOutputRegressor'>), ('MultiTaskElasticNet', <class 'sklearn.linear_model._coordinate_descent.MultiTaskElasticNet'>), ('MultiTaskElasticNetCV', <class 'sklearn.linear_model._coordinate_descent.MultiTaskElasticNetCV'>), ('MultiTaskLasso', <class 'sklearn.linear_model._coordinate_descent.MultiTaskLasso'>), ('MultiTaskLassoCV', <class 'sklearn.linear_model._coordinate_descent.MultiTaskLassoCV'>), ('RegressorChain', <class 'sklearn.multioutput.RegressorChain'>), ('StackingRegressor', <class 'sklearn.ensemble._stacking.StackingRegressor'>), ('VotingRegressor', <class 'sklearn.ensemble._voting.VotingRegressor'>)]
+2023-02-22 03:52:09,112 : INFO : regressor : get_estimators : Line 96 : Estimators available for modelling :: [('ARDRegression', <class 'sklearn.linear_model._bayes.ARDRegression'>), ('AdaBoostRegressor', <class 'sklearn.ensemble._weight_boosting.AdaBoostRegressor'>), ('BaggingRegressor', <class 'sklearn.ensemble._bagging.BaggingRegressor'>), ('BayesianRidge', <class 'sklearn.linear_model._bayes.BayesianRidge'>), ('CCA', <class 'sklearn.cross_decomposition._pls.CCA'>), ('DecisionTreeRegressor', <class 'sklearn.tree._classes.DecisionTreeRegressor'>), ('DummyRegressor', <class 'sklearn.dummy.DummyRegressor'>), ('ElasticNet', <class 'sklearn.linear_model._coordinate_descent.ElasticNet'>), ('ElasticNetCV', <class 'sklearn.linear_model._coordinate_descent.ElasticNetCV'>), ('ExtraTreeRegressor', <class 'sklearn.tree._classes.ExtraTreeRegressor'>), ('ExtraTreesRegressor', <class 'sklearn.ensemble._forest.ExtraTreesRegressor'>), ('GammaRegressor', <class 'sklearn.linear_model._glm.glm.GammaRegressor'>), ('GaussianProcessRegressor', <class 'sklearn.gaussian_process._gpr.GaussianProcessRegressor'>), ('GradientBoostingRegressor', <class 'sklearn.ensemble._gb.GradientBoostingRegressor'>), ('HistGradientBoostingRegressor', <class 'sklearn.ensemble._hist_gradient_boosting.gradient_boosting.HistGradientBoostingRegressor'>), ('HuberRegressor', <class 'sklearn.linear_model._huber.HuberRegressor'>), ('KNeighborsRegressor', <class 'sklearn.neighbors._regression.KNeighborsRegressor'>), ('KernelRidge', <class 'sklearn.kernel_ridge.KernelRidge'>), ('Lars', <class 'sklearn.linear_model._least_angle.Lars'>), ('LarsCV', <class 'sklearn.linear_model._least_angle.LarsCV'>), ('Lasso', <class 'sklearn.linear_model._coordinate_descent.Lasso'>), ('LassoCV', <class 'sklearn.linear_model._coordinate_descent.LassoCV'>), ('LassoLars', <class 'sklearn.linear_model._least_angle.LassoLars'>), ('LassoLarsCV', <class 'sklearn.linear_model._least_angle.LassoLarsCV'>), ('LassoLarsIC', <class 'sklearn.linear_model._least_angle.LassoLarsIC'>), ('LinearRegression', <class 'sklearn.linear_model._base.LinearRegression'>), ('LinearSVR', <class 'sklearn.svm._classes.LinearSVR'>), ('MLPRegressor', <class 'sklearn.neural_network._multilayer_perceptron.MLPRegressor'>), ('NuSVR', <class 'sklearn.svm._classes.NuSVR'>), ('OrthogonalMatchingPursuit', <class 'sklearn.linear_model._omp.OrthogonalMatchingPursuit'>), ('OrthogonalMatchingPursuitCV', <class 'sklearn.linear_model._omp.OrthogonalMatchingPursuitCV'>), ('PLSCanonical', <class 'sklearn.cross_decomposition._pls.PLSCanonical'>), ('PLSRegression', <class 'sklearn.cross_decomposition._pls.PLSRegression'>), ('PassiveAggressiveRegressor', <class 'sklearn.linear_model._passive_aggressive.PassiveAggressiveRegressor'>), ('PoissonRegressor', <class 'sklearn.linear_model._glm.glm.PoissonRegressor'>), ('QuantileRegressor', <class 'sklearn.linear_model._quantile.QuantileRegressor'>), ('RANSACRegressor', <class 'sklearn.linear_model._ransac.RANSACRegressor'>), ('RadiusNeighborsRegressor', <class 'sklearn.neighbors._regression.RadiusNeighborsRegressor'>), ('RandomForestRegressor', <class 'sklearn.ensemble._forest.RandomForestRegressor'>), ('Ridge', <class 'sklearn.linear_model._ridge.Ridge'>), ('RidgeCV', <class 'sklearn.linear_model._ridge.RidgeCV'>), ('SGDRegressor', <class 'sklearn.linear_model._stochastic_gradient.SGDRegressor'>), ('SVR', <class 'sklearn.svm._classes.SVR'>), ('TheilSenRegressor', <class 'sklearn.linear_model._theil_sen.TheilSenRegressor'>), ('TransformedTargetRegressor', <class 'sklearn.compose._target.TransformedTargetRegressor'>), ('TweedieRegressor', <class 'sklearn.linear_model._glm.glm.TweedieRegressor'>)]
+2023-02-22 03:52:09,120 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: ARDRegression ###################
+2023-02-22 03:52:09,124 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('ARDRegression', TransformedTargetRegressor(regressor=ARDRegression(),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:09,178 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/ARDRegression.joblib
+2023-02-22 03:52:09,196 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('ARDRegression',
+                 TransformedTargetRegressor(regressor=ARDRegression(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:09,208 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('ARDRegression',
+                 TransformedTargetRegressor(regressor=ARDRegression(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:09,219 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('ARDRegression',
+                 TransformedTargetRegressor(regressor=ARDRegression(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:09,224 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:09,225 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:09,236 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+       Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  ARDRegression            41.952247         2663.072632   0.53607
+2023-02-22 03:52:09,237 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'ARDRegression', 'mean_absolute_error': 41.95224737900622, 'mean_squared_error': 2663.072631995612, 'r2_score': 0.5360703734241721}]
+2023-02-22 03:52:09,243 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+       Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  ARDRegression            41.952247         2663.072632   0.53607
+2023-02-22 03:52:09,248 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: AdaBoostRegressor ###################
+2023-02-22 03:52:09,251 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('AdaBoostRegressor', TransformedTargetRegressor(regressor=AdaBoostRegressor(),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:09,577 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/AdaBoostRegressor.joblib
+2023-02-22 03:52:09,651 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('AdaBoostRegressor',
+                 TransformedTargetRegressor(regressor=AdaBoostRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:09,664 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('AdaBoostRegressor',
+                 TransformedTargetRegressor(regressor=AdaBoostRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:09,674 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('AdaBoostRegressor',
+                 TransformedTargetRegressor(regressor=AdaBoostRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:09,702 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:09,703 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:09,716 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+           Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  AdaBoostRegressor            42.520342         2776.304355  0.516344
+2023-02-22 03:52:09,717 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'AdaBoostRegressor', 'mean_absolute_error': 42.5203421315479, 'mean_squared_error': 2776.304354891619, 'r2_score': 0.5163444559675698}]
+2023-02-22 03:52:09,724 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+           Estimator  mean_absolute_error  mean_squared_error  r2_score
+0      ARDRegression            41.952247         2663.072632  0.536070
+1  AdaBoostRegressor            42.520342         2776.304355  0.516344
+2023-02-22 03:52:09,731 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: BaggingRegressor ###################
+2023-02-22 03:52:09,738 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('BaggingRegressor', TransformedTargetRegressor(regressor=BaggingRegressor(),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:09,867 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/BaggingRegressor.joblib
+2023-02-22 03:52:09,898 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('BaggingRegressor',
+                 TransformedTargetRegressor(regressor=BaggingRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:09,909 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('BaggingRegressor',
+                 TransformedTargetRegressor(regressor=BaggingRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:09,921 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('BaggingRegressor',
+                 TransformedTargetRegressor(regressor=BaggingRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:09,934 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:09,934 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:09,944 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+          Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  BaggingRegressor            43.252252         2960.547387  0.484248
+2023-02-22 03:52:09,946 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'BaggingRegressor', 'mean_absolute_error': 43.25225225225226, 'mean_squared_error': 2960.547387387388, 'r2_score': 0.4842477717697724}]
+2023-02-22 03:52:09,953 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+           Estimator  mean_absolute_error  mean_squared_error  r2_score
+0      ARDRegression            41.952247         2663.072632  0.536070
+1  AdaBoostRegressor            42.520342         2776.304355  0.516344
+2   BaggingRegressor            43.252252         2960.547387  0.484248
+2023-02-22 03:52:09,958 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: BayesianRidge ###################
+2023-02-22 03:52:09,962 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('BayesianRidge', TransformedTargetRegressor(regressor=BayesianRidge(),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:09,979 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/BayesianRidge.joblib
+2023-02-22 03:52:10,007 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('BayesianRidge',
+                 TransformedTargetRegressor(regressor=BayesianRidge(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,026 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('BayesianRidge',
+                 TransformedTargetRegressor(regressor=BayesianRidge(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,045 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('BayesianRidge',
+                 TransformedTargetRegressor(regressor=BayesianRidge(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,052 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:10,053 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:10,067 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+       Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  BayesianRidge            41.959062          2707.14589  0.528392
+2023-02-22 03:52:10,069 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'BayesianRidge', 'mean_absolute_error': 41.95906188281363, 'mean_squared_error': 2707.1458898175483, 'r2_score': 0.528392441625523}]
+2023-02-22 03:52:10,078 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+           Estimator  mean_absolute_error  mean_squared_error  r2_score
+0      ARDRegression            41.952247         2663.072632  0.536070
+1  AdaBoostRegressor            42.520342         2776.304355  0.516344
+2   BaggingRegressor            43.252252         2960.547387  0.484248
+3      BayesianRidge            41.959062         2707.145890  0.528392
+2023-02-22 03:52:10,084 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: CCA ###################
+2023-02-22 03:52:10,088 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('CCA', TransformedTargetRegressor(regressor=CCA(n_components=1),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:10,110 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/CCA.joblib
+2023-02-22 03:52:10,138 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('CCA',
+                 TransformedTargetRegressor(regressor=CCA(n_components=1),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,153 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('CCA',
+                 TransformedTargetRegressor(regressor=CCA(n_components=1),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,168 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('CCA',
+                 TransformedTargetRegressor(regressor=CCA(n_components=1),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,176 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:10,176 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:10,191 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+  Estimator  mean_absolute_error  mean_squared_error  r2_score
+0       CCA            42.419203         2822.609525  0.508278
+2023-02-22 03:52:10,193 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'CCA', 'mean_absolute_error': 42.419203337353345, 'mean_squared_error': 2822.609525087058, 'r2_score': 0.5082777062818121}]
+2023-02-22 03:52:10,202 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+           Estimator  mean_absolute_error  mean_squared_error  r2_score
+0      ARDRegression            41.952247         2663.072632  0.536070
+1  AdaBoostRegressor            42.520342         2776.304355  0.516344
+2   BaggingRegressor            43.252252         2960.547387  0.484248
+3      BayesianRidge            41.959062         2707.145890  0.528392
+4                CCA            42.419203         2822.609525  0.508278
+2023-02-22 03:52:10,209 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: DecisionTreeRegressor ###################
+2023-02-22 03:52:10,214 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('DecisionTreeRegressor', TransformedTargetRegressor(regressor=DecisionTreeRegressor(),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:10,239 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/DecisionTreeRegressor.joblib
+2023-02-22 03:52:10,268 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('DecisionTreeRegressor',
+                 TransformedTargetRegressor(regressor=DecisionTreeRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,281 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('DecisionTreeRegressor',
+                 TransformedTargetRegressor(regressor=DecisionTreeRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,292 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('DecisionTreeRegressor',
+                 TransformedTargetRegressor(regressor=DecisionTreeRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,297 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:10,298 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:10,308 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+               Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  DecisionTreeRegressor            58.684685         5188.738739  0.096078
+2023-02-22 03:52:10,309 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'DecisionTreeRegressor', 'mean_absolute_error': 58.68468468468468, 'mean_squared_error': 5188.738738738739, 'r2_score': 0.09607811798256582}]
+2023-02-22 03:52:10,316 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+               Estimator  mean_absolute_error  mean_squared_error  r2_score
+0          ARDRegression            41.952247         2663.072632  0.536070
+1      AdaBoostRegressor            42.520342         2776.304355  0.516344
+2       BaggingRegressor            43.252252         2960.547387  0.484248
+3          BayesianRidge            41.959062         2707.145890  0.528392
+4                    CCA            42.419203         2822.609525  0.508278
+5  DecisionTreeRegressor            58.684685         5188.738739  0.096078
+2023-02-22 03:52:10,321 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: DummyRegressor ###################
+2023-02-22 03:52:10,323 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('DummyRegressor', TransformedTargetRegressor(regressor=DummyRegressor(),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:10,328 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/DummyRegressor.joblib
+2023-02-22 03:52:10,341 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('DummyRegressor',
+                 TransformedTargetRegressor(regressor=DummyRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,350 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('DummyRegressor',
+                 TransformedTargetRegressor(regressor=DummyRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,358 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('DummyRegressor',
+                 TransformedTargetRegressor(regressor=DummyRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,359 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:10,360 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:10,371 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+        Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  DummyRegressor            64.812634         5763.312761 -0.004018
+2023-02-22 03:52:10,372 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'DummyRegressor', 'mean_absolute_error': 64.8126343866525, 'mean_squared_error': 5763.312761223723, 'r2_score': -0.004017504077835188}]
+2023-02-22 03:52:10,379 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+               Estimator  mean_absolute_error  mean_squared_error  r2_score
+0          ARDRegression            41.952247         2663.072632  0.536070
+1      AdaBoostRegressor            42.520342         2776.304355  0.516344
+2       BaggingRegressor            43.252252         2960.547387  0.484248
+3          BayesianRidge            41.959062         2707.145890  0.528392
+4                    CCA            42.419203         2822.609525  0.508278
+5  DecisionTreeRegressor            58.684685         5188.738739  0.096078
+6         DummyRegressor            64.812634         5763.312761 -0.004018
+2023-02-22 03:52:10,382 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: ElasticNet ###################
+2023-02-22 03:52:10,384 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('ElasticNet', TransformedTargetRegressor(regressor=ElasticNet(), transformer=MinMaxScaler()))]
+2023-02-22 03:52:10,398 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/ElasticNet.joblib
+2023-02-22 03:52:10,414 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('ElasticNet',
+                 TransformedTargetRegressor(regressor=ElasticNet(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,426 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('ElasticNet',
+                 TransformedTargetRegressor(regressor=ElasticNet(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,436 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('ElasticNet',
+                 TransformedTargetRegressor(regressor=ElasticNet(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,441 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:10,442 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:10,452 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+    Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  ElasticNet            64.812634         5763.312761 -0.004018
+2023-02-22 03:52:10,453 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'ElasticNet', 'mean_absolute_error': 64.8126343866525, 'mean_squared_error': 5763.312761223723, 'r2_score': -0.004017504077835188}]
+2023-02-22 03:52:10,460 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+               Estimator  mean_absolute_error  mean_squared_error  r2_score
+0          ARDRegression            41.952247         2663.072632  0.536070
+1      AdaBoostRegressor            42.520342         2776.304355  0.516344
+2       BaggingRegressor            43.252252         2960.547387  0.484248
+3          BayesianRidge            41.959062         2707.145890  0.528392
+4                    CCA            42.419203         2822.609525  0.508278
+5  DecisionTreeRegressor            58.684685         5188.738739  0.096078
+6         DummyRegressor            64.812634         5763.312761 -0.004018
+7             ElasticNet            64.812634         5763.312761 -0.004018
+2023-02-22 03:52:10,465 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: ElasticNetCV ###################
+2023-02-22 03:52:10,467 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('ElasticNetCV', TransformedTargetRegressor(regressor=ElasticNetCV(), transformer=MinMaxScaler()))]
+2023-02-22 03:52:10,759 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/ElasticNetCV.joblib
+2023-02-22 03:52:10,775 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('ElasticNetCV',
+                 TransformedTargetRegressor(regressor=ElasticNetCV(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,785 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('ElasticNetCV',
+                 TransformedTargetRegressor(regressor=ElasticNetCV(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,797 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('ElasticNetCV',
+                 TransformedTargetRegressor(regressor=ElasticNetCV(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,802 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:10,803 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:10,813 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+      Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  ElasticNetCV            41.982099         2701.580312  0.529362
+2023-02-22 03:52:10,815 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'ElasticNetCV', 'mean_absolute_error': 41.98209919384351, 'mean_squared_error': 2701.5803121249114, 'r2_score': 0.5293620120193613}]
+2023-02-22 03:52:10,822 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+               Estimator  mean_absolute_error  mean_squared_error  r2_score
+0          ARDRegression            41.952247         2663.072632  0.536070
+1      AdaBoostRegressor            42.520342         2776.304355  0.516344
+2       BaggingRegressor            43.252252         2960.547387  0.484248
+3          BayesianRidge            41.959062         2707.145890  0.528392
+4                    CCA            42.419203         2822.609525  0.508278
+5  DecisionTreeRegressor            58.684685         5188.738739  0.096078
+6         DummyRegressor            64.812634         5763.312761 -0.004018
+7             ElasticNet            64.812634         5763.312761 -0.004018
+8           ElasticNetCV            41.982099         2701.580312  0.529362
+2023-02-22 03:52:10,827 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: ExtraTreeRegressor ###################
+2023-02-22 03:52:10,833 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('ExtraTreeRegressor', TransformedTargetRegressor(regressor=ExtraTreeRegressor(),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:10,850 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/ExtraTreeRegressor.joblib
+2023-02-22 03:52:10,876 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('ExtraTreeRegressor',
+                 TransformedTargetRegressor(regressor=ExtraTreeRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,887 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('ExtraTreeRegressor',
+                 TransformedTargetRegressor(regressor=ExtraTreeRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,898 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('ExtraTreeRegressor',
+                 TransformedTargetRegressor(regressor=ExtraTreeRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:10,903 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:10,903 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:10,914 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+            Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  ExtraTreeRegressor            63.783784          6734.18018 -0.173151
+2023-02-22 03:52:10,915 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'ExtraTreeRegressor', 'mean_absolute_error': 63.78378378378378, 'mean_squared_error': 6734.18018018018, 'r2_score': -0.17315076530382822}]
+2023-02-22 03:52:10,922 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+               Estimator  mean_absolute_error  mean_squared_error  r2_score
+0          ARDRegression            41.952247         2663.072632  0.536070
+1      AdaBoostRegressor            42.520342         2776.304355  0.516344
+2       BaggingRegressor            43.252252         2960.547387  0.484248
+3          BayesianRidge            41.959062         2707.145890  0.528392
+4                    CCA            42.419203         2822.609525  0.508278
+5  DecisionTreeRegressor            58.684685         5188.738739  0.096078
+6         DummyRegressor            64.812634         5763.312761 -0.004018
+7             ElasticNet            64.812634         5763.312761 -0.004018
+8           ElasticNetCV            41.982099         2701.580312  0.529362
+9     ExtraTreeRegressor            63.783784         6734.180180 -0.173151
+2023-02-22 03:52:10,927 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: ExtraTreesRegressor ###################
+2023-02-22 03:52:10,929 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('ExtraTreesRegressor', TransformedTargetRegressor(regressor=ExtraTreesRegressor(),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:11,518 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/ExtraTreesRegressor.joblib
+2023-02-22 03:52:11,663 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('ExtraTreesRegressor',
+                 TransformedTargetRegressor(regressor=ExtraTreesRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:11,675 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('ExtraTreesRegressor',
+                 TransformedTargetRegressor(regressor=ExtraTreesRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:11,686 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('ExtraTreesRegressor',
+                 TransformedTargetRegressor(regressor=ExtraTreesRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:11,728 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:11,728 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:11,739 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+             Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  ExtraTreesRegressor            42.236126         2769.660017  0.517502
+2023-02-22 03:52:11,740 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'ExtraTreesRegressor', 'mean_absolute_error': 42.23612612612612, 'mean_squared_error': 2769.660017117117, 'r2_score': 0.5175019554309841}]
+2023-02-22 03:52:11,747 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                Estimator  mean_absolute_error  mean_squared_error  r2_score
+0           ARDRegression            41.952247         2663.072632  0.536070
+1       AdaBoostRegressor            42.520342         2776.304355  0.516344
+2        BaggingRegressor            43.252252         2960.547387  0.484248
+3           BayesianRidge            41.959062         2707.145890  0.528392
+4                     CCA            42.419203         2822.609525  0.508278
+5   DecisionTreeRegressor            58.684685         5188.738739  0.096078
+6          DummyRegressor            64.812634         5763.312761 -0.004018
+7              ElasticNet            64.812634         5763.312761 -0.004018
+8            ElasticNetCV            41.982099         2701.580312  0.529362
+9      ExtraTreeRegressor            63.783784         6734.180180 -0.173151
+10    ExtraTreesRegressor            42.236126         2769.660017  0.517502
+2023-02-22 03:52:11,752 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: GammaRegressor ###################
+2023-02-22 03:52:11,756 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('GammaRegressor', TransformedTargetRegressor(regressor=GammaRegressor(),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:11,772 : INFO : regressor : train_test_evaluate : Line 348 : Exception occurred :: 
+        Estimator                                          Exception
+0  GammaRegressor  Some value(s) of y are out of the valid range ...
+2023-02-22 03:52:11,776 : ERROR : regressor : train_test_evaluate : Line 350 : Exception occurred while training the model :: Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+Traceback (most recent call last):
+  File "/home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/regression/regressor.py", line 307, in train_test_evaluate
+    pipeline_with_best_estimator = model_pipeline.fit(X_train, y_train)
+  File "/home/shashank-agrawal/anaconda3/envs/bluemist-ai/lib/python3.9/site-packages/sklearn/pipeline.py", line 406, in fit
+    self._final_estimator.fit(Xt, y, **fit_params_last_step)
+  File "/home/shashank-agrawal/anaconda3/envs/bluemist-ai/lib/python3.9/site-packages/sklearn/compose/_target.py", line 262, in fit
+    self.regressor_.fit(X, y_trans, **fit_params)
+  File "/home/shashank-agrawal/anaconda3/envs/bluemist-ai/lib/python3.9/site-packages/sklearn/linear_model/_glm/glm.py", line 226, in fit
+    raise ValueError(
+ValueError: Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+2023-02-22 03:52:11,782 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: GaussianProcessRegressor ###################
+2023-02-22 03:52:11,785 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('GaussianProcessRegressor', TransformedTargetRegressor(regressor=GaussianProcessRegressor(),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:11,821 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/GaussianProcessRegressor.joblib
+2023-02-22 03:52:11,843 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('GaussianProcessRegressor',
+                 TransformedTargetRegressor(regressor=GaussianProcessRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:11,853 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('GaussianProcessRegressor',
+                 TransformedTargetRegressor(regressor=GaussianProcessRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:11,864 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('GaussianProcessRegressor',
+                 TransformedTargetRegressor(regressor=GaussianProcessRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:11,873 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:11,873 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:11,883 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+                  Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  GaussianProcessRegressor            67.824666         7450.898835 -0.298009
+2023-02-22 03:52:11,885 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'GaussianProcessRegressor', 'mean_absolute_error': 67.82466607771843, 'mean_squared_error': 7450.898835425666, 'r2_score': -0.29800917663405135}]
+2023-02-22 03:52:11,895 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                   Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0              ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1          AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2           BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3              BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                        CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5      DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6             DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                 ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8               ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9         ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10       ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11            GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12  GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+2023-02-22 03:52:11,900 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: GradientBoostingRegressor ###################
+2023-02-22 03:52:11,905 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('GradientBoostingRegressor', TransformedTargetRegressor(regressor=GradientBoostingRegressor(),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:12,291 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/GradientBoostingRegressor.joblib
+2023-02-22 03:52:12,323 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('GradientBoostingRegressor',
+                 TransformedTargetRegressor(regressor=GradientBoostingRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:12,338 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('GradientBoostingRegressor',
+                 TransformedTargetRegressor(regressor=GradientBoostingRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:12,352 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('GradientBoostingRegressor',
+                 TransformedTargetRegressor(regressor=GradientBoostingRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:12,358 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:12,359 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:12,369 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+                   Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  GradientBoostingRegressor             43.11154         2997.330572   0.47784
+2023-02-22 03:52:12,370 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'GradientBoostingRegressor', 'mean_absolute_error': 43.11153993310496, 'mean_squared_error': 2997.3305724231577, 'r2_score': 0.47783983189877965}]
+2023-02-22 03:52:12,380 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                    Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0               ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1           AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2            BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3               BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                         CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5       DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6              DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                  ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9          ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10        ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11             GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12   GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13  GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+2023-02-22 03:52:12,385 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: HistGradientBoostingRegressor ###################
+2023-02-22 03:52:12,389 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('HistGradientBoostingRegressor', TransformedTargetRegressor(regressor=HistGradientBoostingRegressor(),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:13,274 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/HistGradientBoostingRegressor.joblib
+2023-02-22 03:52:13,442 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('HistGradientBoostingRegressor',
+                 TransformedTargetRegressor(regressor=HistGradientBoostingRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:13,456 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('HistGradientBoostingRegressor',
+                 TransformedTargetRegressor(regressor=HistGradientBoostingRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:13,470 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('HistGradientBoostingRegressor',
+                 TransformedTargetRegressor(regressor=HistGradientBoostingRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:13,484 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:13,485 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:13,499 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+                       Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  HistGradientBoostingRegressor            43.241209         3027.927983   0.47251
+2023-02-22 03:52:13,501 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'HistGradientBoostingRegressor', 'mean_absolute_error': 43.24120922932341, 'mean_squared_error': 3027.9279834654803, 'r2_score': 0.4725095058278701}]
+2023-02-22 03:52:13,516 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                        Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0                   ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1               AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2                BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3                   BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                             CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5           DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6                  DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                      ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                    ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9              ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10            ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11                 GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12       GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13      GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+14  HistGradientBoostingRegressor            43.241209         3027.927983  0.472510                                                                         NaN
+2023-02-22 03:52:13,523 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: HuberRegressor ###################
+2023-02-22 03:52:13,526 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('HuberRegressor', TransformedTargetRegressor(regressor=HuberRegressor(),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:13,645 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/HuberRegressor.joblib
+2023-02-22 03:52:13,670 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('HuberRegressor',
+                 TransformedTargetRegressor(regressor=HuberRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:13,685 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('HuberRegressor',
+                 TransformedTargetRegressor(regressor=HuberRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:13,700 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('HuberRegressor',
+                 TransformedTargetRegressor(regressor=HuberRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:13,707 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:13,707 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:13,722 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+        Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  HuberRegressor             41.36344         2631.265438  0.541611
+2023-02-22 03:52:13,723 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'HuberRegressor', 'mean_absolute_error': 41.3634397067882, 'mean_squared_error': 2631.265437867133, 'r2_score': 0.5416114538728086}]
+2023-02-22 03:52:13,739 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                        Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0                   ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1               AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2                BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3                   BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                             CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5           DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6                  DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                      ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                    ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9              ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10            ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11                 GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12       GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13      GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+14  HistGradientBoostingRegressor            43.241209         3027.927983  0.472510                                                                         NaN
+15                 HuberRegressor            41.363440         2631.265438  0.541611                                                                         NaN
+2023-02-22 03:52:13,744 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: KNeighborsRegressor ###################
+2023-02-22 03:52:13,748 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('KNeighborsRegressor', TransformedTargetRegressor(regressor=KNeighborsRegressor(),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:13,762 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/KNeighborsRegressor.joblib
+2023-02-22 03:52:13,782 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('KNeighborsRegressor',
+                 TransformedTargetRegressor(regressor=KNeighborsRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:13,793 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('KNeighborsRegressor',
+                 TransformedTargetRegressor(regressor=KNeighborsRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:13,803 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('KNeighborsRegressor',
+                 TransformedTargetRegressor(regressor=KNeighborsRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:13,813 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:13,814 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:13,826 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+             Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  KNeighborsRegressor            45.466667         3307.077477  0.423879
+2023-02-22 03:52:13,828 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'KNeighborsRegressor', 'mean_absolute_error': 45.466666666666676, 'mean_squared_error': 3307.0774774774773, 'r2_score': 0.4238793186674208}]
+2023-02-22 03:52:13,839 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                        Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0                   ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1               AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2                BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3                   BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                             CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5           DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6                  DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                      ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                    ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9              ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10            ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11                 GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12       GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13      GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+14  HistGradientBoostingRegressor            43.241209         3027.927983  0.472510                                                                         NaN
+15                 HuberRegressor            41.363440         2631.265438  0.541611                                                                         NaN
+16            KNeighborsRegressor            45.466667         3307.077477  0.423879                                                                         NaN
+2023-02-22 03:52:13,844 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: KernelRidge ###################
+2023-02-22 03:52:13,846 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('KernelRidge', TransformedTargetRegressor(regressor=KernelRidge(), transformer=MinMaxScaler()))]
+2023-02-22 03:52:13,865 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/KernelRidge.joblib
+2023-02-22 03:52:13,888 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('KernelRidge',
+                 TransformedTargetRegressor(regressor=KernelRidge(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:13,901 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('KernelRidge',
+                 TransformedTargetRegressor(regressor=KernelRidge(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:13,915 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('KernelRidge',
+                 TransformedTargetRegressor(regressor=KernelRidge(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:13,923 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:13,924 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:13,938 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+     Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  KernelRidge            95.163513        13588.608471  -1.36725
+2023-02-22 03:52:13,940 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'KernelRidge', 'mean_absolute_error': 95.1635127402098, 'mean_squared_error': 13588.608470778954, 'r2_score': -1.3672497617196044}]
+2023-02-22 03:52:13,957 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                        Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0                   ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1               AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2                BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3                   BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                             CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5           DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6                  DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                      ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                    ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9              ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10            ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11                 GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12       GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13      GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+14  HistGradientBoostingRegressor            43.241209         3027.927983  0.472510                                                                         NaN
+15                 HuberRegressor            41.363440         2631.265438  0.541611                                                                         NaN
+16            KNeighborsRegressor            45.466667         3307.077477  0.423879                                                                         NaN
+17                    KernelRidge            95.163513        13588.608471 -1.367250                                                                         NaN
+2023-02-22 03:52:13,962 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: Lars ###################
+2023-02-22 03:52:13,966 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('Lars', TransformedTargetRegressor(regressor=Lars(), transformer=MinMaxScaler()))]
+2023-02-22 03:52:13,991 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/Lars.joblib
+2023-02-22 03:52:14,014 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('Lars',
+                 TransformedTargetRegressor(regressor=Lars(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:14,025 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('Lars',
+                 TransformedTargetRegressor(regressor=Lars(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:14,035 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('Lars',
+                 TransformedTargetRegressor(regressor=Lars(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:14,040 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:14,041 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:14,052 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+  Estimator  mean_absolute_error  mean_squared_error  r2_score
+0      Lars            41.400974         2670.208535  0.534827
+2023-02-22 03:52:14,054 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'Lars', 'mean_absolute_error': 41.40097363248003, 'mean_squared_error': 2670.2085353689613, 'r2_score': 0.5348272391034989}]
+2023-02-22 03:52:14,066 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                        Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0                   ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1               AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2                BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3                   BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                             CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5           DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6                  DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                      ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                    ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9              ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10            ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11                 GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12       GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13      GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+14  HistGradientBoostingRegressor            43.241209         3027.927983  0.472510                                                                         NaN
+15                 HuberRegressor            41.363440         2631.265438  0.541611                                                                         NaN
+16            KNeighborsRegressor            45.466667         3307.077477  0.423879                                                                         NaN
+17                    KernelRidge            95.163513        13588.608471 -1.367250                                                                         NaN
+18                           Lars            41.400974         2670.208535  0.534827                                                                         NaN
+2023-02-22 03:52:14,071 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: LarsCV ###################
+2023-02-22 03:52:14,073 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('LarsCV', TransformedTargetRegressor(regressor=LarsCV(), transformer=MinMaxScaler()))]
+2023-02-22 03:52:14,162 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/LarsCV.joblib
+2023-02-22 03:52:14,189 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('LarsCV',
+                 TransformedTargetRegressor(regressor=LarsCV(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:14,205 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('LarsCV',
+                 TransformedTargetRegressor(regressor=LarsCV(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:14,221 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('LarsCV',
+                 TransformedTargetRegressor(regressor=LarsCV(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:14,228 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:14,229 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:14,243 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+  Estimator  mean_absolute_error  mean_squared_error  r2_score
+0    LarsCV            43.343438         2817.927477  0.509093
+2023-02-22 03:52:14,245 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'LarsCV', 'mean_absolute_error': 43.34343765064213, 'mean_squared_error': 2817.927477307584, 'r2_score': 0.5090933583417088}]
+2023-02-22 03:52:14,261 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                        Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0                   ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1               AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2                BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3                   BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                             CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5           DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6                  DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                      ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                    ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9              ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10            ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11                 GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12       GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13      GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+14  HistGradientBoostingRegressor            43.241209         3027.927983  0.472510                                                                         NaN
+15                 HuberRegressor            41.363440         2631.265438  0.541611                                                                         NaN
+16            KNeighborsRegressor            45.466667         3307.077477  0.423879                                                                         NaN
+17                    KernelRidge            95.163513        13588.608471 -1.367250                                                                         NaN
+18                           Lars            41.400974         2670.208535  0.534827                                                                         NaN
+19                         LarsCV            43.343438         2817.927477  0.509093                                                                         NaN
+2023-02-22 03:52:14,266 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: Lasso ###################
+2023-02-22 03:52:14,270 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('Lasso', TransformedTargetRegressor(regressor=Lasso(), transformer=MinMaxScaler()))]
+2023-02-22 03:52:14,286 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/Lasso.joblib
+2023-02-22 03:52:14,306 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('Lasso',
+                 TransformedTargetRegressor(regressor=Lasso(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:14,316 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('Lasso',
+                 TransformedTargetRegressor(regressor=Lasso(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:14,326 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('Lasso',
+                 TransformedTargetRegressor(regressor=Lasso(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:14,331 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:14,332 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:14,342 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+  Estimator  mean_absolute_error  mean_squared_error  r2_score
+0     Lasso            64.812634         5763.312761 -0.004018
+2023-02-22 03:52:14,344 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'Lasso', 'mean_absolute_error': 64.8126343866525, 'mean_squared_error': 5763.312761223723, 'r2_score': -0.004017504077835188}]
+2023-02-22 03:52:14,354 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                        Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0                   ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1               AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2                BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3                   BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                             CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5           DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6                  DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                      ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                    ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9              ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10            ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11                 GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12       GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13      GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+14  HistGradientBoostingRegressor            43.241209         3027.927983  0.472510                                                                         NaN
+15                 HuberRegressor            41.363440         2631.265438  0.541611                                                                         NaN
+16            KNeighborsRegressor            45.466667         3307.077477  0.423879                                                                         NaN
+17                    KernelRidge            95.163513        13588.608471 -1.367250                                                                         NaN
+18                           Lars            41.400974         2670.208535  0.534827                                                                         NaN
+19                         LarsCV            43.343438         2817.927477  0.509093                                                                         NaN
+20                          Lasso            64.812634         5763.312761 -0.004018                                                                         NaN
+2023-02-22 03:52:14,357 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: LassoCV ###################
+2023-02-22 03:52:14,359 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('LassoCV', TransformedTargetRegressor(regressor=LassoCV(), transformer=MinMaxScaler()))]
+2023-02-22 03:52:14,627 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/LassoCV.joblib
+2023-02-22 03:52:14,654 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('LassoCV',
+                 TransformedTargetRegressor(regressor=LassoCV(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:14,674 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('LassoCV',
+                 TransformedTargetRegressor(regressor=LassoCV(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:14,694 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('LassoCV',
+                 TransformedTargetRegressor(regressor=LassoCV(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:14,702 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:14,703 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:14,718 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+  Estimator  mean_absolute_error  mean_squared_error  r2_score
+0   LassoCV            41.978754         2700.866656  0.529486
+2023-02-22 03:52:14,721 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'LassoCV', 'mean_absolute_error': 41.97875406632611, 'mean_squared_error': 2700.866655571635, 'r2_score': 0.5294863369868019}]
+2023-02-22 03:52:14,739 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                        Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0                   ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1               AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2                BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3                   BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                             CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5           DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6                  DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                      ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                    ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9              ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10            ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11                 GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12       GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13      GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+14  HistGradientBoostingRegressor            43.241209         3027.927983  0.472510                                                                         NaN
+15                 HuberRegressor            41.363440         2631.265438  0.541611                                                                         NaN
+16            KNeighborsRegressor            45.466667         3307.077477  0.423879                                                                         NaN
+17                    KernelRidge            95.163513        13588.608471 -1.367250                                                                         NaN
+18                           Lars            41.400974         2670.208535  0.534827                                                                         NaN
+19                         LarsCV            43.343438         2817.927477  0.509093                                                                         NaN
+20                          Lasso            64.812634         5763.312761 -0.004018                                                                         NaN
+21                        LassoCV            41.978754         2700.866656  0.529486                                                                         NaN
+2023-02-22 03:52:14,745 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: LassoLars ###################
+2023-02-22 03:52:14,750 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('LassoLars', TransformedTargetRegressor(regressor=LassoLars(), transformer=MinMaxScaler()))]
+2023-02-22 03:52:14,768 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/LassoLars.joblib
+2023-02-22 03:52:14,799 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('LassoLars',
+                 TransformedTargetRegressor(regressor=LassoLars(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:14,820 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('LassoLars',
+                 TransformedTargetRegressor(regressor=LassoLars(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:14,840 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('LassoLars',
+                 TransformedTargetRegressor(regressor=LassoLars(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:14,848 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:14,849 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:14,865 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+   Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  LassoLars            64.812634         5763.312761 -0.004018
+2023-02-22 03:52:14,868 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'LassoLars', 'mean_absolute_error': 64.8126343866525, 'mean_squared_error': 5763.312761223723, 'r2_score': -0.004017504077835188}]
+2023-02-22 03:52:14,886 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                        Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0                   ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1               AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2                BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3                   BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                             CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5           DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6                  DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                      ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                    ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9              ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10            ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11                 GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12       GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13      GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+14  HistGradientBoostingRegressor            43.241209         3027.927983  0.472510                                                                         NaN
+15                 HuberRegressor            41.363440         2631.265438  0.541611                                                                         NaN
+16            KNeighborsRegressor            45.466667         3307.077477  0.423879                                                                         NaN
+17                    KernelRidge            95.163513        13588.608471 -1.367250                                                                         NaN
+18                           Lars            41.400974         2670.208535  0.534827                                                                         NaN
+19                         LarsCV            43.343438         2817.927477  0.509093                                                                         NaN
+20                          Lasso            64.812634         5763.312761 -0.004018                                                                         NaN
+21                        LassoCV            41.978754         2700.866656  0.529486                                                                         NaN
+22                      LassoLars            64.812634         5763.312761 -0.004018                                                                         NaN
+2023-02-22 03:52:14,892 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: LassoLarsCV ###################
+2023-02-22 03:52:14,896 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('LassoLarsCV', TransformedTargetRegressor(regressor=LassoLarsCV(), transformer=MinMaxScaler()))]
+2023-02-22 03:52:15,013 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/LassoLarsCV.joblib
+2023-02-22 03:52:15,047 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('LassoLarsCV',
+                 TransformedTargetRegressor(regressor=LassoLarsCV(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:15,067 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('LassoLarsCV',
+                 TransformedTargetRegressor(regressor=LassoLarsCV(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:15,088 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('LassoLarsCV',
+                 TransformedTargetRegressor(regressor=LassoLarsCV(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:15,096 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:15,097 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:15,111 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+     Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  LassoLarsCV            41.977918         2700.762302  0.529505
+2023-02-22 03:52:15,113 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'LassoLarsCV', 'mean_absolute_error': 41.977918297742335, 'mean_squared_error': 2700.762301955616, 'r2_score': 0.5295045162634502}]
+2023-02-22 03:52:15,130 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                        Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0                   ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1               AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2                BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3                   BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                             CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5           DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6                  DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                      ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                    ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9              ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10            ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11                 GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12       GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13      GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+14  HistGradientBoostingRegressor            43.241209         3027.927983  0.472510                                                                         NaN
+15                 HuberRegressor            41.363440         2631.265438  0.541611                                                                         NaN
+16            KNeighborsRegressor            45.466667         3307.077477  0.423879                                                                         NaN
+17                    KernelRidge            95.163513        13588.608471 -1.367250                                                                         NaN
+18                           Lars            41.400974         2670.208535  0.534827                                                                         NaN
+19                         LarsCV            43.343438         2817.927477  0.509093                                                                         NaN
+20                          Lasso            64.812634         5763.312761 -0.004018                                                                         NaN
+21                        LassoCV            41.978754         2700.866656  0.529486                                                                         NaN
+22                      LassoLars            64.812634         5763.312761 -0.004018                                                                         NaN
+23                    LassoLarsCV            41.977918         2700.762302  0.529505                                                                         NaN
+2023-02-22 03:52:15,136 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: LassoLarsIC ###################
+2023-02-22 03:52:15,139 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('LassoLarsIC', TransformedTargetRegressor(regressor=LassoLarsIC(), transformer=MinMaxScaler()))]
+2023-02-22 03:52:15,176 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/LassoLarsIC.joblib
+2023-02-22 03:52:15,202 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('LassoLarsIC',
+                 TransformedTargetRegressor(regressor=LassoLarsIC(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:15,219 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('LassoLarsIC',
+                 TransformedTargetRegressor(regressor=LassoLarsIC(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:15,236 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('LassoLarsIC',
+                 TransformedTargetRegressor(regressor=LassoLarsIC(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:15,243 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:15,244 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:15,259 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+     Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  LassoLarsIC            41.492555         2672.194071  0.534481
+2023-02-22 03:52:15,261 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'LassoLarsIC', 'mean_absolute_error': 41.492554610871984, 'mean_squared_error': 2672.1940710840463, 'r2_score': 0.5344813421002459}]
+2023-02-22 03:52:15,279 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                        Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0                   ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1               AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2                BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3                   BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                             CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5           DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6                  DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                      ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                    ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9              ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10            ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11                 GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12       GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13      GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+14  HistGradientBoostingRegressor            43.241209         3027.927983  0.472510                                                                         NaN
+15                 HuberRegressor            41.363440         2631.265438  0.541611                                                                         NaN
+16            KNeighborsRegressor            45.466667         3307.077477  0.423879                                                                         NaN
+17                    KernelRidge            95.163513        13588.608471 -1.367250                                                                         NaN
+18                           Lars            41.400974         2670.208535  0.534827                                                                         NaN
+19                         LarsCV            43.343438         2817.927477  0.509093                                                                         NaN
+20                          Lasso            64.812634         5763.312761 -0.004018                                                                         NaN
+21                        LassoCV            41.978754         2700.866656  0.529486                                                                         NaN
+22                      LassoLars            64.812634         5763.312761 -0.004018                                                                         NaN
+23                    LassoLarsCV            41.977918         2700.762302  0.529505                                                                         NaN
+24                    LassoLarsIC            41.492555         2672.194071  0.534481                                                                         NaN
+2023-02-22 03:52:15,286 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: LinearRegression ###################
+2023-02-22 03:52:15,290 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('LinearRegression', TransformedTargetRegressor(regressor=LinearRegression(),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:15,307 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/LinearRegression.joblib
+2023-02-22 03:52:15,329 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('LinearRegression',
+                 TransformedTargetRegressor(regressor=LinearRegression(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:15,344 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('LinearRegression',
+                 TransformedTargetRegressor(regressor=LinearRegression(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:15,358 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('LinearRegression',
+                 TransformedTargetRegressor(regressor=LinearRegression(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:15,364 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:15,365 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:15,380 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+          Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  LinearRegression            41.400974         2670.208535  0.534827
+2023-02-22 03:52:15,382 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'LinearRegression', 'mean_absolute_error': 41.40097363248003, 'mean_squared_error': 2670.2085353689613, 'r2_score': 0.5348272391034989}]
+2023-02-22 03:52:15,399 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                        Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0                   ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1               AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2                BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3                   BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                             CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5           DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6                  DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                      ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                    ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9              ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10            ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11                 GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12       GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13      GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+14  HistGradientBoostingRegressor            43.241209         3027.927983  0.472510                                                                         NaN
+15                 HuberRegressor            41.363440         2631.265438  0.541611                                                                         NaN
+16            KNeighborsRegressor            45.466667         3307.077477  0.423879                                                                         NaN
+17                    KernelRidge            95.163513        13588.608471 -1.367250                                                                         NaN
+18                           Lars            41.400974         2670.208535  0.534827                                                                         NaN
+19                         LarsCV            43.343438         2817.927477  0.509093                                                                         NaN
+20                          Lasso            64.812634         5763.312761 -0.004018                                                                         NaN
+21                        LassoCV            41.978754         2700.866656  0.529486                                                                         NaN
+22                      LassoLars            64.812634         5763.312761 -0.004018                                                                         NaN
+23                    LassoLarsCV            41.977918         2700.762302  0.529505                                                                         NaN
+24                    LassoLarsIC            41.492555         2672.194071  0.534481                                                                         NaN
+25               LinearRegression            41.400974         2670.208535  0.534827                                                                         NaN
+2023-02-22 03:52:15,406 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: LinearSVR ###################
+2023-02-22 03:52:15,409 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('LinearSVR', TransformedTargetRegressor(regressor=LinearSVR(), transformer=MinMaxScaler()))]
+2023-02-22 03:52:15,454 : WARNING : warnings : _showwarnmsg : Line 109 : /home/shashank-agrawal/anaconda3/envs/bluemist-ai/lib/python3.9/site-packages/sklearn/svm/_base.py:1244: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  warnings.warn(
+
+2023-02-22 03:52:15,455 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/LinearSVR.joblib
+2023-02-22 03:52:15,477 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('LinearSVR',
+                 TransformedTargetRegressor(regressor=LinearSVR(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:15,487 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('LinearSVR',
+                 TransformedTargetRegressor(regressor=LinearSVR(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:15,499 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('LinearSVR',
+                 TransformedTargetRegressor(regressor=LinearSVR(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:15,507 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:15,508 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:15,519 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+   Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  LinearSVR            42.126934         2665.347488  0.535674
+2023-02-22 03:52:15,520 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'LinearSVR', 'mean_absolute_error': 42.12693391821322, 'mean_squared_error': 2665.34748846234, 'r2_score': 0.5356740743152244}]
+2023-02-22 03:52:15,537 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                        Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0                   ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1               AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2                BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3                   BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                             CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5           DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6                  DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                      ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                    ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9              ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10            ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11                 GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12       GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13      GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+14  HistGradientBoostingRegressor            43.241209         3027.927983  0.472510                                                                         NaN
+15                 HuberRegressor            41.363440         2631.265438  0.541611                                                                         NaN
+16            KNeighborsRegressor            45.466667         3307.077477  0.423879                                                                         NaN
+17                    KernelRidge            95.163513        13588.608471 -1.367250                                                                         NaN
+18                           Lars            41.400974         2670.208535  0.534827                                                                         NaN
+19                         LarsCV            43.343438         2817.927477  0.509093                                                                         NaN
+20                          Lasso            64.812634         5763.312761 -0.004018                                                                         NaN
+21                        LassoCV            41.978754         2700.866656  0.529486                                                                         NaN
+22                      LassoLars            64.812634         5763.312761 -0.004018                                                                         NaN
+23                    LassoLarsCV            41.977918         2700.762302  0.529505                                                                         NaN
+24                    LassoLarsIC            41.492555         2672.194071  0.534481                                                                         NaN
+25               LinearRegression            41.400974         2670.208535  0.534827                                                                         NaN
+26                      LinearSVR            42.126934         2665.347488  0.535674                                                                         NaN
+2023-02-22 03:52:15,543 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: MLPRegressor ###################
+2023-02-22 03:52:15,546 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('MLPRegressor', TransformedTargetRegressor(regressor=MLPRegressor(), transformer=MinMaxScaler()))]
+2023-02-22 03:52:15,959 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/MLPRegressor.joblib
+2023-02-22 03:52:15,986 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('MLPRegressor',
+                 TransformedTargetRegressor(regressor=MLPRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:15,999 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('MLPRegressor',
+                 TransformedTargetRegressor(regressor=MLPRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:16,012 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('MLPRegressor',
+                 TransformedTargetRegressor(regressor=MLPRegressor(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:16,017 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:16,018 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:16,030 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+      Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  MLPRegressor            45.125042         3248.759398  0.434039
+2023-02-22 03:52:16,032 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'MLPRegressor', 'mean_absolute_error': 45.1250415877695, 'mean_squared_error': 3248.7593975087475, 'r2_score': 0.43403881816339873}]
+2023-02-22 03:52:16,048 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                        Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0                   ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1               AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2                BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3                   BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                             CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5           DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6                  DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                      ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                    ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9              ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10            ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11                 GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12       GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13      GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+14  HistGradientBoostingRegressor            43.241209         3027.927983  0.472510                                                                         NaN
+15                 HuberRegressor            41.363440         2631.265438  0.541611                                                                         NaN
+16            KNeighborsRegressor            45.466667         3307.077477  0.423879                                                                         NaN
+17                    KernelRidge            95.163513        13588.608471 -1.367250                                                                         NaN
+18                           Lars            41.400974         2670.208535  0.534827                                                                         NaN
+19                         LarsCV            43.343438         2817.927477  0.509093                                                                         NaN
+20                          Lasso            64.812634         5763.312761 -0.004018                                                                         NaN
+21                        LassoCV            41.978754         2700.866656  0.529486                                                                         NaN
+22                      LassoLars            64.812634         5763.312761 -0.004018                                                                         NaN
+23                    LassoLarsCV            41.977918         2700.762302  0.529505                                                                         NaN
+24                    LassoLarsIC            41.492555         2672.194071  0.534481                                                                         NaN
+25               LinearRegression            41.400974         2670.208535  0.534827                                                                         NaN
+26                      LinearSVR            42.126934         2665.347488  0.535674                                                                         NaN
+27                   MLPRegressor            45.125042         3248.759398  0.434039                                                                         NaN
+2023-02-22 03:52:16,054 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: NuSVR ###################
+2023-02-22 03:52:16,066 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('NuSVR', TransformedTargetRegressor(regressor=NuSVR(), transformer=MinMaxScaler()))]
+2023-02-22 03:52:16,129 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/NuSVR.joblib
+2023-02-22 03:52:16,148 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('NuSVR',
+                 TransformedTargetRegressor(regressor=NuSVR(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:16,165 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('NuSVR',
+                 TransformedTargetRegressor(regressor=NuSVR(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:16,179 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('NuSVR',
+                 TransformedTargetRegressor(regressor=NuSVR(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:16,191 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:16,191 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:16,202 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+  Estimator  mean_absolute_error  mean_squared_error  r2_score
+0     NuSVR            42.615219         3043.818102  0.469741
+2023-02-22 03:52:16,204 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'NuSVR', 'mean_absolute_error': 42.6152190193467, 'mean_squared_error': 3043.818102488497, 'r2_score': 0.46974131359157}]
+2023-02-22 03:52:16,216 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                        Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0                   ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1               AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2                BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3                   BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                             CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5           DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6                  DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                      ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                    ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9              ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10            ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11                 GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12       GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13      GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+14  HistGradientBoostingRegressor            43.241209         3027.927983  0.472510                                                                         NaN
+15                 HuberRegressor            41.363440         2631.265438  0.541611                                                                         NaN
+16            KNeighborsRegressor            45.466667         3307.077477  0.423879                                                                         NaN
+17                    KernelRidge            95.163513        13588.608471 -1.367250                                                                         NaN
+18                           Lars            41.400974         2670.208535  0.534827                                                                         NaN
+19                         LarsCV            43.343438         2817.927477  0.509093                                                                         NaN
+20                          Lasso            64.812634         5763.312761 -0.004018                                                                         NaN
+21                        LassoCV            41.978754         2700.866656  0.529486                                                                         NaN
+22                      LassoLars            64.812634         5763.312761 -0.004018                                                                         NaN
+23                    LassoLarsCV            41.977918         2700.762302  0.529505                                                                         NaN
+24                    LassoLarsIC            41.492555         2672.194071  0.534481                                                                         NaN
+25               LinearRegression            41.400974         2670.208535  0.534827                                                                         NaN
+26                      LinearSVR            42.126934         2665.347488  0.535674                                                                         NaN
+27                   MLPRegressor            45.125042         3248.759398  0.434039                                                                         NaN
+28                          NuSVR            42.615219         3043.818102  0.469741                                                                         NaN
+2023-02-22 03:52:16,221 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: OrthogonalMatchingPursuit ###################
+2023-02-22 03:52:16,223 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('OrthogonalMatchingPursuit', TransformedTargetRegressor(regressor=OrthogonalMatchingPursuit(),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:16,241 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/OrthogonalMatchingPursuit.joblib
+2023-02-22 03:52:16,265 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('OrthogonalMatchingPursuit',
+                 TransformedTargetRegressor(regressor=OrthogonalMatchingPursuit(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:16,281 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('OrthogonalMatchingPursuit',
+                 TransformedTargetRegressor(regressor=OrthogonalMatchingPursuit(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:16,297 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('OrthogonalMatchingPursuit',
+                 TransformedTargetRegressor(regressor=OrthogonalMatchingPursuit(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:16,304 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:16,305 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:16,320 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+                   Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  OrthogonalMatchingPursuit            49.794996         3869.929489  0.325826
+2023-02-22 03:52:16,322 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'OrthogonalMatchingPursuit', 'mean_absolute_error': 49.79499562402843, 'mean_squared_error': 3869.9294891473587, 'r2_score': 0.325825769374706}]
+2023-02-22 03:52:16,341 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                        Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0                   ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1               AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2                BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3                   BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                             CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5           DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6                  DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                      ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                    ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9              ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10            ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11                 GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12       GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13      GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+14  HistGradientBoostingRegressor            43.241209         3027.927983  0.472510                                                                         NaN
+15                 HuberRegressor            41.363440         2631.265438  0.541611                                                                         NaN
+16            KNeighborsRegressor            45.466667         3307.077477  0.423879                                                                         NaN
+17                    KernelRidge            95.163513        13588.608471 -1.367250                                                                         NaN
+18                           Lars            41.400974         2670.208535  0.534827                                                                         NaN
+19                         LarsCV            43.343438         2817.927477  0.509093                                                                         NaN
+20                          Lasso            64.812634         5763.312761 -0.004018                                                                         NaN
+21                        LassoCV            41.978754         2700.866656  0.529486                                                                         NaN
+22                      LassoLars            64.812634         5763.312761 -0.004018                                                                         NaN
+23                    LassoLarsCV            41.977918         2700.762302  0.529505                                                                         NaN
+24                    LassoLarsIC            41.492555         2672.194071  0.534481                                                                         NaN
+25               LinearRegression            41.400974         2670.208535  0.534827                                                                         NaN
+26                      LinearSVR            42.126934         2665.347488  0.535674                                                                         NaN
+27                   MLPRegressor            45.125042         3248.759398  0.434039                                                                         NaN
+28                          NuSVR            42.615219         3043.818102  0.469741                                                                         NaN
+29      OrthogonalMatchingPursuit            49.794996         3869.929489  0.325826                                                                         NaN
+2023-02-22 03:52:16,347 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: OrthogonalMatchingPursuitCV ###################
+2023-02-22 03:52:16,353 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('OrthogonalMatchingPursuitCV', TransformedTargetRegressor(regressor=OrthogonalMatchingPursuitCV(),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:16,392 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/OrthogonalMatchingPursuitCV.joblib
+2023-02-22 03:52:16,409 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('OrthogonalMatchingPursuitCV',
+                 TransformedTargetRegressor(regressor=OrthogonalMatchingPursuitCV(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:16,428 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('OrthogonalMatchingPursuitCV',
+                 TransformedTargetRegressor(regressor=OrthogonalMatchingPursuitCV(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:16,443 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('OrthogonalMatchingPursuitCV',
+                 TransformedTargetRegressor(regressor=OrthogonalMatchingPursuitCV(),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:16,448 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 03:52:16,449 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 03:52:16,461 : INFO : regressor : train_test_evaluate : Line 330 : Current estimator Stats :: 
+                     Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  OrthogonalMatchingPursuitCV            43.502905          2854.50238  0.502722
+2023-02-22 03:52:16,462 : DEBUG : regressor : train_test_evaluate : Line 331 : Current estimator stats as dictionary :: [{'Estimator': 'OrthogonalMatchingPursuitCV', 'mean_absolute_error': 43.502904908154655, 'mean_squared_error': 2854.5023796862224, 'r2_score': 0.5027217030594968}]
+2023-02-22 03:52:16,476 : DEBUG : regressor : train_test_evaluate : Line 335 : Estimator stats so far :: 
+                        Estimator  mean_absolute_error  mean_squared_error  r2_score                                                                   Exception
+0                   ARDRegression            41.952247         2663.072632  0.536070                                                                         NaN
+1               AdaBoostRegressor            42.520342         2776.304355  0.516344                                                                         NaN
+2                BaggingRegressor            43.252252         2960.547387  0.484248                                                                         NaN
+3                   BayesianRidge            41.959062         2707.145890  0.528392                                                                         NaN
+4                             CCA            42.419203         2822.609525  0.508278                                                                         NaN
+5           DecisionTreeRegressor            58.684685         5188.738739  0.096078                                                                         NaN
+6                  DummyRegressor            64.812634         5763.312761 -0.004018                                                                         NaN
+7                      ElasticNet            64.812634         5763.312761 -0.004018                                                                         NaN
+8                    ElasticNetCV            41.982099         2701.580312  0.529362                                                                         NaN
+9              ExtraTreeRegressor            63.783784         6734.180180 -0.173151                                                                         NaN
+10            ExtraTreesRegressor            42.236126         2769.660017  0.517502                                                                         NaN
+11                 GammaRegressor                  NaN                 NaN       NaN  Some value(s) of y are out of the valid range of the loss 'HalfGammaLoss'.
+12       GaussianProcessRegressor            67.824666         7450.898835 -0.298009                                                                         NaN
+13      GradientBoostingRegressor            43.111540         2997.330572  0.477840                                                                         NaN
+14  HistGradientBoostingRegressor            43.241209         3027.927983  0.472510                                                                         NaN
+15                 HuberRegressor            41.363440         2631.265438  0.541611                                                                         NaN
+16            KNeighborsRegressor            45.466667         3307.077477  0.423879                                                                         NaN
+17                    KernelRidge            95.163513        13588.608471 -1.367250                                                                         NaN
+18                           Lars            41.400974         2670.208535  0.534827                                                                         NaN
+19                         LarsCV            43.343438         2817.927477  0.509093                                                                         NaN
+20                          Lasso            64.812634         5763.312761 -0.004018                                                                         NaN
+21                        LassoCV            41.978754         2700.866656  0.529486                                                                         NaN
+22                      LassoLars            64.812634         5763.312761 -0.004018                                                                         NaN
+23                    LassoLarsCV            41.977918         2700.762302  0.529505                                                                         NaN
+24                    LassoLarsIC            41.492555         2672.194071  0.534481                                                                         NaN
+25               LinearRegression            41.400974         2670.208535  0.534827                                                                         NaN
+26                      LinearSVR            42.126934         2665.347488  0.535674                                                                         NaN
+27                   MLPRegressor            45.125042         3248.759398  0.434039                                                                         NaN
+28                          NuSVR            42.615219         3043.818102  0.469741                                                                         NaN
+29      OrthogonalMatchingPursuit            49.794996         3869.929489  0.325826                                                                         NaN
+30    OrthogonalMatchingPursuitCV            43.502905         2854.502380  0.502722                                                                         NaN
+2023-02-22 03:52:16,481 : INFO : regressor : train_test_evaluate : Line 223 : ###################  Regressor in progress :: PLSCanonical ###################
+2023-02-22 03:52:16,485 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('PLSCanonical', TransformedTargetRegressor(regressor=PLSCanonical(n_components=1),
+                           transformer=MinMaxScaler()))]
+2023-02-22 03:52:16,502 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/PLSCanonical.joblib
+2023-02-22 03:52:16,540 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('PLSCanonical',
+                 TransformedTargetRegressor(regressor=PLSCanonical(n_components=1),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:16,562 : INFO : regressor : train_test_evaluate : Line 312 : Model pipeline with best estimator (no hyperparameter tuning) :: Pipeline(steps=[('PLSCanonical',
+                 TransformedTargetRegressor(regressor=PLSCanonical(n_components=1),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:16,584 : DEBUG : regressor : train_test_evaluate : Line 314 : Model pipeline (no hyperparameter tuning) :: Pipeline(steps=[('PLSCanonical',
+                 TransformedTargetRegressor(regressor=PLSCanonical(n_components=1),
+                                            transformer=MinMaxScaler()))])
+2023-02-22 03:52:25,673 : INFO : environment : <module> : Line 30 : BLUEMIST_PATH /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist

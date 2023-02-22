@@ -14,6 +14,8 @@ import shutil
 import sysconfig
 from logging import config
 import platform
+
+from IPython.display import display, HTML
 from termcolor import colored
 
 
@@ -46,22 +48,21 @@ def initialize(
     logger.handlers[0].doRollover()
 
     banner = """
-    ██████╗ ██╗     ██╗   ██╗███████╗███╗   ███╗██╗███████╗████████╗               █████╗ ██╗
-    ██╔══██╗██║     ██║   ██║██╔════╝████╗ ████║██║██╔════╝╚══██╔══╝              ██╔══██╗██║
-    ██████╔╝██║     ██║   ██║█████╗  ██╔████╔██║██║███████╗   ██║       █████╗    ███████║██║
-    ██╔══██╗██║     ██║   ██║██╔══╝  ██║╚██╔╝██║██║╚════██║   ██║       ╚════╝    ██╔══██║██║
-    ██████╔╝███████╗╚██████╔╝███████╗██║ ╚═╝ ██║██║███████║   ██║                 ██║  ██║██║
-    ╚═════╝ ╚══════╝ ╚═════╝ ╚══════╝╚═╝     ╚═╝╚═╝╚══════╝   ╚═╝                 ╚═╝  ╚═╝╚═╝                                                                                           
-    (version 0.1.1)
+██████╗ ██╗     ██╗   ██╗███████╗███╗   ███╗██╗███████╗████████╗     █████╗ ██╗
+██╔══██╗██║     ██║   ██║██╔════╝████╗ ████║██║██╔════╝╚══██╔══╝    ██╔══██╗██║
+██████╔╝██║     ██║   ██║█████╗  ██╔████╔██║██║███████╗   ██║       ███████║██║
+██╔══██╗██║     ██║   ██║██╔══╝  ██║╚██╔╝██║██║╚════██║   ██║       ██╔══██║██║
+██████╔╝███████╗╚██████╔╝███████╗██║ ╚═╝ ██║██║███████║   ██║       ██║  ██║██║                                                                        
+                                (version 0.1.1)
     """
 
     print(colored(banner, 'blue'))
     logger.info('\n{}'.format(banner))
 
     print('Bluemist path :: {}'.format(BLUEMIST_PATH))
-    print('System platform :: {}, {}, {}, {}'.format(os.name, platform.release(), sysconfig.get_platform(),
+    print('System platform :: {}, {}, {}, {}, {}'.format(os.name, platform.system(), platform.release(), sysconfig.get_platform(),
                                                      platform.architecture()))
-    logger.info('System platform :: {}, {}, {}, {}'.format(os.name, platform.release(), sysconfig.get_platform(),
+    logger.info('System platform :: {}, {}, {}, {}, {}'.format(os.name, platform.system(), platform.release(), sysconfig.get_platform(),
                                                            platform.architecture()))
 
     logger.debug('Printing environment variables...')

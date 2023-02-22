@@ -1,0 +1,388 @@
+2023-02-22 02:25:06,103 : INFO : environment : initialize : Line 60 : 
+
+██████╗ ██╗     ██╗   ██╗███████╗███╗   ███╗██╗███████╗████████╗     █████╗ ██╗
+██╔══██╗██║     ██║   ██║██╔════╝████╗ ████║██║██╔════╝╚══██╔══╝    ██╔══██╗██║
+██████╔╝██║     ██║   ██║█████╗  ██╔████╔██║██║███████╗   ██║       ███████║██║
+██╔══██╗██║     ██║   ██║██╔══╝  ██║╚██╔╝██║██║╚════██║   ██║       ██╔══██║██║
+██████╔╝███████╗╚██████╔╝███████╗██║ ╚═╝ ██║██║███████║   ██║       ██║  ██║██║                                                                        
+                                (version 0.1.1)
+    
+2023-02-22 02:25:06,172 : INFO : environment : initialize : Line 65 : System platform :: posix, Linux, 5.19.0-31-generic, linux-x86_64, ('64bit', 'ELF')
+2023-02-22 02:25:06,173 : DEBUG : environment : initialize : Line 68 : Printing environment variables...
+2023-02-22 02:25:06,173 : DEBUG : environment : initialize : Line 70 : SHELL=/bin/bash
+2023-02-22 02:25:06,174 : DEBUG : environment : initialize : Line 70 : SESSION_MANAGER=local/Lenovo-G510:@/tmp/.ICE-unix/2719,unix/Lenovo-G510:/tmp/.ICE-unix/2719
+2023-02-22 02:25:06,174 : DEBUG : environment : initialize : Line 70 : QT_ACCESSIBILITY=1
+2023-02-22 02:25:06,174 : DEBUG : environment : initialize : Line 70 : COLORTERM=truecolor
+2023-02-22 02:25:06,174 : DEBUG : environment : initialize : Line 70 : XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+2023-02-22 02:25:06,175 : DEBUG : environment : initialize : Line 70 : SSH_AGENT_LAUNCHER=openssh
+2023-02-22 02:25:06,175 : DEBUG : environment : initialize : Line 70 : XDG_MENU_PREFIX=gnome-
+2023-02-22 02:25:06,175 : DEBUG : environment : initialize : Line 70 : GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+2023-02-22 02:25:06,175 : DEBUG : environment : initialize : Line 70 : CONDA_EXE=/home/shashank-agrawal/anaconda3/bin/conda
+2023-02-22 02:25:06,175 : DEBUG : environment : initialize : Line 70 : _CE_M=
+2023-02-22 02:25:06,175 : DEBUG : environment : initialize : Line 70 : GNOME_SHELL_SESSION_MODE=ubuntu
+2023-02-22 02:25:06,175 : DEBUG : environment : initialize : Line 70 : SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+2023-02-22 02:25:06,176 : DEBUG : environment : initialize : Line 70 : XMODIFIERS=@im=ibus
+2023-02-22 02:25:06,176 : DEBUG : environment : initialize : Line 70 : DESKTOP_SESSION=ubuntu
+2023-02-22 02:25:06,176 : DEBUG : environment : initialize : Line 70 : GTK_MODULES=gail:atk-bridge
+2023-02-22 02:25:06,176 : DEBUG : environment : initialize : Line 70 : PWD=/home/shashank-agrawal
+2023-02-22 02:25:06,176 : DEBUG : environment : initialize : Line 70 : XDG_SESSION_DESKTOP=ubuntu
+2023-02-22 02:25:06,176 : DEBUG : environment : initialize : Line 70 : LOGNAME=shashank-agrawal
+2023-02-22 02:25:06,177 : DEBUG : environment : initialize : Line 70 : CONDA_ROOT=/home/shashank-agrawal/anaconda3
+2023-02-22 02:25:06,177 : DEBUG : environment : initialize : Line 70 : QT_QPA_PLATFORMTHEME=appmenu-qt5
+2023-02-22 02:25:06,177 : DEBUG : environment : initialize : Line 70 : XDG_SESSION_TYPE=wayland
+2023-02-22 02:25:06,177 : DEBUG : environment : initialize : Line 70 : CONDA_PREFIX=/home/shashank-agrawal/anaconda3/envs/bluemist-ai
+2023-02-22 02:25:06,177 : DEBUG : environment : initialize : Line 70 : SYSTEMD_EXEC_PID=2747
+2023-02-22 02:25:06,177 : DEBUG : environment : initialize : Line 70 : XAUTHORITY=/run/user/1000/.mutter-Xwaylandauth.PHNV01
+2023-02-22 02:25:06,177 : DEBUG : environment : initialize : Line 70 : HOME=/home/shashank-agrawal
+2023-02-22 02:25:06,178 : DEBUG : environment : initialize : Line 70 : USERNAME=shashank-agrawal
+2023-02-22 02:25:06,178 : DEBUG : environment : initialize : Line 70 : IM_CONFIG_PHASE=1
+2023-02-22 02:25:06,178 : DEBUG : environment : initialize : Line 70 : LANG=en_US.UTF-8
+2023-02-22 02:25:06,178 : DEBUG : environment : initialize : Line 70 : LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+2023-02-22 02:25:06,178 : DEBUG : environment : initialize : Line 70 : XDG_CURRENT_DESKTOP=ubuntu:GNOME
+2023-02-22 02:25:06,179 : DEBUG : environment : initialize : Line 70 : VTE_VERSION=7000
+2023-02-22 02:25:06,179 : DEBUG : environment : initialize : Line 70 : WAYLAND_DISPLAY=wayland-0
+2023-02-22 02:25:06,179 : DEBUG : environment : initialize : Line 70 : CONDA_PROMPT_MODIFIER=(bluemist-ai) 
+2023-02-22 02:25:06,179 : DEBUG : environment : initialize : Line 70 : GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/78569659_ef1d_4705_818b_73a37e389986
+2023-02-22 02:25:06,179 : DEBUG : environment : initialize : Line 70 : NVM_DIR=/home/shashank-agrawal/.nvm
+2023-02-22 02:25:06,179 : DEBUG : environment : initialize : Line 70 : GNOME_SETUP_DISPLAY=:1
+2023-02-22 02:25:06,180 : DEBUG : environment : initialize : Line 70 : LESSCLOSE=/usr/bin/lesspipe %s %s
+2023-02-22 02:25:06,180 : DEBUG : environment : initialize : Line 70 : XDG_SESSION_CLASS=user
+2023-02-22 02:25:06,180 : DEBUG : environment : initialize : Line 70 : TERM=xterm-color
+2023-02-22 02:25:06,180 : DEBUG : environment : initialize : Line 70 : _CE_CONDA=
+2023-02-22 02:25:06,180 : DEBUG : environment : initialize : Line 70 : LESSOPEN=| /usr/bin/lesspipe %s
+2023-02-22 02:25:06,180 : DEBUG : environment : initialize : Line 70 : USER=shashank-agrawal
+2023-02-22 02:25:06,181 : DEBUG : environment : initialize : Line 70 : GNOME_TERMINAL_SERVICE=:1.177
+2023-02-22 02:25:06,181 : DEBUG : environment : initialize : Line 70 : CONDA_SHLVL=2
+2023-02-22 02:25:06,181 : DEBUG : environment : initialize : Line 70 : DISPLAY=:0
+2023-02-22 02:25:06,181 : DEBUG : environment : initialize : Line 70 : SHLVL=2
+2023-02-22 02:25:06,181 : DEBUG : environment : initialize : Line 70 : NVM_CD_FLAGS=
+2023-02-22 02:25:06,182 : DEBUG : environment : initialize : Line 70 : QT_IM_MODULE=ibus
+2023-02-22 02:25:06,182 : DEBUG : environment : initialize : Line 70 : CONDA_PYTHON_EXE=/home/shashank-agrawal/anaconda3/bin/python
+2023-02-22 02:25:06,182 : DEBUG : environment : initialize : Line 70 : XDG_RUNTIME_DIR=/run/user/1000
+2023-02-22 02:25:06,182 : DEBUG : environment : initialize : Line 70 : CONDA_DEFAULT_ENV=bluemist-ai
+2023-02-22 02:25:06,182 : DEBUG : environment : initialize : Line 70 : DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+2023-02-22 02:25:06,183 : DEBUG : environment : initialize : Line 70 : XDG_DATA_DIRS=/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+2023-02-22 02:25:06,183 : DEBUG : environment : initialize : Line 70 : PATH=/home/shashank-agrawal/anaconda3/envs/bluemist-ai/bin:/home/shashank-agrawal/anaconda3/condabin:/home/shashank-agrawal/.nvm/versions/node/v8.11.4/bin:/home/shashank-agrawal/bin:/home/shashank-agrawal/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+2023-02-22 02:25:06,183 : DEBUG : environment : initialize : Line 70 : GDMSESSION=ubuntu
+2023-02-22 02:25:06,183 : DEBUG : environment : initialize : Line 70 : DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+2023-02-22 02:25:06,183 : DEBUG : environment : initialize : Line 70 : NVM_BIN=/home/shashank-agrawal/.nvm/versions/node/v8.11.4/bin
+2023-02-22 02:25:06,183 : DEBUG : environment : initialize : Line 70 : CONDA_PREFIX_1=/home/shashank-agrawal/anaconda3
+2023-02-22 02:25:06,184 : DEBUG : environment : initialize : Line 70 : QT_SCALE_FACTOR=1
+2023-02-22 02:25:06,184 : DEBUG : environment : initialize : Line 70 : _=/home/shashank-agrawal/anaconda3/envs/bluemist-ai/bin/jupyter-notebook
+2023-02-22 02:25:06,184 : DEBUG : environment : initialize : Line 70 : PYDEVD_USE_FRAME_EVAL=NO
+2023-02-22 02:25:06,184 : DEBUG : environment : initialize : Line 70 : JPY_PARENT_PID=94579
+2023-02-22 02:25:06,184 : DEBUG : environment : initialize : Line 70 : CLICOLOR=1
+2023-02-22 02:25:06,184 : DEBUG : environment : initialize : Line 70 : FORCE_COLOR=1
+2023-02-22 02:25:06,185 : DEBUG : environment : initialize : Line 70 : CLICOLOR_FORCE=1
+2023-02-22 02:25:06,185 : DEBUG : environment : initialize : Line 70 : PAGER=cat
+2023-02-22 02:25:06,185 : DEBUG : environment : initialize : Line 70 : GIT_PAGER=cat
+2023-02-22 02:25:06,185 : DEBUG : environment : initialize : Line 70 : MPLBACKEND=module://matplotlib_inline.backend_inline
+2023-02-22 02:25:06,185 : DEBUG : environment : initialize : Line 70 : KMP_DUPLICATE_LIB_OK=True
+2023-02-22 02:25:06,185 : DEBUG : environment : initialize : Line 70 : KMP_INIT_AT_FORK=FALSE
+2023-02-22 02:25:06,185 : DEBUG : environment : initialize : Line 70 : BLUEMIST_PATH=/home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist
+2023-02-22 02:25:06,186 : DEBUG : environment : initialize : Line 78 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/data
+2023-02-22 02:25:06,186 : DEBUG : environment : initialize : Line 81 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/data
+2023-02-22 02:25:06,187 : DEBUG : environment : initialize : Line 78 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/eda
+2023-02-22 02:25:06,187 : DEBUG : environment : initialize : Line 81 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/eda
+2023-02-22 02:25:06,187 : DEBUG : environment : initialize : Line 78 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/experiments
+2023-02-22 02:25:06,188 : DEBUG : environment : initialize : Line 81 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/experiments
+2023-02-22 02:25:06,188 : DEBUG : environment : initialize : Line 78 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models
+2023-02-22 02:25:06,195 : DEBUG : environment : initialize : Line 81 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models
+2023-02-22 02:25:06,196 : DEBUG : environment : initialize : Line 78 : Removing directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/preprocessor
+2023-02-22 02:25:06,196 : DEBUG : environment : initialize : Line 81 : Creating directory :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/preprocessor
+2023-02-22 02:25:06,197 : DEBUG : environment : initialize : Line 85 : Clearing file content of /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/api/predict.py
+2023-02-22 02:25:06,362 : INFO : preprocessor : preprocess_data : Line 122 : Shape of the dataset :: (442, 11)
+2023-02-22 02:25:06,364 : INFO : preprocessor : preprocess_data : Line 123 : Columns in the dataset :: 
+Index(['age', 'sex', 'bmi', 'bp', 's1', 's2', 's3', 's4', 's5', 's6',
+       'target'],
+      dtype='object')
+2023-02-22 02:25:06,370 : DEBUG : preprocessor : preprocess_data : Line 180 : data.dtypes before preprocessing  :: 
+age       float64
+sex       float64
+bmi       float64
+bp        float64
+s1        float64
+s2        float64
+s3        float64
+s4        float64
+s5        float64
+s6        float64
+target    float64
+dtype: object
+2023-02-22 02:25:06,378 : DEBUG : preprocessor : preprocess_data : Line 186 : data.dtypes after dtype conversion  :: 
+age       float64
+sex        object
+bmi       float64
+bp        float64
+s1        float64
+s2        float64
+s3        float64
+s4        float64
+s5        float64
+s6        float64
+target    float64
+dtype: object
+2023-02-22 02:25:06,386 : DEBUG : preprocessor : preprocess_data : Line 207 : Splitting dataset into X_train, X_test, y_train, y_test...
+2023-02-22 02:25:06,393 : DEBUG : preprocessor : preprocess_data : Line 210 : X_train.dtypes before ColumnTransformer :: 
+age    float64
+sex     object
+bmi    float64
+bp     float64
+s1     float64
+s2     float64
+s3     float64
+s4     float64
+s5     float64
+s6     float64
+dtype: object
+2023-02-22 02:25:06,452 : DEBUG : preprocessor : preprocess_data : Line 217 : X_train Columns after ColumnTransformer :: ['age' 'bmi' 'bp' 's1' 's2' 's3' 's4' 's5' 's6'
+ 'sex_-0.044641636506989144' 'sex_0.05068011873981862']
+2023-02-22 02:25:06,454 : DEBUG : preprocessor : preprocess_data : Line 218 : X_train.dtypes after ColumnTransformer :: 
+age                          float64
+bmi                          float64
+bp                           float64
+s1                           float64
+s2                           float64
+s3                           float64
+s4                           float64
+s5                           float64
+s6                           float64
+sex_-0.044641636506989144    float64
+sex_0.05068011873981862      float64
+dtype: object
+2023-02-22 02:25:06,455 : DEBUG : preprocessor : preprocess_data : Line 223 : Saving preprocessor to disk...
+2023-02-22 02:25:06,455 : INFO : bluemist_pipeline : save_preprocessor : Line 25 : Saving preprocessor to disk on :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/preprocessor/preprocessor.joblib
+2023-02-22 02:25:06,493 : DEBUG : bluemist_pipeline : save_preprocessor : Line 27 : Preprocessor column transformer object :: ColumnTransformer(transformers=[('numeric_transformer',
+                                 Pipeline(steps=[('imputer', SimpleImputer()),
+                                                 ('scaler', StandardScaler())]),
+                                 ['age', 'bmi', 'bp', 's1', 's2', 's3', 's4',
+                                  's5', 's6']),
+                                ('categorical_transformer',
+                                 Pipeline(steps=[('imputer',
+                                                  SimpleImputer(strategy='most_frequent')),
+                                                 ('one_hot_encoder',
+                                                  OneHotEncoder())]),
+                                 ['sex'])],
+                  verbose_feature_names_out=False)
+2023-02-22 02:25:07,153 : DEBUG : regressor : get_estimators : Line 75 : All available estimators :: [('ARDRegression', <class 'sklearn.linear_model._bayes.ARDRegression'>), ('AdaBoostRegressor', <class 'sklearn.ensemble._weight_boosting.AdaBoostRegressor'>), ('BaggingRegressor', <class 'sklearn.ensemble._bagging.BaggingRegressor'>), ('BayesianRidge', <class 'sklearn.linear_model._bayes.BayesianRidge'>), ('CCA', <class 'sklearn.cross_decomposition._pls.CCA'>), ('DecisionTreeRegressor', <class 'sklearn.tree._classes.DecisionTreeRegressor'>), ('DummyRegressor', <class 'sklearn.dummy.DummyRegressor'>), ('ElasticNet', <class 'sklearn.linear_model._coordinate_descent.ElasticNet'>), ('ElasticNetCV', <class 'sklearn.linear_model._coordinate_descent.ElasticNetCV'>), ('ExtraTreeRegressor', <class 'sklearn.tree._classes.ExtraTreeRegressor'>), ('ExtraTreesRegressor', <class 'sklearn.ensemble._forest.ExtraTreesRegressor'>), ('GammaRegressor', <class 'sklearn.linear_model._glm.glm.GammaRegressor'>), ('GaussianProcessRegressor', <class 'sklearn.gaussian_process._gpr.GaussianProcessRegressor'>), ('GradientBoostingRegressor', <class 'sklearn.ensemble._gb.GradientBoostingRegressor'>), ('HistGradientBoostingRegressor', <class 'sklearn.ensemble._hist_gradient_boosting.gradient_boosting.HistGradientBoostingRegressor'>), ('HuberRegressor', <class 'sklearn.linear_model._huber.HuberRegressor'>), ('IsotonicRegression', <class 'sklearn.isotonic.IsotonicRegression'>), ('KNeighborsRegressor', <class 'sklearn.neighbors._regression.KNeighborsRegressor'>), ('KernelRidge', <class 'sklearn.kernel_ridge.KernelRidge'>), ('Lars', <class 'sklearn.linear_model._least_angle.Lars'>), ('LarsCV', <class 'sklearn.linear_model._least_angle.LarsCV'>), ('Lasso', <class 'sklearn.linear_model._coordinate_descent.Lasso'>), ('LassoCV', <class 'sklearn.linear_model._coordinate_descent.LassoCV'>), ('LassoLars', <class 'sklearn.linear_model._least_angle.LassoLars'>), ('LassoLarsCV', <class 'sklearn.linear_model._least_angle.LassoLarsCV'>), ('LassoLarsIC', <class 'sklearn.linear_model._least_angle.LassoLarsIC'>), ('LinearRegression', <class 'sklearn.linear_model._base.LinearRegression'>), ('LinearSVR', <class 'sklearn.svm._classes.LinearSVR'>), ('MLPRegressor', <class 'sklearn.neural_network._multilayer_perceptron.MLPRegressor'>), ('MultiOutputRegressor', <class 'sklearn.multioutput.MultiOutputRegressor'>), ('MultiTaskElasticNet', <class 'sklearn.linear_model._coordinate_descent.MultiTaskElasticNet'>), ('MultiTaskElasticNetCV', <class 'sklearn.linear_model._coordinate_descent.MultiTaskElasticNetCV'>), ('MultiTaskLasso', <class 'sklearn.linear_model._coordinate_descent.MultiTaskLasso'>), ('MultiTaskLassoCV', <class 'sklearn.linear_model._coordinate_descent.MultiTaskLassoCV'>), ('NuSVR', <class 'sklearn.svm._classes.NuSVR'>), ('OrthogonalMatchingPursuit', <class 'sklearn.linear_model._omp.OrthogonalMatchingPursuit'>), ('OrthogonalMatchingPursuitCV', <class 'sklearn.linear_model._omp.OrthogonalMatchingPursuitCV'>), ('PLSCanonical', <class 'sklearn.cross_decomposition._pls.PLSCanonical'>), ('PLSRegression', <class 'sklearn.cross_decomposition._pls.PLSRegression'>), ('PassiveAggressiveRegressor', <class 'sklearn.linear_model._passive_aggressive.PassiveAggressiveRegressor'>), ('PoissonRegressor', <class 'sklearn.linear_model._glm.glm.PoissonRegressor'>), ('QuantileRegressor', <class 'sklearn.linear_model._quantile.QuantileRegressor'>), ('RANSACRegressor', <class 'sklearn.linear_model._ransac.RANSACRegressor'>), ('RadiusNeighborsRegressor', <class 'sklearn.neighbors._regression.RadiusNeighborsRegressor'>), ('RandomForestRegressor', <class 'sklearn.ensemble._forest.RandomForestRegressor'>), ('RegressorChain', <class 'sklearn.multioutput.RegressorChain'>), ('Ridge', <class 'sklearn.linear_model._ridge.Ridge'>), ('RidgeCV', <class 'sklearn.linear_model._ridge.RidgeCV'>), ('SGDRegressor', <class 'sklearn.linear_model._stochastic_gradient.SGDRegressor'>), ('SVR', <class 'sklearn.svm._classes.SVR'>), ('StackingRegressor', <class 'sklearn.ensemble._stacking.StackingRegressor'>), ('TheilSenRegressor', <class 'sklearn.linear_model._theil_sen.TheilSenRegressor'>), ('TransformedTargetRegressor', <class 'sklearn.compose._target.TransformedTargetRegressor'>), ('TweedieRegressor', <class 'sklearn.linear_model._glm.glm.TweedieRegressor'>), ('VotingRegressor', <class 'sklearn.ensemble._voting.VotingRegressor'>)]
+2023-02-22 02:25:07,154 : DEBUG : regressor : get_estimators : Line 88 : Estimators not supported by Bluemist AI :: [('IsotonicRegression', <class 'sklearn.isotonic.IsotonicRegression'>), ('MultiOutputRegressor', <class 'sklearn.multioutput.MultiOutputRegressor'>), ('MultiTaskElasticNet', <class 'sklearn.linear_model._coordinate_descent.MultiTaskElasticNet'>), ('MultiTaskElasticNetCV', <class 'sklearn.linear_model._coordinate_descent.MultiTaskElasticNetCV'>), ('MultiTaskLasso', <class 'sklearn.linear_model._coordinate_descent.MultiTaskLasso'>), ('MultiTaskLassoCV', <class 'sklearn.linear_model._coordinate_descent.MultiTaskLassoCV'>), ('RegressorChain', <class 'sklearn.multioutput.RegressorChain'>), ('StackingRegressor', <class 'sklearn.ensemble._stacking.StackingRegressor'>), ('VotingRegressor', <class 'sklearn.ensemble._voting.VotingRegressor'>)]
+2023-02-22 02:25:07,154 : INFO : regressor : get_estimators : Line 96 : Estimators available for modelling :: [('ARDRegression', <class 'sklearn.linear_model._bayes.ARDRegression'>), ('AdaBoostRegressor', <class 'sklearn.ensemble._weight_boosting.AdaBoostRegressor'>), ('BaggingRegressor', <class 'sklearn.ensemble._bagging.BaggingRegressor'>), ('BayesianRidge', <class 'sklearn.linear_model._bayes.BayesianRidge'>), ('CCA', <class 'sklearn.cross_decomposition._pls.CCA'>), ('DecisionTreeRegressor', <class 'sklearn.tree._classes.DecisionTreeRegressor'>), ('DummyRegressor', <class 'sklearn.dummy.DummyRegressor'>), ('ElasticNet', <class 'sklearn.linear_model._coordinate_descent.ElasticNet'>), ('ElasticNetCV', <class 'sklearn.linear_model._coordinate_descent.ElasticNetCV'>), ('ExtraTreeRegressor', <class 'sklearn.tree._classes.ExtraTreeRegressor'>), ('ExtraTreesRegressor', <class 'sklearn.ensemble._forest.ExtraTreesRegressor'>), ('GammaRegressor', <class 'sklearn.linear_model._glm.glm.GammaRegressor'>), ('GaussianProcessRegressor', <class 'sklearn.gaussian_process._gpr.GaussianProcessRegressor'>), ('GradientBoostingRegressor', <class 'sklearn.ensemble._gb.GradientBoostingRegressor'>), ('HistGradientBoostingRegressor', <class 'sklearn.ensemble._hist_gradient_boosting.gradient_boosting.HistGradientBoostingRegressor'>), ('HuberRegressor', <class 'sklearn.linear_model._huber.HuberRegressor'>), ('KNeighborsRegressor', <class 'sklearn.neighbors._regression.KNeighborsRegressor'>), ('KernelRidge', <class 'sklearn.kernel_ridge.KernelRidge'>), ('Lars', <class 'sklearn.linear_model._least_angle.Lars'>), ('LarsCV', <class 'sklearn.linear_model._least_angle.LarsCV'>), ('Lasso', <class 'sklearn.linear_model._coordinate_descent.Lasso'>), ('LassoCV', <class 'sklearn.linear_model._coordinate_descent.LassoCV'>), ('LassoLars', <class 'sklearn.linear_model._least_angle.LassoLars'>), ('LassoLarsCV', <class 'sklearn.linear_model._least_angle.LassoLarsCV'>), ('LassoLarsIC', <class 'sklearn.linear_model._least_angle.LassoLarsIC'>), ('LinearRegression', <class 'sklearn.linear_model._base.LinearRegression'>), ('LinearSVR', <class 'sklearn.svm._classes.LinearSVR'>), ('MLPRegressor', <class 'sklearn.neural_network._multilayer_perceptron.MLPRegressor'>), ('NuSVR', <class 'sklearn.svm._classes.NuSVR'>), ('OrthogonalMatchingPursuit', <class 'sklearn.linear_model._omp.OrthogonalMatchingPursuit'>), ('OrthogonalMatchingPursuitCV', <class 'sklearn.linear_model._omp.OrthogonalMatchingPursuitCV'>), ('PLSCanonical', <class 'sklearn.cross_decomposition._pls.PLSCanonical'>), ('PLSRegression', <class 'sklearn.cross_decomposition._pls.PLSRegression'>), ('PassiveAggressiveRegressor', <class 'sklearn.linear_model._passive_aggressive.PassiveAggressiveRegressor'>), ('PoissonRegressor', <class 'sklearn.linear_model._glm.glm.PoissonRegressor'>), ('QuantileRegressor', <class 'sklearn.linear_model._quantile.QuantileRegressor'>), ('RANSACRegressor', <class 'sklearn.linear_model._ransac.RANSACRegressor'>), ('RadiusNeighborsRegressor', <class 'sklearn.neighbors._regression.RadiusNeighborsRegressor'>), ('RandomForestRegressor', <class 'sklearn.ensemble._forest.RandomForestRegressor'>), ('Ridge', <class 'sklearn.linear_model._ridge.Ridge'>), ('RidgeCV', <class 'sklearn.linear_model._ridge.RidgeCV'>), ('SGDRegressor', <class 'sklearn.linear_model._stochastic_gradient.SGDRegressor'>), ('SVR', <class 'sklearn.svm._classes.SVR'>), ('TheilSenRegressor', <class 'sklearn.linear_model._theil_sen.TheilSenRegressor'>), ('TransformedTargetRegressor', <class 'sklearn.compose._target.TransformedTargetRegressor'>), ('TweedieRegressor', <class 'sklearn.linear_model._glm.glm.TweedieRegressor'>)]
+2023-02-22 02:25:07,164 : INFO : regressor : train_test_evaluate : Line 218 : ###################  Regressor in progress :: ARDRegression ###################
+2023-02-22 02:25:07,166 : INFO : regressor : train_test_evaluate : Line 229 : Available hyperparameters to be tuned :: {'alpha_1': 1e-06, 'alpha_2': 1e-06, 'compute_score': False, 'copy_X': True, 'fit_intercept': True, 'lambda_1': 1e-06, 'lambda_2': 1e-06, 'n_iter': 300, 'threshold_lambda': 10000.0, 'tol': 0.001, 'verbose': False}
+2023-02-22 02:25:07,166 : DEBUG : regressor : train_test_evaluate : Line 230 : Python type() for hyperparameters :: <class 'dict'>
+2023-02-22 02:25:07,166 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: alpha_1 :: [1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1]
+2023-02-22 02:25:07,167 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: alpha_2 :: [1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1]
+2023-02-22 02:25:07,167 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: compute_score :: [False]
+2023-02-22 02:25:07,167 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: copy_X :: [True]
+2023-02-22 02:25:07,167 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: fit_intercept :: [True, False]
+2023-02-22 02:25:07,168 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: lambda_1 :: [1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1]
+2023-02-22 02:25:07,168 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: lambda_2 :: [1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1]
+2023-02-22 02:25:07,168 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: n_iter :: [100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500, 1550, 1600, 1650, 1700, 1750, 1800, 1850, 1900, 1950, 2000, 2050, 2100, 2150, 2200, 2250, 2300, 2350, 2400, 2450, 2500, 2550, 2600, 2650, 2700, 2750, 2800, 2850, 2900, 2950, 3000, 3050, 3100, 3150, 3200, 3250, 3300, 3350, 3400, 3450, 3500, 3550, 3600, 3650, 3700, 3750, 3800, 3850, 3900, 3950, 4000, 4050, 4100, 4150, 4200, 4250, 4300, 4350, 4400, 4450, 4500, 4550, 4600, 4650, 4700, 4750, 4800, 4850, 4900, 4950, 5000]
+2023-02-22 02:25:07,168 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: threshold_lambda :: [5000.0, 6000.0, 7000.0, 8000.0, 9000.0, 10000.0, 11000.0, 12000.0, 13000.0, 14000.0, 15000.0, 16000.0, 17000.0, 18000.0, 19000.0, 20000.0]
+2023-02-22 02:25:07,168 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: tol :: [1e-07, 1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1]
+2023-02-22 02:25:07,169 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: verbose :: [False]
+2023-02-22 02:25:07,169 : INFO : regressor : train_test_evaluate : Line 267 : Hyperparameters to be used for model tuning :: {'ARDRegression__alpha_1': [1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1], 'ARDRegression__alpha_2': [1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1], 'ARDRegression__compute_score': [False], 'ARDRegression__copy_X': [True], 'ARDRegression__fit_intercept': [True, False], 'ARDRegression__lambda_1': [1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1], 'ARDRegression__lambda_2': [1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1], 'ARDRegression__n_iter': [100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500, 1550, 1600, 1650, 1700, 1750, 1800, 1850, 1900, 1950, 2000, 2050, 2100, 2150, 2200, 2250, 2300, 2350, 2400, 2450, 2500, 2550, 2600, 2650, 2700, 2750, 2800, 2850, 2900, 2950, 3000, 3050, 3100, 3150, 3200, 3250, 3300, 3350, 3400, 3450, 3500, 3550, 3600, 3650, 3700, 3750, 3800, 3850, 3900, 3950, 4000, 4050, 4100, 4150, 4200, 4250, 4300, 4350, 4400, 4450, 4500, 4550, 4600, 4650, 4700, 4750, 4800, 4850, 4900, 4950, 5000], 'ARDRegression__threshold_lambda': [5000.0, 6000.0, 7000.0, 8000.0, 9000.0, 10000.0, 11000.0, 12000.0, 13000.0, 14000.0, 15000.0, 16000.0, 17000.0, 18000.0, 19000.0, 20000.0], 'ARDRegression__tol': [1e-07, 1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1], 'ARDRegression__verbose': [False]}
+2023-02-22 02:25:07,170 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('ARDRegression', ARDRegression())]
+2023-02-22 02:25:12,433 : DEBUG : regressor : train_test_evaluate : Line 283 : Model pipeline parameters :: dict_keys(['memory', 'steps', 'verbose', 'ARDRegression', 'ARDRegression__alpha_1', 'ARDRegression__alpha_2', 'ARDRegression__compute_score', 'ARDRegression__copy_X', 'ARDRegression__fit_intercept', 'ARDRegression__lambda_1', 'ARDRegression__lambda_2', 'ARDRegression__n_iter', 'ARDRegression__threshold_lambda', 'ARDRegression__tol', 'ARDRegression__verbose'])
+2023-02-22 02:25:12,449 : INFO : regressor : train_test_evaluate : Line 284 : Fitted estimator with all parameters :: RandomizedSearchCV(estimator=Pipeline(steps=[('ARDRegression',
+                                              ARDRegression())]),
+                   param_distributions={'ARDRegression__alpha_1': [1e-06, 1e-05,
+                                                                   0.0001,
+                                                                   0.001, 0.01,
+                                                                   0.1],
+                                        'ARDRegression__alpha_2': [1e-06, 1e-05,
+                                                                   0.0001,
+                                                                   0.001, 0.01,
+                                                                   0.1],
+                                        'ARDRegression__compute_score': [False],
+                                        'ARDRegression__copy_X': [True],
+                                        'ARDRegression__fit_intercept': [True,
+                                                                         False],
+                                        'ARDRegressi...
+                                                                  550, 600, 650,
+                                                                  700, 750, 800,
+                                                                  850, 900, 950,
+                                                                  1000, 1050,
+                                                                  1100, 1150,
+                                                                  1200, 1250,
+                                                                  1300, 1350,
+                                                                  1400, 1450,
+                                                                  1500, 1550, ...],
+                                        'ARDRegression__threshold_lambda': [5000.0,
+                                                                            6000.0,
+                                                                            7000.0,
+                                                                            8000.0,
+                                                                            9000.0,
+                                                                            10000.0,
+                                                                            11000.0,
+                                                                            12000.0,
+                                                                            13000.0,
+                                                                            14000.0,
+                                                                            15000.0,
+                                                                            16000.0,
+                                                                            17000.0,
+                                                                            18000.0,
+                                                                            19000.0,
+                                                                            20000.0],
+                                        'ARDRegression__tol': [1e-07, 1e-06,
+                                                               1e-05, 0.0001,
+                                                               0.001, 0.01,
+                                                               0.1],
+                                        'ARDRegression__verbose': [False]})
+2023-02-22 02:25:12,451 : DEBUG : regressor : train_test_evaluate : Line 286 : Model pipeline :: Pipeline(steps=[('ARDRegression', ARDRegression())])
+2023-02-22 02:25:12,461 : INFO : regressor : train_test_evaluate : Line 287 : Model pipeline with best estimator :: Pipeline(steps=[('ARDRegression',
+                 ARDRegression(lambda_1=0.01, lambda_2=0.01, n_iter=2350,
+                               threshold_lambda=19000.0, tol=1e-05))])
+2023-02-22 02:25:12,462 : INFO : regressor : train_test_evaluate : Line 289 : Saving model pipeline to disk
+2023-02-22 02:25:12,462 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/ARDRegression.joblib
+2023-02-22 02:25:12,475 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('ARDRegression',
+                 ARDRegression(lambda_1=0.01, lambda_2=0.01, n_iter=2350,
+                               threshold_lambda=19000.0, tol=1e-05))])
+2023-02-22 02:25:12,476 : INFO : regressor : train_test_evaluate : Line 312 : Best score :: 0.4825749205171267
+2023-02-22 02:25:12,476 : INFO : regressor : train_test_evaluate : Line 313 : Best hyperparameters :: {'ARDRegression__verbose': False, 'ARDRegression__tol': 1e-05, 'ARDRegression__threshold_lambda': 19000.0, 'ARDRegression__n_iter': 2350, 'ARDRegression__lambda_2': 0.01, 'ARDRegression__lambda_1': 0.01, 'ARDRegression__fit_intercept': True, 'ARDRegression__copy_X': True, 'ARDRegression__compute_score': False, 'ARDRegression__alpha_2': 1e-06, 'ARDRegression__alpha_1': 1e-06}
+2023-02-22 02:25:12,481 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 02:25:12,482 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 02:25:12,496 : INFO : regressor : train_test_evaluate : Line 325 : Current estimator Stats :: 
+       Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  ARDRegression            48.261223         3385.218639  0.501549
+2023-02-22 02:25:12,498 : DEBUG : regressor : train_test_evaluate : Line 326 : Current estimator stats as dictionary :: [{'Estimator': 'ARDRegression', 'mean_absolute_error': 48.261222681058975, 'mean_squared_error': 3385.218638574735, 'r2_score': 0.5015493842734294}]
+2023-02-22 02:25:12,504 : DEBUG : regressor : train_test_evaluate : Line 330 : Estimator stats so far :: 
+       Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  ARDRegression            48.261223         3385.218639  0.501549
+2023-02-22 02:25:12,510 : INFO : regressor : train_test_evaluate : Line 218 : ###################  Regressor in progress :: RandomForestRegressor ###################
+2023-02-22 02:25:12,512 : INFO : regressor : train_test_evaluate : Line 229 : Available hyperparameters to be tuned :: {'bootstrap': True, 'ccp_alpha': 0.0, 'criterion': 'squared_error', 'max_depth': None, 'max_features': 1.0, 'max_leaf_nodes': None, 'max_samples': None, 'min_impurity_decrease': 0.0, 'min_samples_leaf': 1, 'min_samples_split': 2, 'min_weight_fraction_leaf': 0.0, 'n_estimators': 100, 'n_jobs': None, 'oob_score': False, 'random_state': None, 'verbose': 0, 'warm_start': False}
+2023-02-22 02:25:12,513 : DEBUG : regressor : train_test_evaluate : Line 230 : Python type() for hyperparameters :: <class 'dict'>
+2023-02-22 02:25:12,513 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: bootstrap :: [True, False]
+2023-02-22 02:25:12,513 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: ccp_alpha :: [0.0]
+2023-02-22 02:25:12,513 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: criterion :: ['squared_error', 'friedman_mse', 'absolute_error', 'poisson']
+2023-02-22 02:25:12,513 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: max_depth :: [None, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+2023-02-22 02:25:12,514 : DEBUG : regressor : train_test_evaluate : Line 243 : Hyperparameter in model configuration :: max_features :: [None, 'sqrt', 'log2', 0.7, 0.8, 0.9, 1]
+2023-02-22 02:25:12,514 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: max_leaf_nodes :: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
+2023-02-22 02:25:12,514 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: max_samples :: [0.7, 0.8, 0.9, 1]
+2023-02-22 02:25:12,514 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: min_impurity_decrease :: [0.0]
+2023-02-22 02:25:12,515 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: min_samples_leaf :: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+2023-02-22 02:25:12,515 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: min_samples_split :: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+2023-02-22 02:25:12,515 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: min_weight_fraction_leaf :: [0.0]
+2023-02-22 02:25:12,516 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: n_estimators :: [10, 60, 110, 160, 210, 260, 310, 360, 410, 460, 510, 560, 610, 660, 710, 760, 810, 860, 910, 960, 1010]
+2023-02-22 02:25:12,516 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: n_jobs :: [-1]
+2023-02-22 02:25:12,516 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: oob_score :: [True, False]
+2023-02-22 02:25:12,516 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: random_state :: [2]
+2023-02-22 02:25:12,517 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: verbose :: [False]
+2023-02-22 02:25:12,517 : DEBUG : regressor : train_test_evaluate : Line 248 : Hyperparameter in default configuration :: warm_start :: [True, False]
+2023-02-22 02:25:12,517 : INFO : regressor : train_test_evaluate : Line 267 : Hyperparameters to be used for model tuning :: {'RandomForestRegressor__bootstrap': [True, False], 'RandomForestRegressor__ccp_alpha': [0.0], 'RandomForestRegressor__criterion': ['squared_error', 'friedman_mse', 'absolute_error', 'poisson'], 'RandomForestRegressor__max_depth': [None, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'RandomForestRegressor__max_features': [None, 'sqrt', 'log2', 0.7, 0.8, 0.9, 1], 'RandomForestRegressor__max_leaf_nodes': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50], 'RandomForestRegressor__max_samples': [0.7, 0.8, 0.9, 1], 'RandomForestRegressor__min_impurity_decrease': [0.0], 'RandomForestRegressor__min_samples_leaf': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'RandomForestRegressor__min_samples_split': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], 'RandomForestRegressor__min_weight_fraction_leaf': [0.0], 'RandomForestRegressor__n_estimators': [10, 60, 110, 160, 210, 260, 310, 360, 410, 460, 510, 560, 610, 660, 710, 760, 810, 860, 910, 960, 1010], 'RandomForestRegressor__n_jobs': [-1], 'RandomForestRegressor__oob_score': [True, False], 'RandomForestRegressor__random_state': [2], 'RandomForestRegressor__verbose': [False], 'RandomForestRegressor__warm_start': [True, False]}
+2023-02-22 02:25:12,518 : DEBUG : bluemist_pipeline : add_pipeline_step : Line 37 : Model pipeline steps :: [('RandomForestRegressor', RandomForestRegressor())]
+2023-02-22 02:25:45,792 : WARNING : warnings : _showwarnmsg : Line 109 : /home/shashank-agrawal/anaconda3/envs/bluemist-ai/lib/python3.9/site-packages/sklearn/model_selection/_validation.py:378: FitFailedWarning: 
+30 fits failed out of a total of 50.
+The score on these train-test partitions for these parameters will be set to nan.
+If these failures are not expected, you can try to debug them by setting error_score='raise'.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+30 fits failed with the following error:
+Traceback (most recent call last):
+  File "/home/shashank-agrawal/anaconda3/envs/bluemist-ai/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 686, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/home/shashank-agrawal/anaconda3/envs/bluemist-ai/lib/python3.9/site-packages/sklearn/pipeline.py", line 406, in fit
+    self._final_estimator.fit(Xt, y, **fit_params_last_step)
+  File "/home/shashank-agrawal/anaconda3/envs/bluemist-ai/lib/python3.9/site-packages/sklearn/ensemble/_forest.py", line 398, in fit
+    raise ValueError(
+ValueError: `max_sample` cannot be set if `bootstrap=False`. Either switch to `bootstrap=True` or set `max_sample=None`.
+
+  warnings.warn(some_fits_failed_message, FitFailedWarning)
+
+2023-02-22 02:25:45,799 : WARNING : warnings : _showwarnmsg : Line 109 : /home/shashank-agrawal/anaconda3/envs/bluemist-ai/lib/python3.9/site-packages/sklearn/model_selection/_search.py:953: UserWarning: One or more of the test scores are non-finite: [        nan         nan  0.29248638         nan -0.01758813         nan
+  0.32090661         nan         nan  0.36556323]
+  warnings.warn(
+
+2023-02-22 02:25:46,486 : DEBUG : regressor : train_test_evaluate : Line 283 : Model pipeline parameters :: dict_keys(['memory', 'steps', 'verbose', 'RandomForestRegressor', 'RandomForestRegressor__bootstrap', 'RandomForestRegressor__ccp_alpha', 'RandomForestRegressor__criterion', 'RandomForestRegressor__max_depth', 'RandomForestRegressor__max_features', 'RandomForestRegressor__max_leaf_nodes', 'RandomForestRegressor__max_samples', 'RandomForestRegressor__min_impurity_decrease', 'RandomForestRegressor__min_samples_leaf', 'RandomForestRegressor__min_samples_split', 'RandomForestRegressor__min_weight_fraction_leaf', 'RandomForestRegressor__n_estimators', 'RandomForestRegressor__n_jobs', 'RandomForestRegressor__oob_score', 'RandomForestRegressor__random_state', 'RandomForestRegressor__verbose', 'RandomForestRegressor__warm_start'])
+2023-02-22 02:25:46,500 : INFO : regressor : train_test_evaluate : Line 284 : Fitted estimator with all parameters :: RandomizedSearchCV(estimator=Pipeline(steps=[('RandomForestRegressor',
+                                              RandomForestRegressor())]),
+                   param_distributions={'RandomForestRegressor__bootstrap': [True,
+                                                                             False],
+                                        'RandomForestRegressor__ccp_alpha': [0.0],
+                                        'RandomForestRegressor__criterion': ['squared_error',
+                                                                             'friedman_mse',
+                                                                             'absolute_error',
+                                                                             'poisson'],
+                                        'RandomForestRegressor__max_depth': [None,
+                                                                             1,
+                                                                             2,
+                                                                             3,
+                                                                             4...
+                                        'RandomForestRegressor__min_weight_fraction_leaf': [0.0],
+                                        'RandomForestRegressor__n_estimators': [10,
+                                                                                60,
+                                                                                110,
+                                                                                160,
+                                                                                210,
+                                                                                260,
+                                                                                310,
+                                                                                360,
+                                                                                410,
+                                                                                460,
+                                                                                510,
+                                                                                560,
+                                                                                610,
+                                                                                660,
+                                                                                710,
+                                                                                760,
+                                                                                810,
+                                                                                860,
+                                                                                910,
+                                                                                960,
+                                                                                1010],
+                                        'RandomForestRegressor__n_jobs': [-1],
+                                        'RandomForestRegressor__oob_score': [True,
+                                                                             False],
+                                        'RandomForestRegressor__random_state': [2],
+                                        'RandomForestRegressor__verbose': [False],
+                                        'RandomForestRegressor__warm_start': [True,
+                                                                              False]})
+2023-02-22 02:25:46,501 : DEBUG : regressor : train_test_evaluate : Line 286 : Model pipeline :: Pipeline(steps=[('RandomForestRegressor', RandomForestRegressor())])
+2023-02-22 02:25:46,510 : INFO : regressor : train_test_evaluate : Line 287 : Model pipeline with best estimator :: Pipeline(steps=[('RandomForestRegressor',
+                 RandomForestRegressor(criterion='friedman_mse', max_depth=5,
+                                       max_features='sqrt', max_leaf_nodes=14,
+                                       max_samples=0.9, min_samples_leaf=7,
+                                       min_samples_split=0.3, n_estimators=110,
+                                       n_jobs=-1, oob_score=True,
+                                       random_state=2, verbose=False))])
+2023-02-22 02:25:46,510 : INFO : regressor : train_test_evaluate : Line 289 : Saving model pipeline to disk
+2023-02-22 02:25:46,510 : INFO : bluemist_pipeline : save_model_pipeline : Line 44 : Saving model pipeline to disk :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist/artifacts/models/RandomForestRegressor.joblib
+2023-02-22 02:25:46,643 : INFO : bluemist_pipeline : save_model_pipeline : Line 46 : Model pipeline object :: Pipeline(steps=[('RandomForestRegressor',
+                 RandomForestRegressor(criterion='friedman_mse', max_depth=5,
+                                       max_features='sqrt', max_leaf_nodes=14,
+                                       max_samples=0.9, min_samples_leaf=7,
+                                       min_samples_split=0.3, n_estimators=110,
+                                       n_jobs=-1, oob_score=True,
+                                       random_state=2, verbose=False))])
+2023-02-22 02:25:46,643 : INFO : regressor : train_test_evaluate : Line 312 : Best score :: 0.36556322751752124
+2023-02-22 02:25:46,643 : INFO : regressor : train_test_evaluate : Line 313 : Best hyperparameters :: {'RandomForestRegressor__warm_start': False, 'RandomForestRegressor__verbose': False, 'RandomForestRegressor__random_state': 2, 'RandomForestRegressor__oob_score': True, 'RandomForestRegressor__n_jobs': -1, 'RandomForestRegressor__n_estimators': 110, 'RandomForestRegressor__min_weight_fraction_leaf': 0.0, 'RandomForestRegressor__min_samples_split': 0.3, 'RandomForestRegressor__min_samples_leaf': 7, 'RandomForestRegressor__min_impurity_decrease': 0.0, 'RandomForestRegressor__max_samples': 0.9, 'RandomForestRegressor__max_leaf_nodes': 14, 'RandomForestRegressor__max_features': 'sqrt', 'RandomForestRegressor__max_depth': 5, 'RandomForestRegressor__criterion': 'friedman_mse', 'RandomForestRegressor__ccp_alpha': 0.0, 'RandomForestRegressor__bootstrap': True}
+2023-02-22 02:25:46,696 : INFO : metrics : getStats : Line 38 : Metrics requested :: default
+2023-02-22 02:25:46,697 : INFO : metrics : getStats : Line 43 : Indexes with NaN predictions to be removed :: []
+2023-02-22 02:25:46,708 : INFO : regressor : train_test_evaluate : Line 325 : Current estimator Stats :: 
+               Estimator  mean_absolute_error  mean_squared_error  r2_score
+0  RandomForestRegressor            55.276451         4180.607767  0.384434
+2023-02-22 02:25:46,709 : DEBUG : regressor : train_test_evaluate : Line 326 : Current estimator stats as dictionary :: [{'Estimator': 'RandomForestRegressor', 'mean_absolute_error': 55.27645056500478, 'mean_squared_error': 4180.607766624058, 'r2_score': 0.38443369901142055}]
+2023-02-22 02:25:46,716 : DEBUG : regressor : train_test_evaluate : Line 330 : Estimator stats so far :: 
+               Estimator  mean_absolute_error  mean_squared_error  r2_score
+0          ARDRegression            48.261223         3385.218639  0.501549
+1  RandomForestRegressor            55.276451         4180.607767  0.384434
+2023-02-22 02:25:47,956 : INFO : regressor : train_test_evaluate : Line 358 : Estimator stats across all trained models : 
+                       mean_absolute_error  mean_squared_error  r2_score
+Estimator                                                               
+ARDRegression                    48.261223         3385.218639  0.501549
+RandomForestRegressor            55.276451         4180.607767  0.384434
+2023-02-22 02:29:54,207 : INFO : environment : <module> : Line 30 : BLUEMIST_PATH /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist
+2023-02-22 02:29:54,955 : INFO : utils : _init_num_threads : Line 159 : NumExpr defaulting to 8 threads.
+2023-02-22 02:30:03,424 : INFO : __init__ : <module> : Line 14 : Pandas backend loaded 1.4.2
+2023-02-22 02:30:03,448 : INFO : __init__ : <module> : Line 25 : Numpy backend loaded 1.22.3
+2023-02-22 02:30:03,449 : INFO : __init__ : <module> : Line 37 : Pyspark backend NOT loaded
+2023-02-22 02:30:03,449 : INFO : __init__ : <module> : Line 43 : Python backend loaded
+2023-02-22 02:31:31,378 : INFO : environment : <module> : Line 30 : BLUEMIST_PATH /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist
+2023-02-22 02:31:31,636 : INFO : utils : _init_num_threads : Line 159 : NumExpr defaulting to 8 threads.
+2023-02-22 02:31:36,984 : INFO : __init__ : <module> : Line 14 : Pandas backend loaded 1.4.2
+2023-02-22 02:31:37,011 : INFO : __init__ : <module> : Line 25 : Numpy backend loaded 1.22.3
+2023-02-22 02:31:37,011 : INFO : __init__ : <module> : Line 37 : Pyspark backend NOT loaded
+2023-02-22 02:31:37,012 : INFO : __init__ : <module> : Line 43 : Python backend loaded
+2023-02-22 02:35:38,430 : INFO : environment : <module> : Line 30 : BLUEMIST_PATH /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist
+2023-02-22 02:35:38,671 : INFO : utils : _init_num_threads : Line 159 : NumExpr defaulting to 8 threads.
