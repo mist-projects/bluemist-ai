@@ -71,9 +71,10 @@ def initialize(
 
     # cleaning and building artifacts directory
     if bool(cleanup_resources):
-        directories = ['data', 'eda', 'experiments', 'models', 'preprocessor']
+        directories = ['artifacts/data', 'artifacts/eda', 'artifacts/experiments', 'artifacts/models',
+                       'artifacts/preprocessor', 'mlruns']
         for directory in directories:
-            directory_path = BLUEMIST_PATH + '/artifacts/' + directory
+            directory_path = BLUEMIST_PATH + '/' + directory
             if os.path.exists(directory_path):
                 logger.debug('Removing directory :: {}'.format(directory_path))
                 shutil.rmtree(directory_path)
