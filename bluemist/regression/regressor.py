@@ -69,7 +69,8 @@ def get_estimators(multi_output=False, multi_task=False, names_only=True):
             Future use
         multi_task : bool, default=False
             Future use
-        names_only : bool, default=False
+        names_only : bool, default=True
+            Rerturn only the estimator name without metadata
 
     """
 

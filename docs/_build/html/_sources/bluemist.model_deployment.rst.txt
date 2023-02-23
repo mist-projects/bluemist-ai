@@ -3,6 +3,9 @@ Model Deployment
 
 Bluemist provides integration with FastAPI to deploy the ML model as RESTful API.
 
+- :ref:`bluemist.regression.html:bluemist.regression.regressor.deploy_model`
+
+
 |
 
 .. raw:: html
