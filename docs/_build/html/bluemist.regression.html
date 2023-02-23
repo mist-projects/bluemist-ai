@@ -99,20 +99,21 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="bluemist.regression.regressor.get_estimators">
 <span class="sig-name descname"><span class="pre">get_estimators</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">multi_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bluemist/regression/regressor.html#get_estimators"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bluemist.regression.regressor.get_estimators" title="Permalink to this definition"></a></dt>
-<dd><dl class="simple">
+<dd><p><strong>Returns the list of available regression estimators</strong></p>
+<dl class="simple">
 <dt>multi_output<span class="classifier">bool, default=False</span></dt><dd><p>Future use</p>
 </dd>
 <dt>multi_task<span class="classifier">bool, default=False</span></dt><dd><p>Future use</p>
 </dd>
-<dt>names_only<span class="classifier">bool, default=False</span></dt><dd><p>Returns only the estimator names by removing the class metadata</p>
-</dd>
 </dl>
+<p>names_only : bool, default=False</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="bluemist.regression.regressor.train_test_evaluate">
 <span class="sig-name descname"><span class="pre">train_test_evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tune_models</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_scaling_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_pipeline_to_disk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiment_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bluemist/regression/regressor.html#train_test_evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bluemist.regression.regressor.train_test_evaluate" title="Permalink to this definition"></a></dt>
-<dd><dl class="simple">
+<dd><p><strong>Trains the data on the given dataset, evaluate the models and returns comparison metrics</strong></p>
+<dl class="simple">
 <dt>X_train<span class="classifier">pandas dataframe</span></dt><dd><p>Training data</p>
 </dd>
 <dt>X_test<span class="classifier">pandas dataframe</span></dt><dd><p>Test data</p>

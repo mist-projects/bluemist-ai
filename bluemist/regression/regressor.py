@@ -63,12 +63,14 @@ def initialize_mlflow(mlflow_experiment_name):
 
 def get_estimators(multi_output=False, multi_task=False, names_only=True):
     """
+        **Returns the list of available regression estimators**
+
         multi_output : bool, default=False
             Future use
         multi_task : bool, default=False
             Future use
         names_only : bool, default=False
-            Returns only the estimator names by removing the class metadata
+
     """
 
     estimators = all_estimators(type_filter='regressor')
@@ -131,6 +133,8 @@ def train_test_evaluate(
         experiment_name=None,
         run_name=None):
     """
+        **Trains the data on the given dataset, evaluate the models and returns comparison metrics**
+
         X_train : pandas dataframe
             Training data
         X_test : pandas dataframe

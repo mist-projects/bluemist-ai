@@ -143,12 +143,14 @@
 
 <div class="viewcode-block" id="get_estimators"><a class="viewcode-back" href="../../../bluemist.regression.html#bluemist.regression.regressor.get_estimators">[docs]</a><span class="k">def</span> <span class="nf">get_estimators</span><span class="p">(</span><span class="n">multi_output</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">multi_task</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">names_only</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        **Returns the list of available regression estimators**</span>
+
 <span class="sd">        multi_output : bool, default=False</span>
 <span class="sd">            Future use</span>
 <span class="sd">        multi_task : bool, default=False</span>
 <span class="sd">            Future use</span>
 <span class="sd">        names_only : bool, default=False</span>
-<span class="sd">            Returns only the estimator names by removing the class metadata</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">estimators</span> <span class="o">=</span> <span class="n">all_estimators</span><span class="p">(</span><span class="n">type_filter</span><span class="o">=</span><span class="s1">&#39;regressor&#39;</span><span class="p">)</span>
@@ -211,6 +213,8 @@
         <span class="n">experiment_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">run_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        **Trains the data on the given dataset, evaluate the models and returns comparison metrics**</span>
+
 <span class="sd">        X_train : pandas dataframe</span>
 <span class="sd">            Training data</span>
 <span class="sd">        X_test : pandas dataframe</span>
