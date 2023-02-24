@@ -6,6 +6,7 @@
 </div>
 
 # Bluemist AI
+
 <div align="left">
 [![Generic badge](https://img.shields.io/badge/python-3.9-blue.svg)](https://shields.io/)
 [![PyPI version](https://badge.fury.io/py/bluemist.svg)](https://badge.fury.io/py/bluemist)
