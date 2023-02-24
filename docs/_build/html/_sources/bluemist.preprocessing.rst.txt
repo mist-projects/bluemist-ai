@@ -1,5 +1,5 @@
-Preprocessor
-============
+Data Preprocessing
+==================
 
 .. automodule:: bluemist.preprocessing.preprocessor
    :members:

@@ -102,12 +102,14 @@ def get_estimators(multi_output=False, multi_task=False, names_only=True):
 
 def deploy_model(estimator_name, host='localhost', port=8000):
     """
+
         estimator_name : str,
             Estimator name to be delpoyed
         host : {str, IPv4 or IPv6}, default='localhost'
             Hostname or ip address of the machine where API to be deployed
         port : int, default=8000
             API listening port
+
     """
 
     logger.info('Generating API code to deploy the model :: {}'.format(estimator_name))

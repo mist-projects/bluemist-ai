@@ -24,7 +24,7 @@ copyright = '2023, Shashank Agrawal'
 author = 'Shashank Agrawal'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.2'
+release = '0.1.1'
 
 # -- General configuration ---------------------------------------------------
 
@@ -37,7 +37,8 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.napoleon',
     'jupyter_sphinx',
-    'sphinx.ext.autosectionlabel'
+    'sphinx.ext.autosectionlabel',
+    'm2r'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -63,3 +64,5 @@ html_static_path = ['_static']
 
 # Make sure the target is unique
 autosectionlabel_prefix_document = True
+
+source_suffix = ['.rst', '.md']

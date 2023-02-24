@@ -6,11 +6,13 @@
 Welcome to Bluemist AI's documentation!
 =======================================
 
+.. mdinclude:: ../README.md
+
 .. toctree::
    :maxdepth: 2
    :caption: User Guide:
 
-   bluemist.preprocessing
+   bluemist.installation
 
 
 .. toctree::

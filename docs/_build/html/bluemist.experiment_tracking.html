@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Experiment Tracking &mdash; Bluemist AI 0.1.2 documentation</title>
+  <title>Experiment Tracking &mdash; Bluemist AI 0.1.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/jupyter-sphinx.css" type="text/css" />
@@ -44,15 +44,18 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="bluemist.preprocessing.html">Preprocessor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bluemist.preprocessing.html">Data Preprocessing</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="bluemist.datasource.html">Dataset Extraction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.eda.html">Exploratory Data Analysis (EDA)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bluemist.preprocessing.html">Preprocessor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bluemist.preprocessing.html">Data Preprocessing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.regression.html">Regression</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Experiment Tracking</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Experiment Tracking</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.model_deployment.html">Model Deployment</a></li>
 </ul>
 
@@ -82,6 +85,16 @@
              
   <section id="experiment-tracking">
 <h1>Experiment Tracking<a class="headerlink" href="#experiment-tracking" title="Permalink to this headline"></a></h1>
+<p>Bluemist provides integration with MLflow to track, experiment and evaluate machine learning models. This can be simply achieved by setting the params <code class="docutils literal notranslate"><span class="pre">experiment_name</span></code> and <code class="docutils literal notranslate"><span class="pre">run_name</span></code> while training the model using <code class="docutils literal notranslate"><span class="pre">train_test_evaluate</span></code> as described <a class="reference internal" href="bluemist.regression.html#module-bluemist.regression.regressor"><span class="std std-ref">here</span></a></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Is is important to execute <code class="docutils literal notranslate"><span class="pre">!mlflow</span> <span class="pre">ui</span></code> after <code class="docutils literal notranslate"><span class="pre">train_test_evaluate</span></code> has been completed successfully</p>
+</div>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
@@ -15173,7 +15186,15 @@ System platform :: posix, Linux, 5.19.0-31-generic, linux-x86_64, (&#39;64bit&#3
 
 
 </html>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>To track the experiments, open the browser and navigate to <a class="reference external" href="http://127.0.0.1:5000">http://127.0.0.1:5000</a></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <img alt="_images/regression_experiment_tracking_ui.png" src="_images/regression_experiment_tracking_ui.png" />
+</section>
 </section>
 
 

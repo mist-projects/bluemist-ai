@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to Bluemist AI’s documentation! &mdash; Bluemist AI 0.1.2 documentation</title>
+  <title>Welcome to Bluemist AI’s documentation! &mdash; Bluemist AI 0.1.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/jupyter-sphinx.css" type="text/css" />
@@ -23,7 +23,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Preprocessor" href="bluemist.preprocessing.html" /> 
+    <link rel="next" title="Data Preprocessing" href="bluemist.preprocessing.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,13 +43,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="bluemist.preprocessing.html">Preprocessor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bluemist.preprocessing.html">Data Preprocessing</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.datasource.html">Dataset Extraction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.eda.html">Exploratory Data Analysis (EDA)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bluemist.preprocessing.html">Preprocessor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bluemist.preprocessing.html">Data Preprocessing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.regression.html">Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.experiment_tracking.html">Experiment Tracking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.model_deployment.html">Model Deployment</a></li>
@@ -81,10 +81,88 @@
              
   <section id="welcome-to-bluemist-ai-s-documentation">
 <h1>Welcome to Bluemist AI’s documentation!<a class="headerlink" href="#welcome-to-bluemist-ai-s-documentation" title="Permalink to this headline"></a></h1>
+<a class="reference external image-reference" href="https://badge.fury.io/py/bluemist"><img alt="PyPI version" src="https://badge.fury.io/py/bluemist.svg" /></a>
+<a class="reference external image-reference" href="https://bluemist-ai.readthedocs.io/en/latest/?badge=latest"><img alt="Documentation Status" src="https://readthedocs.org/projects/bluemist-ai/badge/?version=latest" /></a>
+<a class="reference external image-reference" href="https://img.shields.io/github/license/shashanka89/bluemist-ai"><img alt="GitHub" src="https://img.shields.io/github/license/shashanka89/bluemist-ai" /></a>
+</section>
+<section id="bluemist-ai">
+<h1>Bluemist AI<a class="headerlink" href="#bluemist-ai" title="Permalink to this headline"></a></h1>
+<p>Bluemist AI is a low code machine learning library written in Python to develop, evaluate and deploy automated ML
+pipleines.</p>
+<p>It acts as a wrapper service on top of sklearn, numpy, pandas, mlflow and FastAPI.</p>
+<p>Visualization are created using pandas-profiling, sweetviz, dtale and autoviz.</p>
+<section id="features">
+<h2>Features :<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Native integration for data extraction with MySQL, PostgreSQL, MS SQL, Oracle, MariaDB, Amazon Aurora and Amazon S3</p></li>
+<li><p>Exploratory Data Analysis (EDA)</p></li>
+<li><p>Data preprocessing</p></li>
+<li><p>Trains data across multiple algorithms and provide comparison metrics</p></li>
+<li><p>Hyperparameter tuning</p></li>
+<li><p>Experiment tracking</p></li>
+<li><p>API deployment</p></li>
+</ul>
+<p>For more detail please visit &#64; <a class="reference external" href="https://www.bluemist-ai.one">https://www.bluemist-ai.one</a></p>
+</section>
+<section id="user-installation">
+<h2>User installation<a class="headerlink" href="#user-installation" title="Permalink to this headline"></a></h2>
+<p><a href="#id1"><span class="problematic" id="id2">**</span></a><em>NOTE:</em>**  conda package is not available for bluemist at this time, but will be available in a future release</p>
+<section id="method-1">
+<h3>Method 1:<a class="headerlink" href="#method-1" title="Permalink to this headline"></a></h3>
+<div class="highlight-{python} notranslate"><div class="highlight"><pre><span></span>source bluemist-env/bin/activate
+pip install -U bluemist
+</pre></div>
+</div>
+</section>
+<section id="method-2">
+<h3>Method 2:<a class="headerlink" href="#method-2" title="Permalink to this headline"></a></h3>
+<p>It is advised to setup a separate python environment to avoid conflicts with package dependencies.
+This can be done as follows :</p>
+<ul class="simple">
+<li><p>Inatall the package <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code></p></li>
+</ul>
+<div class="highlight-{python} notranslate"><div class="highlight"><pre><span></span>pip install virtualenv
+</pre></div>
+</div>
+<ul>
+<li><p>Create a separate directory where bluemist environment will be created</p>
+<div class="highlight-{python} notranslate"><div class="highlight"><pre><span></span>mkdir /path/to/bluemist-ai
+cd /path/to/bluemist-ai
+</pre></div>
+</div>
+</li>
+<li><p>Create the bluemist environment</p>
+<div class="highlight-{python} notranslate"><div class="highlight"><pre><span></span>virtualenv bluemist-env
+</pre></div>
+</div>
+</li>
+<li><p>Activate the environment and install bluemist</p>
+<div class="highlight-{python} notranslate"><div class="highlight"><pre><span></span>source bluemist-env/bin/activate
+pip install -U bluemist
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="method-3">
+<h3>Method 3:<a class="headerlink" href="#method-3" title="Permalink to this headline"></a></h3>
+<p>bluemist package can be installed using <code class="docutils literal notranslate"><span class="pre">pipx</span></code> utility. It automatically creates an isolated environment to run the
+bluemist package</p>
+<div class="highlight-{python} notranslate"><div class="highlight"><pre><span></span>pip install pipx
+pipx install bluemist
+pipx upgrade bluemist
+</pre></div>
+</div>
+</section>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline"></a></h2>
+<p>Bluemist AI source code is licensed under the MIT License</p>
+<p>See <a class="reference external" href="https://github.com/mist-projects/bluemist-ai/wiki/Third-Part-Libraries">Third Party Libraries</a> for license details of third party libraries included in the distribution.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="bluemist.preprocessing.html">Preprocessor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bluemist.preprocessing.html">Data Preprocessing</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
@@ -97,12 +175,19 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.eda.html">Exploratory Data Analysis (EDA)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bluemist.preprocessing.html">Preprocessor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bluemist.preprocessing.html">Data Preprocessing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.regression.html">Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bluemist.experiment_tracking.html">Experiment Tracking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bluemist.model_deployment.html">Model Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bluemist.experiment_tracking.html">Experiment Tracking</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bluemist.experiment_tracking.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bluemist.model_deployment.html">Model Deployment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bluemist.model_deployment.html#examples">Examples</a></li>
+</ul>
+</li>
 </ul>
 </div>
+</section>
 </section>
 <section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline"></a></h1>
@@ -117,7 +202,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="bluemist.preprocessing.html" class="btn btn-neutral float-right" title="Preprocessor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="bluemist.preprocessing.html" class="btn btn-neutral float-right" title="Data Preprocessing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

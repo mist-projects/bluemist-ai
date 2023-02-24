@@ -7,8 +7,9 @@
 Bluemist AI is a low code machine learning library written in Python to develop, evaluate and deploy automated ML
 pipleines. 
 
-It acts as a wrapper service on top of sklearn, numpy, pandas, mlflow and FastAPI. Visualization are done
-pandas-profiling, sweetviz, dtale and autoviz. 
+It acts as a wrapper service on top of sklearn, numpy, pandas, mlflow and FastAPI.
+
+Visualization are created using pandas-profiling, sweetviz, dtale and autoviz. 
 
 ## Features :
 - Native integration for data extraction with MySQL, PostgreSQL, MS SQL, Oracle, MariaDB, Amazon Aurora and Amazon S3
@@ -26,7 +27,7 @@ For more detail please visit @ https://www.bluemist-ai.one
 **_NOTE:_**  conda package is not available for bluemist at this time, but will be available in a future release
 
 ### Method 1:
-bluemist package can be installed by executing below command :
+
 ```{python}
 source bluemist-env/bin/activate
 pip install -U bluemist
@@ -61,8 +62,8 @@ pip install -U bluemist
 
 ### Method 3:
 
-bluemist package can be installed using ``pipx`` utility. It automatically creates and isolated environment to run the
-package
+bluemist package can be installed using ``pipx`` utility. It automatically creates an isolated environment to run the
+bluemist package
 ```{python}
 pip install pipx
 pipx install bluemist
