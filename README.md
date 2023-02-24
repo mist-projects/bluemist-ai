@@ -30,7 +30,6 @@ Full documentation is available @ https://bluemist-ai.readthedocs.io
 ### Method 1:
 
 ```{python}
-source bluemist-env/bin/activate
 pip install -U bluemist
 ```
 
@@ -45,20 +44,20 @@ pip install virtualenv
 ```
 
 - Create a separate directory where bluemist environment will be created
-- 
+
 ```{python}
 mkdir /path/to/bluemist-ai
 cd /path/to/bluemist-ai
 ```
 
 - Create the bluemist environment
-- 
+
 ```{python}
 virtualenv bluemist-env
 ```
 
 - Activate the environment and install bluemist
-- 
+
 ```{python}
 source bluemist-env/bin/activate
 pip install -U bluemist
