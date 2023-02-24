@@ -25,11 +25,5 @@ Welcome to Bluemist AI's documentation!
    bluemist.regression
    bluemist.experiment_tracking
    bluemist.model_deployment
+   bluemist.coming_soon
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

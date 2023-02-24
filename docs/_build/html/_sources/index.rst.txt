@@ -12,7 +12,7 @@ Welcome to Bluemist AI's documentation!
    :maxdepth: 2
    :caption: User Guide:
 
-   bluemist.preprocessing
+   bluemist.installation
 
 
 .. toctree::
@@ -26,10 +26,3 @@ Welcome to Bluemist AI's documentation!
    bluemist.experiment_tracking
    bluemist.model_deployment
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
