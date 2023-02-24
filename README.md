@@ -1,6 +1,11 @@
+<div align="center">
+
+[![Generic badge](https://img.shields.io/badge/python-3.9-blue.svg)](https://shields.io/)
 [![PyPI version](https://badge.fury.io/py/bluemist.svg)](https://badge.fury.io/py/bluemist)
 [![Documentation Status](https://readthedocs.org/projects/bluemist-ai/badge/?version=latest)](https://bluemist-ai.readthedocs.io/en/latest/?badge=latest)
 ![GitHub](https://img.shields.io/github/license/shashanka89/bluemist-ai)
+
+</div>
 
 # Bluemist AI
 
@@ -20,7 +25,8 @@ Visualization are created using pandas-profiling, sweetviz, dtale and autoviz.
 - Experiment tracking
 - API deployment
 
-For more detail please visit @ https://www.bluemist-ai.one
+For more detail please visit @ https://www.bluemist-ai.one.
+Documentation is available @ 
 
 ## User installation
 
