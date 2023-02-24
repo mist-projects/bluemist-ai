@@ -1,13 +1,17 @@
 <div align="center">
-
 [![Generic badge](https://img.shields.io/badge/python-3.9-blue.svg)](https://shields.io/)
 [![PyPI version](https://badge.fury.io/py/bluemist.svg)](https://badge.fury.io/py/bluemist)
 [![Documentation Status](https://readthedocs.org/projects/bluemist-ai/badge/?version=latest)](https://bluemist-ai.readthedocs.io/en/latest/?badge=latest)
 ![GitHub](https://img.shields.io/github/license/shashanka89/bluemist-ai)
-
 </div>
 
 # Bluemist AI
+<div align="left">
+[![Generic badge](https://img.shields.io/badge/python-3.9-blue.svg)](https://shields.io/)
+[![PyPI version](https://badge.fury.io/py/bluemist.svg)](https://badge.fury.io/py/bluemist)
+[![Documentation Status](https://readthedocs.org/projects/bluemist-ai/badge/?version=latest)](https://bluemist-ai.readthedocs.io/en/latest/?badge=latest)
+![GitHub](https://img.shields.io/github/license/shashanka89/bluemist-ai)
+</div>
 
 Bluemist AI is a low code machine learning library written in Python to develop, evaluate and deploy automated ML
 pipleines. 
