@@ -87,7 +87,6 @@
 <span class="kn">import</span> <span class="nn">sklearn</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
 
-<span class="kn">import</span> <span class="nn">bluemist</span>
 <span class="kn">from</span> <span class="nn">bluemist.environment</span> <span class="kn">import</span> <span class="n">initialize</span>
 <span class="c1"># from bluemist.datasource.aws import get_data_from_s3</span>
 <span class="c1"># from bluemist.datasource import get_data_from_filesystem</span>
@@ -134,22 +133,21 @@
     <span class="c1">#                               query=query, chunk_size=100)</span>
 
     <span class="c1">#print(&#39;get_estimators&#39;, get_estimators())</span>
-    <span class="n">initialize</span><span class="p">()</span></div>
-    <span class="c1"># data = datasets.load_diabetes(as_frame=True)</span>
+    <span class="n">initialize</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="c1">#data = get_data_from_filesystem(&#39;datasets/auto-mpg/auto-mpg.csv&#39;)</span>
 
     <span class="c1">#perform_eda(data.frame, target_variable=&#39;target&#39;, provider=&#39;autoviz&#39;)</span>
 
-    <span class="c1"># X_train, X_test, y_train, y_test = preprocess_data(data.frame, target_variable=&#39;target&#39;, test_size=0.25,</span>
-    <span class="c1">#                                                    data_scaling_strategy=None,</span>
-    <span class="c1">#                                                       categorical_features=[&#39;sex&#39;],</span>
-    <span class="c1">#                                                    categorical_encoder=&#39;OrdinalEncoder&#39;)</span>
-    <span class="c1">#</span>
-    <span class="c1"># train_test_evaluate(X_train, X_test, y_train, y_test, tune_models=[&#39;AdaBoostRegressor&#39;, &#39;ARDRegression&#39;], metrics=&#39;all&#39;, target_scaling_strategy=None,</span>
-    <span class="c1">#                     experiment_name=&#39;regression_demo&#39;, run_name=&#39;run1&#39;)</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">preprocess_data</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="n">target_variable</span><span class="o">=</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+                                                       <span class="n">data_scaling_strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                                          <span class="n">categorical_features</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">],</span>
+                                                       <span class="n">categorical_encoder</span><span class="o">=</span><span class="s1">&#39;OrdinalEncoder&#39;</span><span class="p">)</span>
+
+    <span class="n">train_test_evaluate</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">tune_models</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">target_scaling_strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="c1"># # # pipeline = get_model_pipeline(&#39;LarsCV&#39;)</span>
     <span class="c1"># # print(pipeline.get_params)</span>
-    <span class="c1"># #deploy_model(estimator_name=&#39;LarsCV&#39;, host=&#39;localhost&#39;, port=8000)</span>
+    <span class="n">deploy_model</span><span class="p">(</span><span class="n">estimator_name</span><span class="o">=</span><span class="s1">&#39;LarsCV&#39;</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">)</span></div>
 
 
 <span class="c1"># Press the green button in the gutter to run the script.</span>

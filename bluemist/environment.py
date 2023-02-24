@@ -55,7 +55,6 @@ def initialize(
     """
 
     print(colored(banner, 'blue'))
-    logger.info('\n{}'.format(banner))
 
     print('Bluemist path :: {}'.format(BLUEMIST_PATH))
     print('System platform :: {}, {}, {}, {}, {}'.format(os.name, platform.system(), platform.release(), sysconfig.get_platform(),
