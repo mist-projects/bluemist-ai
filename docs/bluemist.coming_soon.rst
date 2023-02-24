@@ -1,5 +1,5 @@
-Coming Soon:
-============
+Coming Soon
+===========
 
 * Classification
 * Clustering

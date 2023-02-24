@@ -21,9 +21,9 @@ Visualization are created using pandas-profiling, sweetviz, dtale and autoviz.
 - Experiment tracking
 - API deployment
 
-For the detailed list of supported and upcoming features, visit @ https://www.bluemist-ai.one
+For the detailed list of supported and upcoming features, visit https://www.bluemist-ai.one
 
-Documentation is available @ https://bluemist-ai.readthedocs.io
+Full documentation is available @ https://bluemist-ai.readthedocs.io
 
 ## User installation
 
