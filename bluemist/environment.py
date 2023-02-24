@@ -15,9 +15,7 @@ import sysconfig
 from logging import config
 import platform
 
-from IPython.display import display, HTML
 from termcolor import colored
-
 
 os.environ["BLUEMIST_PATH"] = os.path.realpath(os.path.dirname(__file__))
 BLUEMIST_PATH = os.getenv("BLUEMIST_PATH")
