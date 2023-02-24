@@ -1,3 +1,4 @@
+autoviz==0.1.58
 boto3==1.26.63
 cx_Oracle==8.3.0
 dtale==2.12.2
@@ -7,9 +8,11 @@ joblib==1.1.1
 mlflow==2.1.1
 numpy==1.22.3
 pandas==1.4.2
-pandas_profiling==0.0.dev0
+pandas_profiling==3.6.6
 scikit_learn==1.2.1
+setuptools==67.1.0
 SQLAlchemy==1.4.32
 sweetviz==2.1.4
 termcolor==1.1.0
 tqdm==4.64.1
+ydata_profiling==4.0.0
