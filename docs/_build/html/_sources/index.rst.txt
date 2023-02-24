@@ -25,4 +25,5 @@ Welcome to Bluemist AI's documentation!
    bluemist.regression
    bluemist.experiment_tracking
    bluemist.model_deployment
+   bluemist.coming_soon
 
