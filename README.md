@@ -89,14 +89,12 @@ Below functionalities are available only with complete package installation
 
 - Data extraction from RDBMS or cloud
 - EDA Visualizations using dtale and sweetviz
-- Experiment Tracking
-- Model API deployment
 
 Alternatively a single optional package can be installed using the ``pip`` command. For example, if you would like to
 extract data from Amazon S3 but do not wish to install other optional packages :
 
 ```{python}
-pip install mlflow
+pip install boto3
 ```
 
 ## License
