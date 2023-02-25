@@ -4,15 +4,13 @@ __license__ = "MIT"
 __version__ = "0.1.1"
 __email__ = "dew@bluemist-ai.one"
 
-
 import logging
 import os
 from logging import config
 
-from ydata_profiling import ProfileReport
+from pandas_profiling import ProfileReport
 import dtale
 import sweetviz as sv
-
 
 BLUEMIST_PATH = os.getenv("BLUEMIST_PATH")
 EDA_ARTIFACTS_PATH = BLUEMIST_PATH + '/' + 'artifacts/eda'
@@ -33,8 +31,7 @@ def perform_eda(data,
         provider : {'pandas-profiling', 'sweetviz', 'dtale'}, default='pandas-profiling'
             Library provider for exploratory data analysis
         sample_size: str, default=10000
-            Number of rows to return from dataframe. ``None`` to perform eda on the complete dataset which can be slower
-            if dataset has large number of rows and columns
+            Number of rows to return from dataframe. ``None`` to perform eda on the complete dataset which can be slower if dataset has large number of rows and columns
         data_randomizer: int, default=None
             Controls the data split. Provide a value to reproduce the same split.
 

@@ -9,6 +9,7 @@ mlflow==2.1.1
 nest_asyncio==1.5.6
 numpy==1.22.3
 pandas==1.4.2
+pandas_profiling==3.6.6
 pydantic==1.10.2
 pyngrok==5.2.1
 scikit-learn==1.2.1
@@ -18,4 +19,3 @@ sweetviz==2.1.4
 termcolor==1.1.0
 tqdm==4.64.1
 uvicorn==0.20.0
-ydata-profiling==4.0.0
