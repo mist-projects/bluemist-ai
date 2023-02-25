@@ -48,11 +48,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#user-installation">User installation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#method-1">Method 1</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#method-2-recommended">Method 2 (recommended)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#method-3">Method 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#method-2-recommended">Method 2 (recommended):</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#method-3">Method 3:</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">Minimal package vs Full package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#license">License</a></li>
 </ul>
 </li>
@@ -120,19 +119,12 @@ pandas-profiling, sweetviz, dtale and autoviz.</p>
 <h2>User installation<a class="headerlink" href="#user-installation" title="Permalink to this headline"></a></h2>
 <section id="method-1">
 <h3>Method 1<a class="headerlink" href="#method-1" title="Permalink to this headline"></a></h3>
-<p>To install minimal version of the package with hard dependencies listed in  <a class="reference external" href="requirements.txt">requirements.txt</a></p>
 <div class="highlight-{python} notranslate"><div class="highlight"><pre><span></span>pip install -U bluemist
-</pre></div>
-</div>
-<p>To install the complete package including optional dependencies listed
-in  <a class="reference external" href="requirements-optional.txt">requirements-optional.txt</a>.
-Refer <a class="reference external" href="#minimal-package-vs-full-package">Minimal package vs Full package</a> for more details.</p>
-<div class="highlight-{python} notranslate"><div class="highlight"><pre><span></span>pip install -U bluemist[complete]
 </pre></div>
 </div>
 </section>
 <section id="method-2-recommended">
-<h3>Method 2 (recommended)<a class="headerlink" href="#method-2-recommended" title="Permalink to this headline"></a></h3>
+<h3>Method 2 (recommended):<a class="headerlink" href="#method-2-recommended" title="Permalink to this headline"></a></h3>
 <p>It is advised to setup a separate python environment to avoid conflicts with package dependencies.
 This can be done as follows :</p>
 <ul class="simple">
@@ -163,7 +155,7 @@ pip install -U bluemist
 </div>
 </section>
 <section id="method-3">
-<h3>Method 3<a class="headerlink" href="#method-3" title="Permalink to this headline"></a></h3>
+<h3>Method 3:<a class="headerlink" href="#method-3" title="Permalink to this headline"></a></h3>
 <p>bluemist package can be installed using <code class="docutils literal notranslate"><span class="pre">pipx</span></code> utility. It automatically creates an isolated environment to run the
 bluemist package</p>
 <div class="highlight-{python} notranslate"><div class="highlight"><pre><span></span>pip install pipx
@@ -172,21 +164,6 @@ pipx upgrade bluemist
 </pre></div>
 </div>
 </section>
-</section>
-<section id="id1">
-<h2>Minimal package vs Full package<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
-<p>Below functionalities are available only with complete package installation</p>
-<ul class="simple">
-<li><p>Data extraction from RDBMS or cloud</p></li>
-<li><p>EDA Visualizations using dtale and sweetviz</p></li>
-<li><p>Experiment Tracking</p></li>
-<li><p>Model API deployment</p></li>
-</ul>
-<p>Alternatively a single optional package can be installed using the <code class="docutils literal notranslate"><span class="pre">pip</span></code> command. For example, if you would like to
-perform experiment tracking and do not wish to install other optional packages :</p>
-<div class="highlight-{python} notranslate"><div class="highlight"><pre><span></span>pip install mlflow
-</pre></div>
-</div>
 </section>
 <section id="license">
 <h2>License<a class="headerlink" href="#license" title="Permalink to this headline"></a></h2>

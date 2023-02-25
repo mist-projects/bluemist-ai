@@ -9,11 +9,10 @@ import logging
 import os
 from logging import config
 
-from pandas_profiling import ProfileReport
+from ydata_profiling import ProfileReport
 import dtale
 import sweetviz as sv
-from autoviz.AutoViz_Class import AutoViz_Class
-AV = AutoViz_Class()
+
 
 BLUEMIST_PATH = os.getenv("BLUEMIST_PATH")
 EDA_ARTIFACTS_PATH = BLUEMIST_PATH + '/' + 'artifacts/eda'
@@ -24,7 +23,6 @@ logger = logging.getLogger("bluemist")
 
 def perform_eda(data,
                 provider='pandas-profiling',
-                target_variable=None,
                 sample_size=10000,
                 data_randomizer=2):
     """
@@ -32,7 +30,7 @@ def perform_eda(data,
 
         data: pandas dataframe
             Dataframe for exploratory data analysis
-        provider : {'pandas-profiling', 'sweetviz', 'dtale', 'autoviz'}, default='pandas-profiling'
+        provider : {'pandas-profiling', 'sweetviz', 'dtale'}, default='pandas-profiling'
             Library provider for exploratory data analysis
         sample_size: str, default=10000
             Number of rows to return from dataframe. ``None`` to perform eda on the complete dataset which can be slower
@@ -56,11 +54,6 @@ def perform_eda(data,
 
         .. raw:: html
            :file: ../../code_samples/quickstarts/eda/eda_dtale.html
-
-        *EDA using AutoViz*
-
-        .. raw:: html
-           :file: ../../code_samples/quickstarts/eda/eda_autoviz.html
 
     """
 
@@ -89,11 +82,6 @@ def perform_eda(data,
             print('Opening dtale UI on the browser...')
             d = dtale.show(data, subprocess=False, reaper_on=True)
             d.open_browser()
-        elif provider == 'autoviz':
-            dftc = AV.AutoViz(filename='', sep=',', depVar=target_variable, dfte=data, header=0, verbose=2,
-                              lowess=False, chart_format='html', max_rows_analyzed=sample_size,
-                              save_plot_dir=output_provider)
-            print('Output files stored under the path :: ' + output_provider)
     else:
         print('Invalid provider, valid providers are :: {}'.format(valid_providers))
         logger.info('Invalid provider, valid providers are :: {}'.format(valid_providers))
