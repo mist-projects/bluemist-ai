@@ -5,7 +5,7 @@
 [![Documentation Status](https://readthedocs.org/projects/bluemist-ai/badge/?version=latest)](https://bluemist-ai.readthedocs.io/en/latest/?badge=latest)
 ![GitHub](https://img.shields.io/github/license/shashanka89/bluemist-ai)
 
-Bluemist AI is a low code machine learning library written in Python to develop, evaluate and deploy automated Machine
+Bluemist AI is an open source, low code machine learning library written in Python to develop, evaluate and deploy automated Machine
 Learning models and pipleines.
 
 It acts as a wrapper service on top of sklearn, numpy, pandas, mlflow and FastAPI. Visualization are created using
@@ -26,13 +26,23 @@ Full documentation is available @ https://bluemist-ai.readthedocs.io
 
 ## User installation
 
-### Method 1:
+#### Method 1
+
+To install minimal version of the package with hard dependencies listed in  [requirements.txt](requirements.txt)
 
 ```{python}
 pip install -U bluemist
 ```
 
-### Method 2 (recommended):
+To install the complete package including optional dependencies listed
+in  [requirements-optional.txt](requirements-optional.txt).
+Refer [Minimal package vs Full package](#minimal-package-vs-full-package) for more details.
+
+```{python}
+pip install -U bluemist[complete]
+```
+
+#### Method 2 (recommended)
 It is advised to setup a separate python environment to avoid conflicts with package dependencies. 
 This can be done as follows :
 
@@ -62,7 +72,7 @@ source bluemist-env/bin/activate
 pip install -U bluemist
 ```
 
-### Method 3:
+#### Method 3
 
 bluemist package can be installed using ``pipx`` utility. It automatically creates an isolated environment to run the
 bluemist package
@@ -73,6 +83,20 @@ pipx install bluemist
 pipx upgrade bluemist
 ```
 
+## Minimal package vs Full package
+Below functionalities are available only with complete package installation
+
+- Data extraction from RDBMS or cloud
+- EDA Visualizations using dtale and sweetviz
+- Experiment Tracking
+- Model API deployment
+
+Alternatively a single optional package can be installed using the ``pip`` command. For example, if you would like to
+perform experiment tracking and do not wish to install other optional packages :
+
+```{python}
+pip install mlflow
+```
 
 ## License
 
