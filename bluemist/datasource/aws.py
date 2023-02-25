@@ -8,7 +8,6 @@ __email__ = "dew@bluemist-ai.one"
 import logging
 import os
 from logging import config
-import boto3
 
 from bluemist.datasource import get_data_from_filesystem
 
@@ -52,7 +51,7 @@ def get_data_from_s3(aws_access_key_id,
            :file: ../../code_samples/quickstarts/datasource/ds_aws.html
 
     """
-
+    import boto3
     s3 = boto3.client('s3', aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
     logger.debug('S3 service client created :: {}'.format(s3))
     s3.download_file(s3_bucket_name, s3_object_name, destination_path)

@@ -9,8 +9,6 @@ import os
 from logging import config
 
 from pandas_profiling import ProfileReport
-import dtale
-import sweetviz as sv
 
 BLUEMIST_PATH = os.getenv("BLUEMIST_PATH")
 EDA_ARTIFACTS_PATH = BLUEMIST_PATH + '/' + 'artifacts/eda'
@@ -70,12 +68,14 @@ def perform_eda(data,
             profile = ProfileReport(data, explorative=True)
             profile.to_file(output_file=output_file, silent=False)
         elif provider == 'sweetviz':
+            import sweetviz as sv
             logger.info('Output file :: {}'.format(output_file))
             print('Output file :: {}'.format(output_file))
             print('Output file will be opened in the browser after analysis is completed !!')
             sweetviz_report = sv.analyze(data)
             sweetviz_report.show_html(output_file)
         elif provider == 'dtale':
+            import dtale
             print('Opening dtale UI on the browser...')
             d = dtale.show(data, subprocess=False, reaper_on=True)
             d.open_browser()
