@@ -289,7 +289,7 @@ def train_test_evaluate(
 
                     if steps is not None:
                         model_pipeline = Pipeline(steps=steps)
-                        search = RandomizedSearchCV(model_pipeline, param_distributions=hyperparameters)
+                        search = RandomizedSearchCV(model_pipeline, param_distributions=hyperparameters, n_iter=100)
                         fitted_estimator_with_all_parameters = search.fit(X_train, y_train)
                         pipeline_with_best_estimator = fitted_estimator_with_all_parameters.best_estimator_
                         logger.debug('Model pipeline parameters :: {}'.format(model_pipeline.get_params().keys()))

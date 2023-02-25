@@ -245,7 +245,7 @@ RANSACRegressor = {
 }
 
 RadiusNeighborsRegressor = {
-    'radius': [1.0],
+    'radius': np.arange(1, 1000 + 1, 10).tolist(),
     'weights': ['uniform', 'distance'],
     'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute'],
     'leaf_size': np.arange(2, 50 + 1, 1).tolist(),
