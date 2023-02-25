@@ -1,0 +1,5 @@
+boto3==1.26.63
+cx_Oracle==8.3.0
+dtale==2.12.3
+SQLAlchemy==1.4.32
+sweetviz==2.1.4
