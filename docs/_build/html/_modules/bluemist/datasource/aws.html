@@ -89,7 +89,6 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">config</span>
-<span class="kn">import</span> <span class="nn">boto3</span>
 
 <span class="kn">from</span> <span class="nn">bluemist.datasource</span> <span class="kn">import</span> <span class="n">get_data_from_filesystem</span>
 
@@ -133,7 +132,7 @@
 <span class="sd">           :file: ../../code_samples/quickstarts/datasource/ds_aws.html</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-
+    <span class="kn">import</span> <span class="nn">boto3</span>
     <span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">,</span> <span class="n">aws_access_key_id</span><span class="o">=</span><span class="n">aws_access_key_id</span><span class="p">,</span> <span class="n">aws_secret_access_key</span><span class="o">=</span><span class="n">aws_secret_access_key</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;S3 service client created :: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s3</span><span class="p">))</span>
     <span class="n">s3</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span><span class="n">s3_bucket_name</span><span class="p">,</span> <span class="n">s3_object_name</span><span class="p">,</span> <span class="n">destination_path</span><span class="p">)</span>

@@ -90,9 +90,7 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">urllib.parse</span>
 <span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">config</span>
-<span class="kn">import</span> <span class="nn">cx_Oracle</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
 
 <span class="n">BLUEMIST_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;BLUEMIST_PATH&quot;</span><span class="p">)</span>
 
@@ -142,6 +140,7 @@
     <span class="n">password</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote_plus</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">db_type</span> <span class="o">==</span> <span class="s1">&#39;mariadb&#39;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Pulling data from MariaDB&#39;</span><span class="p">)</span>
         <span class="n">connection_url</span> <span class="o">=</span> <span class="s1">&#39;mysql+pymysql://&#39;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">password</span> <span class="o">+</span> <span class="s1">&#39;@&#39;</span> <span class="o">+</span> <span class="n">host</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">database</span>
         <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">connection_url</span><span class="p">)</span>
@@ -150,6 +149,7 @@
         <span class="n">data</span> <span class="o">=</span> <span class="n">extract_data</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span>
     <span class="k">elif</span> <span class="n">db_type</span> <span class="o">==</span> <span class="s1">&#39;mssql&#39;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Pulling data from MS SQL&#39;</span><span class="p">)</span>
         <span class="n">connection_url</span> <span class="o">=</span> <span class="s1">&#39;mssql+pymssql://&#39;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">password</span> <span class="o">+</span> <span class="s1">&#39;@&#39;</span> <span class="o">+</span> <span class="n">host</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">database</span>
         <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">connection_url</span><span class="p">)</span>
@@ -158,6 +158,7 @@
         <span class="n">data</span> <span class="o">=</span> <span class="n">extract_data</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span>
     <span class="k">elif</span> <span class="n">db_type</span> <span class="o">==</span> <span class="s1">&#39;mysql&#39;</span> <span class="ow">or</span> <span class="n">db_type</span> <span class="o">==</span> <span class="s1">&#39;aurora-mysql&#39;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Pulling data from MySQL&#39;</span><span class="p">)</span>
         <span class="n">connection_url</span> <span class="o">=</span> <span class="s1">&#39;mysql+pymysql://&#39;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">password</span> <span class="o">+</span> <span class="s1">&#39;@&#39;</span> <span class="o">+</span> <span class="n">host</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">database</span>
         <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">connection_url</span><span class="p">)</span>
@@ -166,6 +167,7 @@
         <span class="n">data</span> <span class="o">=</span> <span class="n">extract_data</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span>
     <span class="k">elif</span> <span class="n">db_type</span> <span class="o">==</span> <span class="s1">&#39;oracle&#39;</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">cx_Oracle</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Pulling data from Oracle&#39;</span><span class="p">)</span>
         <span class="n">connection_url</span> <span class="o">=</span> <span class="s1">&#39;oracle+cx_oracle://&#39;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">password</span> <span class="o">+</span> <span class="s1">&#39;@&#39;</span> <span class="o">+</span> <span class="n">host</span> <span class="o">+</span> <span class="s1">&#39;/?service_name=&#39;</span> <span class="o">+</span> <span class="n">service</span>
         <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">connection_url</span><span class="p">)</span>
@@ -174,6 +176,7 @@
         <span class="n">data</span> <span class="o">=</span> <span class="n">extract_data</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span>
     <span class="k">elif</span> <span class="n">db_type</span> <span class="o">==</span> <span class="s1">&#39;postgres&#39;</span> <span class="ow">or</span> <span class="n">db_type</span> <span class="o">==</span> <span class="s1">&#39;aurora-postgres&#39;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Pulling data from PostgreSQL&#39;</span><span class="p">)</span>
         <span class="n">connection_url</span> <span class="o">=</span> <span class="s1">&#39;postgresql://&#39;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">password</span> <span class="o">+</span> <span class="s1">&#39;@&#39;</span> <span class="o">+</span> <span class="n">host</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">database</span>
         <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">connection_url</span><span class="p">)</span>
