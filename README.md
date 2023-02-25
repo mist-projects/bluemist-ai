@@ -26,7 +26,7 @@ Full documentation is available @ https://bluemist-ai.readthedocs.io
 
 ## User installation
 
-#### Method 1
+##### Method 1
 
 To install minimal version of the package with hard dependencies listed in  [requirements.txt](requirements.txt)
 
@@ -42,7 +42,7 @@ Refer [Minimal package vs Full package](#minimal-package-vs-full-package) for mo
 pip install -U bluemist[complete]
 ```
 
-#### Method 2 (recommended)
+##### Method 2 (recommended)
 It is advised to setup a separate python environment to avoid conflicts with package dependencies. 
 This can be done as follows :
 
@@ -72,7 +72,7 @@ source bluemist-env/bin/activate
 pip install -U bluemist
 ```
 
-#### Method 3
+##### Method 3
 
 bluemist package can be installed using ``pipx`` utility. It automatically creates an isolated environment to run the
 bluemist package
