@@ -5,9 +5,8 @@
 ![GitHub](https://img.shields.io/github/license/mist-projects/bluemist-ai)
 [![Documentation Status](https://readthedocs.org/projects/bluemist-ai/badge/?version=latest)](https://bluemist-ai.readthedocs.io/en/latest/?badge=latest)
 
-Bluemist AI is a low code machine learning library written in Python to develop, evaluate and deploy automated Machine
 Bluemist AI is an open source, low code machine learning library written in Python to develop, evaluate and deploy automated Machine
-Learning models and pipleines.
+Learning models and pipelines.
 
 It acts as a wrapper service on top of sklearn, numpy, pandas, mlflow and FastAPI. Visualization are created using
 pandas-profiling, sweetviz, dtale and autoviz. 
