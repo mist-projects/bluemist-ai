@@ -14559,12 +14559,12 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
                 },
                 displayAlign: 'center',
                 CommonHTML: {
-                    linebreaks: { 
-                    automatic: true 
+                    linebreaks: {
+                    automatic: true
                     }
                 }
             });
-        
+
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }
     }
@@ -14577,7 +14577,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">bluemist</span>
@@ -14593,12 +14593,13 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
 
 <span class="kn">from</span> <span class="nn">bluemist.environment</span> <span class="kn">import</span> <span class="n">initialize</span>
+<span class="kn">from</span> <span class="nn">bluemist.datasource</span> <span class="kn">import</span> <span class="n">get_data_from_filesystem</span>
 <span class="kn">from</span> <span class="nn">bluemist.preprocessing</span> <span class="kn">import</span> <span class="n">preprocess_data</span>
 <span class="kn">from</span> <span class="nn">bluemist.regression</span> <span class="kn">import</span> <span class="n">train_test_evaluate</span>
 </pre></div>
@@ -14613,11 +14614,12 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">initialize</span><span class="p">()</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">get_data_from_filesystem</span><span class="p">(</span><span class="s1">'https://raw.githubusercontent.com/plotly/datasets/3aa08e58607d1f36159efc4cca9d0d073bbf57bb/auto-mpg.csv'</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -14647,35 +14649,107 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 ██████╔╝███████╗╚██████╔╝███████╗██║ ╚═╝ ██║██║███████║   ██║       ██║  ██║██║                                                                        
                                 (version 0.1.1)
     </span>
-Bluemist path :: /home/shashank-agrawal/PycharmProjects/bluemist-ai/bluemist
+Bluemist path :: /home/shashank-agrawal/anaconda3/envs/bluemist-test-2/lib/python3.9/site-packages/bluemist
 System platform :: posix, Linux, 5.19.0-31-generic, linux-x86_64, (&#39;64bit&#39;, &#39;ELF&#39;)
 </pre>
 </div>
 </div>
 
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mpg</th>
+      <th>cylinders</th>
+      <th>displacement</th>
+      <th>horsepower</th>
+      <th>weight</th>
+      <th>acceleration</th>
+      <th>model_year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>18.0</td>
+      <td>8</td>
+      <td>307.0</td>
+      <td>130.0</td>
+      <td>3504</td>
+      <td>12.0</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>15.0</td>
+      <td>8</td>
+      <td>350.0</td>
+      <td>165.0</td>
+      <td>3693</td>
+      <td>11.5</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>18.0</td>
+      <td>8</td>
+      <td>318.0</td>
+      <td>150.0</td>
+      <td>3436</td>
+      <td>11.0</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>16.0</td>
+      <td>8</td>
+      <td>304.0</td>
+      <td>150.0</td>
+      <td>3433</td>
+      <td>12.0</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>17.0</td>
+      <td>8</td>
+      <td>302.0</td>
+      <td>140.0</td>
+      <td>3449</td>
+      <td>10.5</td>
+      <td>70</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 </div>
 
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Categorical encoding using OneHotEncoder</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">preprocess_data</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> 
-                                                   <span class="n">target_variable</span><span class="o">=</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> 
-                                                   <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> 
-                                                   <span class="n">categorical_features</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">],</span> 
-                                                   <span class="n">categorical_encoder</span><span class="o">=</span><span class="s1">&#39;OneHotEncoder&#39;</span><span class="p">)</span>
-</pre></div>
 
-     </div>
-</div>
-</div>
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14683,12 +14757,198 @@ System platform :: posix, Linux, 5.19.0-31-generic, linux-x86_64, (&#39;64bit&#3
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Categorical encoding using OneHotEncoder</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">preprocess_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> 
+                                                   <span class="n">target_variable</span><span class="o">=</span><span class="s1">'mpg'</span><span class="p">,</span> 
+                                                   <span class="n">data_scaling_strategy</span><span class="o">=</span><span class="s1">'StandardScaler'</span><span class="p">,</span>
+                                                   <span class="n">categorical_features</span><span class="o">=</span><span class="p">[</span><span class="s1">'model_year'</span><span class="p">],</span> 
+                                                   <span class="n">categorical_encoder</span><span class="o">=</span><span class="s1">'OneHotEncoder'</span><span class="p">,</span>
+                                                   <span class="n">drop_categories_one_hot_encoder</span><span class="o">=</span><span class="s1">'first'</span><span class="p">)</span>
+<span class="n">X_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cylinders</th>
+      <th>displacement</th>
+      <th>horsepower</th>
+      <th>weight</th>
+      <th>acceleration</th>
+      <th>model_year_71</th>
+      <th>model_year_72</th>
+      <th>model_year_73</th>
+      <th>model_year_74</th>
+      <th>model_year_75</th>
+      <th>model_year_76</th>
+      <th>model_year_77</th>
+      <th>model_year_78</th>
+      <th>model_year_79</th>
+      <th>model_year_80</th>
+      <th>model_year_81</th>
+      <th>model_year_82</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-0.83336</td>
+      <td>-0.907666</td>
+      <td>-0.849167</td>
+      <td>-1.339614</td>
+      <td>-1.222913</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.83336</td>
+      <td>-0.829817</td>
+      <td>-1.062608</td>
+      <td>-0.870397</td>
+      <td>-0.263143</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.83336</td>
+      <td>-1.024438</td>
+      <td>-0.875847</td>
+      <td>-1.195240</td>
+      <td>0.412250</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-0.83336</td>
+      <td>-0.907666</td>
+      <td>-0.395605</td>
+      <td>-0.793398</td>
+      <td>1.194285</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-0.83336</td>
+      <td>-0.683851</td>
+      <td>-0.395605</td>
+      <td>0.398895</td>
+      <td>2.225149</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Train and compare models</span>
-<span class="n">train_test_evaluate</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> 
-                    <span class="n">tune_models</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ARDRegression&#39;</span><span class="p">,</span> <span class="s1">&#39;RandomForestRegressor&#39;</span><span class="p">])</span>
+<span class="n">train_test_evaluate</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14710,7 +14970,7 @@ System platform :: posix, Linux, 5.19.0-31-generic, linux-x86_64, (&#39;64bit&#3
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>Training RandomForestRegressor: 100%|<span class="ansi-blue-fg">██████████</span>| 2/2 [00:39&lt;00:00, 19.78s/it]
+<pre>Training TweedieRegressor: 100%|<span class="ansi-blue-fg">██████████</span>| 46/46 [00:26&lt;00:00,  1.73it/s]             
 </pre>
 </div>
 </div>
@@ -14724,20 +14984,20 @@ System platform :: posix, Linux, 5.19.0-31-generic, linux-x86_64, (&#39;64bit&#3
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
 <style type="text/css">
-#T_781a2_row0_col0, #T_781a2_row0_col1, #T_781a2_row0_col2 {
+#T_c4f6e_row10_col0, #T_c4f6e_row10_col1, #T_c4f6e_row10_col2 {
   background-color: green;
 }
-#T_781a2_row1_col0, #T_781a2_row1_col1, #T_781a2_row1_col2 {
+#T_c4f6e_row31_col0, #T_c4f6e_row31_col1, #T_c4f6e_row31_col2 {
   background-color: yellow;
 }
 </style>
-<table id="T_781a2">
+<table id="T_c4f6e">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_781a2_level0_col0" class="col_heading level0 col0" >mean_absolute_error</th>
-      <th id="T_781a2_level0_col1" class="col_heading level0 col1" >mean_squared_error</th>
-      <th id="T_781a2_level0_col2" class="col_heading level0 col2" >r2_score</th>
+      <th id="T_c4f6e_level0_col0" class="col_heading level0 col0" >mean_absolute_error</th>
+      <th id="T_c4f6e_level0_col1" class="col_heading level0 col1" >mean_squared_error</th>
+      <th id="T_c4f6e_level0_col2" class="col_heading level0 col2" >r2_score</th>
     </tr>
     <tr>
       <th class="index_name level0" >Estimator</th>
@@ -14748,16 +15008,280 @@ System platform :: posix, Linux, 5.19.0-31-generic, linux-x86_64, (&#39;64bit&#3
   </thead>
   <tbody>
     <tr>
-      <th id="T_781a2_level0_row0" class="row_heading level0 row0" >ARDRegression</th>
-      <td id="T_781a2_row0_col0" class="data row0 col0" >48.261223</td>
-      <td id="T_781a2_row0_col1" class="data row0 col1" >3385.218639</td>
-      <td id="T_781a2_row0_col2" class="data row0 col2" >0.501549</td>
+      <th id="T_c4f6e_level0_row0" class="row_heading level0 row0" >ARDRegression</th>
+      <td id="T_c4f6e_row0_col0" class="data row0 col0" >2.256667</td>
+      <td id="T_c4f6e_row0_col1" class="data row0 col1" >8.194630</td>
+      <td id="T_c4f6e_row0_col2" class="data row0 col2" >0.849847</td>
     </tr>
     <tr>
-      <th id="T_781a2_level0_row1" class="row_heading level0 row1" >RandomForestRegressor</th>
-      <td id="T_781a2_row1_col0" class="data row1 col0" >55.276451</td>
-      <td id="T_781a2_row1_col1" class="data row1 col1" >4180.607767</td>
-      <td id="T_781a2_row1_col2" class="data row1 col2" >0.384434</td>
+      <th id="T_c4f6e_level0_row1" class="row_heading level0 row1" >AdaBoostRegressor</th>
+      <td id="T_c4f6e_row1_col0" class="data row1 col0" >2.589514</td>
+      <td id="T_c4f6e_row1_col1" class="data row1 col1" >11.544786</td>
+      <td id="T_c4f6e_row1_col2" class="data row1 col2" >0.788460</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row2" class="row_heading level0 row2" >BaggingRegressor</th>
+      <td id="T_c4f6e_row2_col0" class="data row2 col0" >2.075500</td>
+      <td id="T_c4f6e_row2_col1" class="data row2 col1" >8.978287</td>
+      <td id="T_c4f6e_row2_col2" class="data row2 col2" >0.835487</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row3" class="row_heading level0 row3" >BayesianRidge</th>
+      <td id="T_c4f6e_row3_col0" class="data row3 col0" >2.305722</td>
+      <td id="T_c4f6e_row3_col1" class="data row3 col1" >8.464032</td>
+      <td id="T_c4f6e_row3_col2" class="data row3 col2" >0.844910</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row4" class="row_heading level0 row4" >CCA</th>
+      <td id="T_c4f6e_row4_col0" class="data row4 col0" >2.666047</td>
+      <td id="T_c4f6e_row4_col1" class="data row4 col1" >11.255903</td>
+      <td id="T_c4f6e_row4_col2" class="data row4 col2" >0.793754</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row5" class="row_heading level0 row5" >DecisionTreeRegressor</th>
+      <td id="T_c4f6e_row5_col0" class="data row5 col0" >2.570000</td>
+      <td id="T_c4f6e_row5_col1" class="data row5 col1" >11.356600</td>
+      <td id="T_c4f6e_row5_col2" class="data row5 col2" >0.791908</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row6" class="row_heading level0 row6" >DummyRegressor</th>
+      <td id="T_c4f6e_row6_col0" class="data row6 col0" >6.386631</td>
+      <td id="T_c4f6e_row6_col1" class="data row6 col1" >55.425677</td>
+      <td id="T_c4f6e_row6_col2" class="data row6 col2" >-0.015587</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row7" class="row_heading level0 row7" >ElasticNet</th>
+      <td id="T_c4f6e_row7_col0" class="data row7 col0" >3.027509</td>
+      <td id="T_c4f6e_row7_col1" class="data row7 col1" >15.358260</td>
+      <td id="T_c4f6e_row7_col2" class="data row7 col2" >0.718584</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row8" class="row_heading level0 row8" >ElasticNetCV</th>
+      <td id="T_c4f6e_row8_col0" class="data row8 col0" >2.327361</td>
+      <td id="T_c4f6e_row8_col1" class="data row8 col1" >8.477487</td>
+      <td id="T_c4f6e_row8_col2" class="data row8 col2" >0.844664</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row9" class="row_heading level0 row9" >ExtraTreeRegressor</th>
+      <td id="T_c4f6e_row9_col0" class="data row9 col0" >2.475000</td>
+      <td id="T_c4f6e_row9_col1" class="data row9 col1" >12.482500</td>
+      <td id="T_c4f6e_row9_col2" class="data row9 col2" >0.771278</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row10" class="row_heading level0 row10" >ExtraTreesRegressor</th>
+      <td id="T_c4f6e_row10_col0" class="data row10 col0" >1.647550</td>
+      <td id="T_c4f6e_row10_col1" class="data row10 col1" >6.147960</td>
+      <td id="T_c4f6e_row10_col2" class="data row10 col2" >0.887348</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row11" class="row_heading level0 row11" >GammaRegressor</th>
+      <td id="T_c4f6e_row11_col0" class="data row11 col0" >2.884864</td>
+      <td id="T_c4f6e_row11_col1" class="data row11 col1" >14.504004</td>
+      <td id="T_c4f6e_row11_col2" class="data row11 col2" >0.734237</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row12" class="row_heading level0 row12" >GaussianProcessRegressor</th>
+      <td id="T_c4f6e_row12_col0" class="data row12 col0" >4.758763</td>
+      <td id="T_c4f6e_row12_col1" class="data row12 col1" >70.758601</td>
+      <td id="T_c4f6e_row12_col2" class="data row12 col2" >-0.296538</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row13" class="row_heading level0 row13" >GradientBoostingRegressor</th>
+      <td id="T_c4f6e_row13_col0" class="data row13 col0" >2.049585</td>
+      <td id="T_c4f6e_row13_col1" class="data row13 col1" >8.927605</td>
+      <td id="T_c4f6e_row13_col2" class="data row13 col2" >0.836416</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row14" class="row_heading level0 row14" >HistGradientBoostingRegressor</th>
+      <td id="T_c4f6e_row14_col0" class="data row14 col0" >1.975980</td>
+      <td id="T_c4f6e_row14_col1" class="data row14 col1" >7.834050</td>
+      <td id="T_c4f6e_row14_col2" class="data row14 col2" >0.856454</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row15" class="row_heading level0 row15" >HuberRegressor</th>
+      <td id="T_c4f6e_row15_col0" class="data row15 col0" >2.178780</td>
+      <td id="T_c4f6e_row15_col1" class="data row15 col1" >7.930182</td>
+      <td id="T_c4f6e_row15_col2" class="data row15 col2" >0.854692</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row16" class="row_heading level0 row16" >KNeighborsRegressor</th>
+      <td id="T_c4f6e_row16_col0" class="data row16 col0" >2.113800</td>
+      <td id="T_c4f6e_row16_col1" class="data row16 col1" >7.738356</td>
+      <td id="T_c4f6e_row16_col2" class="data row16 col2" >0.858207</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row17" class="row_heading level0 row17" >KernelRidge</th>
+      <td id="T_c4f6e_row17_col0" class="data row17 col0" >4.270037</td>
+      <td id="T_c4f6e_row17_col1" class="data row17 col1" >43.464550</td>
+      <td id="T_c4f6e_row17_col2" class="data row17 col2" >0.203582</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row18" class="row_heading level0 row18" >Lars</th>
+      <td id="T_c4f6e_row18_col0" class="data row18 col0" >2.606594</td>
+      <td id="T_c4f6e_row18_col1" class="data row18 col1" >12.785552</td>
+      <td id="T_c4f6e_row18_col2" class="data row18 col2" >0.765725</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row19" class="row_heading level0 row19" >LarsCV</th>
+      <td id="T_c4f6e_row19_col0" class="data row19 col0" >2.501025</td>
+      <td id="T_c4f6e_row19_col1" class="data row19 col1" >11.607143</td>
+      <td id="T_c4f6e_row19_col2" class="data row19 col2" >0.787318</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row20" class="row_heading level0 row20" >Lasso</th>
+      <td id="T_c4f6e_row20_col0" class="data row20 col0" >2.933188</td>
+      <td id="T_c4f6e_row20_col1" class="data row20 col1" >14.458799</td>
+      <td id="T_c4f6e_row20_col2" class="data row20 col2" >0.735066</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row21" class="row_heading level0 row21" >LassoCV</th>
+      <td id="T_c4f6e_row21_col0" class="data row21 col0" >2.270614</td>
+      <td id="T_c4f6e_row21_col1" class="data row21 col1" >8.378751</td>
+      <td id="T_c4f6e_row21_col2" class="data row21 col2" >0.846473</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row22" class="row_heading level0 row22" >LassoLars</th>
+      <td id="T_c4f6e_row22_col0" class="data row22 col0" >2.933223</td>
+      <td id="T_c4f6e_row22_col1" class="data row22 col1" >14.458541</td>
+      <td id="T_c4f6e_row22_col2" class="data row22 col2" >0.735070</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row23" class="row_heading level0 row23" >LassoLarsCV</th>
+      <td id="T_c4f6e_row23_col0" class="data row23 col0" >2.270610</td>
+      <td id="T_c4f6e_row23_col1" class="data row23 col1" >8.379307</td>
+      <td id="T_c4f6e_row23_col2" class="data row23 col2" >0.846463</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row24" class="row_heading level0 row24" >LassoLarsIC</th>
+      <td id="T_c4f6e_row24_col0" class="data row24 col0" >2.276349</td>
+      <td id="T_c4f6e_row24_col1" class="data row24 col1" >8.322669</td>
+      <td id="T_c4f6e_row24_col2" class="data row24 col2" >0.847500</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row25" class="row_heading level0 row25" >LinearRegression</th>
+      <td id="T_c4f6e_row25_col0" class="data row25 col0" >2.294341</td>
+      <td id="T_c4f6e_row25_col1" class="data row25 col1" >8.472032</td>
+      <td id="T_c4f6e_row25_col2" class="data row25 col2" >0.844764</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row26" class="row_heading level0 row26" >LinearSVR</th>
+      <td id="T_c4f6e_row26_col0" class="data row26 col0" >2.207200</td>
+      <td id="T_c4f6e_row26_col1" class="data row26 col1" >8.495899</td>
+      <td id="T_c4f6e_row26_col2" class="data row26 col2" >0.844326</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row27" class="row_heading level0 row27" >MLPRegressor</th>
+      <td id="T_c4f6e_row27_col0" class="data row27 col0" >4.640779</td>
+      <td id="T_c4f6e_row27_col1" class="data row27 col1" >32.390917</td>
+      <td id="T_c4f6e_row27_col2" class="data row27 col2" >0.406488</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row28" class="row_heading level0 row28" >NuSVR</th>
+      <td id="T_c4f6e_row28_col0" class="data row28 col0" >2.126710</td>
+      <td id="T_c4f6e_row28_col1" class="data row28 col1" >8.719420</td>
+      <td id="T_c4f6e_row28_col2" class="data row28 col2" >0.840231</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row29" class="row_heading level0 row29" >OrthogonalMatchingPursuit</th>
+      <td id="T_c4f6e_row29_col0" class="data row29 col0" >3.029635</td>
+      <td id="T_c4f6e_row29_col1" class="data row29 col1" >14.888476</td>
+      <td id="T_c4f6e_row29_col2" class="data row29 col2" >0.727192</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row30" class="row_heading level0 row30" >OrthogonalMatchingPursuitCV</th>
+      <td id="T_c4f6e_row30_col0" class="data row30 col0" >2.336884</td>
+      <td id="T_c4f6e_row30_col1" class="data row30 col1" >8.764258</td>
+      <td id="T_c4f6e_row30_col2" class="data row30 col2" >0.839409</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row31" class="row_heading level0 row31" >PLSCanonical</th>
+      <td id="T_c4f6e_row31_col0" class="data row31 col0" >8.720938</td>
+      <td id="T_c4f6e_row31_col1" class="data row31 col1" >120.612123</td>
+      <td id="T_c4f6e_row31_col2" class="data row31 col2" >-1.210024</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row32" class="row_heading level0 row32" >PLSRegression</th>
+      <td id="T_c4f6e_row32_col0" class="data row32 col0" >2.517296</td>
+      <td id="T_c4f6e_row32_col1" class="data row32 col1" >9.824553</td>
+      <td id="T_c4f6e_row32_col2" class="data row32 col2" >0.819981</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row33" class="row_heading level0 row33" >PassiveAggressiveRegressor</th>
+      <td id="T_c4f6e_row33_col0" class="data row33 col0" >2.387875</td>
+      <td id="T_c4f6e_row33_col1" class="data row33 col1" >10.818580</td>
+      <td id="T_c4f6e_row33_col2" class="data row33 col2" >0.801767</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row34" class="row_heading level0 row34" >PoissonRegressor</th>
+      <td id="T_c4f6e_row34_col0" class="data row34 col0" >1.925364</td>
+      <td id="T_c4f6e_row34_col1" class="data row34 col1" >6.555547</td>
+      <td id="T_c4f6e_row34_col2" class="data row34 col2" >0.879880</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row35" class="row_heading level0 row35" >QuantileRegressor</th>
+      <td id="T_c4f6e_row35_col0" class="data row35 col0" >6.322000</td>
+      <td id="T_c4f6e_row35_col1" class="data row35 col1" >54.606000</td>
+      <td id="T_c4f6e_row35_col2" class="data row35 col2" >-0.000568</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row36" class="row_heading level0 row36" >RANSACRegressor</th>
+      <td id="T_c4f6e_row36_col0" class="data row36 col0" >2.310333</td>
+      <td id="T_c4f6e_row36_col1" class="data row36 col1" >10.757303</td>
+      <td id="T_c4f6e_row36_col2" class="data row36 col2" >0.802890</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row37" class="row_heading level0 row37" >RadiusNeighborsRegressor</th>
+      <td id="T_c4f6e_row37_col0" class="data row37 col0" >1.920274</td>
+      <td id="T_c4f6e_row37_col1" class="data row37 col1" >7.350697</td>
+      <td id="T_c4f6e_row37_col2" class="data row37 col2" >0.871168</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row38" class="row_heading level0 row38" >RandomForestRegressor</th>
+      <td id="T_c4f6e_row38_col0" class="data row38 col0" >1.952540</td>
+      <td id="T_c4f6e_row38_col1" class="data row38 col1" >7.893172</td>
+      <td id="T_c4f6e_row38_col2" class="data row38 col2" >0.855370</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row39" class="row_heading level0 row39" >Ridge</th>
+      <td id="T_c4f6e_row39_col0" class="data row39 col0" >2.305583</td>
+      <td id="T_c4f6e_row39_col1" class="data row39 col1" >8.463796</td>
+      <td id="T_c4f6e_row39_col2" class="data row39 col2" >0.844914</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row40" class="row_heading level0 row40" >RidgeCV</th>
+      <td id="T_c4f6e_row40_col0" class="data row40 col0" >2.282064</td>
+      <td id="T_c4f6e_row40_col1" class="data row40 col1" >8.445197</td>
+      <td id="T_c4f6e_row40_col2" class="data row40 col2" >0.845255</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row41" class="row_heading level0 row41" >SGDRegressor</th>
+      <td id="T_c4f6e_row41_col0" class="data row41 col0" >2.309441</td>
+      <td id="T_c4f6e_row41_col1" class="data row41 col1" >8.528790</td>
+      <td id="T_c4f6e_row41_col2" class="data row41 col2" >0.843724</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row42" class="row_heading level0 row42" >SVR</th>
+      <td id="T_c4f6e_row42_col0" class="data row42 col0" >2.028735</td>
+      <td id="T_c4f6e_row42_col1" class="data row42 col1" >8.102731</td>
+      <td id="T_c4f6e_row42_col2" class="data row42 col2" >0.851530</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row43" class="row_heading level0 row43" >TheilSenRegressor</th>
+      <td id="T_c4f6e_row43_col0" class="data row43 col0" >2.341294</td>
+      <td id="T_c4f6e_row43_col1" class="data row43 col1" >9.388071</td>
+      <td id="T_c4f6e_row43_col2" class="data row43 col2" >0.827979</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row44" class="row_heading level0 row44" >TransformedTargetRegressor</th>
+      <td id="T_c4f6e_row44_col0" class="data row44 col0" >2.294341</td>
+      <td id="T_c4f6e_row44_col1" class="data row44 col1" >8.472032</td>
+      <td id="T_c4f6e_row44_col2" class="data row44 col2" >0.844764</td>
+    </tr>
+    <tr>
+      <th id="T_c4f6e_level0_row45" class="row_heading level0 row45" >TweedieRegressor</th>
+      <td id="T_c4f6e_row45_col0" class="data row45 col0" >2.993400</td>
+      <td id="T_c4f6e_row45_col1" class="data row45 col1" >15.195929</td>
+      <td id="T_c4f6e_row45_col2" class="data row45 col2" >0.721559</td>
     </tr>
   </tbody>
 </table>
@@ -14768,6 +15292,130 @@ System platform :: posix, Linux, 5.19.0-31-generic, linux-x86_64, (&#39;64bit&#3
 
 </div>
 
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Hyperparameter tuning</span>
+<span class="n">train_test_evaluate</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> 
+                    <span class="n">tune_models</span><span class="o">=</span><span class="p">[</span><span class="s1">'PLSCanonical'</span><span class="p">,</span> <span class="s1">'KernelRidge'</span><span class="p">])</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>Training PLSCanonical: 100%|<span class="ansi-blue-fg">██████████</span>| 2/2 [00:37&lt;00:00, 18.94s/it]
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
+<style type="text/css">
+#T_ba7eb_row0_col0, #T_ba7eb_row0_col1, #T_ba7eb_row0_col2 {
+  background-color: green;
+}
+#T_ba7eb_row1_col0, #T_ba7eb_row1_col1, #T_ba7eb_row1_col2 {
+  background-color: yellow;
+}
+</style>
+<table id="T_ba7eb">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_ba7eb_level0_col0" class="col_heading level0 col0" >mean_absolute_error</th>
+      <th id="T_ba7eb_level0_col1" class="col_heading level0 col1" >mean_squared_error</th>
+      <th id="T_ba7eb_level0_col2" class="col_heading level0 col2" >r2_score</th>
+    </tr>
+    <tr>
+      <th class="index_name level0" >Estimator</th>
+      <th class="blank col0" >&nbsp;</th>
+      <th class="blank col1" >&nbsp;</th>
+      <th class="blank col2" >&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_ba7eb_level0_row0" class="row_heading level0 row0" >KernelRidge</th>
+      <td id="T_ba7eb_row0_col0" class="data row0 col0" >1.762374</td>
+      <td id="T_ba7eb_row0_col1" class="data row0 col1" >5.959747</td>
+      <td id="T_ba7eb_row0_col2" class="data row0 col2" >0.890797</td>
+    </tr>
+    <tr>
+      <th id="T_ba7eb_level0_row1" class="row_heading level0 row1" >PLSCanonical</th>
+      <td id="T_ba7eb_row1_col0" class="data row1 col0" >4.928449</td>
+      <td id="T_ba7eb_row1_col1" class="data row1 col1" >33.450465</td>
+      <td id="T_ba7eb_row1_col2" class="data row1 col2" >0.387074</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># After hyperparameter tuning all error parameters reduced for KernelRidge and PLSCanonical</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
 </div>
 
 </div>

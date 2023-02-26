@@ -257,11 +257,6 @@
 <span class="sd">        *Regression*</span>
 
 <span class="sd">        .. raw:: html</span>
-<span class="sd">            :file: ../../code_samples/quickstarts/regression/regression_simple.html</span>
-
-<span class="sd">        *Regression with hyperparameter tuning*</span>
-
-<span class="sd">        .. raw:: html</span>
 <span class="sd">            :file: ../../code_samples/quickstarts/regression/regression_hyperparameter_tuning.html</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -305,8 +300,6 @@
         <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
 
         <span class="k">if</span> <span class="n">tune_models</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">tune_all_models</span> <span class="ow">or</span> <span class="n">estimator_name</span> <span class="ow">in</span> <span class="n">tune_model_list</span><span class="p">:</span>
-        <span class="c1">#if estimator_name == &#39;LinearRegression&#39;:</span>
-        <span class="c1">#if i &lt; 3:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
                     <span class="s1">&#39;###################  Regressor in progress :: </span><span class="si">{}</span><span class="s1"> ###################&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">estimator_name</span><span class="p">))</span>
@@ -370,7 +363,7 @@
 
                     <span class="k">if</span> <span class="n">steps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                         <span class="n">model_pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span>
-                        <span class="n">search</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">model_pipeline</span><span class="p">,</span> <span class="n">param_distributions</span><span class="o">=</span><span class="n">hyperparameters</span><span class="p">)</span>
+                        <span class="n">search</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">model_pipeline</span><span class="p">,</span> <span class="n">param_distributions</span><span class="o">=</span><span class="n">hyperparameters</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
                         <span class="n">fitted_estimator_with_all_parameters</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
                         <span class="n">pipeline_with_best_estimator</span> <span class="o">=</span> <span class="n">fitted_estimator_with_all_parameters</span><span class="o">.</span><span class="n">best_estimator_</span>
                         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Model pipeline parameters :: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">model_pipeline</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>

@@ -176,11 +176,6 @@ def train_test_evaluate(
         *Regression*
 
         .. raw:: html
-            :file: ../../code_samples/quickstarts/regression/regression_simple.html
-
-        *Regression with hyperparameter tuning*
-
-        .. raw:: html
             :file: ../../code_samples/quickstarts/regression/regression_hyperparameter_tuning.html
 
     """
