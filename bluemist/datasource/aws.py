@@ -54,5 +54,5 @@ def get_data_from_s3(aws_access_key_id,
     logger.debug('S3 service client created :: {}'.format(s3))
     s3.download_file(s3_bucket_name, s3_object_name, destination_path)
     data = get_data_from_filesystem(destination_path, sheet_name, file_type, delimiter)
-    data.columns = data.columns.str.replace('\W', '_')
+    data.columns = data.columns.str.replace('\W', '_')  # TODO: Revisit the code
     return data

@@ -86,6 +86,7 @@ def get_data_from_database(db_type=None,
         data = extract_data(conn, query, chunk_size)
         return data
     elif db_type == 'oracle':
+        from sqlalchemy import create_engine
         import cx_Oracle
         logger.info('Pulling data from Oracle')
         connection_url = 'oracle+cx_oracle://' + username + ':' + password + '@' + host + '/?service_name=' + service
@@ -116,5 +117,5 @@ def extract_data(conn=None, query=None, chunk_size=None):
     data = pd.concat(dfs, ignore_index=True)
     logger.info('Total records pulled {}'.format(record_count))
 
-    data.columns = data.columns.str.replace('\W', '_')
+    data.columns = data.columns.str.replace('\W', '_')  # TODO: Revisit this code
     return data
