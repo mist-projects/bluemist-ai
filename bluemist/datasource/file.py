@@ -45,10 +45,12 @@ def get_data_from_filesystem(file_path,
     if file_type == 'delimited':
         data = pd.read_csv(filepath_or_buffer=file_path, sep=delimiter)
         logger.info('Data pull completed !!')
+        data.columns = data.columns.str.replace('\W', '_')
         return data
     elif file_type == 'excel':
         data = pd.read_excel(io=file_path, sheet_name=sheet_name)
         logger.info('Data pull completed !!')
+        data.columns = data.columns.str.replace('\W', '_')
         return data
 
 

@@ -116,4 +116,5 @@ def extract_data(conn=None, query=None, chunk_size=None):
     data = pd.concat(dfs, ignore_index=True)
     logger.info('Total records pulled {}'.format(record_count))
 
+    data.columns = data.columns.str.replace('\W', '_')
     return data

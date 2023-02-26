@@ -10,16 +10,12 @@ import numpy as np
 
 
 class request_body(BaseModel):
-    age: float
-    sex: str
-    bmi: float
-    bp: float
-    s1: float
-    s2: float
-    s3: float
-    s4: float
-    s5: float
-    s6: float
+    cylinders: int
+    displacement: float
+    horsepower: float
+    weight: int
+    acceleration: float
+    model_year: str
     
 
 app = FastAPI(debug=True)
@@ -33,49 +29,48 @@ pipeline = joblib.load(BLUEMIST_PATH + '/' + 'artifacts/models/LarsCV.joblib')
 def predict(data: request_body):
     # Making the data in a form suitable for prediction
     input_data = [[
-        data.age,
-        data.sex,
-        data.bmi,
-        data.bp,
-        data.s1,
-        data.s2,
-        data.s3,
-        data.s4,
-        data.s5,
-        data.s6,
+        data.cylinders,
+        data.displacement,
+        data.horsepower,
+        data.weight,
+        data.acceleration,
+        data.model_year,
         ]]
 
     input_df = pd.DataFrame(input_data, columns=[
-        'age',
-        'sex',
-        'bmi',
-        'bp',
-        's1',
-        's2',
-        's3',
-        's4',
-        's5',
-        's6',
+        'cylinders',
+        'displacement',
+        'horsepower',
+        'weight',
+        'acceleration',
+        'model_year',
         ])
 
     df_to_predict = pd.DataFrame(preprocessor.transform(input_df), columns=[
-        'age',
-        'bmi',
-        'bp',
-        's1',
-        's2',
-        's3',
-        's4',
-        's5',
-        's6',
-        'sex',
+        'cylinders',
+        'displacement',
+        'horsepower',
+        'weight',
+        'acceleration',
+        'model_year_71',
+        'model_year_72',
+        'model_year_73',
+        'model_year_74',
+        'model_year_75',
+        'model_year_76',
+        'model_year_77',
+        'model_year_78',
+        'model_year_79',
+        'model_year_80',
+        'model_year_81',
+        'model_year_82',
         ])
 
     # Predicting the Class
     prediction = pipeline.predict(df_to_predict)
 
     # Return the Result
-    return {'predicted_target': prediction[0]}
+    return {'predicted_mpg': prediction[0]}
 
 
 def start_api_server(host='localhost', port=8000):
