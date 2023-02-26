@@ -1,9 +1,9 @@
 # Bluemist AI
 
 [![Generic badge](https://img.shields.io/badge/python-3.9-blue.svg)](https://shields.io/)
-[![PyPI version](https://badge.fury.io/py/bluemist.svg)](https://badge.fury.io/py/bluemist)
 ![GitHub](https://img.shields.io/github/license/mist-projects/bluemist-ai)
 [![Documentation Status](https://readthedocs.org/projects/bluemist-ai/badge/?version=latest)](https://bluemist-ai.readthedocs.io/en/latest/?badge=latest)
+[![PyPI version](https://badge.fury.io/py/bluemist.svg)](https://badge.fury.io/py/bluemist)
 
 Bluemist AI is an open source, low code machine learning library written in Python to develop, evaluate and deploy automated Machine
 Learning models and pipelines.
