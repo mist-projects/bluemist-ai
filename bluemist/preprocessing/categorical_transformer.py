@@ -4,10 +4,13 @@ __license__ = "MIT"
 __version__ = "0.1.1"
 __email__ = "dew@bluemist-ai.one"
 
-
+import sklearn
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder, OrdinalEncoder
+from sklearn.preprocessing import LabelEncoder, OrdinalEncoder, OneHotEncoder
+
+#import cuml
+from bluemist import environment
 
 
 def build_categorical_transformer_pipeline(**kwargs):
@@ -35,6 +38,13 @@ def build_categorical_transformer_pipeline(**kwargs):
         elif categorical_encoder == 'OrdinalEncoder':
             encoder_step = ('ordinal_encoder', OrdinalEncoder())
         elif categorical_encoder == 'OneHotEncoder':
+            # gpu_support_enabled = environment.gpu_support
+            # if gpu_support_enabled:
+            #     #one_hot_encoder = cuml.preprocessing.OneHotEncoder()
+            #     one_hot_encoder = sklearn.preprocessing.OneHotEncoder()
+            # else:
+            #     one_hot_encoder = sklearn.preprocessing.OneHotEncoder()
+
             if drop_categories is not None and handle_unknown is not None:
                 encoder_step = ('one_hot_encoder', OneHotEncoder(drop=drop_categories, handle_unknown=handle_unknown))
             elif drop_categories is not None:

@@ -7,13 +7,12 @@ __license__ = "MIT"
 __version__ = "0.1.1"
 __email__ = "dew@bluemist-ai.one"
 
-
 import logging
 import os
+import platform
 import shutil
 import sysconfig
 from logging import config
-import platform
 
 from termcolor import colored
 
@@ -27,9 +26,12 @@ logger = logging.getLogger("bluemist")
 logging.captureWarnings(True)
 logger.info('BLUEMIST_PATH {}'.format(BLUEMIST_PATH))
 
+gpu_support = False
+
 
 def initialize(
         log_level='DEBUG',
+        enable_gpu_support=False,
         cleanup_resources=True
 ):
     """
@@ -39,6 +41,17 @@ def initialize(
     cleanup_resources : {True, False}, default=True
         cleanup artifacts from previous runs
     """
+
+    global gpu_support
+    gpu_support = enable_gpu_support
+
+    if gpu_support:
+        gpu_brand = check_gpu_brand()
+        print("gpu_brand :"+ gpu_brand)
+        if gpu_brand == "Intel":
+            from sklearnex import patch_sklearn;
+            patch_sklearn()
+            print("GPU support is enabled !!")
 
     if log_level.upper() in ['CRITICAL', 'FATAL', 'ERROR', 'WARNING', 'WARN', 'INFO', 'DEBUG']:
         logger.setLevel(logging.getLevelName(log_level))
@@ -57,10 +70,12 @@ def initialize(
     print(colored(banner, 'blue'))
 
     print('Bluemist path :: {}'.format(BLUEMIST_PATH))
-    print('System platform :: {}, {}, {}, {}, {}'.format(os.name, platform.system(), platform.release(), sysconfig.get_platform(),
-                                                     platform.architecture()))
-    logger.info('System platform :: {}, {}, {}, {}, {}'.format(os.name, platform.system(), platform.release(), sysconfig.get_platform(),
-                                                           platform.architecture()))
+    print('System platform :: {}, {}, {}, {}, {}'.format(os.name, platform.system(), platform.release(),
+                                                         sysconfig.get_platform(),
+                                                         platform.architecture()))
+    logger.info('System platform :: {}, {}, {}, {}, {}'.format(os.name, platform.system(), platform.release(),
+                                                               sysconfig.get_platform(),
+                                                               platform.architecture()))
 
     logger.debug('Printing environment variables...')
     for key, value in os.environ.items():
@@ -82,3 +97,23 @@ def initialize(
         with open(BLUEMIST_PATH + '/' + 'artifacts/api/predict.py', 'w') as f:
             logger.debug('Clearing file content of {}'.format(BLUEMIST_PATH + '/' + 'artifacts/api/predict.py'))
             f.truncate()
+
+
+def check_gpu_brand():
+    import subprocess
+
+    # Check for NVIDIA GPU
+    try:
+        subprocess.check_output(['nvidia-smi', '--help'])
+        return "NVIDIA"
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        pass
+
+    # Check for Intel GPU
+    try:
+        subprocess.check_output(['intel_gpu_top', '-h'])
+        return "Intel"
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        pass
+
+    return "Unknown GPU brand"

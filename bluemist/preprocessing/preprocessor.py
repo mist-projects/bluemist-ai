@@ -7,14 +7,15 @@ __license__ = "MIT"
 __version__ = "0.1.1"
 __email__ = "dew@bluemist-ai.one"
 
-
 import logging
 import os
 from logging import config
 import numpy as np
 import pandas as pd
+import sklearn
 from sklearn.compose import ColumnTransformer
-from sklearn.model_selection import train_test_split
+
+from bluemist import environment
 from bluemist.pipeline.bluemist_pipeline import save_preprocessor
 from bluemist.preprocessing import categorical_transformer, numeric_transformer
 
@@ -180,7 +181,9 @@ def preprocess_data(
     logger.debug('data.dtypes before preprocessing  :: \n{}'.format(data.dtypes))
 
     if numerical_features is not None:
-        data[final_numerical_features] = data[final_numerical_features].apply(pd.to_numeric, errors=numeric_conversion_strategy, axis=1)
+        data[final_numerical_features] = data[final_numerical_features].apply(pd.to_numeric,
+                                                                              errors=numeric_conversion_strategy,
+                                                                              axis=1)
 
     data[final_categorical_features] = data[final_categorical_features].astype(str)
     logger.debug('data.dtypes after dtype conversion  :: \n{}'.format(data.dtypes))
@@ -205,7 +208,19 @@ def preprocess_data(
     X = data.drop([target_variable], axis=1)
     y = data[[target_variable]]
     logger.debug('Splitting dataset into X_train, X_test, y_train, y_test...')
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=data_randomizer)
+
+    gpu_support_enabled = environment.gpu_support
+    # if gpu_support_enabled:
+    #     import cudf, cuml
+    #     X_train, X_test, y_train, y_test = cuml.model_selection.train_test_split(cudf.from_pandas(X),
+    #                                                                              cudf.from_pandas(y),
+    #                                                                              test_size=test_size,
+    #                                                                              random_state=data_randomizer)
+    #     X_train = X_train.to_pandas()
+    #     X_test = X_test.to_pandas()
+    # else:
+    X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, test_size=test_size,
+                                                                                random_state=data_randomizer)
 
     logger.debug('X_train.dtypes before ColumnTransformer :: \n{}'.format(X_train.dtypes))
     X_train = pd.DataFrame(preprocessor.fit_transform(X_train), columns=preprocessor.get_feature_names_out())
