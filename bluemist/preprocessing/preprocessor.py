@@ -209,16 +209,6 @@ def preprocess_data(
     y = data[[target_variable]]
     logger.debug('Splitting dataset into X_train, X_test, y_train, y_test...')
 
-    gpu_support_enabled = environment.gpu_support
-    # if gpu_support_enabled:
-    #     import cudf, cuml
-    #     X_train, X_test, y_train, y_test = cuml.model_selection.train_test_split(cudf.from_pandas(X),
-    #                                                                              cudf.from_pandas(y),
-    #                                                                              test_size=test_size,
-    #                                                                              random_state=data_randomizer)
-    #     X_train = X_train.to_pandas()
-    #     X_test = X_test.to_pandas()
-    # else:
     X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, test_size=test_size,
                                                                                 random_state=data_randomizer)
 

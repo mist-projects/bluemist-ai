@@ -2,16 +2,19 @@
 Performs model training, testing, evaluations and deployment
 """
 
-__author__ = "Shashank Agrawal"
-__license__ = "MIT"
-__version__ = "0.1.1"
-__email__ = "dew@bluemist-ai.one"
+# Author: Shashank Agrawal
+# License: MIT
+# Version: 0.1.2
+# Email: dew@bluemist-ai.one
+# Created: Jun 22, 2022
+# Last modified: May 29, 2023
 
 import importlib
 import logging
 import os
 from logging import config
 
+import cuml
 import pandas as pd
 
 import mlflow
@@ -24,12 +27,12 @@ from sklearn.pipeline import Pipeline
 from tqdm import tqdm
 
 import bluemist
+from bluemist import environment
 from bluemist.pipeline.bluemist_pipeline import add_pipeline_step, save_model_pipeline, clear_all_model_pipelines
 from bluemist.preprocessing import preprocessor
 from bluemist.regression.constant import multi_output_regressors, multi_task_regressors, unsupported_regressors, \
     base_estimator_regressors
 
-from bluemist.regression.tuning.constant import default_hyperparameters
 from bluemist.utils.metrics import scoringStrategy
 from sklearn.utils import all_estimators
 
@@ -200,10 +203,10 @@ def train_test_evaluate(
     df = pd.DataFrame()
 
     estimators = get_estimators(multi_output, multi_task, names_only=False)
-
     clear_all_model_pipelines()
 
     i = 0
+
     # If hyperparameter tuning is requested for specific models, limit the overall training to those models to save time
     if tune_models is not None and not tune_all_models and tune_model_list:
         estimators_to_skip = []
@@ -218,7 +221,8 @@ def train_test_evaluate(
         pbar.set_description(f"Training {estimator_name}")
         i = i + 1
 
-        if tune_models is None or tune_all_models or estimator_name in tune_model_list:
+        #if tune_models is None or tune_all_models or estimator_name in tune_model_list:
+        if estimator_name == "LinearRegression":
             try:
                 logger.info(
                     '###################  Regressor in progress :: {} ###################'.format(estimator_name))
@@ -230,36 +234,43 @@ def train_test_evaluate(
 
                 # Hyperparameter tuning is requested
                 if tune_all_models or estimator_name in tune_model_list:
-                    estimator_parameters = regressor.get_params()
+                    if environment.available_gpu == 'NVIDIA' and hasattr(cuml, estimator_name):
+                        regressor = getattr(cuml.linear_model, estimator_name)()
+                        estimator_parameters = regressor.get_params()
+                        estimator_parameters.pop('handle', None)
+                        estimator_parameters.pop('verbose', None)
+                        logger.info('Regressor class from cuML :: {}'.format(regressor))
+                    else:
+                        estimator_parameters = regressor.get_params()
+
                     logger.info('Available hyperparameters to be tuned :: {}'.format(estimator_parameters))
                     logger.debug('Python type() for hyperparameters :: {}'.format(type(estimator_parameters)))
 
-                    model_hyperparameters_for_tuning = getattr(bluemist.regression.tuning.constant, estimator_name,
-                                                               None)
+                    default_hyperparameters = None
+                    if environment.available_gpu == 'NVIDIA':
+                        default_hyperparameters = getattr(bluemist.regression.tuning.cuml, 'default_hyperparameters', None)
+                        model_hyperparameters_for_tuning = getattr(bluemist.regression.tuning.cuml, estimator_name, None)
+                    else:
+                        default_hyperparameters = getattr(bluemist.regression.tuning.sklearn, 'default_hyperparameters', None)
+                        model_hyperparameters_for_tuning = getattr(bluemist.regression.tuning.sklearn, estimator_name, None)
 
                     deprecated_hyperparameters = []
                     for hyperparameter, default_hyperparameter_value in estimator_parameters.items():
                         if default_hyperparameter_value == 'deprecated':
                             deprecated_hyperparameters.append(hyperparameter)
                             logger.debug('Deprecated hyperparameter identified :: {}'.format(hyperparameter))
-                        elif model_hyperparameters_for_tuning is not None \
-                                and hyperparameter in model_hyperparameters_for_tuning:
+                        elif model_hyperparameters_for_tuning is not None and hyperparameter in model_hyperparameters_for_tuning:
                             estimator_parameters[hyperparameter] = model_hyperparameters_for_tuning[hyperparameter]
-                            logger.debug('Hyperparameter in model configuration :: {} :: {}'.format(hyperparameter,
-                                                                                                    estimator_parameters[
-                                                                                                        hyperparameter]))
+                            logger.debug('Hyperparameter in model configuration :: {} :: {}'.format(hyperparameter, estimator_parameters[hyperparameter]))
                         elif hyperparameter in default_hyperparameters:
                             estimator_parameters[hyperparameter] = default_hyperparameters[hyperparameter]
-                            logger.debug('Hyperparameter in default configuration :: {} :: {}'.format(hyperparameter,
-                                                                                                      estimator_parameters[
-                                                                                                          hyperparameter]))
+                            logger.debug('Hyperparameter in default configuration :: {} :: {}'.format(hyperparameter, estimator_parameters[hyperparameter]))
 
                     for deprecated_hyperparameter in deprecated_hyperparameters:
                         estimator_parameters.pop(deprecated_hyperparameter, None)
 
                     # Creating new dictionary of hyperparameters to add step name as required by the pipeline
                     hyperparameters = {}
-
                     for hyperparameter in estimator_parameters:
                         old_key = hyperparameter
 
@@ -272,9 +283,13 @@ def train_test_evaluate(
                     logger.info('Hyperparameters to be used for model tuning :: {}'.format(hyperparameters))
 
                     if target_scaling_strategy is not None:
+                        # TODO: Remove the usage of TransformedTargetRegressor so speical handling is not required for cuML
                         transformed_target_regressor = TransformedTargetRegressor(regressor=regressor,
                                                                                   transformer=target_scaler)
-                        step_estimator = (estimator_name, transformed_target_regressor)
+                        if environment.available_gpu == 'NVIDIA':
+                            step_estimator = (estimator_name, regressor)
+                        else:
+                            step_estimator = (estimator_name, transformed_target_regressor)
                         steps = add_pipeline_step(estimator_name, step_estimator)
                     else:
                         step_estimator = (estimator_name, regressor)
@@ -282,42 +297,51 @@ def train_test_evaluate(
 
                     if steps is not None:
                         model_pipeline = Pipeline(steps=steps)
-                        search = RandomizedSearchCV(model_pipeline, param_distributions=hyperparameters, n_iter=100)
-                        fitted_estimator_with_all_parameters = search.fit(X_train, y_train)
-                        pipeline_with_best_estimator = fitted_estimator_with_all_parameters.best_estimator_
+                        randomized_search = RandomizedSearchCV(model_pipeline, param_distributions=hyperparameters, n_iter=100)
+                        optimized_estimator = randomized_search.fit(X_train, y_train)
+                        best_estimator_pipeline = optimized_estimator.best_estimator_
+
                         logger.debug('Model pipeline parameters :: {}'.format(model_pipeline.get_params().keys()))
-                        logger.info(
-                            'Fitted estimator with all parameters :: {}'.format(fitted_estimator_with_all_parameters))
+                        logger.info('Fitted estimator with all parameters :: {}'.format(optimized_estimator))
                         logger.debug('Model pipeline :: {}'.format(model_pipeline))
-                        logger.info('Model pipeline with best estimator :: {}'.format(pipeline_with_best_estimator))
+                        logger.info('Model pipeline with best estimator :: {}'.format(best_estimator_pipeline))
+
                         if save_pipeline_to_disk:
                             logger.info('Saving model pipeline to disk')
-                            save_model_pipeline(estimator_name, pipeline_with_best_estimator)
+                            save_model_pipeline(estimator_name, best_estimator_pipeline)
                 else:
                     if target_scaling_strategy is not None:
+                        # TODO: Remove the usage of TransformedTargetRegressor so speical handling is not required for cuML
                         transformed_target_regressor = TransformedTargetRegressor(regressor=regressor,
                                                                                   transformer=target_scaler)
-                        step_estimator = (estimator_name, transformed_target_regressor)
+                        if environment.available_gpu == 'NVIDIA':
+                            step_estimator = (estimator_name, regressor)
+                        else:
+                            step_estimator = (estimator_name, transformed_target_regressor)
                         steps = add_pipeline_step(estimator_name, step_estimator)
                     else:
                         step_estimator = (estimator_name, regressor)
                         steps = add_pipeline_step(estimator_name, step_estimator)
 
                     model_pipeline = Pipeline(steps=steps)
-                    pipeline_with_best_estimator = model_pipeline.fit(X_train, y_train)
+                    best_estimator_pipeline = model_pipeline.fit(X_train, y_train)
 
                     if save_pipeline_to_disk:
-                        save_model_pipeline(estimator_name, pipeline_with_best_estimator)
+                        save_model_pipeline(estimator_name, best_estimator_pipeline)
 
-                    logger.info('Model pipeline with best estimator (no hyperparameter tuning) :: {}'.format(
-                        pipeline_with_best_estimator))
+                    logger.info('Model pipeline with best estimator (no hyperparameter tuning) :: {}'.format(best_estimator_pipeline))
                     logger.debug('Model pipeline (no hyperparameter tuning) :: {}'.format(model_pipeline))
 
                 if tune_all_models or estimator_name in tune_model_list:
-                    logger.info('Best score :: {}'.format(fitted_estimator_with_all_parameters.best_score_))
-                    logger.info('Best hyperparameters :: {}'.format(fitted_estimator_with_all_parameters.best_params_))
+                    logger.info('Best score :: {}'.format(optimized_estimator.best_score_))
+                    logger.info('Best hyperparameters :: {}'.format(optimized_estimator.best_params_))
 
-                y_pred = pipeline_with_best_estimator.predict(X_test)
+                y_pred = best_estimator_pipeline.predict(X_test)
+                print(y_pred)
+
+                # Convert pandas series to ndarray since cuml will return pandas series
+                if environment.available_gpu == 'NVIDIA':
+                    y_pred = y_pred.values
 
                 scorer = scoringStrategy(y_test, y_pred, metrics)
                 estimator_stats_df = scorer.getStats()
@@ -328,8 +352,7 @@ def train_test_evaluate(
                 final_stats_df.insert(0, 'Estimator', estimator_name)
 
                 logger.info('Current estimator Stats :: \n{}'.format(final_stats_df.to_string()))
-                logger.debug(
-                    'Current estimator stats as dictionary :: {}'.format(final_stats_df.to_dict('records')))
+                logger.debug('Current estimator stats as dictionary :: {}'.format(final_stats_df.to_dict('records')))
 
                 df = pd.concat([df, final_stats_df], ignore_index=True)
                 logger.debug('Estimator stats so far :: \n{}'.format(df.to_string()))
@@ -339,7 +362,7 @@ def train_test_evaluate(
                         logger.info('Capturing stats in MLFlow...')
                         mlflow.log_param('model', estimator_name)
                         mlflow.log_metrics(estimator_stats_df.to_dict('records')[0])
-                        mlflow.sklearn.log_model(pipeline_with_best_estimator, 'model_' + estimator_name)
+                        mlflow.sklearn.log_model(best_estimator_pipeline, 'model_' + estimator_name)
                         run_id = mlflow.active_run().info.run_id
                         logger.info('Model saved in run :: {}'.format(run_id))
             except Exception as e:

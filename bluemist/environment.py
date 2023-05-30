@@ -2,10 +2,12 @@
 Initialize Bluemist-AI's environment
 """
 
-__author__ = "Shashank Agrawal"
-__license__ = "MIT"
-__version__ = "0.1.1"
-__email__ = "dew@bluemist-ai.one"
+# Author: Shashank Agrawal
+# License: MIT
+# Version: 0.1.2
+# Email: dew@bluemist-ai.one
+# Created: Feb 10, 2023
+# Last modified: May 29, 2023
 
 import logging
 import os
@@ -26,7 +28,7 @@ logger = logging.getLogger("bluemist")
 logging.captureWarnings(True)
 logger.info('BLUEMIST_PATH {}'.format(BLUEMIST_PATH))
 
-gpu_support = False
+available_gpu = False
 
 
 def initialize(
@@ -42,16 +44,31 @@ def initialize(
         cleanup artifacts from previous runs
     """
 
-    global gpu_support
+    global available_gpu
     gpu_support = enable_gpu_support
 
     if gpu_support:
         gpu_brand = check_gpu_brand()
-        print("gpu_brand :"+ gpu_brand)
+        print("GPU Brand ::", gpu_brand)
+
         if gpu_brand == "Intel":
-            from sklearnex import patch_sklearn;
-            patch_sklearn()
-            print("GPU support is enabled !!")
+            try:
+                from sklearnex import patch_sklearn
+                patch_sklearn()
+                available_gpu = gpu_brand
+                print("GPU support is enabled via Intel(R) Extension !!")
+            except Exception as e:
+                print("GPU support NOT available !!")
+                print("Error:", str(e))
+        elif gpu_brand == "NVIDIA":
+            try:
+                import cuml
+                cuml_version = cuml.__version__
+                available_gpu = gpu_brand
+                print("GPU support is available via RAPIDS cuML", str(cuml_version))
+            except Exception as e:
+                print("GPU support NOT available !!")
+                print("Error:", str(e))
 
     if log_level.upper() in ['CRITICAL', 'FATAL', 'ERROR', 'WARNING', 'WARN', 'INFO', 'DEBUG']:
         logger.setLevel(logging.getLevelName(log_level))
@@ -116,4 +133,4 @@ def check_gpu_brand():
     except (FileNotFoundError, subprocess.CalledProcessError):
         pass
 
-    return "Unknown GPU brand"
+    return "Unknown GPU brand !!"
