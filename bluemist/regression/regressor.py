@@ -246,7 +246,6 @@ def train_test_evaluate(
                     logger.info('Available hyperparameters to be tuned :: {}'.format(estimator_parameters))
                     logger.debug('Python type() for hyperparameters :: {}'.format(type(estimator_parameters)))
 
-                    default_hyperparameters = None
                     if environment.available_gpu == 'NVIDIA':
                         default_hyperparameters = getattr(bluemist.regression.tuning.cuml, 'default_hyperparameters', None)
                         model_hyperparameters_for_tuning = getattr(bluemist.regression.tuning.cuml, estimator_name, None)
@@ -337,7 +336,6 @@ def train_test_evaluate(
                     logger.info('Best hyperparameters :: {}'.format(optimized_estimator.best_params_))
 
                 y_pred = best_estimator_pipeline.predict(X_test)
-                print(y_pred)
 
                 # Convert pandas series to ndarray since cuml will return pandas series
                 if environment.available_gpu == 'NVIDIA':
