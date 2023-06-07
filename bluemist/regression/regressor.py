@@ -14,7 +14,6 @@ import logging
 import os
 from logging import config
 
-import cuml
 import pandas as pd
 
 import mlflow
@@ -234,12 +233,14 @@ def train_test_evaluate(
 
                 # Hyperparameter tuning is requested
                 if tune_all_models or estimator_name in tune_model_list:
-                    if environment.available_gpu == 'NVIDIA' and hasattr(cuml, estimator_name):
-                        regressor = getattr(cuml.linear_model, estimator_name)()
-                        estimator_parameters = regressor.get_params()
-                        estimator_parameters.pop('handle', None)
-                        estimator_parameters.pop('verbose', None)
-                        logger.info('Regressor class from cuML :: {}'.format(regressor))
+                    if environment.available_gpu == 'NVIDIA':
+                        import cuml
+                        if hasattr(cuml, estimator_name):
+                            regressor = getattr(cuml.linear_model, estimator_name)()
+                            estimator_parameters = regressor.get_params()
+                            estimator_parameters.pop('handle', None)
+                            estimator_parameters.pop('verbose', None)
+                            logger.info('Regressor class from cuML :: {}'.format(regressor))
                     else:
                         estimator_parameters = regressor.get_params()
 
