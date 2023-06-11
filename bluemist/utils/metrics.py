@@ -59,7 +59,7 @@ class scoringStrategy:
                     row.append(str(e))
                     logger.error('Exception occurred while computing metric :: {}'.format(str(e)), exc_info=True)
         elif isinstance(self.metrics_requested, list) and len(self.metrics_requested) > 0:
-            for metric in list:
+            for metric in self.metrics_requested:
                 self.metrics_to_be_returned.append(metric.__name__)
                 try:
                     row.append(metric(self.y_true, self.y_pred))
