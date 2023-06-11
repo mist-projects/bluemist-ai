@@ -6,19 +6,15 @@ Performs model training, testing, evaluations and deployment
 # License: MIT
 # Version: 0.1.2
 # Email: dew@bluemist-ai.one
-# Created: Jun 22, 2022
-# Last modified: May 29, 2023
+# Created: Jul 3, 2022
+# Last modified: June 11, 2023
 
 import importlib
 import logging
 import os
 from logging import config
-
 import pandas as pd
 
-import mlflow
-import mlflow.sklearn
-from mlflow.tracking import MlflowClient
 from pandas.core.dtypes.common import is_numeric_dtype
 from sklearn.compose import TransformedTargetRegressor
 from sklearn.model_selection import RandomizedSearchCV
@@ -31,11 +27,13 @@ from bluemist.pipeline.bluemist_pipeline import add_pipeline_step, save_model_pi
 from bluemist.preprocessing import preprocessor
 from bluemist.regression.constant import multi_output_regressors, multi_task_regressors, unsupported_regressors, \
     base_estimator_regressors
+from bluemist.utils.constants import GPU_BRAND_INTEL, GPU_BRAND_NVIDIA, GPU_EXECUTION_DEVICE_INTEL, \
+    GPU_EXECUTION_DEVICE_NVIDIA
 
 from bluemist.utils.metrics import scoringStrategy
 from sklearn.utils import all_estimators
 
-from bluemist.utils.scaler import getScaler
+from bluemist.utils.scaler import get_scaler
 from bluemist.utils import generate_api as generate_api
 from bluemist.artifacts.api import predict
 
@@ -47,7 +45,14 @@ config.fileConfig(BLUEMIST_PATH + '/' + 'logging.config')
 logger = logging.getLogger("bluemist")
 
 
+def import_mlflow():
+    import mlflow
+    return mlflow
+
+
 def initialize_mlflow(mlflow_experiment_name):
+    mlflow = import_mlflow()
+
     logger.info('Initializing MLFlow...')
     if mlflow_experiment_name is not None:
         experiment = mlflow.get_experiment_by_name(mlflow_experiment_name)
@@ -57,7 +62,7 @@ def initialize_mlflow(mlflow_experiment_name):
 
         if experiment is not None and experiment.lifecycle_stage == 'deleted':
             logger.info('Restoring MLFlow experiment :: {}'.format(mlflow_experiment_name))
-            client = MlflowClient()
+            client = mlflow.tracking.MlflowClient()
             client.restore_experiment(experiment.experiment_id)
 
         mlflow.set_experiment(mlflow_experiment_name)
@@ -72,7 +77,7 @@ def get_estimators(multi_output=False, multi_task=False, names_only=True):
         multi_task : bool, default=False
             Future use
         names_only : bool, default=True
-            Rerturn only the estimator name without metadata
+            Returns only the estimator name without metadata
 
     """
 
@@ -104,14 +109,12 @@ def get_estimators(multi_output=False, multi_task=False, names_only=True):
 
 def deploy_model(estimator_name, host='localhost', port=8000):
     """
-
         estimator_name : str,
-            Estimator name to be delpoyed
+            Estimator name to be deployed
         host : {str, IPv4 or IPv6}, default='localhost'
             Hostname or ip address of the machine where API to be deployed
         port : int, default=8000
             API listening port
-
     """
 
     logger.info('Generating API code to deploy the model :: {}'.format(estimator_name))
@@ -183,34 +186,38 @@ def train_test_evaluate(
     """
 
     tune_all_models = False
-    tune_model_list = []
+    models_to_tune = []
     target_scaler = None
-    capture_stats = False
+    sklearnex_algorithms = None
 
     if target_scaling_strategy is not None:
-        target_scaler = getScaler(target_scaling_strategy)
+        target_scaler = get_scaler(target_scaling_strategy)
 
     if isinstance(tune_models, str) and tune_models == 'all':
         tune_all_models = True
     elif isinstance(tune_models, list):
-        tune_model_list = tune_models
+        models_to_tune = tune_models
 
     if experiment_name is not None:
-        capture_stats = True
         initialize_mlflow(experiment_name)
+
+    # Get patch names from sklearnex
+    if environment.available_gpu == GPU_BRAND_INTEL:
+        from sklearnex import sklearn_is_patched, get_patch_names
+        sklearnex_algorithms = get_patch_names()
 
     df = pd.DataFrame()
 
     estimators = get_estimators(multi_output, multi_task, names_only=False)
     clear_all_model_pipelines()
 
-    i = 0
+    counter = 0
 
     # If hyperparameter tuning is requested for specific models, limit the overall training to those models to save time
-    if tune_models is not None and not tune_all_models and tune_model_list:
+    if tune_models is not None and not tune_all_models and models_to_tune:
         estimators_to_skip = []
         for estimator in estimators:
-            if estimator[0] not in tune_model_list:
+            if estimator[0] not in models_to_tune:
                 estimators_to_skip.append(estimator)
 
         for estimator_to_skip in estimators_to_skip:
@@ -218,31 +225,41 @@ def train_test_evaluate(
 
     for estimator_name, estimator_class in (pbar := tqdm(estimators, colour='blue')):
         pbar.set_description(f"Training {estimator_name}")
-        i = i + 1
+        counter = counter + 1
 
-        #if tune_models is None or tune_all_models or estimator_name in tune_model_list:
-        if estimator_name == "LinearRegression":
+        execution_device = 'CPU'
+
+        # No tuning OR Tune All OR Tune Few
+        if tune_models is None or tune_all_models or estimator_name in models_to_tune:
+        #if estimator_name == "LinearRegression":
+            logger.info('############  Regressor in progress :: {} ############'.format(estimator_name))
+
             try:
-                logger.info(
-                    '###################  Regressor in progress :: {} ###################'.format(estimator_name))
+                if environment.available_gpu == GPU_BRAND_NVIDIA:
+                    import cuml
+                    if hasattr(cuml, estimator_name):
+                        regressor = getattr(cuml, estimator_name)()
+                        execution_device = GPU_EXECUTION_DEVICE_NVIDIA
+                        logger.info('Regressor class from cuML :: {}'.format(regressor))
+                elif environment.available_gpu == GPU_BRAND_INTEL:
+                    for sklearnex_algorithm in sklearnex_algorithms:
+                        if (estimator_name == 'LinearRegression' and sklearnex_algorithm == 'linear') or estimator_name.lower() == sklearnex_algorithm:
+                            logger.info('\nSklearn Algorithm :: {}, Sklearn Intel(R) Ex Algorithm :: {}'.format(estimator_name, sklearnex_algorithm))
+                            if sklearn_is_patched(name=sklearnex_algorithm):
+                                execution_device = GPU_EXECUTION_DEVICE_INTEL
+                            break
+                    regressor = estimator_class()
+                else:
+                    # Normal CPU processing
+                    regressor = estimator_class()
 
-                regressor = estimator_class()
-
+                # TODO: Revist this code. Code errors out without n_components=1
                 if estimator_name in ['CCA', 'PLSCanonical']:
                     regressor.set_params(n_components=1)
 
                 # Hyperparameter tuning is requested
-                if tune_all_models or estimator_name in tune_model_list:
-                    if environment.available_gpu == 'NVIDIA':
-                        import cuml
-                        if hasattr(cuml, estimator_name):
-                            regressor = getattr(cuml.linear_model, estimator_name)()
-                            estimator_parameters = regressor.get_params()
-                            estimator_parameters.pop('handle', None)
-                            estimator_parameters.pop('verbose', None)
-                            logger.info('Regressor class from cuML :: {}'.format(regressor))
-                    else:
-                        estimator_parameters = regressor.get_params()
+                if tune_all_models or estimator_name in models_to_tune:
+                    estimator_parameters = regressor.get_params()
 
                     logger.info('Available hyperparameters to be tuned :: {}'.format(estimator_parameters))
                     logger.debug('Python type() for hyperparameters :: {}'.format(type(estimator_parameters)))
@@ -269,7 +286,7 @@ def train_test_evaluate(
                     for deprecated_hyperparameter in deprecated_hyperparameters:
                         estimator_parameters.pop(deprecated_hyperparameter, None)
 
-                    # Creating new dictionary of hyperparameters to add step name as required by the pipeline
+                    # Creating new dictionary of hyperparameters to add step name as required by the sklearn pipeline
                     hyperparameters = {}
                     for hyperparameter in estimator_parameters:
                         old_key = hyperparameter
@@ -284,8 +301,8 @@ def train_test_evaluate(
 
                     if target_scaling_strategy is not None:
                         # TODO: Remove the usage of TransformedTargetRegressor so speical handling is not required for cuML
-                        transformed_target_regressor = TransformedTargetRegressor(regressor=regressor,
-                                                                                  transformer=target_scaler)
+                        transformed_target_regressor = TransformedTargetRegressor(regressor=regressor, transformer=target_scaler)
+
                         if environment.available_gpu == 'NVIDIA':
                             step_estimator = (estimator_name, regressor)
                         else:
@@ -312,8 +329,8 @@ def train_test_evaluate(
                 else:
                     if target_scaling_strategy is not None:
                         # TODO: Remove the usage of TransformedTargetRegressor so speical handling is not required for cuML
-                        transformed_target_regressor = TransformedTargetRegressor(regressor=regressor,
-                                                                                  transformer=target_scaler)
+                        transformed_target_regressor = TransformedTargetRegressor(regressor=regressor, transformer=target_scaler)
+
                         if environment.available_gpu == 'NVIDIA':
                             step_estimator = (estimator_name, regressor)
                         else:
@@ -329,10 +346,11 @@ def train_test_evaluate(
                     if save_pipeline_to_disk:
                         save_model_pipeline(estimator_name, best_estimator_pipeline)
 
-                    logger.info('Model pipeline with best estimator (no hyperparameter tuning) :: {}'.format(best_estimator_pipeline))
+                    logger.info('Model pipeline with best estimator (no hyperparameter tuning) :: {}'.format(
+                        best_estimator_pipeline))
                     logger.debug('Model pipeline (no hyperparameter tuning) :: {}'.format(model_pipeline))
 
-                if tune_all_models or estimator_name in tune_model_list:
+                if tune_all_models or estimator_name in models_to_tune:
                     logger.info('Best score :: {}'.format(optimized_estimator.best_score_))
                     logger.info('Best hyperparameters :: {}'.format(optimized_estimator.best_params_))
 
@@ -348,7 +366,8 @@ def train_test_evaluate(
                 final_stats_df = estimator_stats_df.copy()
 
                 # Insert Estimator name as the first column in the dataframe
-                final_stats_df.insert(0, 'Estimator', estimator_name)
+                final_stats_df.insert(0, 'Estimator', estimator_name)  # Make it the first column of the dataframe
+                final_stats_df.insert(1, 'Execution Device', execution_device)  # Make it the second column of the dataframe
 
                 logger.info('Current estimator Stats :: \n{}'.format(final_stats_df.to_string()))
                 logger.debug('Current estimator stats as dictionary :: {}'.format(final_stats_df.to_dict('records')))
@@ -356,7 +375,8 @@ def train_test_evaluate(
                 df = pd.concat([df, final_stats_df], ignore_index=True)
                 logger.debug('Estimator stats so far :: \n{}'.format(df.to_string()))
 
-                if capture_stats:
+                if experiment_name is not None:
+                    mlflow = import_mlflow()
                     with mlflow.start_run(run_name=run_name):
                         logger.info('Capturing stats in MLFlow...')
                         mlflow.log_param('model', estimator_name)
@@ -372,6 +392,7 @@ def train_test_evaluate(
                 logger.error('Exception occurred while training the model :: {}'.format(str(e)), exc_info=True)
 
     df.set_index('Estimator', inplace=True)
+    print(df)
     display(HTML(df.style
                  .highlight_max(
         subset=[col for col in df.columns if col.endswith('score') and is_numeric_dtype(df[col])], color='green')
