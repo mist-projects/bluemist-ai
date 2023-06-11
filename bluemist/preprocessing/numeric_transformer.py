@@ -9,7 +9,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import PowerTransformer
 
-from bluemist.utils.scaler import getScaler, available_scalers
+from bluemist.utils.scaler import get_scaler, available_scalers
 
 
 def build_numeric_transformer_pipeline(**kwargs):
@@ -32,7 +32,7 @@ def build_numeric_transformer_pipeline(**kwargs):
 
     # data scaling
     if scaler is not None and scaler in available_scalers:
-        scaler_step = ('scaler', getScaler(scaler))
+        scaler_step = ('scaler', get_scaler(scaler))
         preprocessing_steps.append(scaler_step)
     elif scaler is not None:
         raise ValueError('Invalid scaler value passed : ', scaler)
