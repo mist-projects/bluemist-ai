@@ -3,13 +3,16 @@
 # Version: 0.1.2
 # Email: dew@bluemist-ai.one
 # Created: May 29, 2023
-# Last modified: June 4, 2023
+# Last modified: June 16, 2023
 
 import numpy as np
 
 default_hyperparameters = {
-    'output_type': ['input'],
-    'random_state': [2]
+    'output_type': ['array'],
+    'random_state': [2],
+    'verbose': [0],
+    'dtype': [None],
+    'n_jobs': [-1],
 }
 
 LinearRegression = {
@@ -59,20 +62,27 @@ MBSGDRegressor = {
 }
 
 RandomForestRegressor = {
+    'accuracy_metric': ['r2', 'media_ae', 'mean_ae', 'mse'],
+    'bootstrap': [True, False],
+    'class_weight': ['auto', 'balanced'],
+    'criterion': ['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
     'n_estimators': np.arange(10, 1050 + 1, 50).tolist(),
     'split_criterion': ['mse', 'poisson', 'gamma', 'inverse_gaussian'],
-    'bootstrap': [True, False],
+    'max_batch_size': [4096],
     'max_samples': [0.7, 0.8, 0.9, 1],
     'max_depth': [1, 2, 3, 4, 6, 8, 10, 12, 14, 16],
+    'max_leaf_nodes': np.arange(2, 50 + 1, 1).tolist(),
     'max_leaves': np.arange(2, 50 + 1, 1).tolist(),
-    'max_features': [None, 'sqrt', 'log2', 0.7, 0.8, 0.9, 1],
-    'n_bins': np.arange(2, 255 + 1, 1).tolist(),
-    'n_streams': [4],
+    'max_features': ['auto', 'sqrt', 'log2'],
     'min_samples_leaf': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     'min_samples_split': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
     'min_impurity_decrease': [0.0],
-    'accuracy_metrics': ['r2', 'media_ae', 'mean_ae', 'mse'],
-    'max_batch_size': [4096]
+    'min_impurity_split': [1],
+    'min_weight_fraction_leaf': [1],
+    'n_bins': np.arange(2, 255 + 1, 1).tolist(),
+    'n_streams': [4],
+    'oob_score': [True, False],
+    'warm_start': [True, False]
 }
 
 SVR = {
