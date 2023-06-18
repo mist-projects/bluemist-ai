@@ -7,7 +7,7 @@
 
 import numpy as np
 
-default_hyperparameters = {
+default_params = {
     'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute'],
     'alphas': [None],
     'alpha': [1.0, 1.5, 2.0, 2.5, 3, 3.5, 4, 4.5, 5],
