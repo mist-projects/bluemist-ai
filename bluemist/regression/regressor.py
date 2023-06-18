@@ -7,7 +7,7 @@ Performs model training, testing, evaluations and deployment
 # Version: 0.1.2
 # Email: dew@bluemist-ai.one
 # Created:  Jun 22, 2022
-# Last modified: June 16, 2023
+# Last modified: June 18, 2023
 
 import importlib
 import logging
@@ -246,8 +246,7 @@ def train_test_evaluate(
         execution_device = 'CPU'
 
         # No tuning OR Tune All OR Tune Few
-        #if tune_models is None or tune_all_models or estimator_name in models_to_tune:
-        if estimator_name == "RandomForestRegressor":
+        if tune_models is None or tune_all_models or estimator_name in models_to_tune:
             logger.info('############  Regressor in progress :: {} ############'.format(estimator_name))
             regressor = None
 
@@ -258,7 +257,7 @@ def train_test_evaluate(
                     if hasattr(cuml, estimator_name):
                         regressor = getattr(cuml, estimator_name)()
                         execution_device = GPU_EXECUTION_DEVICE_NVIDIA
-                        logger.info('Regressor class from cuML :: {}'.format(regressor))
+                        logger.info('Regressor class from cuML :: {}'.format(regressor.__class__.__module__ + '.' + regressor.__class__.__name__))
                 elif environment.available_gpu == GPU_BRAND_INTEL:
                     for sklearnex_algorithm in sklearnex_algorithms:
                         if (estimator_name == 'LinearRegression' and sklearnex_algorithm == 'linear') or estimator_name.lower() == sklearnex_algorithm:
@@ -288,23 +287,29 @@ def train_test_evaluate(
                     else:
                         default_hyperparameters_module = bluemist.regression.tuning.sklearn
 
-                    default_hyperparameters = getattr(default_hyperparameters_module, 'default_hyperparameters', None)
-                    model_hyperparameters_for_tuning = getattr(default_hyperparameters_module, estimator_name, None)
+                    default_hyperparameters = getattr(default_hyperparameters_module, 'default_params', None)
+                    model_params_for_tuning = getattr(default_hyperparameters_module, estimator_name, None)
+                    remove_params = model_params_for_tuning.get('remove_params')
 
-                    deprecated_hyperparameters = []
+                    hyperparameters_to_remove = []
                     for hyperparameter, default_value in estimator_params.items():
-                        if default_value == 'deprecated' or hyperparameter == 'handle':
-                            deprecated_hyperparameters.append(hyperparameter)
+                        if str(default_value) == 'deprecated':
+                            hyperparameters_to_remove.append(hyperparameter)
                             logger.debug('Deprecated hyperparameter identified :: {}'.format(hyperparameter))
-                        elif model_hyperparameters_for_tuning is not None and hyperparameter in model_hyperparameters_for_tuning:
-                            estimator_params[hyperparameter] = model_hyperparameters_for_tuning[hyperparameter]
+                        elif model_params_for_tuning is not None and hyperparameter in model_params_for_tuning:
+                            estimator_params[hyperparameter] = model_params_for_tuning[hyperparameter]
                             logger.debug('Hyperparameter in model configuration :: {} :: {}'.format(hyperparameter, estimator_params[hyperparameter]))
                         elif hyperparameter in default_hyperparameters:
                             estimator_params[hyperparameter] = default_hyperparameters[hyperparameter]
                             logger.debug('Hyperparameter in default configuration :: {} :: {}'.format(hyperparameter, estimator_params[hyperparameter]))
 
-                    for deprecated_hyperparameter in deprecated_hyperparameters:
-                        estimator_params.pop(deprecated_hyperparameter, None)
+                        if remove_params is not None:
+                            if hyperparameter in remove_params and hyperparameter not in hyperparameters_to_remove:
+                                hyperparameters_to_remove.append(hyperparameter)
+                                logger.debug('Unsupported hyperparameter identified :: {}'.format(hyperparameter))
+
+                    for hyperparameter_to_remove in hyperparameters_to_remove:
+                        estimator_params.pop(hyperparameter_to_remove, None)
 
                     # Creating new dictionary of hyperparameters to add step name as required by the sklearn pipeline
                     hyperparameters = {}
