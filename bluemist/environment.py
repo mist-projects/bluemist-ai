@@ -40,10 +40,15 @@ def initialize(
 ):
     """
     log_level : {'CRITICAL', 'FATAL', 'ERROR', 'WARNING', 'WARN', 'INFO', 'DEBUG'}, default='INFO'
-        control logging level for bluemist.log
+        Controls the logging level for bluemist.log
+
+    enable_gpu_support : {True, False}, default=False
+        Enables GPU support for Intel and NVIDIA
+            - Intel GPU support is provided by Intel® Extension for Scikit-learn
+            - NVIDIA GPU support is provided by RAPIDS cuML
 
     cleanup_resources : {True, False}, default=True
-        cleanup artifacts from previous runs
+        Cleanup artifacts from previous runs
     """
 
     global available_gpu
@@ -57,7 +62,7 @@ def initialize(
                 from sklearnex import patch_sklearn
                 patch_sklearn()
                 available_gpu = gpu_brand
-                print("GPU support is enabled via Intel(R) Extension !!")
+                print("Intel GPU support is enabled via Intel® Extension for Scikit-learn !!")
             except Exception as e:
                 print("GPU support NOT available !")
                 print("Error:", str(e))
@@ -67,7 +72,7 @@ def initialize(
                 cuml_version = cuml.__version__
                 available_gpu = gpu_brand
                 print("cuML version", str(cuml_version))
-                print("GPU support is available via RAPIDS cuML", str(cuml_version))
+                print("NVIDIA GPU support is available via RAPIDS cuML ", str(cuml_version))
             except Exception as e:
                 print("GPU support NOT available !")
                 print("Error:", str(e))
