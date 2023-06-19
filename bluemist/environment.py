@@ -7,7 +7,7 @@ Initialize Bluemist-AI's environment
 # Version: 0.1.2
 # Email: dew@bluemist-ai.one
 # Created: Feb 10, 2023
-# Last modified: June 18, 2023
+# Last modified: June 19, 2023
 
 import logging
 import os
@@ -39,13 +39,13 @@ def initialize(
         cleanup_resources=True
 ):
     """
-    log_level : {'CRITICAL', 'FATAL', 'ERROR', 'WARNING', 'WARN', 'INFO', 'DEBUG'}, default='INFO'
+    log_level : {'CRITICAL', 'FATAL', 'ERROR', 'WARNING', 'WARN', 'INFO', 'DEBUG'}, default='DEBUG'
         Controls the logging level for bluemist.log
 
     enable_gpu_support : {True, False}, default=False
-        Enables GPU support for Intel and NVIDIA
-            - Intel GPU support is provided by Intel® Extension for Scikit-learn
-            - NVIDIA GPU support is provided by RAPIDS cuML
+        - Enables GPU support for Intel and NVIDIA based on the GPU brand identified on the system. This function checks the GPU brand on the system and enables GPU support accordingly. It supports Intel and NVIDIA GPUs.
+        - Intel GPU support is provided by Intel® Extension for Scikit-learn
+        - NVIDIA GPU support is provided by RAPIDS cuML
 
     cleanup_resources : {True, False}, default=True
         Cleanup artifacts from previous runs
