@@ -1,5 +1,7 @@
-boto3==1.26.63
+boto3==1.26.155
 cx_Oracle==8.3.0
-dtale==2.12.3
-SQLAlchemy==1.4.32
+cupy==12.1.0
+dtale==2.16.0
+scikit_learn_intelex==20230426.134916
+SQLAlchemy==1.4.39
 sweetviz==2.1.4
