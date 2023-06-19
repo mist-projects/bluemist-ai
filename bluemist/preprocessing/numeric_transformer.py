@@ -1,8 +1,9 @@
-
-__author__ = "Shashank Agrawal"
-__license__ = "MIT"
-__version__ = "0.1.1"
-__email__ = "dew@bluemist-ai.one"
+# Author: Shashank Agrawal
+# License: MIT
+# Version: 0.1.2
+# Email: dew@bluemist-ai.one
+# Created: Sep 6, 2022
+# Last modified: June 19, 2023
 
 
 from sklearn.impute import SimpleImputer
@@ -39,6 +40,7 @@ def build_numeric_transformer_pipeline(**kwargs):
 
     # data transformation
     if data_tranformation_strategy is not None and data_tranformation_strategy in ['auto', 'yeo-johnson', 'box-cox']:
+        transformer_step = tuple()
         if data_tranformation_strategy == 'yeo-johnson':
             transformer_step = ('transformer', PowerTransformer(method='yeo-johnson'))
         elif data_tranformation_strategy == 'box-cox':

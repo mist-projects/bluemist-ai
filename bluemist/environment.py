@@ -30,7 +30,7 @@ logger = logging.getLogger("bluemist")
 logging.captureWarnings(True)
 logger.info('BLUEMIST_PATH {}'.format(BLUEMIST_PATH))
 
-available_gpu = False
+available_gpu = None
 
 
 def initialize(
@@ -41,12 +41,10 @@ def initialize(
     """
     log_level : {'CRITICAL', 'FATAL', 'ERROR', 'WARNING', 'WARN', 'INFO', 'DEBUG'}, default='DEBUG'
         Controls the logging level for bluemist.log
-
     enable_gpu_support : {True, False}, default=False
         - Enables GPU support for Intel and NVIDIA based on the GPU brand identified on the system. This function checks the GPU brand on the system and enables GPU support accordingly. It supports Intel and NVIDIA GPUs.
         - Intel GPU support is provided by Intel® Extension for Scikit-learn
         - NVIDIA GPU support is provided by RAPIDS cuML
-
     cleanup_resources : {True, False}, default=True
         Cleanup artifacts from previous runs
     """

@@ -93,7 +93,6 @@ def get_estimators(multi_output=False, multi_task=False, names_only=True):
             Future use
         names_only : bool, default=True
             Returns only the estimator name without metadata
-
     """
 
     estimators = all_estimators(type_filter='regressor')
@@ -124,10 +123,10 @@ def get_estimators(multi_output=False, multi_task=False, names_only=True):
 
 def deploy_model(estimator_name, host='localhost', port=8000):
     """
-        estimator_name : str,
-            Estimator name to be deployed
+        estimator_name : str
+            Name of the estimator to be deployed
         host : {str, IPv4 or IPv6}, default='localhost'
-            Hostname or ip address of the machine where API to be deployed
+            Hostname or IP address of the machine where the API will be deployed
         port : int, default=8000
             API listening port
     """
@@ -371,8 +370,7 @@ def train_test_evaluate(
                     if save_pipeline_to_disk:
                         save_model_pipeline(estimator_name, best_estimator_pipeline)
 
-                    logger.info('Model pipeline with best estimator (no hyperparameter tuning) :: {}'.format(
-                        best_estimator_pipeline))
+                    logger.info('Model pipeline with best estimator (no hyperparameter tuning) :: {}'.format(best_estimator_pipeline))
                     logger.debug('Model pipeline (no hyperparameter tuning) :: {}'.format(model_pipeline))
 
                 if tune_all_models or estimator_name in models_to_tune:
