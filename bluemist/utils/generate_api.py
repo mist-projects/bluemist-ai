@@ -1,3 +1,10 @@
+# Author: Shashank Agrawal
+# License: MIT
+# Version: 0.1.2
+# Email: dew@bluemist-ai.one
+# Created:  Feb 19, 2023
+# Last modified: June 19, 2023
+
 import os
 from jinja2 import Template
 
@@ -11,7 +18,6 @@ from pydantic import BaseModel
 from fastapi import FastAPI
 from pyngrok import ngrok
 import os
-import numpy as np
 
 
 class request_body(BaseModel):
@@ -27,7 +33,7 @@ app = FastAPI(debug=True)
 
 BLUEMIST_PATH = os.environ["BLUEMIST_PATH"]
 preprocessor = joblib.load(BLUEMIST_PATH + '/' + 'artifacts/preprocessor/preprocessor.joblib')
-pipeline = joblib.load(BLUEMIST_PATH + '/' + 'artifacts/models/LarsCV.joblib')
+pipeline = joblib.load(BLUEMIST_PATH + '/' + 'artifacts/models/{{ estimator_name }}.joblib')
 
 
 @app.post('/predict')
