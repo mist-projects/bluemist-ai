@@ -7,7 +7,7 @@ Performs model training, testing, evaluations and deployment
 # Version: 0.1.2
 # Email: dew@bluemist-ai.one
 # Created:  Jun 22, 2022
-# Last modified: June 18, 2023
+# Last modified: June 19, 2023
 
 import importlib
 import logging
@@ -31,7 +31,7 @@ from bluemist.regression.constant import multi_output_regressors, multi_task_reg
 from bluemist.utils.constants import GPU_BRAND_INTEL, GPU_BRAND_NVIDIA, GPU_EXECUTION_DEVICE_INTEL, \
     GPU_EXECUTION_DEVICE_NVIDIA
 
-from bluemist.utils.metrics import scoringStrategy
+from bluemist.utils.metrics import metric_scorer
 from sklearn.utils import all_estimators
 
 from bluemist.utils.scaler import get_scaler
@@ -388,8 +388,8 @@ def train_test_evaluate(
                     import cupy as cp
                     y_pred = cp.asnumpy(y_pred)
 
-                scorer = scoringStrategy(y_test, y_pred, metrics)
-                estimator_stats_df = scorer.getStats()
+                scorer = metric_scorer(y_test, y_pred, metrics)
+                estimator_stats_df = scorer.calculate_metrics()
 
                 final_stats_df = estimator_stats_df.copy()
                 execution_time = measure_execution_time(start_time)

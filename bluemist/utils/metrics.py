@@ -1,9 +1,19 @@
+# Author: Shashank Agrawal
+# License: MIT
+# Version: 0.1.2
+# Email: dew@bluemist-ai.one
+# Created:  Jun 19, 2022
+# Last modified: June 19, 2023
+
+
 import logging
 import os
 from logging import config
 import numpy as np
-from sklearn.metrics import *
 import pandas as pd
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, explained_variance_score, max_error, \
+    mean_squared_log_error, median_absolute_error, mean_absolute_percentage_error, mean_poisson_deviance, \
+    mean_gamma_deviance, mean_tweedie_deviance, d2_tweedie_score, mean_pinball_loss
 
 BLUEMIST_PATH = os.environ["BLUEMIST_PATH"]
 config.fileConfig(BLUEMIST_PATH + '/' + 'logging.config')
@@ -18,7 +28,7 @@ classification_metrics = []
 all_classification_metrics = []
 
 
-class scoringStrategy:
+class metric_scorer:
     y_true = None
     y_pred = None
     metrics_requested = None
@@ -30,7 +40,7 @@ class scoringStrategy:
         self.metrics_requested = metrics
         self.metrics_to_be_returned = []
 
-    def getStats(self):
+    def calculate_metrics(self):
 
         rows = []
         row = []
