@@ -255,7 +255,8 @@ RadiusNeighborsRegressor = {
 }
 
 RandomForestRegressor = {
-    'max_features': [None, 'sqrt', 'log2', 0.7, 0.8, 0.9, 1]
+    'max_features': [None, 'sqrt', 'log2', 0.7, 0.8, 0.9, 1],
+    'maxBins': [256]
 }
 
 Ridge = {

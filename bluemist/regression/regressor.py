@@ -28,8 +28,8 @@ from bluemist.pipeline.bluemist_pipeline import add_pipeline_step, save_model_pi
 from bluemist.preprocessing import preprocessor
 from bluemist.regression.constant import multi_output_regressors, multi_task_regressors, unsupported_regressors, \
     base_estimator_regressors
-from bluemist.utils.constants import GPU_BRAND_INTEL, GPU_BRAND_NVIDIA, GPU_EXECUTION_DEVICE_INTEL, \
-    GPU_EXECUTION_DEVICE_NVIDIA
+from bluemist.utils.constants import GPU_BRAND_INTEL, GPU_BRAND_NVIDIA, GPU_ACCELERATION_NVIDIA, CPU_ACCELERATION_INTEL, \
+    CPU_BRAND_INTEL
 
 from bluemist.utils.metrics import metric_scorer
 from sklearn.utils import all_estimators
@@ -216,7 +216,7 @@ def train_test_evaluate(
         initialize_mlflow(experiment_name)
 
     # Get patch names from sklearnex
-    if environment.available_gpu == GPU_BRAND_INTEL:
+    if environment.available_cpu == CPU_BRAND_INTEL:
         from sklearnex import sklearn_is_patched, get_patch_names
         sklearnex_algorithms = get_patch_names()
 
@@ -242,7 +242,7 @@ def train_test_evaluate(
         pbar.set_description(f"Training {estimator_name}")
 
         counter = counter + 1
-        execution_device = 'CPU'
+        estimator_execution_device = 'CPU'
 
         # No tuning OR Tune All OR Tune Few
         if tune_models is None or tune_all_models or estimator_name in models_to_tune:
@@ -255,18 +255,19 @@ def train_test_evaluate(
                     cuml.set_global_output_type('array')  # cuML will return predictions of type cupy.ndarray
                     if hasattr(cuml, estimator_name):
                         regressor = getattr(cuml, estimator_name)()
-                        execution_device = GPU_EXECUTION_DEVICE_NVIDIA
+                        estimator_execution_device = GPU_ACCELERATION_NVIDIA
                         logger.info('Regressor class from cuML :: {}'.format(regressor.__class__.__module__ + '.' + regressor.__class__.__name__))
-                elif environment.available_gpu == GPU_BRAND_INTEL:
+
+                if regressor is None and environment.available_cpu == CPU_BRAND_INTEL:
                     for sklearnex_algorithm in sklearnex_algorithms:
                         if (estimator_name == 'LinearRegression' and sklearnex_algorithm == 'linear') or estimator_name.lower() == sklearnex_algorithm:
                             logger.info('\nSklearn Algorithm :: {}, Sklearn Intel(R) Ex Algorithm :: {}'.format(estimator_name, sklearnex_algorithm))
                             if sklearn_is_patched(name=sklearnex_algorithm):
-                                execution_device = GPU_EXECUTION_DEVICE_INTEL
+                                regressor = estimator_class()
+                                estimator_execution_device = CPU_ACCELERATION_INTEL
                             break
-                    regressor = estimator_class()
 
-                # Normal CPU processing via sklearn when GPU is not available or not requested
+                # Normal CPU processing if acceleration extensions are not applied
                 if regressor is None:
                     regressor = estimator_class()
 
@@ -281,7 +282,7 @@ def train_test_evaluate(
                     logger.info('Available hyperparameters to be tuned :: {}'.format(estimator_params))
                     logger.debug('Python type() for hyperparameters :: {}'.format(type(estimator_params)))
 
-                    if execution_device == GPU_EXECUTION_DEVICE_NVIDIA:
+                    if estimator_execution_device == GPU_ACCELERATION_NVIDIA:
                         default_hyperparameters_module = bluemist.regression.tuning.cuml
                     else:
                         default_hyperparameters_module = bluemist.regression.tuning.sklearn
@@ -393,7 +394,7 @@ def train_test_evaluate(
                 execution_time = measure_execution_time(start_time)
 
                 final_stats_df.insert(0, 'Estimator', estimator_name)  # Insert Estimator name as the first column in the dataframe
-                final_stats_df.insert(1, 'Execution Device', execution_device)  # Insert Execution Device as the second column in the dataframe
+                final_stats_df.insert(1, 'Execution Device', estimator_execution_device)  # Insert Execution Device as the second column in the dataframe
                 final_stats_df.insert(2, 'Execution Time', execution_time) # Insert Execution Time as the third column in the dataframe
 
                 logger.info('Current estimator Stats :: \n{}'.format(final_stats_df.to_string()))

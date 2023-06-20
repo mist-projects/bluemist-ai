@@ -18,7 +18,7 @@ from logging import config
 
 from termcolor import colored
 
-from bluemist.utils.constants import GPU_BRAND_INTEL, GPU_BRAND_NVIDIA
+from bluemist.utils.constants import CPU_BRAND_INTEL, GPU_BRAND_INTEL, GPU_BRAND_NVIDIA
 
 os.environ["BLUEMIST_PATH"] = os.path.realpath(os.path.dirname(__file__))
 BLUEMIST_PATH = os.getenv("BLUEMIST_PATH")
@@ -31,40 +31,36 @@ logging.captureWarnings(True)
 logger.info('BLUEMIST_PATH {}'.format(BLUEMIST_PATH))
 
 available_gpu = None
+available_cpu = None
 
 
 def initialize(
         log_level='DEBUG',
-        enable_gpu_support=False,
+        enable_acceleration_extensions=False,
         cleanup_resources=True
 ):
     """
     log_level : {'CRITICAL', 'FATAL', 'ERROR', 'WARNING', 'WARN', 'INFO', 'DEBUG'}, default='DEBUG'
         Controls the logging level for bluemist.log
-    enable_gpu_support : {True, False}, default=False
-        - Enables GPU support for Intel and NVIDIA based on the GPU brand identified on the system. This function checks the GPU brand on the system and enables GPU support accordingly. It supports Intel and NVIDIA GPUs.
-        - Intel GPU support is provided by Intel® Extension for Scikit-learn
-        - NVIDIA GPU support is provided by RAPIDS cuML
+    enable_acceleration_extensions : {True, False}, default=False
+        - Enables NVIDIA GPU acceleration/Intel CPU acceleration based on the underlying GPU/CPU infrastructure
+        - NVIDIA GPU acceleration is provided by RAPIDS cuML. For supported algorithms refer https://docs.rapids.ai/api/cuml/stable/api/#regression-and-classification
+        - Intel CPU acceleration is provided by Intel® Extension for Scikit-learn. For supported algorithms refer https://intel.github.io/scikit-learn-intelex/algorithms.html#on-cpu
     cleanup_resources : {True, False}, default=True
         Cleanup artifacts from previous runs
     """
 
     global available_gpu
+    global available_cpu
 
-    if enable_gpu_support:
+    if enable_acceleration_extensions:
         gpu_brand = check_gpu_brand()
-        print("GPU Brand ::", gpu_brand)
+        cpu_brand = check_cpu_brand()
 
-        if gpu_brand == GPU_BRAND_INTEL:
-            try:
-                from sklearnex import patch_sklearn
-                patch_sklearn()
-                available_gpu = gpu_brand
-                print("Intel GPU support is enabled via Intel® Extension for Scikit-learn !!")
-            except Exception as e:
-                print("GPU support NOT available !")
-                print("Error:", str(e))
-        elif gpu_brand == GPU_BRAND_NVIDIA:
+        print("GPU Brand ::", gpu_brand)
+        print("CPU Brand ::", cpu_brand)
+
+        if gpu_brand == GPU_BRAND_NVIDIA:
             try:
                 import cuml
                 cuml_version = cuml.__version__
@@ -72,7 +68,17 @@ def initialize(
                 print("cuML version", str(cuml_version))
                 print("NVIDIA GPU support is available via RAPIDS cuML ", str(cuml_version))
             except Exception as e:
-                print("GPU support NOT available !")
+                print("NVIDIA GPU support is NOT available !")
+                print("Error:", str(e))
+
+        if cpu_brand == CPU_BRAND_INTEL:
+            try:
+                from sklearnex import patch_sklearn
+                patch_sklearn()
+                available_cpu = cpu_brand
+                print("CPU Acceleration enabled via Intel® Extension for Scikit-learn")
+            except Exception as e:
+                print("Intel CPU Acceleration is NOT available !")
                 print("Error:", str(e))
 
     if log_level.upper() in ['CRITICAL', 'FATAL', 'ERROR', 'WARNING', 'WARN', 'INFO', 'DEBUG']:
@@ -139,3 +145,10 @@ def check_gpu_brand():
         pass
 
     return "Unknown GPU brand !!"
+
+
+def check_cpu_brand():
+    import cpuinfo
+
+    cpu_brand = cpuinfo.get_cpu_info()['vendor_id_raw']  # get only the brand name
+    return cpu_brand
