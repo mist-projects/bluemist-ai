@@ -7,13 +7,14 @@ Initialize Bluemist-AI's environment
 # Version: 0.1.2
 # Email: dew@bluemist-ai.one
 # Created: Feb 10, 2023
-# Last modified: June 19, 2023
+# Last modified: June 21, 2023
 
 import logging
 import os
 import platform
 import shutil
 import sysconfig
+import traceback
 from logging import config
 
 from termcolor import colored
@@ -44,14 +45,44 @@ def initialize(
         Controls the logging level for bluemist.log
     enable_acceleration_extensions : {True, False}, default=False
         - Enables NVIDIA GPU acceleration/Intel CPU acceleration based on the underlying GPU/CPU infrastructure
-        - NVIDIA GPU acceleration is provided by RAPIDS cuML. For supported algorithms refer https://docs.rapids.ai/api/cuml/stable/api/#regression-and-classification
-        - Intel CPU acceleration is provided by Intel® Extension for Scikit-learn. For supported algorithms refer https://intel.github.io/scikit-learn-intelex/algorithms.html#on-cpu
+        - NVIDIA GPU acceleration is provided by RAPIDS cuML. For the list of supported algorithms, please refer  https://docs.rapids.ai/api/cuml/stable/api/#regression-and-classification
+        - Intel CPU acceleration is provided by Intel® Extension for Scikit-learn. For the list of supported algorithms, please refer https://intel.github.io/scikit-learn-intelex/algorithms.html#on-cpu
     cleanup_resources : {True, False}, default=True
         Cleanup artifacts from previous runs
     """
 
     global available_gpu
     global available_cpu
+
+    banner = """
+    ██████╗ ██╗     ██╗   ██╗███████╗███╗   ███╗██╗███████╗████████╗     █████╗ ██╗
+    ██╔══██╗██║     ██║   ██║██╔════╝████╗ ████║██║██╔════╝╚══██╔══╝    ██╔══██╗██║
+    ██████╔╝██║     ██║   ██║█████╗  ██╔████╔██║██║███████╗   ██║       ███████║██║
+    ██╔══██╗██║     ██║   ██║██╔══╝  ██║╚██╔╝██║██║╚════██║   ██║       ██╔══██║██║
+    ██████╔╝███████╗╚██████╔╝███████╗██║ ╚═╝ ██║██║███████║   ██║       ██║  ██║██║                                                                        
+                                    (version 0.1.2)
+    """
+
+    print(colored(banner, 'blue'))
+
+    print('Bluemist path :: {}'.format(BLUEMIST_PATH))
+    print('System platform :: {}, {}, {}, {}, {}'.format(os.name, platform.system(), platform.release(),
+                                                         sysconfig.get_platform(),
+                                                         platform.architecture()))
+
+    logger.info('System platform :: {}, {}, {}, {}, {}'.format(os.name, platform.system(), platform.release(),
+                                                               sysconfig.get_platform(),
+                                                               platform.architecture()))
+
+    logger.debug('Printing environment variables...')
+
+    for key, value in os.environ.items():
+        logger.debug(f'{key}={value}')
+
+    if log_level.upper() in ['CRITICAL', 'FATAL', 'ERROR', 'WARNING', 'WARN', 'INFO', 'DEBUG']:
+        logger.setLevel(logging.getLevelName(log_level))
+
+    logger.handlers[0].doRollover()
 
     if enable_acceleration_extensions:
         gpu_brand = check_gpu_brand()
@@ -69,7 +100,8 @@ def initialize(
                 print("NVIDIA GPU support is available via RAPIDS cuML ", str(cuml_version))
             except Exception as e:
                 print("NVIDIA GPU support is NOT available !")
-                print("Error:", str(e))
+                logger.error("Error: %s", str(e))
+                logger.error(traceback.format_exc())
 
         if cpu_brand == CPU_BRAND_INTEL:
             try:
@@ -79,35 +111,8 @@ def initialize(
                 print("CPU Acceleration enabled via Intel® Extension for Scikit-learn")
             except Exception as e:
                 print("Intel CPU Acceleration is NOT available !")
-                print("Error:", str(e))
-
-    if log_level.upper() in ['CRITICAL', 'FATAL', 'ERROR', 'WARNING', 'WARN', 'INFO', 'DEBUG']:
-        logger.setLevel(logging.getLevelName(log_level))
-
-    logger.handlers[0].doRollover()
-
-    banner = """
-██████╗ ██╗     ██╗   ██╗███████╗███╗   ███╗██╗███████╗████████╗     █████╗ ██╗
-██╔══██╗██║     ██║   ██║██╔════╝████╗ ████║██║██╔════╝╚══██╔══╝    ██╔══██╗██║
-██████╔╝██║     ██║   ██║█████╗  ██╔████╔██║██║███████╗   ██║       ███████║██║
-██╔══██╗██║     ██║   ██║██╔══╝  ██║╚██╔╝██║██║╚════██║   ██║       ██╔══██║██║
-██████╔╝███████╗╚██████╔╝███████╗██║ ╚═╝ ██║██║███████║   ██║       ██║  ██║██║                                                                        
-                                (version 0.1.2)
-    """
-
-    print(colored(banner, 'blue'))
-
-    print('Bluemist path :: {}'.format(BLUEMIST_PATH))
-    print('System platform :: {}, {}, {}, {}, {}'.format(os.name, platform.system(), platform.release(),
-                                                         sysconfig.get_platform(),
-                                                         platform.architecture()))
-    logger.info('System platform :: {}, {}, {}, {}, {}'.format(os.name, platform.system(), platform.release(),
-                                                               sysconfig.get_platform(),
-                                                               platform.architecture()))
-
-    logger.debug('Printing environment variables...')
-    for key, value in os.environ.items():
-        logger.debug(f'{key}={value}')
+                logger.error("Error: %s", str(e))
+                logger.error(traceback.format_exc())
 
     # cleaning and building artifacts directory
     if bool(cleanup_resources):
