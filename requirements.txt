@@ -11,9 +11,9 @@ py_cpuinfo==8.0.0
 pydantic==1.10.2
 pyngrok==6.0.0
 scikit-learn==1.2.2
-scikit_learn_intelex==20230426.134916
+scikit_learn_intelex==2023.1.1
 setuptools==67.8.0
 termcolor==2.3.0
 tqdm==4.64.1
 uvicorn==0.16.0
-ydata_profiling==0.0.dev0
+ydata_profiling==4.3.1
