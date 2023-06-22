@@ -420,7 +420,7 @@ def train_test_evaluate(
                 logger.error('Exception occurred while training the model :: {}'.format(str(e)), exc_info=True)
 
     df.set_index('Estimator', inplace=True)
-    print(df)
+    #print(df)
     display(HTML(df.style
                  .highlight_max(
         subset=[col for col in df.columns if col.endswith('score') and is_numeric_dtype(df[col])], color='green')
