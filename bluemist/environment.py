@@ -7,7 +7,7 @@ Initialize Bluemist-AI's environment
 # Version: 0.1.2
 # Email: dew@bluemist-ai.one
 # Created: Feb 10, 2023
-# Last modified: June 21, 2023
+# Last modified: June 22, 2023
 
 import logging
 import os
@@ -60,7 +60,7 @@ def initialize(
     ██████╔╝██║     ██║   ██║█████╗  ██╔████╔██║██║███████╗   ██║       ███████║██║
     ██╔══██╗██║     ██║   ██║██╔══╝  ██║╚██╔╝██║██║╚════██║   ██║       ██╔══██║██║
     ██████╔╝███████╗╚██████╔╝███████╗██║ ╚═╝ ██║██║███████║   ██║       ██║  ██║██║                                                                        
-                                    (version 0.1.2)
+                        (version 0.1.2 - ThunderBurst)
     """
 
     print(colored(banner, 'blue'))
