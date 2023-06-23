@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bluemist AI &mdash; Bluemist AI 0.1.1 documentation</title>
@@ -16,14 +16,15 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Dataset Extraction" href="bluemist.datasource.html" />
+    <link rel="next" title="Environment Configuration" href="bluemist.configure_environment.html" />
     <link rel="prev" title="Bluemist AI" href="index.html" /> 
 </head>
 
@@ -32,11 +33,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Bluemist AI
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Bluemist AI
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -45,11 +50,17 @@
               <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Bluemist AI</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-features">Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#user-installation">User installation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#method-1">Method 1</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#method-2-recommended">Method 2 (recommended)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#method-3">Method 3</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#support-for-gpu-cpu-acceleration">Support for GPU/CPU Acceleration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gpu-acceleration">GPU Acceleration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cpu-acceleration">CPU Acceleration</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#id1">Minimal package vs Full package</a></li>
@@ -59,6 +70,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="bluemist.configure_environment.html">Environment Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.datasource.html">Dataset Extraction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.eda.html">Exploratory Data Analysis (EDA)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.preprocessing.html">Data Preprocessing</a></li>
@@ -81,8 +93,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Bluemist AI</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Bluemist AI</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/bluemist.installation.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -93,49 +105,51 @@
            <div itemprop="articleBody">
              
   <section id="bluemist-ai">
-<h1>Bluemist AI<a class="headerlink" href="#bluemist-ai" title="Permalink to this headline"></a></h1>
+<h1>Bluemist AI<a class="headerlink" href="#bluemist-ai" title="Permalink to this heading"></a></h1>
 <a class="reference external image-reference" href="https://shields.io/"><img alt="Generic badge" src="https://img.shields.io/badge/python-3.9-blue.svg" /></a>
 <a class="reference external image-reference" href="https://badge.fury.io/py/bluemist"><img alt="PyPI version" src="https://badge.fury.io/py/bluemist.svg" /></a>
 <a class="reference external image-reference" href="https://img.shields.io/github/license/mist-projects/bluemist-ai"><img alt="GitHub" src="https://img.shields.io/github/license/mist-projects/bluemist-ai" /></a>
 <a class="reference external image-reference" href="https://bluemist-ai.readthedocs.io/en/latest/?badge=latest"><img alt="Documentation Status" src="https://readthedocs.org/projects/bluemist-ai/badge/?version=latest" /></a>
-<p>Bluemist AI is a low code machine learning library written in Python to develop, evaluate and deploy automated Machine
-Bluemist AI is an open source, low code machine learning library written in Python to develop, evaluate and deploy automated Machine
-Learning models and pipleines.</p>
-<p>It acts as a wrapper service on top of sklearn, numpy, pandas, mlflow and FastAPI. Visualization are created using
-pandas-profiling, sweetviz, dtale and autoviz.</p>
-<section id="features">
-<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<p>Bluemist AI is an advanced, open-source, low-code machine learning library developed in Python. Its primary purpose is
+to facilitate the development, evaluation, and deployment of automated machine learning models and pipelines.</p>
+<p>The library acts as a convenient wrapper service, integrating seamlessly with popular Python libraries such as
+scikit-learn, NumPy, pandas, mlflow, and FastAPI. For visualization purposes, Bluemist AI leverages the capabilities of
+pandas-profiling, sweetviz, dtale, and autoviz.</p>
+<section id="key-features">
+<h2>Key Features<a class="headerlink" href="#key-features" title="Permalink to this heading"></a></h2>
+<p>Bluemist AI offers a range of powerful features, including:</p>
 <ul class="simple">
-<li><p>Native integration for data extraction with MySQL, PostgreSQL, MS SQL, Oracle, MariaDB, Amazon Aurora and Amazon S3</p></li>
-<li><p>Exploratory Data Analysis (EDA)</p></li>
-<li><p>Data preprocessing</p></li>
-<li><p>Trains data across multiple algorithms and provide comparison metrics</p></li>
-<li><p>Hyperparameter tuning</p></li>
-<li><p>Experiment tracking</p></li>
-<li><p>API deployment</p></li>
+<li><p><strong>Native Data Integration</strong>: Seamlessly extract data from various sources, including MySQL, PostgreSQL, MS SQL, Oracle, MariaDB, Amazon Aurora, and Amazon S3, providing a unified interface for working with diverse datasets.</p></li>
+<li><p><strong>Exploratory Data Analysis (EDA)</strong>: Conduct thorough EDA on your data, enabling comprehensive insights into the characteristics, distributions, and relationships within the dataset.</p></li>
+<li><p><strong>Data Preprocessing</strong>: Streamline the preprocessing pipeline by leveraging Bluemist AI’s built-in preprocessing capabilities, allowing you to handle missing data, perform feature scaling, encoding, and other essential preprocessing tasks efficiently.</p></li>
+<li><p><strong>Algorithm Selection and Comparison</strong>: Bluemist AI facilitates training data across multiple algorithms, enabling you to compare and evaluate various models using comprehensive metrics and insights.</p></li>
+<li><p><strong>Hyperparameter Tuning</strong>: Optimize model performance with built-in hyperparameter tuning functionalities, automatically searching for the optimal combination of hyperparameters to achieve the best results.</p></li>
+<li><p><strong>Experiment Tracking</strong>: Keep track of your experiments effortlessly, storing essential metadata, parameters, and results, allowing for easy reproducibility and experimentation management.</p></li>
+<li><p><strong>API Deployment</strong>: Bluemist AI simplifies the process of deploying machine learning models as APIs, making it easier to integrate your models into production systems and applications.</p></li>
 </ul>
+<p>These features make Bluemist AI a powerful tool for developing, evaluating, and deploying machine learning models efficiently and effectively.</p>
+</section>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h2>
 <p>For the detailed list of supported and upcoming features, visit <a class="reference external" href="https://www.bluemist-ai.one">https://www.bluemist-ai.one</a></p>
 <p>Full documentation is available &#64; <a class="reference external" href="https://bluemist-ai.readthedocs.io">https://bluemist-ai.readthedocs.io</a></p>
 </section>
 <section id="user-installation">
-<h2>User installation<a class="headerlink" href="#user-installation" title="Permalink to this headline"></a></h2>
+<h2>User installation<a class="headerlink" href="#user-installation" title="Permalink to this heading"></a></h2>
 <section id="method-1">
-<h3>Method 1<a class="headerlink" href="#method-1" title="Permalink to this headline"></a></h3>
+<h3>Method 1<a class="headerlink" href="#method-1" title="Permalink to this heading"></a></h3>
 <p>To install minimal version of the package with hard dependencies listed in  <a class="reference external" href="https://github.com/mist-projects/bluemist-ai/blob/f0f6f74e70b24171a6df13b90220139ede70f4e3/requirements.txt">requirements.txt</a></p>
 <div class="highlight-{python} notranslate"><div class="highlight"><pre><span></span>pip install -U bluemist
 </pre></div>
 </div>
-<p>To install the complete package including optional dependencies listed
-in  <a class="reference external" href="https://github.com/mist-projects/bluemist-ai/blob/8db75fc52824783f7d9e9a2ad2f65e51d3a30e33/requirements-optional.txt">requirements-optional.txt</a>.
-Refer <a class="reference external" href="#minimal-package-vs-full-package">Minimal package vs Full package</a> for more details.</p>
+<p>To install the complete package including optional dependencies listed in  <a class="reference external" href="https://github.com/mist-projects/bluemist-ai/blob/8db75fc52824783f7d9e9a2ad2f65e51d3a30e33/requirements-optional.txt">requirements-optional.txt</a>. Refer <a class="reference external" href="#minimal-package-vs-full-package">Minimal package vs Full package</a> for more details.</p>
 <div class="highlight-{python} notranslate"><div class="highlight"><pre><span></span>pip install -U bluemist[complete]
 </pre></div>
 </div>
 </section>
 <section id="method-2-recommended">
-<h3>Method 2 (recommended)<a class="headerlink" href="#method-2-recommended" title="Permalink to this headline"></a></h3>
-<p>It is advised to setup a separate python environment to avoid conflicts with package dependencies.
-This can be done as follows :</p>
+<h3>Method 2 (recommended)<a class="headerlink" href="#method-2-recommended" title="Permalink to this heading"></a></h3>
+<p>It is advised to set up a separate Python environment to avoid conflicts with package dependencies. Follow the steps below:</p>
 <ul class="simple">
 <li><p>Install the package <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code></p></li>
 </ul>
@@ -164,7 +178,7 @@ pip install -U bluemist
 </div>
 </section>
 <section id="method-3">
-<h3>Method 3<a class="headerlink" href="#method-3" title="Permalink to this headline"></a></h3>
+<h3>Method 3<a class="headerlink" href="#method-3" title="Permalink to this heading"></a></h3>
 <p>bluemist package can be installed using <code class="docutils literal notranslate"><span class="pre">pipx</span></code> utility. It automatically creates an isolated environment to run the
 bluemist package</p>
 <div class="highlight-{python} notranslate"><div class="highlight"><pre><span></span>pip install pipx
@@ -174,12 +188,54 @@ pipx upgrade bluemist
 </div>
 </section>
 </section>
+<section id="support-for-gpu-cpu-acceleration">
+<h2>Support for GPU/CPU Acceleration<a class="headerlink" href="#support-for-gpu-cpu-acceleration" title="Permalink to this heading"></a></h2>
+<section id="gpu-acceleration">
+<h3>GPU Acceleration<a class="headerlink" href="#gpu-acceleration" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>If your system is equipped with an NVIDIA GPU and you want to utilize GPU acceleration for model training, you can
+install the RAPIDS cuML package by executing the following command:</p></li>
+</ul>
+<div class="highlight-{python} notranslate"><div class="highlight"><pre><span></span>pip install cudf-cu11 cuml-cu11 --extra-index-url=https://pypi.nvidia.com
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">cuml</span></code> package provides GPU-accelerated implementations of various machine learning algorithms. By installing this
+package, you can leverage the power of your GPU to significantly improve the speed and performance of your machine
+learning workflows.</p></li>
+<li><p>For the list of supported algorithms, please
+refer <a class="reference external" href="https://docs.rapids.ai/api/cuml/stable/api/#regression-and-classification">https://docs.rapids.ai/api/cuml/stable/api/#regression-and-classification</a></p></li>
+<li><p>Acceleration extensions can ben enabled by passing the parameter <code class="docutils literal notranslate"><span class="pre">enable_acceleration_extensions=True</span></code> during
+the <code class="docutils literal notranslate"><span class="pre">initialize</span></code> phase.</p></li>
+</ul>
+</section>
+<section id="cpu-acceleration">
+<h3>CPU Acceleration<a class="headerlink" href="#cpu-acceleration" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>If your system is equipped with an Intel CPU and you want to utilize CPU acceleration for model training, you can
+install the Intel® Extension for Scikit-learn package by executing the following command:</p></li>
+</ul>
+<div class="highlight-{python} notranslate"><div class="highlight"><pre><span></span>pip install -U scikit-learn-intelex
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">scikit-learn-intelex</span></code> package provides CPU-accelerated implementations of Scikit-learn algorithms. By installing
+this package, you can leverage the power of your Intel CPU to significantly improve the speed and performance of your
+machine learning workflows.</p></li>
+<li><p>For the list of supported algorithms, please refer to
+the <a class="reference external" href="https://intel.github.io/scikit-learn-intelex/algorithms.html#on-cpu">Intel® Extension for Scikit-learn documentation</a>.</p></li>
+<li><p>Acceleration extensions can ben enabled by passing the parameter <code class="docutils literal notranslate"><span class="pre">enable_acceleration_extensions=True</span></code> during
+the <code class="docutils literal notranslate"><span class="pre">initialize</span></code> phase.</p></li>
+</ul>
+</section>
+</section>
 <section id="id1">
-<h2>Minimal package vs Full package<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+<h2>Minimal package vs Full package<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
 <p>Below functionalities are available only with complete package installation</p>
 <ul class="simple">
 <li><p>Data extraction from RDBMS or cloud</p></li>
 <li><p>EDA Visualizations using dtale and sweetviz</p></li>
+<li><p>CPU/GPU Acceleration</p></li>
 </ul>
 <p>Alternatively a single optional package can be installed using the <code class="docutils literal notranslate"><span class="pre">pip</span></code> command. For example, if you would like to
 extract data from Amazon S3 but do not wish to install other optional packages :</p>
@@ -188,8 +244,8 @@ extract data from Amazon S3 but do not wish to install other optional packages :
 </div>
 </section>
 <section id="license">
-<h2>License<a class="headerlink" href="#license" title="Permalink to this headline"></a></h2>
-<p>Bluemist AI source code is licensed under the MIT License</p>
+<h2>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h2>
+<p>This project is licensed under the <a class="reference external" href="LICENSE">MIT License</a>.</p>
 <p>See <a class="reference external" href="https://github.com/mist-projects/bluemist-ai/wiki/Third-Part-Libraries">Third Party Libraries</a> for license details of third party libraries included in the distribution.</p>
 </section>
 </section>
@@ -199,7 +255,7 @@ extract data from Amazon S3 but do not wish to install other optional packages :
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="Bluemist AI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="bluemist.datasource.html" class="btn btn-neutral float-right" title="Dataset Extraction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="bluemist.configure_environment.html" class="btn btn-neutral float-right" title="Environment Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

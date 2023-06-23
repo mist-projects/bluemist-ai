@@ -7,7 +7,7 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   bluemist.artifcats
+   bluemist.artifacts
    bluemist.classification
    bluemist.datasource
    bluemist.pipeline

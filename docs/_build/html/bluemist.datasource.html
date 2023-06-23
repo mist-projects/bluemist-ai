@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dataset Extraction &mdash; Bluemist AI 0.1.1 documentation</title>
@@ -16,15 +16,16 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Exploratory Data Analysis (EDA)" href="bluemist.eda.html" />
-    <link rel="prev" title="Bluemist AI" href="bluemist.installation.html" /> 
+    <link rel="prev" title="Environment Configuration" href="bluemist.configure_environment.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -32,11 +33,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Bluemist AI
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Bluemist AI
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -48,6 +53,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bluemist.configure_environment.html">Environment Configuration</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Dataset Extraction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#module-bluemist.datasource.file">File System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-bluemist.datasource.database">Database</a></li>
@@ -75,8 +81,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Dataset Extraction</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Dataset Extraction</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/bluemist.datasource.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -87,9 +93,9 @@
            <div itemprop="articleBody">
              
   <section id="dataset-extraction">
-<h1>Dataset Extraction<a class="headerlink" href="#dataset-extraction" title="Permalink to this headline"></a></h1>
+<h1>Dataset Extraction<a class="headerlink" href="#dataset-extraction" title="Permalink to this heading"></a></h1>
 <section id="module-bluemist.datasource.file">
-<span id="file-system"></span><h2>File System<a class="headerlink" href="#module-bluemist.datasource.file" title="Permalink to this headline"></a></h2>
+<span id="file-system"></span><h2>File System<a class="headerlink" href="#module-bluemist.datasource.file" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="bluemist.datasource.file.get_data_from_filesystem">
 <span class="sig-name descname"><span class="pre">get_data_from_filesystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'delimited'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">','</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bluemist/datasource/file.html#get_data_from_filesystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bluemist.datasource.file.get_data_from_filesystem" title="Permalink to this definition"></a></dt>
@@ -14743,7 +14749,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 </section>
 <section id="module-bluemist.datasource.database">
-<span id="database"></span><h2>Database<a class="headerlink" href="#module-bluemist.datasource.database" title="Permalink to this headline"></a></h2>
+<span id="database"></span><h2>Database<a class="headerlink" href="#module-bluemist.datasource.database" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="bluemist.datasource.database.get_data_from_database">
 <span class="sig-name descname"><span class="pre">get_data_from_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">service</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oracle_instant_client_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bluemist/datasource/database.html#get_data_from_database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bluemist.datasource.database.get_data_from_database" title="Permalink to this definition"></a></dt>
@@ -29451,7 +29457,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 </section>
 <section id="module-bluemist.datasource.aws">
-<span id="amazon-cloud-aws"></span><h2>Amazon cloud (AWS)<a class="headerlink" href="#module-bluemist.datasource.aws" title="Permalink to this headline"></a></h2>
+<span id="amazon-cloud-aws"></span><h2>Amazon cloud (AWS)<a class="headerlink" href="#module-bluemist.datasource.aws" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="bluemist.datasource.aws.get_data_from_s3">
 <span class="sig-name descname"><span class="pre">get_data_from_s3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aws_access_key_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aws_secret_access_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_bucket_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_object_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'delimited'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">','</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bluemist/datasource/aws.html#get_data_from_s3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bluemist.datasource.aws.get_data_from_s3" title="Permalink to this definition"></a></dt>
@@ -44120,7 +44126,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="bluemist.installation.html" class="btn btn-neutral float-left" title="Bluemist AI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bluemist.configure_environment.html" class="btn btn-neutral float-left" title="Environment Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="bluemist.eda.html" class="btn btn-neutral float-right" title="Exploratory Data Analysis (EDA)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
