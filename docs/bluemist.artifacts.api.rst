@@ -1,13 +1,13 @@
-bluemist.artifcats.api package
+bluemist.artifacts.api package
 ==============================
 
 Submodules
 ----------
 
-bluemist.artifcats.api.model\_api module
+bluemist.artifacts.api.model\_api module
 ----------------------------------------
 
-.. automodule:: bluemist.artifcats.api.model_api
+.. automodule:: bluemist.artifacts.api.model_api
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ bluemist.artifcats.api.model\_api module
 Module contents
 ---------------
 
-.. automodule:: bluemist.artifcats.api
+.. automodule:: bluemist.artifacts.api
    :members:
    :undoc-members:
    :show-inheritance:
