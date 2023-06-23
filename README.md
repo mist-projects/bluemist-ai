@@ -91,34 +91,41 @@ pipx upgrade bluemist
 
 #### GPU Acceleration
 
-- If your system has an NVIDIA GPU and you would like to utilize GPU acceleration for model training, you can install
-  the RAPIDS cuML package by running the following command:
-
-- The `cuml` package provides GPU-accelerated implementations of various machine learning algorithms. Installing this 
-  package allows you to leverage the power of your GPU for faster computations and improved performance in your machine
-  learning workflows.
-
-- For the list of supported algorithms, please
-  refer https://docs.rapids.ai/api/cuml/stable/api/#regression-and-classification
+- If your system is equipped with an NVIDIA GPU and you want to utilize GPU acceleration for model training, you can
+  install the RAPIDS cuML package by executing the following command:
 
 ```{python}
 pip install cudf-cu11 cuml-cu11 --extra-index-url=https://pypi.nvidia.com
 ```
 
+- The `cuml` package provides GPU-accelerated implementations of various machine learning algorithms. By installing this
+  package, you can leverage the power of your GPU to significantly improve the speed and performance of your machine
+  learning workflows.
+
+- For the list of supported algorithms, please
+  refer https://docs.rapids.ai/api/cuml/stable/api/#regression-and-classification
+
+- Acceleration extensions can ben enabled by passing the parameter ``enable_acceleration_extensions=True`` during
+  the ``initialize`` phase.
+
 #### CPU Acceleration
 
-- If your system has an Intel CPU and you would like to utilize CPU acceleration for model training, you can install
-  the Intel® Extension for Scikit-learn package by running the below command.
-
-- The `scikit-learn-intelex` package provides CPU-accelerated implementations of Scikit-learn algorithms. Installing this
-  package allows you to leverage the power of your Intel CPU for faster computations and improved performance in your
-  machine learning workflows.
-
-- For the list of supported algorithms, please refer https://intel.github.io/scikit-learn-intelex/algorithms.html#on-cpu
+- If your system is equipped with an Intel CPU and you want to utilize CPU acceleration for model training, you can
+  install the Intel® Extension for Scikit-learn package by executing the following command:
 
 ```{python}
 pip install -U scikit-learn-intelex
 ```
+
+- The `scikit-learn-intelex` package provides CPU-accelerated implementations of Scikit-learn algorithms. By installing
+  this package, you can leverage the power of your Intel CPU to significantly improve the speed and performance of your
+  machine learning workflows.
+
+- For the list of supported algorithms, please refer to
+  the [Intel® Extension for Scikit-learn documentation](https://intel.github.io/scikit-learn-intelex/algorithms.html#on-cpu).
+
+- Acceleration extensions can ben enabled by passing the parameter ``enable_acceleration_extensions=True`` during
+  the ``initialize`` phase.
 
 ## Minimal package vs Full package
 Below functionalities are available only with complete package installation
