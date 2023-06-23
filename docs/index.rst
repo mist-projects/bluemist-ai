@@ -16,6 +16,7 @@
    :maxdepth: 2
    :caption: Documentation:
 
+   bluemist.configure_environment
    bluemist.datasource
    bluemist.eda
    bluemist.preprocessing

@@ -2,10 +2,12 @@
 Performs data pre-processing
 """
 
-__author__ = "Shashank Agrawal"
-__license__ = "MIT"
-__version__ = "0.1.1"
-__email__ = "dew@bluemist-ai.one"
+# Author: Shashank Agrawal
+# License: MIT
+# Version: 0.1.2
+# Email: dew@bluemist-ai.one
+# Created: Jun 22, 2022
+# Last modified: June 11, 2023
 
 
 import logging
@@ -13,8 +15,9 @@ import os
 from logging import config
 import numpy as np
 import pandas as pd
+import sklearn
 from sklearn.compose import ColumnTransformer
-from sklearn.model_selection import train_test_split
+
 from bluemist.pipeline.bluemist_pipeline import save_preprocessor
 from bluemist.preprocessing import categorical_transformer, numeric_transformer
 
@@ -117,6 +120,9 @@ def preprocess_data(
     """
 
     global target_for_deployment
+    global initial_column_metadata_for_deployment
+    global encoded_columns_for_deployment
+
     target_for_deployment = target_variable
 
     logger.info('Shape of the dataset :: {}'.format(data.shape))
@@ -134,8 +140,12 @@ def preprocess_data(
     auto_computed_categorical_features = data.select_dtypes(include='object').columns.tolist()
 
     final_numerical_features = auto_computed_numerical_features.copy()
-    final_numerical_features.remove(target_variable)
+    if target_variable in final_numerical_features:
+        final_numerical_features.remove(target_variable)
+
     final_categorical_features = auto_computed_categorical_features.copy()
+    if target_variable in final_categorical_features:
+        final_categorical_features.remove(target_variable)
 
     # finalize the list of numerical features
     if auto_computed_numerical_features is not None:
@@ -180,13 +190,14 @@ def preprocess_data(
     logger.debug('data.dtypes before preprocessing  :: \n{}'.format(data.dtypes))
 
     if numerical_features is not None:
-        data[final_numerical_features] = data[final_numerical_features].apply(pd.to_numeric, errors=numeric_conversion_strategy, axis=1)
+        data[final_numerical_features] = data[final_numerical_features].apply(pd.to_numeric,
+                                                                              errors=numeric_conversion_strategy,
+                                                                              axis=1)
 
     data[final_categorical_features] = data[final_categorical_features].astype(str)
     logger.debug('data.dtypes after dtype conversion  :: \n{}'.format(data.dtypes))
 
     # Creating list of column name and datatype which will be used in generate_api.py
-    global initial_column_metadata_for_deployment
     for col_name, col_type in data.drop(target_variable, axis=1).dtypes.items():
         initial_column_metadata_for_deployment.append((col_name, col_type))
 
@@ -205,13 +216,14 @@ def preprocess_data(
     X = data.drop([target_variable], axis=1)
     y = data[[target_variable]]
     logger.debug('Splitting dataset into X_train, X_test, y_train, y_test...')
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=data_randomizer)
+
+    X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, test_size=test_size,
+                                                                                random_state=data_randomizer)
 
     logger.debug('X_train.dtypes before ColumnTransformer :: \n{}'.format(X_train.dtypes))
     X_train = pd.DataFrame(preprocessor.fit_transform(X_train), columns=preprocessor.get_feature_names_out())
     X_test = pd.DataFrame(preprocessor.transform(X_test), columns=preprocessor.get_feature_names_out())
 
-    global encoded_columns_for_deployment
     encoded_columns_for_deployment = preprocessor.get_feature_names_out()
 
     logger.debug('X_train Columns after ColumnTransformer :: {}'.format(preprocessor.get_feature_names_out()))

@@ -1,10 +1,11 @@
+# Author: Shashank Agrawal
+# License: MIT
+# Version: 0.1.2
+# Email: dew@bluemist-ai.one
+# Created: Jun 22, 2022
+# Last modified: May 29, 2023
 
-__author__ = "Shashank Agrawal"
-__license__ = "MIT"
-__version__ = "0.1.1"
-__email__ = "dew@bluemist-ai.one"
-
-
+from bluemist.regression import tuning
 from bluemist.regression.regressor import (
     get_estimators,
     train_test_evaluate,

@@ -1,13 +1,13 @@
-
-__author__ = "Shashank Agrawal"
-__license__ = "MIT"
-__version__ = "0.1.1"
-__email__ = "dew@bluemist-ai.one"
-
+# Author: Shashank Agrawal
+# License: MIT
+# Version: 0.1.2
+# Email: dew@bluemist-ai.one
+# Created: Jun 22, 2022
+# Last modified: May 29, 2023
 
 import numpy as np
 
-default_hyperparameters = {
+default_params = {
     'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute'],
     'alphas': [None],
     'alpha': [1.0, 1.5, 2.0, 2.5, 3, 3.5, 4, 4.5, 5],
@@ -255,7 +255,8 @@ RadiusNeighborsRegressor = {
 }
 
 RandomForestRegressor = {
-    'max_features': [None, 'sqrt', 'log2', 0.7, 0.8, 0.9, 1]
+    'max_features': [None, 'sqrt', 'log2', 0.7, 0.8, 0.9, 1],
+    'maxBins': [256]
 }
 
 Ridge = {

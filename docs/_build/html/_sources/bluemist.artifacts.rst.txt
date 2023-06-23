@@ -1,4 +1,4 @@
-bluemist.artifcats package
+bluemist.artifacts package
 ==========================
 
 Subpackages
@@ -7,12 +7,12 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   bluemist.artifcats.api
+   bluemist.artifacts.api
 
 Module contents
 ---------------
 
-.. automodule:: bluemist.artifcats
+.. automodule:: bluemist.artifacts
    :members:
    :undoc-members:
    :show-inheritance:

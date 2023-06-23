@@ -6,4 +6,4 @@ Coming Soon
 * Deep Learning
 * Natural Language Processing (NLP)
 * Computer Vision
-* GPU Support
+* Web interface

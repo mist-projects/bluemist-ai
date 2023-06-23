@@ -15,10 +15,11 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -29,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Bluemist AI
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Bluemist AI
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -45,6 +50,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="bluemist.configure_environment.html">Environment Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.datasource.html">Dataset Extraction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.eda.html">Exploratory Data Analysis (EDA)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.preprocessing.html">Data Preprocessing</a></li>
@@ -67,8 +73,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Index</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Index</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -86,6 +92,7 @@
  | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
  | <a href="#G"><strong>G</strong></a>
+ | <a href="#I"><strong>I</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#P"><strong>P</strong></a>
  | <a href="#S"><strong>S</strong></a>
@@ -109,6 +116,20 @@
 
       <ul>
         <li><a href="bluemist.html#module-bluemist">module</a>
+</li>
+      </ul></li>
+      <li>
+    bluemist.artifacts
+
+      <ul>
+        <li><a href="bluemist.artifacts.html#module-bluemist.artifacts">module</a>
+</li>
+      </ul></li>
+      <li>
+    bluemist.artifacts.api
+
+      <ul>
+        <li><a href="bluemist.artifacts.api.html#module-bluemist.artifacts.api">module</a>
 </li>
       </ul></li>
       <li>
@@ -147,12 +168,21 @@
 </li>
       </ul></li>
       <li>
+    bluemist.environment
+
+      <ul>
+        <li><a href="bluemist.configure_environment.html#module-bluemist.environment">module</a>
+</li>
+      </ul></li>
+      <li>
     bluemist.main
 
       <ul>
         <li><a href="bluemist.html#module-bluemist.main">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     bluemist.pipeline
 
@@ -167,8 +197,6 @@
         <li><a href="bluemist.pipeline.html#module-bluemist.pipeline.bluemist_pipeline">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     bluemist.preprocessing.preprocessor
 
@@ -188,13 +216,6 @@
 
       <ul>
         <li><a href="bluemist.regression.tuning.html#module-bluemist.regression.tuning">module</a>
-</li>
-      </ul></li>
-      <li>
-    bluemist.regression.tuning.constant
-
-      <ul>
-        <li><a href="bluemist.regression.tuning.html#module-bluemist.regression.tuning.constant">module</a>
 </li>
       </ul></li>
       <li>
@@ -231,6 +252,10 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="bluemist.utils.html#bluemist.utils.metrics.metric_scorer.calculate_metrics">calculate_metrics() (metric_scorer method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="bluemist.pipeline.html#bluemist.pipeline.bluemist_pipeline.clear_all_model_pipelines">clear_all_model_pipelines() (in module bluemist.pipeline.bluemist_pipeline)</a>
 </li>
   </ul></td>
@@ -253,17 +278,23 @@
 </li>
       <li><a href="bluemist.datasource.html#bluemist.datasource.file.get_data_from_filesystem">get_data_from_filesystem() (in module bluemist.datasource.file)</a>
 </li>
-      <li><a href="bluemist.datasource.html#bluemist.datasource.aws.get_data_from_s3">get_data_from_s3() (in module bluemist.datasource.aws)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="bluemist.datasource.html#bluemist.datasource.aws.get_data_from_s3">get_data_from_s3() (in module bluemist.datasource.aws)</a>
+</li>
       <li><a href="bluemist.regression.html#bluemist.regression.regressor.get_estimators">get_estimators() (in module bluemist.regression.regressor)</a>
 </li>
       <li><a href="bluemist.pipeline.html#bluemist.pipeline.bluemist_pipeline.get_model_pipeline">get_model_pipeline() (in module bluemist.pipeline.bluemist_pipeline)</a>
 </li>
-      <li><a href="bluemist.utils.html#bluemist.utils.scaler.getScaler">getScaler() (in module bluemist.utils.scaler)</a>
+      <li><a href="bluemist.utils.html#bluemist.utils.scaler.get_scaler">get_scaler() (in module bluemist.utils.scaler)</a>
 </li>
-      <li><a href="bluemist.utils.html#bluemist.utils.metrics.scoringStrategy.getStats">getStats() (scoringStrategy method)</a>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="bluemist.configure_environment.html#bluemist.environment.initialize">initialize() (in module bluemist.environment)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -273,15 +304,21 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="bluemist.html#bluemist.main.main">main() (in module bluemist.main)</a>
 </li>
-      <li><a href="bluemist.utils.html#bluemist.utils.metrics.scoringStrategy.metrics_requested">metrics_requested (scoringStrategy attribute)</a>
+      <li><a href="bluemist.utils.html#bluemist.utils.metrics.metric_scorer">metric_scorer (class in bluemist.utils.metrics)</a>
 </li>
-      <li><a href="bluemist.utils.html#bluemist.utils.metrics.scoringStrategy.metrics_to_be_returned">metrics_to_be_returned (scoringStrategy attribute)</a>
+      <li><a href="bluemist.utils.html#bluemist.utils.metrics.metric_scorer.metrics_requested">metrics_requested (metric_scorer attribute)</a>
+</li>
+      <li><a href="bluemist.utils.html#bluemist.utils.metrics.metric_scorer.metrics_to_be_returned">metrics_to_be_returned (metric_scorer attribute)</a>
 </li>
       <li>
     module
 
       <ul>
         <li><a href="bluemist.html#module-bluemist">bluemist</a>
+</li>
+        <li><a href="bluemist.artifacts.html#module-bluemist.artifacts">bluemist.artifacts</a>
+</li>
+        <li><a href="bluemist.artifacts.api.html#module-bluemist.artifacts.api">bluemist.artifacts.api</a>
 </li>
         <li><a href="bluemist.classification.html#module-bluemist.classification">bluemist.classification</a>
 </li>
@@ -292,6 +329,8 @@
         <li><a href="bluemist.datasource.html#module-bluemist.datasource.file">bluemist.datasource.file</a>
 </li>
         <li><a href="bluemist.eda.html#module-bluemist.eda.analyze_data">bluemist.eda.analyze_data</a>
+</li>
+        <li><a href="bluemist.configure_environment.html#module-bluemist.environment">bluemist.environment</a>
 </li>
         <li><a href="bluemist.html#module-bluemist.main">bluemist.main</a>
 </li>
@@ -304,8 +343,6 @@
         <li><a href="bluemist.regression.html#module-bluemist.regression.regressor">bluemist.regression.regressor</a>
 </li>
         <li><a href="bluemist.regression.tuning.html#module-bluemist.regression.tuning">bluemist.regression.tuning</a>
-</li>
-        <li><a href="bluemist.regression.tuning.html#module-bluemist.regression.tuning.constant">bluemist.regression.tuning.constant</a>
 </li>
         <li><a href="bluemist.utils.html#module-bluemist.utils">bluemist.utils</a>
 </li>
@@ -340,8 +377,6 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="bluemist.pipeline.html#bluemist.pipeline.bluemist_pipeline.save_preprocessor">save_preprocessor() (in module bluemist.pipeline.bluemist_pipeline)</a>
 </li>
-      <li><a href="bluemist.utils.html#bluemist.utils.metrics.scoringStrategy">scoringStrategy (class in bluemist.utils.metrics)</a>
-</li>
   </ul></td>
 </tr></table>
 
@@ -356,11 +391,11 @@
 <h2 id="Y">Y</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="bluemist.utils.html#bluemist.utils.metrics.scoringStrategy.y_pred">y_pred (scoringStrategy attribute)</a>
+      <li><a href="bluemist.utils.html#bluemist.utils.metrics.metric_scorer.y_pred">y_pred (metric_scorer attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="bluemist.utils.html#bluemist.utils.metrics.scoringStrategy.y_true">y_true (scoringStrategy attribute)</a>
+      <li><a href="bluemist.utils.html#bluemist.utils.metrics.metric_scorer.y_true">y_true (metric_scorer attribute)</a>
 </li>
   </ul></td>
 </tr></table>

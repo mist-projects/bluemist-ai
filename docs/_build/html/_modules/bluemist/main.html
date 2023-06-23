@@ -15,10 +15,11 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -29,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> Bluemist AI
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Bluemist AI
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -45,6 +50,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../bluemist.configure_environment.html">Environment Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../bluemist.datasource.html">Dataset Extraction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../bluemist.eda.html">Exploratory Data Analysis (EDA)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../bluemist.preprocessing.html">Data Preprocessing</a></li>
@@ -67,9 +73,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-      <li>bluemist.main</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">bluemist.main</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -85,21 +91,28 @@
 <span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">config</span>
 
 <span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="kn">import</span> <span class="nn">cpuinfo</span>
+<span class="kn">import</span> <span class="nn">sklearnex</span>
+<span class="c1">#import cuml</span>
+<span class="kn">from</span> <span class="nn">sklearnex</span> <span class="kn">import</span> <span class="n">patch_sklearn</span><span class="p">,</span> <span class="n">sklearn_is_patched</span>
+
+<span class="c1">#patch_sklearn()</span>
+
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
 
-<span class="kn">from</span> <span class="nn">bluemist.environment</span> <span class="kn">import</span> <span class="n">initialize</span>
+<span class="kn">from</span> <span class="nn">bluemist.environment</span> <span class="kn">import</span> <span class="n">initialize</span><span class="p">,</span> <span class="n">check_gpu_brand</span>
 <span class="c1"># from bluemist.datasource.aws import get_data_from_s3</span>
 <span class="kn">from</span> <span class="nn">bluemist.datasource</span> <span class="kn">import</span> <span class="n">get_data_from_filesystem</span>
 <span class="c1"># from bluemist.pipeline import get_model_pipeline</span>
 <span class="kn">from</span> <span class="nn">bluemist.preprocessing</span> <span class="kn">import</span> <span class="n">preprocess_data</span>
 <span class="kn">from</span> <span class="nn">bluemist.regression</span> <span class="kn">import</span> <span class="n">train_test_evaluate</span><span class="p">,</span> <span class="n">deploy_model</span><span class="p">,</span> <span class="n">get_estimators</span>
+
 <span class="c1"># from bluemist.eda import perform_eda</span>
 <span class="c1"># from bluemist.datasource.database import get_data_from_database</span>
 
 <span class="n">HOME_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BLUEMIST_PATH&quot;</span><span class="p">]</span>
 <span class="n">config</span><span class="o">.</span><span class="n">fileConfig</span><span class="p">(</span><span class="n">HOME_PATH</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;logging.config&#39;</span><span class="p">)</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;root&quot;</span><span class="p">)</span>
-
 
 <div class="viewcode-block" id="main"><a class="viewcode-back" href="../../bluemist.html#bluemist.main.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="c1"># query = &#39;SELECT * FROM public.auto_mpg&#39;</span>
@@ -132,15 +145,20 @@
     <span class="c1">#                               oracle_instant_client_path=&#39;/home/shashank-agrawal/Desktop/instantclient_21_6&#39;,</span>
     <span class="c1">#                               query=query, chunk_size=100)</span>
 
-    <span class="c1">#print(&#39;get_estimators&#39;, get_estimators())</span>
-    <span class="n">initialize</span><span class="p">()</span>
+    <span class="n">initialize</span><span class="p">(</span><span class="n">enable_acceleration_extensions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># print(&#39;get_estimators&#39;, get_estimators())</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="n">cpuinfo</span><span class="o">.</span><span class="n">get_cpu_info</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sklearn_is_patched</span><span class="p">())</span>
+
+
     <span class="c1"># data = datasets.load_diabetes(as_frame=True)</span>
     <span class="c1"># data = get_data_from_filesystem(&#39;datasets/auto-mpg/auto-mpg.csv&#39;)</span>
 
     <span class="n">data</span> <span class="o">=</span> <span class="n">get_data_from_filesystem</span><span class="p">(</span>
         <span class="s1">&#39;https://raw.githubusercontent.com/plotly/datasets/3aa08e58607d1f36159efc4cca9d0d073bbf57bb/auto-mpg.csv&#39;</span><span class="p">)</span>
 
-    <span class="c1">#perform_eda(data.frame, target_variable=&#39;target&#39;, provider=&#39;autoviz&#39;)</span>
+    <span class="c1"># perform_eda(data.frame, target_variable=&#39;target&#39;, provider=&#39;autoviz&#39;)</span>
 
     <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">preprocess_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span>
                                                        <span class="n">target_variable</span><span class="o">=</span><span class="s1">&#39;mpg&#39;</span><span class="p">,</span>
@@ -150,10 +168,10 @@
                                                        <span class="n">categorical_encoder</span><span class="o">=</span><span class="s1">&#39;OneHotEncoder&#39;</span><span class="p">,</span>
                                                        <span class="n">drop_categories_one_hot_encoder</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
     <span class="n">train_test_evaluate</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-    <span class="n">deploy_model</span><span class="p">(</span><span class="n">estimator_name</span><span class="o">=</span><span class="s1">&#39;RadiusNeighborsRegressor&#39;</span><span class="p">)</span>
+    <span class="n">deploy_model</span><span class="p">(</span><span class="n">estimator_name</span><span class="o">=</span><span class="s1">&#39;LinearSVR&#39;</span><span class="p">)</span></div>
     <span class="c1"># # # pipeline = get_model_pipeline(&#39;LarsCV&#39;)</span>
     <span class="c1"># # print(pipeline.get_params)</span>
-    <span class="n">deploy_model</span><span class="p">(</span><span class="n">estimator_name</span><span class="o">=</span><span class="s1">&#39;LarsCV&#39;</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">)</span></div>
+    <span class="c1"># deploy_model(estimator_name=&#39;LarsCV&#39;, host=&#39;localhost&#39;, port=8000)</span>
 
 
 <span class="c1"># Press the green button in the gutter to run the script.</span>

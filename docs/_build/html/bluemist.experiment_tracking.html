@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Experiment Tracking &mdash; Bluemist AI 0.1.1 documentation</title>
@@ -16,10 +16,11 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -32,11 +33,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Bluemist AI
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Bluemist AI
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -48,6 +53,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bluemist.configure_environment.html">Environment Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.datasource.html">Dataset Extraction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.eda.html">Exploratory Data Analysis (EDA)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.preprocessing.html">Data Preprocessing</a></li>
@@ -73,8 +79,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Experiment Tracking</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Experiment Tracking</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/bluemist.experiment_tracking.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -85,7 +91,7 @@
            <div itemprop="articleBody">
              
   <section id="experiment-tracking">
-<h1>Experiment Tracking<a class="headerlink" href="#experiment-tracking" title="Permalink to this headline"></a></h1>
+<h1>Experiment Tracking<a class="headerlink" href="#experiment-tracking" title="Permalink to this heading"></a></h1>
 <p>Bluemist provides integration with MLflow to track, experiment and evaluate machine learning models. This can be simply achieved by setting the params <code class="docutils literal notranslate"><span class="pre">experiment_name</span></code> and <code class="docutils literal notranslate"><span class="pre">run_name</span></code> while training the model using <code class="docutils literal notranslate"><span class="pre">train_test_evaluate</span></code> as described <a class="reference internal" href="bluemist.regression.html#module-bluemist.regression.regressor"><span class="std std-ref">here</span></a></p>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -95,7 +101,7 @@
 <p>Is is important to execute <code class="docutils literal notranslate"><span class="pre">!mlflow</span> <span class="pre">ui</span></code> after <code class="docutils literal notranslate"><span class="pre">train_test_evaluate</span></code> has been completed successfully</p>
 </div>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />

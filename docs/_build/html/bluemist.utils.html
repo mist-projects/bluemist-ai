@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>bluemist.utils package &mdash; Bluemist AI 0.1.1 documentation</title>
@@ -16,10 +16,11 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -30,11 +31,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Bluemist AI
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Bluemist AI
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -46,6 +51,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="bluemist.configure_environment.html">Environment Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.datasource.html">Dataset Extraction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.eda.html">Exploratory Data Analysis (EDA)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluemist.preprocessing.html">Data Preprocessing</a></li>
@@ -68,8 +74,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>bluemist.utils package</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">bluemist.utils package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/bluemist.utils.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -80,12 +86,12 @@
            <div itemprop="articleBody">
              
   <section id="bluemist-utils-package">
-<h1>bluemist.utils package<a class="headerlink" href="#bluemist-utils-package" title="Permalink to this headline"></a></h1>
+<h1>bluemist.utils package<a class="headerlink" href="#bluemist-utils-package" title="Permalink to this heading"></a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </section>
 <section id="module-bluemist.utils.generate_api">
-<span id="bluemist-utils-generate-api-module"></span><h2>bluemist.utils.generate_api module<a class="headerlink" href="#module-bluemist.utils.generate_api" title="Permalink to this headline"></a></h2>
+<span id="bluemist-utils-generate-api-module"></span><h2>bluemist.utils.generate_api module<a class="headerlink" href="#module-bluemist.utils.generate_api" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="bluemist.utils.generate_api.generate_api_code">
 <span class="sig-name descname"><span class="pre">generate_api_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimator_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_column_metadata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoded_column_metadata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_variable</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bluemist/utils/generate_api.html#generate_api_code"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bluemist.utils.generate_api.generate_api_code" title="Permalink to this definition"></a></dt>
@@ -93,49 +99,49 @@
 
 </section>
 <section id="module-bluemist.utils.metrics">
-<span id="bluemist-utils-metrics-module"></span><h2>bluemist.utils.metrics module<a class="headerlink" href="#module-bluemist.utils.metrics" title="Permalink to this headline"></a></h2>
+<span id="bluemist-utils-metrics-module"></span><h2>bluemist.utils.metrics module<a class="headerlink" href="#module-bluemist.utils.metrics" title="Permalink to this heading"></a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="bluemist.utils.metrics.scoringStrategy">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scoringStrategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bluemist/utils/metrics.html#scoringStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bluemist.utils.metrics.scoringStrategy" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="bluemist.utils.metrics.metric_scorer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">metric_scorer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bluemist/utils/metrics.html#metric_scorer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bluemist.utils.metrics.metric_scorer" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
-<dt class="sig sig-object py" id="bluemist.utils.metrics.scoringStrategy.getStats">
-<span class="sig-name descname"><span class="pre">getStats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bluemist/utils/metrics.html#scoringStrategy.getStats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bluemist.utils.metrics.scoringStrategy.getStats" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="bluemist.utils.metrics.metric_scorer.calculate_metrics">
+<span class="sig-name descname"><span class="pre">calculate_metrics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bluemist/utils/metrics.html#metric_scorer.calculate_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bluemist.utils.metrics.metric_scorer.calculate_metrics" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="bluemist.utils.metrics.scoringStrategy.metrics_requested">
-<span class="sig-name descname"><span class="pre">metrics_requested</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#bluemist.utils.metrics.scoringStrategy.metrics_requested" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="bluemist.utils.metrics.metric_scorer.metrics_requested">
+<span class="sig-name descname"><span class="pre">metrics_requested</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#bluemist.utils.metrics.metric_scorer.metrics_requested" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="bluemist.utils.metrics.scoringStrategy.metrics_to_be_returned">
-<span class="sig-name descname"><span class="pre">metrics_to_be_returned</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#bluemist.utils.metrics.scoringStrategy.metrics_to_be_returned" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="bluemist.utils.metrics.metric_scorer.metrics_to_be_returned">
+<span class="sig-name descname"><span class="pre">metrics_to_be_returned</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#bluemist.utils.metrics.metric_scorer.metrics_to_be_returned" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="bluemist.utils.metrics.scoringStrategy.y_pred">
-<span class="sig-name descname"><span class="pre">y_pred</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#bluemist.utils.metrics.scoringStrategy.y_pred" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="bluemist.utils.metrics.metric_scorer.y_pred">
+<span class="sig-name descname"><span class="pre">y_pred</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#bluemist.utils.metrics.metric_scorer.y_pred" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="bluemist.utils.metrics.scoringStrategy.y_true">
-<span class="sig-name descname"><span class="pre">y_true</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#bluemist.utils.metrics.scoringStrategy.y_true" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="bluemist.utils.metrics.metric_scorer.y_true">
+<span class="sig-name descname"><span class="pre">y_true</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#bluemist.utils.metrics.metric_scorer.y_true" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 </section>
 <section id="module-bluemist.utils.scaler">
-<span id="bluemist-utils-scaler-module"></span><h2>bluemist.utils.scaler module<a class="headerlink" href="#module-bluemist.utils.scaler" title="Permalink to this headline"></a></h2>
+<span id="bluemist-utils-scaler-module"></span><h2>bluemist.utils.scaler module<a class="headerlink" href="#module-bluemist.utils.scaler" title="Permalink to this heading"></a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="bluemist.utils.scaler.getScaler">
-<span class="sig-name descname"><span class="pre">getScaler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scaling_strategy</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bluemist/utils/scaler.html#getScaler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bluemist.utils.scaler.getScaler" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="bluemist.utils.scaler.get_scaler">
+<span class="sig-name descname"><span class="pre">get_scaler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scaling_strategy</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bluemist/utils/scaler.html#get_scaler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bluemist.utils.scaler.get_scaler" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </section>
 <section id="module-bluemist.utils">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-bluemist.utils" title="Permalink to this headline"></a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-bluemist.utils" title="Permalink to this heading"></a></h2>
 </section>
 </section>
 

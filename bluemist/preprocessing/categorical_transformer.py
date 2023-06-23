@@ -1,13 +1,16 @@
+# Author: Shashank Agrawal
+# License: MIT
+# Version: 0.1.2
+# Email: dew@bluemist-ai.one
+# Created: Sep 6, 2022
+# Last modified: May 29, 2023
 
-__author__ = "Shashank Agrawal"
-__license__ = "MIT"
-__version__ = "0.1.1"
-__email__ = "dew@bluemist-ai.one"
-
-
+import sklearn
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder, OrdinalEncoder
+from sklearn.preprocessing import LabelEncoder, OrdinalEncoder, OneHotEncoder
+
+from bluemist import environment
 
 
 def build_categorical_transformer_pipeline(**kwargs):
@@ -26,7 +29,7 @@ def build_categorical_transformer_pipeline(**kwargs):
             imputer_step = ('imputer', SimpleImputer(strategy=imputer_strategy))
         transformer_steps.append(imputer_step)
     else:
-        raise ValueError('Invalid imputer_strategy value passed : ', imputer_strategy)
+        raise ValueError('Invalid imputer_strategy value passed: {}'.format(imputer_strategy))
 
     if categorical_encoder is not None and categorical_encoder in ['OneHotEncoder', 'OrdinalEncoder']:
         encoder_step = tuple()
@@ -35,14 +38,14 @@ def build_categorical_transformer_pipeline(**kwargs):
         elif categorical_encoder == 'OrdinalEncoder':
             encoder_step = ('ordinal_encoder', OrdinalEncoder())
         elif categorical_encoder == 'OneHotEncoder':
-            if drop_categories is not None and handle_unknown is not None:
-                encoder_step = ('one_hot_encoder', OneHotEncoder(drop=drop_categories, handle_unknown=handle_unknown))
-            elif drop_categories is not None:
-                encoder_step = ('one_hot_encoder', OneHotEncoder(drop=drop_categories))
-            elif handle_unknown is not None:
-                encoder_step = ('one_hot_encoder', OneHotEncoder(handle_unknown=handle_unknown))
-            else:
-                encoder_step = ('one_hot_encoder', OneHotEncoder())
+            encoder_class = OneHotEncoder
+            kwargs = {}
+            if drop_categories is not None:
+                kwargs['drop'] = drop_categories
+            if handle_unknown is not None:
+                kwargs['handle_unknown'] = handle_unknown
+
+            encoder_step = ('one_hot_encoder', encoder_class(**kwargs))
 
         transformer_steps.append(encoder_step)
     else:

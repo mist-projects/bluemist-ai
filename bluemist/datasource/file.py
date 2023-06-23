@@ -1,8 +1,10 @@
 
-__author__ = "Shashank Agrawal"
-__license__ = "MIT"
-__version__ = "0.1.1"
-__email__ = "dew@bluemist-ai.one"
+# Author: Shashank Agrawal
+# License: MIT
+# Version: 0.1.2
+# Email: dew@bluemist-ai.one
+# Created:  Jun 22, 2022
+# Last modified: June 17, 2023
 
 
 import logging
@@ -45,12 +47,12 @@ def get_data_from_filesystem(file_path,
     if file_type == 'delimited':
         data = pd.read_csv(filepath_or_buffer=file_path, sep=delimiter)
         logger.info('Data pull completed !!')
-        data.columns = data.columns.str.replace('\W', '_')  # TODO: Revisit this code
+        data.columns = data.columns.str.replace('\W', '_', regex=True)  # TODO: Revisit this code
         return data
     elif file_type == 'excel':
         data = pd.read_excel(io=file_path, sheet_name=sheet_name)
         logger.info('Data pull completed !!')
-        data.columns = data.columns.str.replace('\W', '_')  # TODO: Revisit this code
+        data.columns = data.columns.str.replace('\W', '_', regex=True)  # TODO: Revisit this code
         return data
 
 
