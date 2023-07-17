@@ -60,6 +60,7 @@ class TaskModels:
                     "albert-base-v2",
                 ],
                 "task_name": "ner",
+                "question_support": False,
             },
             "named-entity-recognition": {
                 "models": [
@@ -69,6 +70,7 @@ class TaskModels:
                     "xlm-roberta-large",
                 ],
                 "task_name": "ner",
+                "question_support": False,
             },
             "question-answering": {
                 "models": [
@@ -78,6 +80,7 @@ class TaskModels:
                     "xlnet-large-cased",
                 ],
                 "task_name": "question-answering",
+                "question_support": True,
             },
             "sentiment-analysis": {
                 "models": [
@@ -87,6 +90,7 @@ class TaskModels:
                     "xlm-roberta-base",
                 ],
                 "task_name": "sentiment-analysis",
+                "question_support": False,
             },
             "summarization": {
                 "models": [
@@ -96,6 +100,7 @@ class TaskModels:
                     "t5-large",
                 ],
                 "task_name": "summarization",
+                "question_support": False,
             },
             "text-classification": {
                 "models": [
@@ -105,6 +110,7 @@ class TaskModels:
                     "xlm-roberta-base",
                 ],
                 "task_name": "text-classification",
+                "question_support": False,
             },
         }
 
@@ -147,4 +153,20 @@ class TaskModels:
             return self.tasks[task]['task_name']
         else:
             return None
+
+    def is_question_supported(self, task):
+        """
+        Check if the given task supports questions.
+
+        Args:
+            task (str): The task name to check.
+
+        Returns:
+            bool: True if the task supports questions, False otherwise.
+        """
+        if task in self.tasks:
+            return self.tasks[task]["question_support"]
+        else:
+            return False
+
 
