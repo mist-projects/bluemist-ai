@@ -3,7 +3,7 @@
 # Version: 0.1.3
 # Email: dew@bluemist-ai.one
 # Created:  Jul 17, 2023
-# Last modified: Jul 17, 2023
+# Last modified: Jul 22, 2023
 
 class TaskModels:
     """
@@ -76,11 +76,17 @@ class TaskModels:
                 "models": [
                     "bert-large-uncased-whole-word-masking-finetuned-squad",
                     "distilbert-base-uncased-distilled-squad",
-                    "roberta-large-squad2",
-                    "xlnet-large-cased",
+                    "deepset/roberta-large-squad2",
+                    "distilbert-base-cased-distilled-squad",
+                    "bert-large-cased-whole-word-masking-finetuned-squad",
+                    "deepset/bert-base-cased-squad2",
+                    "deepset/bert-large-uncased-whole-word-masking-squad2",
+                    "deepset/bert-base-uncased-squad2",
+                    "deepset/roberta-base-squad2",
+                    "deepset/roberta-base-squad2-distilled",
                 ],
                 "task_name": "question-answering",
-                "question_support": True,
+                "question_support": True
             },
             "sentiment-analysis": {
                 "models": [
