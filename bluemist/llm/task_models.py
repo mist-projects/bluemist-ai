@@ -64,13 +64,27 @@ class TaskModels:
             },
             "named-entity-recognition": {
                 "models": [
-                    "bert-base-cased",
-                    "roberta-base",
-                    "camembert-base",
-                    "xlm-roberta-large",
+                    "dslim/bert-base-NER",
+                    "dslim/bert-large-NER",
                 ],
                 "task_name": "ner",
                 "question_support": False,
+            },
+            "question-answering": {
+                "models": [
+                    "bert-large-uncased-whole-word-masking-finetuned-squad",
+                    "distilbert-base-uncased-distilled-squad",
+                    "deepset/roberta-large-squad2",
+                    "distilbert-base-cased-distilled-squad",
+                    "bert-large-cased-whole-word-masking-finetuned-squad",
+                    "deepset/bert-base-cased-squad2",
+                    "deepset/bert-large-uncased-whole-word-masking-squad2",
+                    "deepset/bert-base-uncased-squad2",
+                    "deepset/roberta-base-squad2",
+                    "deepset/roberta-base-squad2-distilled",
+                ],
+                "task_name": "question-answering",
+                "question_support": True
             },
             "question-answering": {
                 "models": [
