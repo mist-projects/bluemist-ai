@@ -3,7 +3,11 @@
 # Version: 0.1.3
 # Email: dew@bluemist-ai.one
 # Created:  Jul 17, 2023
-# Last modified: Jul 22, 2023
+# Last modified: Aug 16, 2023
+
+from huggingface_hub import list_models
+from transformers.pipelines import get_supported_tasks
+
 
 class TaskModels:
     """
@@ -22,18 +26,18 @@ class TaskModels:
     task_models = TaskModels()
 
     # Retrieve a list of available tasks
-    tasks = task_models.list_tasks()
+    tasks = task_models.get_all_tasks()
     print("Available tasks:", tasks)
 
     # Retrieve the list of models for a specific task
     task = "question-answering"
-    models = task_models.list_models(task)
+    models = task_models.get_models_for_task(task)
     print(f"Models for {task} task:", models)
 
-    # Retrieve the pipeline task name for a specific task
-    task = "sentiment-analysis"
-    task_name = task_models.get_task_name(task)
-    print(f"Task name for {task} task:", task_name)
+    # Check if a specific task supports questions
+    task = "document-question-answering"
+    is_supported = task_models.is_question_supported(task)
+    print(f"Does {task} support questions:", is_supported)
     ```
     """
 
@@ -49,105 +53,49 @@ class TaskModels:
 
     def populate_tasks(self):
         """
-        Populates the tasks dictionary with available tasks and their associated models.
+        Populates the tasks dictionary with tasks supported by Bluemist AI
         """
         self.tasks = {
-            "information-extraction": {
-                "models": [
-                    "bert-base-cased",
-                    "roberta-large",
-                    "electra-large",
-                    "albert-base-v2",
-                ],
-                "task_name": "ner",
-                "question_support": False,
+            "Document Question Answering": {
+                "task_name": "document-question-answering",
+                "question_support": True,
             },
-            "named-entity-recognition": {
-                "models": [
-                    "dslim/bert-base-NER",
-                    "dslim/bert-large-NER",
-                ],
-                "task_name": "ner",
-                "question_support": False,
-            },
-            "question-answering": {
-                "models": [
-                    "bert-large-uncased-whole-word-masking-finetuned-squad",
-                    "distilbert-base-uncased-distilled-squad",
-                    "deepset/roberta-large-squad2",
-                    "distilbert-base-cased-distilled-squad",
-                    "bert-large-cased-whole-word-masking-finetuned-squad",
-                    "deepset/bert-base-cased-squad2",
-                    "deepset/bert-large-uncased-whole-word-masking-squad2",
-                    "deepset/bert-base-uncased-squad2",
-                    "deepset/roberta-base-squad2",
-                    "deepset/roberta-base-squad2-distilled",
-                ],
+            "Question Answering": {
                 "task_name": "question-answering",
                 "question_support": True
-            },
-            "question-answering": {
-                "models": [
-                    "bert-large-uncased-whole-word-masking-finetuned-squad",
-                    "distilbert-base-uncased-distilled-squad",
-                    "deepset/roberta-large-squad2",
-                    "distilbert-base-cased-distilled-squad",
-                    "bert-large-cased-whole-word-masking-finetuned-squad",
-                    "deepset/bert-base-cased-squad2",
-                    "deepset/bert-large-uncased-whole-word-masking-squad2",
-                    "deepset/bert-base-uncased-squad2",
-                    "deepset/roberta-base-squad2",
-                    "deepset/roberta-base-squad2-distilled",
-                ],
-                "task_name": "question-answering",
-                "question_support": True
-            },
-            "sentiment-analysis": {
-                "models": [
-                    "bert-base-uncased",
-                    "distilbert-base-uncased",
-                    "roberta-base",
-                    "xlm-roberta-base",
-                ],
-                "task_name": "sentiment-analysis",
-                "question_support": False,
-            },
-            "summarization": {
-                "models": [
-                    "bart-large-cnn",
-                    "pegasus-large",
-                    "t5-base",
-                    "t5-large",
-                ],
-                "task_name": "summarization",
-                "question_support": False,
-            },
-            "text-classification": {
-                "models": [
-                    "bert-base-uncased",
-                    "distilbert-base-uncased",
-                    "roberta-base",
-                    "xlm-roberta-base",
-                ],
-                "task_name": "text-classification",
-                "question_support": False,
-            },
+            }
         }
 
-    def get_models_for_task(self, task):
+    @staticmethod
+    def is_model_supported_by_task(model, task_name):
+        """
+        Check if a specific model is supported by a given task.
+
+        Args:
+            model (str): The name of the model to check for support.
+            task_name (str): The name of the task to check model support against.
+
+        Returns:
+            bool: True if the model is supported by the task, False otherwise.
+        """
+
+        models = TaskModels.get_models_for_task(task_name, limit=None)
+        return model in models
+
+    @staticmethod
+    def get_models_for_task(task_name, limit):
         """
         Retrieves the available models for a given task.
 
         Args:
-            task (str): The task for which to retrieve the models.
+            task_name (str): The task for which to retrieve the models.
+            limit (int, optional): The maximum number of models to retrieve
 
         Returns:
             list: A list of available models for the specified task.
         """
-        if task in self.tasks:
-            return self.tasks[task]['models']
-        else:
-            return []
+        models = list_models(filter=task_name, sort='downloads', direction='-1', limit=limit)
+        return [model.modelId for model in models]
 
     def get_all_tasks(self):
         """
@@ -156,37 +104,23 @@ class TaskModels:
         Returns:
             list: A list of all available tasks.
         """
-        return list(self.tasks.keys())
+        hf_supported_tasks = get_supported_tasks()
+        matching_task_names = [task["task_name"] for task in self.tasks.values() if task["task_name"] in hf_supported_tasks]
 
-    def get_task_name(self, task):
-        """
-        Retrieve the pipeline task name for a given task.
+        return matching_task_names
 
-        Args:
-            task (str): The task for which to retrieve the pipeline task name.
-
-        Returns:
-            str or None: The pipeline task name associated with the given task,
-                or None if the task is not found in the dictionary.
-        """
-        if task in self.tasks:
-            return self.tasks[task]['task_name']
-        else:
-            return None
-
-    def is_question_supported(self, task):
+    def is_question_supported(self, task_name):
         """
         Check if the given task supports questions.
 
         Args:
-            task (str): The task name to check.
+            task_name (str): The task name to check.
 
         Returns:
             bool: True if the task supports questions, False otherwise.
         """
-        if task in self.tasks:
-            return self.tasks[task]["question_support"]
-        else:
-            return False
+        for task_info in self.tasks.values():
+            if task_info["task_name"] == task_name:
+                return task_info["question_support"]
 
-
+        return False
