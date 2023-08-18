@@ -3,7 +3,7 @@
 # Version: 0.1.3
 # Email: dew@bluemist-ai.one
 # Created:  Jul 17, 2023
-# Last modified: Aug 16, 2023
+# Last modified: Aug 18, 2023
 
 from huggingface_hub import list_models
 from transformers.pipelines import get_supported_tasks
@@ -59,10 +59,12 @@ class TaskModels:
             "Document Question Answering": {
                 "task_name": "document-question-answering",
                 "question_support": True,
+                "context_input_type": "png"
             },
             "Question Answering": {
                 "task_name": "question-answering",
-                "question_support": True
+                "question_support": True,
+                "context_input_type": "text"
             }
         }
 
@@ -124,3 +126,19 @@ class TaskModels:
                 return task_info["question_support"]
 
         return False
+
+    def get_context_input_type(self, task_name):
+        """
+        Get the input type required for the given task's context.
+
+        Args:
+            task_name (str): The name of the task to check.
+
+        Returns:
+            bool: The context input type if the task supports questions, None otherwise.
+        """
+        for task_info in self.tasks.values():
+            if task_info["task_name"] == task_name:
+                return task_info["context_input_type"]
+
+        return None
