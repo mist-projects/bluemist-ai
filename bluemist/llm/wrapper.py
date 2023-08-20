@@ -3,7 +3,7 @@
 # Version: 0.1.3
 # Email: dew@bluemist-ai.one
 # Created: Jul 17, 2023
-# Last modified: Aug 18, 2023
+# Last modified: Aug 20, 2023
 
 from transformers import pipeline
 import pandas as pd
@@ -13,17 +13,13 @@ from task_models import TaskModels
 task_models = TaskModels()
 
 
-# def deploy_model(task, model, context, question=None):
-#     evaluate_models(task, context, question, override_models=model, limit=1)
-
-
-def perform_task(task_name, context, question=None, override_models=None, limit=5, evaluate_models=True):
+def perform_task(task_name, input, question=None, override_models=None, limit=5, evaluate_models=True):
     """
         **Performs the task on the given dataset, evaluate the models and returns comparison metrics**
 
-        task : str, default=None
+        task_name : str, default=None
             Supported tasks can be retrieved from the TaskModels class using the get_all_tasks method.
-        context : str
+        input : str
             Text or information used by the model to perform specific NLP tasks.
         question : str, default=None
             Specific query or question provided as input to the model for question-answering tasks. The model uses this question to find the relevant answer within the provided context.
@@ -62,29 +58,83 @@ def perform_task(task_name, context, question=None, override_models=None, limit=
     if limit is not None and 0 < limit <= num_of_models:
         models = models[:limit]
 
-    if task_models.get_context_input_type(task_name) == "text":
+    results_df = process_models(task_name, models, results_df, input, question)
+    return results_df
 
-        # Iterate through all available models for the task
-        for model in models:
-            print(f"Model: {model}")
 
-            # Create the pipeline for the specific task
-            nlp = pipeline(task=task_name, model=model)
+def process_models(task_name, models, results_df, input, question=None):
+    """
+    Process multiple models with given inputs and consolidate results.
 
-            if task_models.is_question_supported(task_name):
-                result = nlp(context=context, question=question)
-            else:
-                result = nlp(context)
+    Args:
+        task_name : str, default=None
+            Supported tasks can be retrieved from the TaskModels class using the get_all_tasks method.
+        models : list
+            A list of model names to be processed.
+        results_df : pd.DataFrame
+            The initial results DataFrame.
+        context : str, default=None
+            Text or information used by the model to perform specific NLP tasks.
+        image : str, default=None
+            The image input for image-based tasks. Defaults to None.
+        question : str, default=None
+            Specific query or question provided as input to the model for question-answering tasks. The model uses this question to find the relevant answer within the provided context.
 
-            results_df = consolidate_results(result, results_df, model)
+    Returns:
+        results_df : pd.DataFrame
+            The updated results DataFrame containing consolidated results from all models.
+    """
 
+    for model in models:
+        print(f"Model: {model}")
+
+        nlp = pipeline(task=task_name, model=model)
+        input_args = {}
+
+        if task_models.is_question_supported(task_name):
+            input_args["question"] = question
+
+        if task_name == "question-answering":
+            input_args["context"] = input
+            result = nlp(input_args)
+        elif task_name == "document-question-answering":
+            input_args["image"] = input
+            result = nlp(input_args)
+        elif task_name == "summarization":
+            input_args["min_length"] = 30
+            input_args["max_length"] = 130
+            input_args["do_sample"] = False
+            result = nlp(input, **input_args)
+
+        results_df = consolidate_results(result, results_df, model)
     return results_df
 
 
 def consolidate_results(result, results_df, model):
+    """
+    Consolidates the given result into the results DataFrame.
+
+    This function takes a result, which can be a dictionary or a list of dictionaries,
+    and appends it to the provided results DataFrame. The 'model' argument is used to
+    associate the result with a specific model.
+
+    Args:
+        result : (dict or list):
+            The result to be consolidated into the DataFrame.
+        results_df : (pd.DataFrame)
+            The DataFrame to which the result will be added.
+        model : str
+            The model name associated with the result.
+
+    Returns:
+        results_df : pd.DataFrame
+            The updated results DataFrame with the new consolidated result.
+    """
+
     # Initialize an empty DataFrame
     new_rows_df = pd.DataFrame()
 
+    # Some models return the result as dict while other may return list.
     if isinstance(result, dict):
         new_rows_df = pd.DataFrame([result])
     elif isinstance(result, list):
@@ -94,5 +144,4 @@ def consolidate_results(result, results_df, model):
 
     # Store the results in the DataFrame
     results_df = pd.concat([results_df, new_rows_df], ignore_index=True)
-
     return results_df
