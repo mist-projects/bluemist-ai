@@ -3,7 +3,7 @@
 # Version: 0.1.3
 # Email: dew@bluemist-ai.one
 # Created: Jul 17, 2023
-# Last modified: Aug 20, 2023
+# Last modified: Aug 27, 2023
 
 from transformers import pipeline
 import pandas as pd
@@ -13,13 +13,13 @@ from task_models import TaskModels
 task_models = TaskModels()
 
 
-def perform_task(task_name, input, question=None, override_models=None, limit=5, evaluate_models=True):
+def perform_task(task_name, input_data, question=None, override_models=None, limit=5, evaluate_models=True):
     """
         **Performs the task on the given dataset, evaluate the models and returns comparison metrics**
 
         task_name : str, default=None
             Supported tasks can be retrieved from the TaskModels class using the get_all_tasks method.
-        input : str
+        input_data : str
             Text or information used by the model to perform specific NLP tasks.
         question : str, default=None
             Specific query or question provided as input to the model for question-answering tasks. The model uses this question to find the relevant answer within the provided context.
@@ -31,7 +31,6 @@ def perform_task(task_name, input, question=None, override_models=None, limit=5,
 
     # Check if the given task name is valid and supported by the available tasks.
     all_tasks = task_models.get_all_tasks()
-    print(all_tasks)
 
     if task_name not in all_tasks:
         raise ValueError(f"Task '{task_name}' is not a valid task.")
@@ -58,11 +57,11 @@ def perform_task(task_name, input, question=None, override_models=None, limit=5,
     if limit is not None and 0 < limit <= num_of_models:
         models = models[:limit]
 
-    results_df = process_models(task_name, models, results_df, input, question)
+    results_df = process_models(task_name, models, results_df, input_data, question)
     return results_df
 
 
-def process_models(task_name, models, results_df, input, question=None):
+def process_models(task_name, models, results_df, input_data, question=None, min_length=30, max_length=130, do_sample=False):
     """
     Process multiple models with given inputs and consolidate results.
 
@@ -73,16 +72,20 @@ def process_models(task_name, models, results_df, input, question=None):
             A list of model names to be processed.
         results_df : pd.DataFrame
             The initial results DataFrame.
-        context : str, default=None
+        input_data : str, default=None
             Text or information used by the model to perform specific NLP tasks.
-        image : str, default=None
-            The image input for image-based tasks. Defaults to None.
         question : str, default=None
             Specific query or question provided as input to the model for question-answering tasks. The model uses this question to find the relevant answer within the provided context.
+        min_length: number, default=30
+            The minimum length of the generated summary. Defaults to 30. The summarization model ensures that the summary is at least this length.
+        max_length : number, default=130
+            The maximum length of the generated summary. Defaults to 130. The summarization model limits the summary to a maximum of this length.
+        do_sample : boolean, default=False
+            Whether to use sampling during summary generation. Defaults to False. When True, the model uses a sampling technique for token selection.
 
     Returns:
-        results_df : pd.DataFrame
-            The updated results DataFrame containing consolidated results from all models.
+        pd.DataFrame
+            The dataFrame containing consolidated results from all models.
     """
 
     for model in models:
@@ -95,16 +98,18 @@ def process_models(task_name, models, results_df, input, question=None):
             input_args["question"] = question
 
         if task_name == "question-answering":
-            input_args["context"] = input
+            input_args["context"] = input_data
             result = nlp(input_args)
         elif task_name == "document-question-answering":
-            input_args["image"] = input
+            input_args["image"] = input_data
             result = nlp(input_args)
         elif task_name == "summarization":
-            input_args["min_length"] = 30
-            input_args["max_length"] = 130
-            input_args["do_sample"] = False
-            result = nlp(input, **input_args)
+            input_args["min_length"] = min_length
+            input_args["max_length"] = max_length
+            input_args["do_sample"] = do_sample
+            result = nlp(input_data, **input_args)
+        elif task_name == "sentiment-analysis":
+            result = nlp(input_data)
 
         results_df = consolidate_results(result, results_df, model)
     return results_df
@@ -128,7 +133,7 @@ def consolidate_results(result, results_df, model):
 
     Returns:
         results_df : pd.DataFrame
-            The updated results DataFrame with the new consolidated result.
+            Results DataFrame with the consolidated result.
     """
 
     # Initialize an empty DataFrame

@@ -3,7 +3,7 @@
 # Version: 0.1.3
 # Email: dew@bluemist-ai.one
 # Created:  Jul 17, 2023
-# Last modified: Aug 20, 2023
+# Last modified: Aug 27, 2023
 
 import os
 from huggingface_hub import list_models
@@ -68,17 +68,18 @@ class TaskModels:
             "Document Question Answering": {
                 "task_name": "document-question-answering",
                 "question_support": True,
-                "context_input_type": "image"
             },
             "Question Answering": {
                 "task_name": "question-answering",
                 "question_support": True,
-                "context_input_type": "text"
             },
             "Summarize": {
                 "task_name": "summarization",
                 "question_support": False,
-                "context_input_type": "article"
+            },
+            "Sentiment Analysis": {
+                "task_name": "sentiment-analysis",
+                "question_support": False,
             }
         }
 
@@ -121,6 +122,7 @@ class TaskModels:
             list: A list of all available tasks.
         """
         hf_supported_tasks = get_supported_tasks()
+        print(hf_supported_tasks)
         matching_task_names = [task["task_name"] for task in self.tasks.values() if
                                task["task_name"] in hf_supported_tasks]
 
