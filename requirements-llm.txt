@@ -1,0 +1,4 @@
+huggingface_hub~=0.16.4
+pytesseract~=0.3.10
+torch==2.1.0
+transformers~=4.28.1
