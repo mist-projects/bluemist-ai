@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>llm_question_answer</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>llm_jupyter_notebook</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14865,14 +14865,17 @@ System platform :: posix, Linux, 6.2.0-35-generic, linux-x86_64, (&#39;64bit&#39
 
 <span class="n">task</span> <span class="o">=</span> <span class="s2">"question-answering"</span>
 
-<span class="nb">input</span> <span class="o">=</span> <span class="s2">"""The Industrial Revolution, which began in the late 18th century, had a profound impact on society, </span>
-<span class="s2">transforming the way people lived and worked. One of the most significant changes brought about by the </span>
-<span class="s2">Industrial Revolution was the shift from agrarian economies to industrial economies. This transition resulted </span>
-<span class="s2">in the rapid growth of cities as people flocked to urban areas in search of employment in factories. </span>
-<span class="s2">The development of new machinery and technologies, such as the steam engine and the spinning jenny, r</span>
-<span class="s2">evolutionized manufacturing and led to increased productivity. However, the benefits of the Industrial Revolution </span>
-<span class="s2">were not evenly distributed, and many workers faced harsh working conditions, long hours, and low wages. </span>
-<span class="s2">The social and economic consequences of this era continue to shape our world today."""</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="s2">"""The Industrial Revolution, which began in the late 18th century, had a </span>
+<span class="s2">profound impact on society, transforming the way people lived and worked. One of </span>
+<span class="s2">the most significant changes brought about by the Industrial Revolution was the </span>
+<span class="s2">shift from agrarian economies to industrial economies. This transition resulted in </span>
+<span class="s2">the rapid growth of cities as people flocked to urban areas in search of employment </span>
+<span class="s2">in factories. The development of new machinery and technologies, such as the steam </span>
+<span class="s2">engine and the spinning jenny, revolutionized manufacturing and led to increased </span>
+<span class="s2">productivity. However, the benefits of the Industrial Revolution were not evenly </span>
+<span class="s2">distributed, and many workers faced harsh working conditions, long hours, and low </span>
+<span class="s2">wages. The social and economic consequences of this era continue to shape our world </span>
+<span class="s2">today."""</span>
 
 <span class="n">question</span> <span class="o">=</span> <span class="s2">"""What were the key technological innovations of the Industrial Revolution, </span>
 <span class="s2">and how did they impact both the economy and the lives of workers during that time?"""</span>
@@ -15006,14 +15009,17 @@ Model :: distilbert-base-cased-distilled-squad
 
 <span class="n">task</span> <span class="o">=</span> <span class="s2">"summarization"</span>
 
-<span class="nb">input</span> <span class="o">=</span> <span class="s2">"""The Industrial Revolution, which began in the late 18th century, had a profound impact on society, </span>
-<span class="s2">transforming the way people lived and worked. One of the most significant changes brought about by the </span>
-<span class="s2">Industrial Revolution was the shift from agrarian economies to industrial economies. This transition resulted </span>
-<span class="s2">in the rapid growth of cities as people flocked to urban areas in search of employment in factories. </span>
-<span class="s2">The development of new machinery and technologies, such as the steam engine and the spinning jenny, r</span>
-<span class="s2">evolutionized manufacturing and led to increased productivity. However, the benefits of the Industrial Revolution </span>
-<span class="s2">were not evenly distributed, and many workers faced harsh working conditions, long hours, and low wages. </span>
-<span class="s2">The social and economic consequences of this era continue to shape our world today."""</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="s2">"""The Industrial Revolution, which began in the late 18th century, had a </span>
+<span class="s2">profound impact on society, transforming the way people lived and worked. One of </span>
+<span class="s2">the most significant changes brought about by the Industrial Revolution was the </span>
+<span class="s2">shift from agrarian economies to industrial economies. This transition resulted in </span>
+<span class="s2">the rapid growth of cities as people flocked to urban areas in search of employment </span>
+<span class="s2">in factories. The development of new machinery and technologies, such as the steam </span>
+<span class="s2">engine and the spinning jenny, revolutionized manufacturing and led to increased </span>
+<span class="s2">productivity. However, the benefits of the Industrial Revolution were not evenly </span>
+<span class="s2">distributed, and many workers faced harsh working conditions, long hours, and low </span>
+<span class="s2">wages. The social and economic consequences of this era continue to shape our world </span>
+<span class="s2">today."""</span>
 
 <span class="n">df_summarization</span> <span class="o">=</span> <span class="n">perform_task</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">input_data</span><span class="o">=</span><span class="nb">input</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
@@ -15102,12 +15108,13 @@ Model :: t5-base
 
 <span class="n">task</span> <span class="o">=</span> <span class="s2">"sentiment-analysis"</span>
 
-<span class="nb">input</span> <span class="o">=</span> <span class="s2">"""The new restaurant in town has been creating quite a buzz among food enthusiasts. </span>
-<span class="s2">The elegant decor, friendly staff, and a diverse menu with a wide range of culinary delights have been </span>
-<span class="s2">receiving rave reviews. Diners have been praising the exquisite flavors and presentation of the dishes. </span>
-<span class="s2">However, there have also been a few complaints about the wait times during peak hours. </span>
-<span class="s2">Overall, it seems that most customers are delighted with their dining experience and are looking forward </span>
-<span class="s2">to returning for more delicious meals."""</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="s2">"""The new restaurant in town has been creating quite a buzz among food </span>
+<span class="s2">enthusiasts.  The elegant decor, friendly staff, and a diverse menu with a wide </span>
+<span class="s2">range of culinary delights have been receiving rave reviews. Diners have been </span>
+<span class="s2">praising the exquisite flavors and presentation of the dishes. However, there </span>
+<span class="s2">have also been a few complaints about the wait times during peak hours. </span>
+<span class="s2">Overall, it seems that most customers are delighted with their dining experience </span>
+<span class="s2">and are looking forward to returning for more delicious meals."""</span>
 
 <span class="n">df_sentiment_analysis</span> <span class="o">=</span> <span class="n">perform_task</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">input_data</span><span class="o">=</span><span class="nb">input</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">df_sentiment_analysis</span>
