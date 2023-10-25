@@ -21,6 +21,7 @@
    bluemist.eda
    bluemist.preprocessing
    bluemist.regression
+   bluemist.llm
    bluemist.experiment_tracking
    bluemist.model_deployment
    bluemist.coming_soon
