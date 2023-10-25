@@ -3,7 +3,7 @@
 # Version: 0.1.3
 # Email: dew@bluemist-ai.one
 # Created: Aug 27, 2023
-# Last modified: Aug 27, 2023
+# Last modified: Oct 25, 2023
 
 import nest_asyncio
 import uvicorn
@@ -36,12 +36,8 @@ async def perform_nlp_task(
         evaluate_models: bool = True
 ):
     try:
-        if isinstance(input_data.input_data, str):
-            input_data_list = [input_data.input_data]
-        else:
-            input_data_list = input_data.input_data
-
-        results_df = perform_task(task_name, input_data_list, question, override_models, limit, evaluate_models)
+        results_df = perform_task(task_name, input_data.input_data, question=question, override_models=override_models,
+                                  limit=limit, evaluate_models=evaluate_models)
         return JSONResponse(content=results_df.to_dict(orient="records"))
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))

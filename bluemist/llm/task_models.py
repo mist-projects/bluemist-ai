@@ -3,7 +3,7 @@
 # Version: 0.1.3
 # Email: dew@bluemist-ai.one
 # Created:  Jul 17, 2023
-# Last modified: Aug 27, 2023
+# Last modified: Oct 25, 2023
 
 import os
 from huggingface_hub import list_models
@@ -11,35 +11,19 @@ from transformers.pipelines import get_supported_tasks
 
 
 class TaskModels:
+
     """
-    Class representing a collection of tasks and their associated models.
+    Class representing a collection of tasks and their associated models. It serves as a powerful wrapper for Hugging Face models,
+    streamlining natural language processing tasks.
 
-    This class provides methods to retrieve information about available tasks
-    and models. It also allows accessing the pipeline task name for a given task.
+    It offers simplified interfaces for four key functions:
+        - Document Question Answering
+        - Question Answering
+        - Summarize
+        - Sentiment Analysis
 
-    Attributes:
-        tasks (dict): A dictionary mapping tasks to a list of associated models
-            and their corresponding pipeline task names.
-
-    Example usage:
-    ```
-    # Instantiate the TaskModels class
-    task_models = TaskModels()
-
-    # Retrieve a list of available tasks
-    tasks = task_models.get_all_tasks()
-    print("Available tasks:", tasks)
-
-    # Retrieve the list of models for a specific task
-    task = "question-answering"
-    models = task_models.get_models_for_task(task)
-    print(f"Models for {task} task:", models)
-
-    # Check if a specific task supports questions
-    task = "document-question-answering"
-    is_supported = task_models.is_question_supported(task)
-    print(f"Does {task} support questions:", is_supported)
-    ```
+    Users can initialize an instance of the class to access these functionalities effortlessly.
+    Bluemist AI is designed to simplify complex NLP operations, making it an invaluable tool for text analysis and understanding.
     """
 
     def __init__(self):
@@ -122,7 +106,6 @@ class TaskModels:
             list: A list of all available tasks.
         """
         hf_supported_tasks = get_supported_tasks()
-        print(hf_supported_tasks)
         matching_task_names = [task["task_name"] for task in self.tasks.values() if
                                task["task_name"] in hf_supported_tasks]
 
