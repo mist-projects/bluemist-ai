@@ -1,6 +1,5 @@
 boto3==1.26.155
 cx_Oracle==8.3.0
-cupy==12.1.0
 dtale==2.16.0
 SQLAlchemy==1.4.39
 sweetviz==2.1.4
