@@ -1,8 +1,9 @@
-
-__author__ = "Shashank Agrawal"
-__license__ = "MIT"
-__version__ = "0.1.1"
-__email__ = "dew@bluemist-ai.one"
+# Author: Shashank Agrawal
+# License: MIT
+# Version: 0.1.4
+# Email: dew@bluemist-ai.one
+# Created: Jun 18, 2022
+# Last modified: Jan 22, 2024
 
 
 __all__ = [
@@ -10,5 +11,6 @@ __all__ = [
     'eda',
     'preprocessing',
     'regression',
-    'classification'
+    'classification',
+    'nn'
 ]
