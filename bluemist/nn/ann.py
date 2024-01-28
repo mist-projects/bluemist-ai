@@ -7,7 +7,7 @@ Performs model training, testing, evaluations and deployment
 # Version: 0.1.4
 # Email: dew@bluemist-ai.one
 # Created:  Dec 29, 2023
-# Last modified: Jan 22, 2024
+# Last modified: Jan 28, 2024
 
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Dense
@@ -37,102 +37,98 @@ def train_test_evaluate(
         optimizer_name=None,
         learning_rate=None,
         optimizer_params=None,
+        layer_configs=None,
         plot_graphs=True
 ):
-    # Define input layer
-    input_shape = X_train.shape[1]
-
-    # Use user-provided or default values for the number of layers and neurons
-    num_layers = num_layers or 2
-    num_neurons = num_neurons or 128
-
-    # Define input layer
-    input_layer = Input(shape=(input_shape,))
-    model_output_layer = input_layer
-
-    # Build the model
-    for _ in range(num_layers):
-        model_output_layer = Dense(units=num_neurons, activation='relu')(model_output_layer)
-
-    # Build the model based on the task
-    if task == 'regression':
-        kernel_initializer = get(kernel_initializer)
-        model_output_layer = Dense(units=1, activation='linear', kernel_initializer=kernel_initializer)(
-            model_output_layer)
-        loss = 'mean_squared_error'
-        metrics = [mean_squared_error]
-    elif task == 'classification':
-        kernel_initializer = get(kernel_initializer)
-
-        # Adjust activation based on the number of classes
-        num_classes = 2  # Default for binary classification
-        if y_train is not None:
-            num_classes = len(np.unique(y_train))
-
-        if num_classes == 2:
-            # Binary classification
-            activation = activation if activation is not None else 'sigmoid'
-            loss = loss if loss is not None else 'binary_crossentropy'
-        else:
-            # Multi-class classification
-            activation = activation if activation is not None else 'softmax'
-            loss = loss if loss is not None else ('categorical_crossentropy' if num_classes > 2 else 'binary_crossentropy')
-
-            # Use 'sparse_categorical_crossentropy' if the labels are integers
-            if isinstance(y_train[0], (int, np.integer)):
-                loss = 'sparse_' + loss
-
-            metrics = metrics if metrics is not None else ['accuracy']
-
-        model_output_layer = Dense(units=num_classes, activation=activation, kernel_initializer=kernel_initializer)(model_output_layer)
-    else:
-        raise ValueError("Invalid task. Supported tasks: 'regression' or 'classification'.")
-
     # Select optimizer dynamically based on user input
     if optimizer_name is not None:
         optimizer_name = optimizer_name.lower()
+
+        # Initialize learning rate if None
+        if learning_rate is None:
+            learning_rate = 0.001
+
         if optimizer_name == 'adam':
-            optimizer = Adam(learning_rate=learning_rate, **optimizer_params)
+            optimizer = Adam(learning_rate=learning_rate, **optimizer_params) \
+                if optimizer_params is not None and isinstance(optimizer_params, dict) else Adam(
+                learning_rate=learning_rate)
         elif optimizer_name == 'sgd':
-            optimizer = SGD(learning_rate=learning_rate, **optimizer_params)
+            optimizer = SGD(learning_rate=learning_rate, **optimizer_params) \
+                if optimizer_params is not None and isinstance(optimizer_params, dict) else SGD(
+                learning_rate=learning_rate)
         elif optimizer_name == 'rmsprop':
-            optimizer = RMSprop(learning_rate=learning_rate, **optimizer_params)
+            optimizer = RMSprop(learning_rate=learning_rate, **optimizer_params) \
+                if optimizer_params is not None and isinstance(optimizer_params, dict) else RMSprop(
+                learning_rate=learning_rate)
         elif optimizer_name == 'adagrad':
-            optimizer = Adagrad(learning_rate=learning_rate, **optimizer_params)
+            optimizer = RMSprop(learning_rate=learning_rate, **optimizer_params) \
+                if optimizer_params is not None and isinstance(optimizer_params, dict) else RMSprop(
+                learning_rate=learning_rate)
         elif optimizer_name == 'adadelta':
-            optimizer = Adadelta(learning_rate=learning_rate, **optimizer_params)
+            optimizer = Adadelta(learning_rate=learning_rate, **optimizer_params) \
+                if optimizer_params is not None and isinstance(optimizer_params, dict) else Adadelta(
+                learning_rate=learning_rate)
         elif optimizer_name == 'nadam':
-            optimizer = Nadam(learning_rate=learning_rate, **optimizer_params)
+            optimizer = Nadam(learning_rate=learning_rate, **optimizer_params) \
+                if optimizer_params is not None and isinstance(optimizer_params, dict) else Nadam(
+                learning_rate=learning_rate)
         elif optimizer_name == 'adamax':
-            optimizer = Adamax(learning_rate=learning_rate, **optimizer_params)
+            optimizer = Adamax(learning_rate=learning_rate, **optimizer_params) \
+                if optimizer_params is not None and isinstance(optimizer_params, dict) else Adamax(
+                learning_rate=learning_rate)
         else:
             raise ValueError(f"Invalid optimizer: {optimizer_name}")
     else:
         # Use a default optimizer if not specified
-        optimizer = Adam()
+        optimizer = Adam(learning_rate=learning_rate)
+
+    # Define input layer
+    input_shape = X_train.shape[1]
+    input_layer = Input(shape=(input_shape,))
+    model_output_layer = input_layer
+
+    if task == 'regression' and layer_configs is None:
+        layer_configs = [
+            {'units': 1024, 'activation': 'relu'},
+            {'units': 512, 'activation': 'relu'},
+            {'units': 256, 'activation': 'relu'},
+            {'units': 128, 'activation': 'relu'},
+            {'units': 96, 'activation': 'relu'},
+            {'units': 1, 'activation': 'linear'}
+        ]
+    elif task == 'classification' and layer_configs is None:
+        layer_configs = [
+            {'units': 1024, 'activation': 'relu'},
+            {'units': 512, 'activation': 'relu'},
+            {'units': 256, 'activation': 'relu'},
+            {'units': 128, 'activation': 'relu'},
+            {'units': 64, 'activation': 'relu'},
+            {'units': len(np.unique(y_train)), 'activation': 'softmax'}
+        ]
+
+    dense_layers = []
+    for config in layer_configs:
+        dense_layer = Dense(**config)(model_output_layer)
+        dense_layers.append(dense_layer)
 
     # Create the model
-    model = Model(inputs=input_layer, outputs=model_output_layer)
+    model = Model(inputs=input_layer, outputs=dense_layers)
     model.compile(optimizer=optimizer, loss=loss, metrics=metrics)
 
     model.summary()
-
-    # Train the model with validation split
-    history = model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size, validation_split=0.2, verbose=1)
+    history = model.fit(X_train, y_train, epochs=epochs, validation_split=0.2, verbose=2)
 
     if plot_graphs:
         if task == 'regression':
             plot_loss(history)
-            plot_accuracy(history, task='regression')
-            plot_metrics(history, metric='mean_squared_error')
-        elif task == 'classification':
-            plot_accuracy(history, task='classification')
-            plot_metrics(history, metric='precision')
-            #plot_confusion_matrix(y_true_classification, y_pred_classification, classes=class_labels)
+        # elif task == 'classification':
+        #     plot_accuracy(history, task='classification')
+        #     plot_metrics(history, metric='precision')
+        #     #plot_confusion_matrix(y_true_classification, y_pred_classification, classes=class_labels)
 
-    # Evaluate on the test data
-    test_metrics = model.evaluate(X_test, y_test)
-    return model, test_metrics
+    # # Evaluate on the test data
+    # test_metrics = model.evaluate(X_test, y_test)
+    return model
 
 
 def plot_loss(history):
