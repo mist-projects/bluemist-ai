@@ -1,13 +1,14 @@
 """
 Performs model training, testing, evaluations and deployment
 """
+import os
 
 # Author: Shashank Agrawal
 # License: MIT
 # Version: 0.1.4
 # Email: dew@bluemist-ai.one
 # Created:  Dec 29, 2023
-# Last modified: Jan 28, 2024
+# Last modified: Feb 04, 2024
 
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Dense
@@ -18,6 +19,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import confusion_matrix
+from tensorflow.python.keras.callbacks import EarlyStopping, ModelCheckpoint
 
 
 def train_test_evaluate(
@@ -26,18 +28,17 @@ def train_test_evaluate(
         y_train,
         y_test,
         task=None,
-        epochs=None,
+        epochs=1000,
         batch_size=None,
         kernel_initializer=None,
-        num_layers=None,
-        num_neurons=None,
-        activation=None,
         loss=None,
         metrics=None,
         optimizer_name=None,
         learning_rate=None,
         optimizer_params=None,
         layer_configs=None,
+        early_stopping_kwargs=None,
+        model_checkpoint_kwargs=None,
         plot_graphs=True
 ):
     # Select optimizer dynamically based on user input
@@ -102,7 +103,7 @@ def train_test_evaluate(
             {'units': 512, 'activation': 'relu'},
             {'units': 256, 'activation': 'relu'},
             {'units': 128, 'activation': 'relu'},
-            {'units': 64, 'activation': 'relu'},
+            {'units': 96, 'activation': 'relu'},
             {'units': len(np.unique(y_train)), 'activation': 'softmax'}
         ]
 
@@ -116,7 +117,29 @@ def train_test_evaluate(
     model.compile(optimizer=optimizer, loss=loss, metrics=metrics)
 
     model.summary()
-    history = model.fit(X_train, y_train, epochs=epochs, validation_split=0.2, verbose=2)
+    callbacks_list = []
+
+    # Define early stopping callback
+    if early_stopping_kwargs is None:
+        early_stopping_callback = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
+        callbacks_list.append(early_stopping_callback)
+    else:
+        early_stopping_callback = EarlyStopping(**early_stopping_kwargs)
+        callbacks_list.append(early_stopping_callback)
+
+    BLUEMIST_PATH = os.environ["BLUEMIST_PATH"]
+    MODELS_PATH = BLUEMIST_PATH + '/' + 'artifacts' + '/' + 'models'
+
+    # Define model checkpoint callback
+    if model_checkpoint_kwargs is None:
+        model_checkpoint_callback = ModelCheckpoint(MODELS_PATH + 'best_model.h5', monitor='val_loss', save_best_only=True)
+        callbacks_list.append(model_checkpoint_callback)
+    else:
+        model_checkpoint_kwargs['filepath'] = os.path.join(MODELS_PATH, model_checkpoint_kwargs['filepath'])
+        model_checkpoint_callback = ModelCheckpoint(**model_checkpoint_kwargs)
+        callbacks_list.append(model_checkpoint_callback)
+
+    history = model.fit(X_train, y_train, epochs=epochs, validation_split=0.2, verbose=2, callbacks=callbacks_list)
 
     if plot_graphs:
         if task == 'regression':
