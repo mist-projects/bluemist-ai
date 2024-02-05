@@ -8,7 +8,7 @@ import os
 # Version: 0.1.4
 # Email: dew@bluemist-ai.one
 # Created:  Dec 29, 2023
-# Last modified: Feb 04, 2024
+# Last modified: Feb 05, 2024
 
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Dense
@@ -20,6 +20,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import confusion_matrix
 from tensorflow.python.keras.callbacks import EarlyStopping, ModelCheckpoint
+
+from bluemist.utils.metrics import metric_scorer
+
+BLUEMIST_PATH = os.environ["BLUEMIST_PATH"]
+MODELS_PATH = BLUEMIST_PATH + '/' + 'artifacts' + '/' + 'models'
 
 
 def train_test_evaluate(
@@ -41,6 +46,54 @@ def train_test_evaluate(
         model_checkpoint_kwargs=None,
         plot_graphs=True
 ):
+    """
+    Train, test, and evaluate a neural network model.
+
+    Parameters:
+    -----------
+    X_train : pandas.DataFrame
+        Training input data.
+    X_test : pandas.DataFrame
+        Test input data.
+    y_train : np.ndarray
+        Training labels.
+    y_test : np.ndarray
+        Test labels.
+    task : str, optional
+        The task type ('regression' or 'classification').
+    epochs : int, optional
+        Number of training epochs.
+    batch_size : int, optional
+        Batch size for training.
+    kernel_initializer : str, optional
+        Initializer for kernel weights.
+    loss : str, optional
+        Loss function to use during training.
+    metrics : list, optional
+        List of metrics to monitor during training.
+    optimizer_name : str, optional
+        Name of the optimizer to use.
+    learning_rate : float, optional
+        Learning rate for the optimizer.
+    optimizer_params : dict, optional
+        Additional parameters for the optimizer.
+    layer_configs : list, optional
+        List of dictionaries specifying layer configurations.
+    early_stopping_kwargs : dict, optional
+        Additional parameters for EarlyStopping callback.
+    model_checkpoint_kwargs : dict, optional
+        Additional parameters for ModelCheckpoint callback.
+    plot_graphs : bool, optional
+        Whether to plot graphs (e.g., loss) during training.
+
+    Returns:
+    --------
+    history : tensorflow.python.keras.callbacks.History
+        History object containing training metrics.
+    model : tensorflow.keras.models.Model
+        Trained neural network model.
+    """
+
     # Select optimizer dynamically based on user input
     if optimizer_name is not None:
         optimizer_name = optimizer_name.lower()
@@ -107,142 +160,38 @@ def train_test_evaluate(
             {'units': len(np.unique(y_train)), 'activation': 'softmax'}
         ]
 
-    dense_layers = []
-    for config in layer_configs:
-        dense_layer = Dense(**config)(model_output_layer)
-        dense_layers.append(dense_layer)
+    # Add hidden layers
+    for config in layer_configs[:-1]:  # Exclude the last config for the output layer
+        model_output_layer = Dense(**config)(model_output_layer)
+
+    # Output layer for regression
+    output_layer = Dense(**layer_configs[-1])(model_output_layer)
 
     # Create the model
-    model = Model(inputs=input_layer, outputs=dense_layers)
+    model = Model(inputs=input_layer, outputs=output_layer)
     model.compile(optimizer=optimizer, loss=loss, metrics=metrics)
 
     model.summary()
     callbacks_list = []
 
     # Define early stopping callback
-    if early_stopping_kwargs is None:
-        early_stopping_callback = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
-        callbacks_list.append(early_stopping_callback)
-    else:
+    if early_stopping_kwargs is not None:
         early_stopping_callback = EarlyStopping(**early_stopping_kwargs)
         callbacks_list.append(early_stopping_callback)
 
-    BLUEMIST_PATH = os.environ["BLUEMIST_PATH"]
-    MODELS_PATH = BLUEMIST_PATH + '/' + 'artifacts' + '/' + 'models'
-
     # Define model checkpoint callback
-    if model_checkpoint_kwargs is None:
-        model_checkpoint_callback = ModelCheckpoint(MODELS_PATH + 'best_model.h5', monitor='val_loss', save_best_only=True)
-        callbacks_list.append(model_checkpoint_callback)
-    else:
+    if model_checkpoint_kwargs is not None:
         model_checkpoint_kwargs['filepath'] = os.path.join(MODELS_PATH, model_checkpoint_kwargs['filepath'])
         model_checkpoint_callback = ModelCheckpoint(**model_checkpoint_kwargs)
         callbacks_list.append(model_checkpoint_callback)
 
-    history = model.fit(X_train, y_train, epochs=epochs, validation_split=0.2, verbose=2, callbacks=callbacks_list)
+    history = model.fit(X_train, y_train, epochs=epochs, validation_split=0.2, verbose=2)
+    model.summary()
+    model.evaluate(X_test, y_test)
+    y_pred = model.predict(X_test)
+    scorer = metric_scorer(y_test, y_pred, 'default')
 
-    if plot_graphs:
-        if task == 'regression':
-            plot_loss(history)
-        # elif task == 'classification':
-        #     plot_accuracy(history, task='classification')
-        #     plot_metrics(history, metric='precision')
-        #     #plot_confusion_matrix(y_true_classification, y_pred_classification, classes=class_labels)
+    estimator_stats_df = scorer.calculate_metrics()
+    print(estimator_stats_df)
 
-    # # Evaluate on the test data
-    # test_metrics = model.evaluate(X_test, y_test)
-    return model
-
-
-def plot_loss(history):
-    """
-    Plot training and validation loss from the training history.
-
-    Parameters:
-    - history: Training history.
-    """
-    plt.plot(history.history['loss'], label='Train Loss')
-
-    if 'val_loss' in history.history:
-        plt.plot(history.history['val_loss'], label='Validation Loss')
-
-    plt.title('Training and Validation Loss')
-    plt.xlabel('Epoch')
-    plt.ylabel('Loss')
-    plt.legend()
-    plt.show()
-
-
-def plot_accuracy(history, task='classification'):
-    """
-    Plot training and validation accuracy from the training history.
-
-    Parameters:
-    - history: Training history.
-    - task: Type of task ('classification' or 'regression').
-    """
-    metric = 'accuracy' if task == 'classification' else 'mean_squared_error'
-
-    plt.plot(history.history[metric], label='Train ' + metric.capitalize())
-
-    if 'val_' + metric in history.history:
-        plt.plot(history.history['val_' + metric], label='Validation ' + metric.capitalize())
-
-    plt.title('Training and Validation ' + metric.capitalize())
-    plt.xlabel('Epoch')
-    plt.ylabel(metric.capitalize())
-    plt.legend()
-    plt.show()
-
-
-def plot_metrics(history, metric='precision'):
-    """
-    Plot training and validation metrics from the training history.
-
-    Parameters:
-    - history: Training history.
-    - metric: Metric to plot (default is 'precision').
-    """
-    plt.plot(history.history[metric], label='Train ' + metric.capitalize())
-
-    if 'val_' + metric in history.history:
-        plt.plot(history.history['val_' + metric], label='Validation ' + metric.capitalize())
-
-    plt.title('Training and Validation ' + metric.capitalize())
-    plt.xlabel('Epoch')
-    plt.ylabel(metric.capitalize())
-    plt.legend()
-    plt.show()
-
-
-def plot_learning_rate(history):
-    """
-    Plot learning rate schedule from the training history.
-
-    Parameters:
-    - history: Training history.
-    """
-    if 'lr' in history.history:
-        plt.plot(history.history['lr'], label='Learning Rate')
-        plt.title('Learning Rate Schedule')
-        plt.xlabel('Epoch')
-        plt.ylabel('Learning Rate')
-        plt.legend()
-        plt.show()
-
-
-def plot_confusion_matrix(y_true, y_pred, classes=None):
-    """
-    Plot confusion matrix for classification tasks.
-
-    Parameters:
-    - y_true: True labels.
-    - y_pred: Predicted labels.
-    - classes: Class labels (optional).
-    """
-    cm = confusion_matrix(y_true, y_pred)
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=classes, yticklabels=classes)
-    plt.title('Confusion Matrix')
-    plt.xlabel('Predicted')
-    plt.ylabel('True')
-    plt.show()
+    return history, model
